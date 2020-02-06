@@ -1,0 +1,23 @@
+<section fxLayout="row" fxLayoutAlign="center" fxFlex="1 1 1 auto">
+    <div fxFlex></div>
+    <section fxLayout="column" fxLayoutAlign="center start">
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" />
+        </mat-form-field>
+        <table class="mat-elevation-z7" mat-table [dataSource]="dataSource" matSort matSortDirection="asc">
+            <ng-container *ngFor="let col of columnObjects" [matColumnDef]="col.columnId">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{col.propertyName}}</th>
+                <td mat-cell *matCellDef="let dataArray;index as i"
+                    [style.color]="setDataColor(dataArray[col.propertyName])">{{dataArray[col.propertyName]}}
+                    <button *ngIf="col.columnId==='Select'" mat-raised-button class="customize-button"
+                        (click)="select(i)"></button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnIds; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnIds"></tr>
+        </table>
+        <mat-paginator class="mat-elevation-z7" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons>
+        </mat-paginator>
+    </section>
+    <div fxFlex></div>
+</section>

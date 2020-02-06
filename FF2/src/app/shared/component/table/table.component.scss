@@ -1,0 +1,156 @@
+@import '_table';
+@import '_color';
+
+@include mat-table-cols((
+  Symbol: (width: 3.5rem, color: gray),
+  Name: (width: 12rem, color: gray),
+  Exchange: (width: 12rem, color: gray),
+  Open: (width: 5rem),
+  Low: (width: 5rem),
+  High: (width: 5rem),
+  LatestPrice: (width: 5rem),
+  Change: (width: 5rem),
+  ChangePercent: (width: 5rem),
+  Week52Low: (width: 5rem),
+  Week52High: (width: 5rem),
+  YtdChange: (width: 5rem),
+));
+
+
+
+.icon-red {
+    color: $red;
+}
+
+.icon-green {
+    color:green;
+}
+
+tr.mat-header-row th {
+    color: white;
+    font-weight: 250;
+    text-align: center;
+  }
+
+  tr.mat-header-row {
+    // background-color:darkslateblue;
+    // background-color:slateblue;
+    // background-color: cornflowerblue;
+    background-color: rgb(25,118,210);    //  background-color:dodgerblue;
+
+  }
+
+  .mat-row:nth-child(even) {
+    background-color: whitesmoke;
+  }
+  
+  .mat-row:nth-child(odd) {
+    background-color: white;
+  }
+
+  mat-cell, .mat-cell:nth-child(n+3), mat-header-cell, .mat-header-cell:nth-child(n+3)  {
+    min-height:auto; // overrides the 'inherit' that set the min height of the row
+    padding: 0 6px 0;
+  }
+
+  mat-header-cell, .mat-header-cell:nth-child(n+6)  {
+    min-height:auto; // overrides the 'inherit' that set the min height of the row
+    padding: 0 0 0 1.35rem;
+  }
+  
+  mat-cell:nth-child(n+6), .mat-cell:nth-child(n+6) {
+    text-align: center;
+}
+
+ .mat-cell:first-child {
+  padding-left:4rem;
+  text-align: left;
+}
+
+.mat-header-cell:first-child {
+  padding-left:5.5rem;
+  text-align: left;
+}
+
+div.mat-sort-header-container {
+  text-align: center;
+}
+
+// Expandable Row
+.expand-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.dataArray-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.expanded-row:not(.expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.expanded-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.expanded-row td {
+  border-bottom-width: 0;
+}
+
+#option-image {
+  width:1rem;
+}
+
+#option-row {
+  width: 100%;
+}
+
+.delete-tooltip-red {
+  background:  $red;
+}
+
+.add-tooltip-green {
+  background: #4bb543;
+}
+
+td {
+  text-transform: capitalize;
+}
+
+#search-icon {
+  color: goldenrod;
+}
+
+.mat-input-invalid .mat-input-placeholder {
+  color:  $red;
+}
+
+.mat-input-invalid .mat-input-ripple {
+  background-color:  $red;
+}
+
+mat-error {
+  color: white;
+}
+.mat-select-arrow {
+  color: white !important;
+}
+
+@media screen and (max-width: 1024px) {
+  tr.mat-header-row {
+    background-color: transparent;
+  }
+  tr.mat-header-row th {
+    color: black;
+  }
+}

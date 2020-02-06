@@ -1,0 +1,32 @@
+@mixin mat-table-cols($columns)
+{
+    .mat-column-
+    {
+        @each $colName, $props in $columns {
+
+            $width: map-get($props, 'width');
+
+            &#{$colName} 
+            {
+                flex: $width;
+                min-width: $width;
+
+                @if map-has-key($props, 'color') 
+                {
+                    color: map-get($props, 'color');
+                }
+            }  
+        }
+    }
+}
+
+
+table,
+mat-paginator {
+  position: relative;
+  width: 100%;
+}
+
+mat-form-field {
+  margin-left: 1rem;
+}

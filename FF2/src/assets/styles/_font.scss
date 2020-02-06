@@ -1,0 +1,29 @@
+@mixin font() {
+    h1 {
+        font-weight: bold;
+        margin: 0;
+        color: black;
+    }
+
+    p {
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 20px;
+        letter-spacing: 0.5px;
+        margin: 20px 0 30px;        
+        color: black;
+    }
+
+    span {
+        font-size: 12px;
+        font-weight: 525;
+        color: whitesmoke;
+    }
+
+    a {
+        color: white;
+        font-size: 14px;
+        text-decoration: none;
+        margin: 15px 0;
+    }
+}
