@@ -13,17 +13,21 @@ import { LayoutComponent } from './layout/layout.component';
 import { AuctionModule } from './feature/auction/auction.module';
 import { MyTeamModule } from './feature/my-team/my-team.module';
 import { MyAccountModule } from './feature/my-account/my-account.module';
+import { SharedModule } from './shared/shared.module';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     CoreModule,
     HomeModule,
     AuctionModule,
+    SharedModule,
     MyTeamModule,
     MyAccountModule,
     BrowserAnimationsModule,

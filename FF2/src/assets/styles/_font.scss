@@ -1,8 +1,9 @@
 @mixin font() {
     h1 {
         font-weight: bold;
-        margin: 0;
+        margin: 0 auto;
         color: black;
+        text-align: center;
     }
 
     p {

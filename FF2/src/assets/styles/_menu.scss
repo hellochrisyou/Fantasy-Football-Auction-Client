@@ -1,0 +1,113 @@
+header {
+  width: 100%;
+  top: 0;
+  position: relative;
+  margin-bottom: 0;
+}
+
+.b-a,
+.bar,
+.bar:before,
+.bar:after {
+  transition: all 0.25s;
+  content: "";
+  position: absolute;
+  left: 0;
+  height: 6px;
+  width: 30px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.menu-collapsed {
+  transition: all 0.25s;
+  position: fixed;
+  top: 10px;
+  left: 9px;
+  height: 36px;
+  width: 36px;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.menu-collapsed ul {
+  transition: all 0;
+  position: fixed;
+  left: -9000px;
+}
+
+.bar {
+  position: fixed;
+  left: 12px;
+  top: 24px;
+}
+
+.bar:before {
+  top: -8px;
+}
+
+.bar:after {
+  top: 8px;
+}
+
+.b-a-expanded,
+.menu-expanded .bar:before,
+.menu-expanded .bar:after {
+  transition: all 0.25s;
+  top: 0;
+}
+
+.menu-expanded {
+  transition: all 0.25s;
+  text-align: center;
+  line-height: 150px;
+  height: 100%;
+  width: 100%;
+  border-radius: 0;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.menu-expanded ul {
+  transition: all 0;
+  position: relative;
+  left: 0;
+  z-index: 500;
+}
+
+.menu-expanded li {
+  text-align: left;
+}
+
+.menu-expanded a {
+  transition: all 0.15s;
+  text-decoration: none;
+  font-size: 2em;
+  color: #fff;
+  display: block;
+  padding: 5px;
+}
+
+.menu-expanded a:hover {
+  transition: all 0.15s;
+  letter-spacing: 2px;
+  color: #333;
+}
+
+.menu-expanded .bar {
+  background-color: transparent;
+  transition: all 0.25s;
+}
+
+.menu-expanded .bar:before {
+  transform: rotate(45deg);
+}
+
+.menu-expanded .bar:after {
+  transform: rotate(-45deg);
+}
+
+a {
+  cursor: pointer;
+}

@@ -1,7 +1,5 @@
-.layout-wrapper{
-    height: 100%;
-}
-
-.flex-wrapper{
-    height: 100%;
+.flex-wrapper,
+.layout-wrapper {
+  min-height: 100vh;
+  min-width: 100vw;
 }

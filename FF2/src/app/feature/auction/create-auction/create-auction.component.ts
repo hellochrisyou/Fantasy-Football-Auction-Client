@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-create-auction',
+  selector: 'create-auction',
   templateUrl: './create-auction.component.html',
   styleUrls: ['./create-auction.component.scss']
 })

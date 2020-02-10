@@ -32,7 +32,7 @@ export class SigninComponent extends CreateBaseForm implements OnInit, OnDestroy
       alert('correctly  required fields!');
       return false;
     } else {
-      this.auth.signinEmail(this.formGroup.get('loginEmailCtrl').value, this.formGroup.get('loginPassCtrl').value);
+      // this.auth.signinEmail(this.formGroup.get('loginEmailCtrl').value, this.formGroup.get('loginPassCtrl').value);
     }
   }
 
@@ -56,7 +56,7 @@ export class SigninComponent extends CreateBaseForm implements OnInit, OnDestroy
   }
 
   public loginGoogle(): void {
-    this.auth.signinGoogle();
+    // this.auth.signinGoogle();
   }
 
 }

@@ -1,74 +1,122 @@
-@import '_table';
-@import '_color';
+@import "_table";
+@import "_color";
 
-@include mat-table-cols((
-  Symbol: (width: 3.5rem, color: gray),
-  Name: (width: 12rem, color: gray),
-  Exchange: (width: 12rem, color: gray),
-  Open: (width: 5rem),
-  Low: (width: 5rem),
-  High: (width: 5rem),
-  LatestPrice: (width: 5rem),
-  Change: (width: 5rem),
-  ChangePercent: (width: 5rem),
-  Week52Low: (width: 5rem),
-  Week52High: (width: 5rem),
-  YtdChange: (width: 5rem),
-));
+@include mat-table-cols(
+  (
+    Symbol: (
+      width: 3.5rem,
+      color: gray
+    ),
+    Name: (
+      width: 12rem,
+      color: gray
+    ),
+    Exchange: (
+      width: 12rem,
+      color: gray
+    ),
+    Open: (
+      width: 5rem
+    ),
+    Low: (
+      width: 5rem
+    ),
+    High: (
+      width: 5rem
+    ),
+    LatestPrice: (
+      width: 5rem
+    ),
+    Change: (
+      width: 5rem
+    ),
+    ChangePercent: (
+      width: 5rem
+    ),
+    Week52Low: (
+      width: 5rem
+    ),
+    Week52High: (
+      width: 5rem
+    ),
+    YtdChange: (
+      width: 5rem
+    )
+  )
+);
+section {
+  height: 100vh;
+}
+table,
+mat-paginator {
+  max-width: 70vw;
+  margin: 0 auto;
+  position: absolute;
+  top: 15vh;
+  left: 15vw;
+}
 
-
+#search-field {
+  top: 10vh;
+  left: 15vw;
+  position: absolute;
+}
 
 .icon-red {
-    color: $red;
+  color: $red;
 }
 
 .icon-green {
-    color:green;
+  color: green;
 }
 
 tr.mat-header-row th {
-    color: white;
-    font-weight: 250;
-    text-align: center;
-  }
-
-  tr.mat-header-row {
-    // background-color:darkslateblue;
-    // background-color:slateblue;
-    // background-color: cornflowerblue;
-    background-color: rgb(25,118,210);    //  background-color:dodgerblue;
-
-  }
-
-  .mat-row:nth-child(even) {
-    background-color: whitesmoke;
-  }
-  
-  .mat-row:nth-child(odd) {
-    background-color: white;
-  }
-
-  mat-cell, .mat-cell:nth-child(n+3), mat-header-cell, .mat-header-cell:nth-child(n+3)  {
-    min-height:auto; // overrides the 'inherit' that set the min height of the row
-    padding: 0 6px 0;
-  }
-
-  mat-header-cell, .mat-header-cell:nth-child(n+6)  {
-    min-height:auto; // overrides the 'inherit' that set the min height of the row
-    padding: 0 0 0 1.35rem;
-  }
-  
-  mat-cell:nth-child(n+6), .mat-cell:nth-child(n+6) {
-    text-align: center;
+  color: white;
+  font-weight: 250;
+  text-align: center;
 }
 
- .mat-cell:first-child {
-  padding-left:4rem;
+tr.mat-header-row {
+  // background-color:darkslateblue;
+  // background-color:slateblue;
+  // background-color: cornflowerblue;
+  background-color: rgb(25, 118, 210); //  background-color:dodgerblue;
+}
+
+.mat-row:nth-child(even) {
+  background-color: whitesmoke;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: white;
+}
+
+mat-cell,
+.mat-cell:nth-child(n + 3),
+mat-header-cell,
+.mat-header-cell:nth-child(n + 3) {
+  min-height: auto; // overrides the 'inherit' that set the min height of the row
+  padding: 0 6px 0;
+}
+
+mat-header-cell,
+.mat-header-cell:nth-child(n + 6) {
+  min-height: auto; // overrides the 'inherit' that set the min height of the row
+  padding: 0 0 0 1.35rem;
+}
+
+mat-cell:nth-child(n + 6),
+.mat-cell:nth-child(n + 6) {
+  text-align: center;
+}
+
+.mat-cell:first-child {
+  padding-left: 4rem;
   text-align: left;
 }
 
 .mat-header-cell:first-child {
-  padding-left:5.5rem;
+  padding-left: 5.5rem;
   text-align: left;
 }
 
@@ -108,7 +156,7 @@ tr.expanded-row:not(.expanded-row):active {
 }
 
 #option-image {
-  width:1rem;
+  width: 1rem;
 }
 
 #option-row {
@@ -116,7 +164,7 @@ tr.expanded-row:not(.expanded-row):active {
 }
 
 .delete-tooltip-red {
-  background:  $red;
+  background: $red;
 }
 
 .add-tooltip-green {
@@ -132,11 +180,11 @@ td {
 }
 
 .mat-input-invalid .mat-input-placeholder {
-  color:  $red;
+  color: $red;
 }
 
 .mat-input-invalid .mat-input-ripple {
-  background-color:  $red;
+  background-color: $red;
 }
 
 mat-error {
@@ -152,5 +200,14 @@ mat-error {
   }
   tr.mat-header-row th {
     color: black;
+  }
+  table,
+  mat-paginator {
+    max-width: 100%;
+    left: 1vw;
+  }
+  #search-field {
+    left: 1vw;
+    top: 8vh;
   }
 }

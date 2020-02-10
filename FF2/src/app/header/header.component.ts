@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../service/auth.service';
+import { AuthService } from '../core/service/auth.service';
 
 
 
 declare var $: any;
 
 @Component({
-  selector: 'app-header',
+  selector: 'toolbar-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
@@ -21,6 +21,6 @@ export class HeaderComponent implements OnInit {
     });
   }
   public logout() {
-    this.auth.signOut();
+    // this.auth.signOut();
   }
 }

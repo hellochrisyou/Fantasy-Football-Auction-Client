@@ -25,7 +25,7 @@ export class SignupComponent extends CreateBaseForm implements OnInit, OnDestroy
       alert('Please correctly fill all the required fields');
       return false;
     } else {
-      this.auth.signupEmail(this.formGroup.get('signupEmailCtrl').value, this.formGroup.get('signupPassCtrl').value);
+      // this.auth.signupEmail(this.formGroup.get('signupEmailCtrl').value, this.formGroup.get('signupPassCtrl').value);
     }
   }
   public ngOnInit(): void {
