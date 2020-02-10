@@ -15,6 +15,9 @@ import { MyTeamModule } from './feature/my-team/my-team.module';
 import { MyAccountModule } from './feature/my-account/my-account.module';
 import { SharedModule } from './shared/shared.module';
 import { HeaderComponent } from './header/header.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HeaderInterceptor } from './core/interceptor/header.interceptor';
+import { CachingInterceptor } from './core/interceptor/caching.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,7 @@ import { HeaderComponent } from './header/header.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     CoreModule,
     HomeModule,
     AuctionModule,
@@ -36,7 +40,18 @@ import { HeaderComponent } from './header/header.component';
     AngularFirestoreModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeaderInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CachingInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

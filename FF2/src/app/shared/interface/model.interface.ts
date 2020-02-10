@@ -1,4 +1,4 @@
-export interface QB {
+export interface QB extends Player {
     name: string;
     passingTD: number;
     passingYard: number;
@@ -7,56 +7,45 @@ export interface QB {
     rushingYard: number;
     rushingTD: number;
     fumble: number;
-    fantasy_points?: number;
 }
 
-export interface RB {
-    name: string;
+export interface RB extends Player {
     rushingYard: number;
     rushingTD: number;
     reception: number;
     receivingYard: number;
     receivingTD: number;
     fumble: number;
-    fantasy_points?: number;
 }
 
-export interface WR {
-    name: string;
+export interface WR extends Player {
     reception: number;
     receivingYard: number;
     receivingTD: number;
-    fantasy_points?: number;
 }
 
-export interface TE {
-    name: string;
+export interface TE extends Player {
     reception: number;
     receivingYard: number;
     receivingTD: number;
-    fantasy_points?: number;
 }
 
-export interface DEF {
-    name: string;
+export interface DEF extends Player {
     sack: number;
     interception: number;
     fumblesRecovered: number;
     safety: number;
     TD: number;
     pointsAllowed: number;
-    fantasy_points?: number;
 }
 
-export interface Kicker {
-    name: string;
+export interface Kicker extends Player {
     PAT: number;
     fg0To19: number;
     fg20To29: number;
     fg30To39: number;
     fg40To49: number;
     fg50Plus: number;
-    fantasy_points?: number;
 }
 
 export interface User {
@@ -86,5 +75,8 @@ export interface Player {
     id?: number | string;
     name: string;
     position: string;
+    minPrice: number;
+    maxPrice: number;
+    averagePrice: number;
     fantasy_points?: number;
 }
