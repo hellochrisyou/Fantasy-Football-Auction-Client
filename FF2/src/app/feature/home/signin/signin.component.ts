@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { CreateBaseForm } from 'src/app/shared/base/base-form';
-import { AuthService } from 'src/app/core/service/auth.service';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/service/auth.service';
+import { CreateBaseForm } from 'src/app/shared/base/base-form';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -24,7 +23,6 @@ export class SigninComponent extends CreateBaseForm implements OnInit, OnDestroy
     protected auth: AuthService,
     protected fb: FormBuilder,
     protected changeDetectorRef: ChangeDetectorRef,
-    protected router: Router
   ) {
     super(fb, changeDetectorRef);
   }

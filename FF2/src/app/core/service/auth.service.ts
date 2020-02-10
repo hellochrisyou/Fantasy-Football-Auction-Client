@@ -42,18 +42,18 @@ export class AuthService {
     private afs: AngularFirestore,
     public dialog: MatDialog,
   ) {
-    this.user = this.afAuth.authState.pipe(
-      switchMap(user => {
-        if (user) {
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-        } else {
-          return of(null);
-        }
-      })
-    );
-    this.afAuth.authState.subscribe(authState => {
-      this.authState = authState;
-    });
+    // this.user = this.afAuth.authState.pipe(
+    //   switchMap(user => {
+    //     if (user) {
+    //       return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+    //     } else {
+    //       return of(null);
+    //     }
+    //   })
+    // );
+    // this.afAuth.authState.subscribe(authState => {
+    //   this.authState = authState;
+    // });
   }
 
   get isAuthenticated(): boolean {
@@ -72,7 +72,8 @@ export class AuthService {
       .then(res => {
         this.snackBar.open('Registration', 'SUCCESS', {
         });
-        this.router.navigateByUrl('search-stock');
+        // this.router.navigateByUrl('my-team');
+        // window.location.reload();
       })
       .catch(error => {
         this.signupErrorPopup(error.message);
@@ -94,7 +95,8 @@ export class AuthService {
 
   public signOut() {
     this.afAuth.auth.signOut().then(() => {
-      this.router.navigate(['/home']);
+      // this.router.navigate(['/home']);
+      // window.location.reload();
     });
   }
 
@@ -104,7 +106,8 @@ export class AuthService {
       .auth
       .signInWithEmailAndPassword(email, password)
       .then(credential => {
-        this.router.navigateByUrl('search-stock');
+        // this.router.navigateByUrl('my-team');
+        // window.location.reload();
       })
       .catch(err => { });
   }
@@ -142,7 +145,7 @@ export class AuthService {
 
     return [
       {
-        id: this.authState.uid,
+        uid: this.authState.uid,
         displayName: this.authState.displayName,
         email: this.authState.email,
         phoneNumber: this.authState.phoneNumber,

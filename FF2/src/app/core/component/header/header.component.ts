@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
 
+
+
+declare var $: any;
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -12,6 +16,9 @@ export class HeaderComponent implements OnInit {
     public auth: AuthService
   ) { }
   ngOnInit(): void {
+    $('.menu-collapsed').click(function () {
+      $(this).toggleClass('menu-expanded');
+    });
   }
   public logout() {
     this.auth.signOut();

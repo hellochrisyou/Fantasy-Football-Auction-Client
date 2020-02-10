@@ -2,17 +2,19 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { HomeRoutingModule } from './home-routing.module';
-import { SignupComponent } from './signup/signup.component';
+import { HomeComponent } from './home.component';
 import { SigninComponent } from './signin/signin.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
-  declarations: [SignupComponent, SigninComponent],
+  declarations: [HomeComponent, SignupComponent, SigninComponent],
   imports: [
     SharedModule,
     HomeRoutingModule
   ],
   exports: [
+    HomeComponent,
     SignupComponent,
     SigninComponent
   ]

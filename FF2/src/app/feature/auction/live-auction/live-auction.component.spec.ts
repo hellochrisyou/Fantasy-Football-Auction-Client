@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OngoingDraftComponent } from './ongoing-draft.component';
+import { LiveAuctionComponent } from './live-auction.component';
 
-describe('OngoingDraftComponent', () => {
-  let component: OngoingDraftComponent;
-  let fixture: ComponentFixture<OngoingDraftComponent>;
+describe('LiveAuctionComponent', () => {
+  let component: LiveAuctionComponent;
+  let fixture: ComponentFixture<LiveAuctionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OngoingDraftComponent ]
+      declarations: [ LiveAuctionComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OngoingDraftComponent);
+    fixture = TestBed.createComponent(LiveAuctionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

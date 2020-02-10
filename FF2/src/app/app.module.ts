@@ -1,29 +1,36 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CoreModule } from './core/core.module';
 import { AngularFireModule } from '@angular/fire';
-import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { FeatureModule } from './feature/feature.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from 'src/environments/environment';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
+import { HomeModule } from './feature/home/home.module';
+import { LayoutComponent } from './layout/layout.component';
+import { AuctionModule } from './feature/auction/auction.module';
+import { MyTeamModule } from './feature/my-team/my-team.module';
+import { MyAccountModule } from './feature/my-account/my-account.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LayoutComponent,
   ],
   imports: [
     BrowserModule,
     CoreModule,
-    FeatureModule,
+    HomeModule,
+    AuctionModule,
+    MyTeamModule,
+    MyAccountModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
