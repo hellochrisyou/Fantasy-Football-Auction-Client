@@ -29,7 +29,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
   columnDisplay = '';
 
-  dataSource: MatTableDataSource<QB | RB | WR | TE | DEF | Kicker | Player | Team>;
+  dataSource: MatTableDataSource<any>;
   index: number;
 
   // tslint:disable-next-line: variable-name
@@ -50,6 +50,8 @@ export class TableComponent implements OnInit, OnDestroy {
     return this._dataArray;
   }
   public set dataArray(value: any[]) {
+    console.log('value', value);
+
     this._dataArray = value;
   }
 
@@ -68,11 +70,7 @@ export class TableComponent implements OnInit, OnDestroy {
         this.columnIds = RB_DISPLAY;
         this.columnObjects = RB_COL_OBJ;
         break;
-      case 'WR':
-        this.columnIds = RECEIVING_DISPLAY;
-        this.columnObjects = RECEIVING_COL_OBJ;
-        break;
-      case 'TE':
+      case 'RECEIVING':
         this.columnIds = RECEIVING_DISPLAY;
         this.columnObjects = RECEIVING_COL_OBJ;
         break;

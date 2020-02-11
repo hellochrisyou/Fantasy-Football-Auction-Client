@@ -16,12 +16,12 @@ export class FilterPlayersService {
     this.resultArray = [];
     for (const tmp of arraySet) {
       for (const myPlayer of this.myPlayers) {
-        if (myPlayer.name === tmp.name) {
+        if (myPlayer.Name === tmp.Name) {
           continue;
         }
       }
       for (const otherPlayer of this.otherPlayers) {
-        if (otherPlayer.name === tmp.name) {
+        if (otherPlayer.Name === tmp.Name) {
           continue;
         }
       }

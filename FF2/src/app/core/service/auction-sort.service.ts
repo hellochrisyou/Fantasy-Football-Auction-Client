@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { QB, RB, WR, TE, DEF, Kicker } from 'src/app/shared/interface/model.interface';
+import { QB, RB, WR, TE, DEF, Kicker, LastSeasonPlayers } from 'src/app/shared/interface/model.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +7,15 @@ import { QB, RB, WR, TE, DEF, Kicker } from 'src/app/shared/interface/model.inte
 export class AuctionSortService {
 
   constructor() { }
+
+  lastSeasonPlayers: LastSeasonPlayers = {
+    quaterBacks: [],
+    runningsBacks: [],
+    wideReceivers: [],
+    tightEnds: [],
+    defenses: [],
+    kickers: []
+  };
 
   // tslint:disable-next-line: variable-name
   private _tmpQbArray: QB[] = [];
@@ -58,35 +67,38 @@ export class AuctionSortService {
     this._tmpKArray = value;
   }
 
-  public sortAuctionPlayers(auctionArr: any): void {
-    auctionArr.forEach(player => {
+  public sortAuctionPlayers(auctionArr: any): LastSeasonPlayers {
+    console.log('here');
+    for (const player of auctionArr) {
       switch (player.position) {
         case 'QB': {
-          this.tmpQbArray.push(player);
+          this.lastSeasonPlayers.quaterBacks.push(player);
           break;
         }
         case 'RB': {
-          this.tmpRbArray.push(player);
+          this.lastSeasonPlayers.runningsBacks.push(player);
           break;
         }
         case 'WR': {
-          this.tmpWrArray.push(player);
+          this.lastSeasonPlayers.wideReceivers.push(player);
           break;
         }
         case 'TE': {
-          this.tmpTeArray.push(player);
+          this.lastSeasonPlayers.tightEnds.push(player);
           break;
         }
         case 'DEF': {
-          this.tmpDefArray.push(player);
+          this.lastSeasonPlayers.defenses.push(player);
           break;
         }
         case 'K': {
-          this.tmpKArray.push(player);
+          this.lastSeasonPlayers.kickers.push(player);
           break;
         }
       }
-    });
+    }
+    console.log('check', this.lastSeasonPlayers);
+    return this.lastSeasonPlayers;
   }
 }
 

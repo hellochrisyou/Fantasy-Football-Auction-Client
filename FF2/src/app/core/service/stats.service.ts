@@ -23,15 +23,14 @@ export class StatsService {
   public returnQbStats(qbArray: any[]): QB[] {
     for (const qb of qbArray) {
       this.tmpQb = {};
-      this.tmpQb.name = qb.name;
-      qb.stats['5'] != null ? (this.tmpQb.passingYard = qb.stats['5']) : (this.tmpQb.passingYard = 0);
-
-      qb.stats['6'] != null ? (this.tmpQb.passingTD = qb.stats['6']) : (this.tmpQb.passingTD = 0);
-      qb.stats['7'] != null ? (this.tmpQb.interception = qb.stats['7']) : (this.tmpQb.interception = 0);
-      qb.stats['8'] != null ? (this.tmpQb.sack = qb.stats['8']) : (this.tmpQb.sack = 0);
-      qb.stats['14'] != null ? (this.tmpQb.rushingYard = qb.stats['14']) : (this.tmpQb.rushingYard = 0);
-      qb.stats['15'] != null ? (this.tmpQb.rushingTD = qb.stats['15']) : (this.tmpQb.rushingTD = 0);
-      qb.stats['31'] != null ? (this.tmpQb.fumble = qb.stats['31']) : (this.tmpQb.fumble = 0);
+      this.tmpQb.Name = qb.name;
+      qb.stats['5'] != null ? (this.tmpQb.PassYD = qb.stats['5']) : (this.tmpQb.PassYD = 0);
+      qb.stats['6'] != null ? (this.tmpQb.PassTD = qb.stats['6']) : (this.tmpQb.PassTD = 0);
+      qb.stats['7'] != null ? (this.tmpQb.INT = qb.stats['7']) : (this.tmpQb.INT = 0);
+      qb.stats['8'] != null ? (this.tmpQb.Sack = qb.stats['8']) : (this.tmpQb.Sack = 0);
+      qb.stats['14'] != null ? (this.tmpQb.RushYD = qb.stats['14']) : (this.tmpQb.RushYD = 0);
+      qb.stats['15'] != null ? (this.tmpQb.RushTD = qb.stats['15']) : (this.tmpQb.RushTD = 0);
+      qb.stats['31'] != null ? (this.tmpQb.Fumble = qb.stats['31']) : (this.tmpQb.Fumble = 0);
 
       this.tmpQbArray.push(this.tmpQb);
     }
@@ -41,13 +40,13 @@ export class StatsService {
   public returnRbStats(rbArray: any[]): RB[] {
     for (const rb of rbArray) {
       this.tmpRb = {};
-      this.tmpRb.name = rb.name;
-      rb.stats['14'] != null ? (this.tmpRb.rushingYard = rb.stats['14']) : (this.tmpRb.rushingYard = 0);
-      rb.stats['15'] != null ? (this.tmpRb.rushingTD = rb.stats['15']) : (this.tmpRb.rushingTD = 0);
-      rb.stats['20'] != null ? (this.tmpRb.reception = rb.stats['20']) : (this.tmpRb.reception = 0);
-      rb.stats['21'] != null ? (this.tmpRb.receivingYard = rb.stats['21']) : (this.tmpRb.receivingYard = 0);
-      rb.stats['22'] != null ? (this.tmpRb.receivingTD = rb.stats['22']) : (this.tmpRb.receivingTD = 0);
-      rb.stats['31'] != null ? (this.tmpRb.fumble = rb.stats['31']) : (this.tmpRb.fumble = 0);
+      this.tmpRb.Name = rb.name;
+      rb.stats['14'] != null ? (this.tmpRb.RushYD = rb.stats['14']) : (this.tmpRb.RushYD = 0);
+      rb.stats['15'] != null ? (this.tmpRb.RushTD = rb.stats['15']) : (this.tmpRb.RushTD = 0);
+      rb.stats['20'] != null ? (this.tmpRb.Rec = rb.stats['20']) : (this.tmpRb.Rec = 0);
+      rb.stats['21'] != null ? (this.tmpRb.RecYD = rb.stats['21']) : (this.tmpRb.RecYD = 0);
+      rb.stats['22'] != null ? (this.tmpRb.RecTD = rb.stats['22']) : (this.tmpRb.RecTD = 0);
+      rb.stats['31'] != null ? (this.tmpRb.Fumble = rb.stats['31']) : (this.tmpRb.Fumble = 0);
       this.tmpRbArray.push(this.tmpRb);
     }
     return this.tmpRbArray;
@@ -57,10 +56,10 @@ export class StatsService {
     for (const wr of wrArray) {
       this.tmpWr = {};
 
-      this.tmpWr.name = wr.name;
-      wr.stats['20'] != null ? (this.tmpWr.reception = wr.stats['20']) : (this.tmpWr.reception = 0);
-      wr.stats['21'] != null ? (this.tmpWr.receivingYard = wr.stats['21']) : (this.tmpWr.receivingYard = 0);
-      wr.stats['22'] != null ? (this.tmpWr.receivingTD = wr.stats['22']) : (this.tmpWr.receivingTD = 0);
+      this.tmpWr.Name = wr.name;
+      wr.stats['20'] != null ? (this.tmpWr.Rec = wr.stats['20']) : (this.tmpWr.Rec = 0);
+      wr.stats['21'] != null ? (this.tmpWr.RecYD = wr.stats['21']) : (this.tmpWr.RecYD = 0);
+      wr.stats['22'] != null ? (this.tmpWr.RecTD = wr.stats['22']) : (this.tmpWr.RecTD = 0);
       this.tmpWrArray.push(this.tmpWr);
     }
     return this.tmpWrArray;
@@ -69,10 +68,10 @@ export class StatsService {
   public returnTeStats(teArray: any[]): TE[] {
     for (const te of teArray) {
       this.tmpTe = {};
-      this.tmpTe.name = te.name;
-      te.stats['20'] != null ? (this.tmpTe.reception = te.stats['20']) : (this.tmpTe.reception = 0);
-      te.stats['21'] != null ? (this.tmpTe.receivingYard = te.stats['21']) : (this.tmpTe.receivingYard = 0);
-      te.stats['22'] != null ? (this.tmpTe.receivingTD = te.stats['22']) : (this.tmpTe.receivingTD = 0);
+      this.tmpTe.Name = te.name;
+      te.stats['20'] != null ? (this.tmpTe.Rec = te.stats['20']) : (this.tmpTe.Rec = 0);
+      te.stats['21'] != null ? (this.tmpTe.RecYD = te.stats['21']) : (this.tmpTe.RecYD = 0);
+      te.stats['22'] != null ? (this.tmpTe.RecTD = te.stats['22']) : (this.tmpTe.RecTD = 0);
       this.tmpTeArray.push(this.tmpTe);
     }
     return this.tmpTeArray;
@@ -81,13 +80,13 @@ export class StatsService {
   public returnDEFStats(defArray: any[]): DEF[] {
     for (const def of defArray) {
       this.tmpDef = {};
-      this.tmpDef.name = def.name;
-      def.stats['45'] != null ? (this.tmpDef.sack = def.stats['45']) : (this.tmpDef.sack = 0);
-      def.stats['46'] != null ? (this.tmpDef.interception = def.stats['46']) : (this.tmpDef.interception = 0);
-      def.stats['47'] != null ? (this.tmpDef.fumblesRecovered = def.stats['47']) : (this.tmpDef.fumblesRecovered = 0);
-      def.stats['49'] != null ? (this.tmpDef.safety = def.stats['49']) : (this.tmpDef.safety = 0);
+      this.tmpDef.Name = def.name;
+      def.stats['45'] != null ? (this.tmpDef.Sack = def.stats['45']) : (this.tmpDef.Sack = 0);
+      def.stats['46'] != null ? (this.tmpDef.INT = def.stats['46']) : (this.tmpDef.INT = 0);
+      def.stats['47'] != null ? (this.tmpDef.FumbleRec = def.stats['47']) : (this.tmpDef.FumbleRec = 0);
+      def.stats['49'] != null ? (this.tmpDef.Safety = def.stats['49']) : (this.tmpDef.Safety = 0);
       def.stats['50'] != null ? (this.tmpDef.TD = def.stats['50']) : (this.tmpDef.TD = 0);
-      def.stats['54'] != null ? (this.tmpDef.pointsAllowed = def.stats['54']) : (this.tmpDef.pointsAllowed = 0);
+      def.stats['54'] != null ? (this.tmpDef.PointsAllowed = def.stats['54']) : (this.tmpDef.PointsAllowed = 0);
       this.tmpDefArray.push(this.tmpDef);
     }
     return this.tmpDefArray;
@@ -96,7 +95,7 @@ export class StatsService {
   returnKickerStats(kArray: any[]): Kicker[] {
     for (const kicker of kArray) {
       this.tmpKicker = {};
-      this.tmpKicker.name = kicker.name;
+      this.tmpKicker.Name = kicker.name;
       kicker.stats['33'] != null ? (this.tmpKicker.PAT = kicker.stats['33']) : (this.tmpKicker.PAT = 0);
       kicker.stats['35'] != null ? (this.tmpKicker.fg0To19 = kicker.stats['35']) : (this.tmpKicker.fg0To19 = 0);
       kicker.stats['36'] != null ? (this.tmpKicker.fg20To29 = kicker.stats['36']) : (this.tmpKicker.fg20To29 = 0);
