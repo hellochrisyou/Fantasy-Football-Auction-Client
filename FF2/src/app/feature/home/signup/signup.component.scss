@@ -10,3 +10,25 @@
 #left-flex {
   padding: 0 10px 0;
 }
+
+img#profile_picture {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 2rem 0 0 2rem;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+div.portfoliocard .right_col {
+  top: 7.65rem !important;
+  position: absolute;
+  left: 10rem;
+}
+
+button.mat-button#signup-button {
+  background-color: #1a237e;
+}

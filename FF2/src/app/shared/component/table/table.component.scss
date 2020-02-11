@@ -2,22 +2,26 @@
 @import "_color";
 
 section {
-  height: 100vh;
+  height: 90vh;
 }
-table,
-mat-paginator {
+table {
   max-width: 70vw;
+  width: 100%;
   margin: 0 auto;
-  position: absolute;
-  top: 15vh;
-  left: 15vw;
+  position: relative;
+  width: auto;
   color: white;
   background-color: $control-color;
 }
+mat-paginator {
+  width: auto;
+  margin: 0 auto;
+  position: relative;
+  background-color: $control-color;
+}
 #search-field {
-  top: 10vh;
-  left: 15vw;
-  position: absolute;
+  left: 20vw;
+  position: relative;
 }
 
 .mat-select-value {

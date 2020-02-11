@@ -2,10 +2,13 @@
     <div class="coverphoto"></div>
     <div class="profile_picture"></div>
     <div class="left_col">
-        <div class="social-container" fxLayout="row" fxLayoutAlign="center center">
-            <button mat-fab class="mat-elevation-z5"><a (click)="loginGoogle()">
+        <div class="social-container" fxLayout="column" fxLayoutAlign="center center">
+            <h4>Google Sign in</h4>
+            <button mat-fab class="mat-elevation-z5">
+                <a (click)="loginGoogle()">
                     <i class="fa fa-google"></i>
-                </a></button>
+                </a>
+            </button>
         </div>
     </div>
     <div class="right_col">
@@ -32,8 +35,6 @@
             <mat-form-field>
                 <mat-label>Password</mat-label>
                 <input matInput placeholder="Password" formControlName="loginPassCtrl" [errorStateMatcher]="matcher">
-                <br>
-                <br>
                 <mat-error *ngIf="formGroup.get('loginPassCtrl').errors &&
                     formGroup.get('loginPassCtrl').dirty && formGroup.controls.loginPassCtrl.hasError('required')">
                     Password is <strong>REQUIRED</strong>
@@ -41,6 +42,13 @@
                 <mat-error *ngIf="formGroup.get('loginPassCtrl').errors &&
                     formGroup.get('loginPassCtrl').dirty && !formGroup.controls.loginPassCtrl.hasError('required')">
                     Password is <strong>REQUIRED</strong>
+                </mat-error>
+                <mat-error
+                    *ngIf="formGroup.get('loginPassCtrl').errors &&
+                                    formGroup.get('loginPassCtrl').dirty && formGroup.controls.loginPassCtrl.hasError('maxlength')">
+                    Minimum of
+                    <strong>{{formGroup.controls.loginPassCtrl.errors.minlength.requiredLength}}</strong>
+                    characters
                 </mat-error>
                 <mat-error *ngIf="formGroup.get('loginPassCtrl').errors &&
                     formGroup.get('loginPassCtrl').dirty && formGroup.controls.loginPassCtrl.hasError('maxlength')">
