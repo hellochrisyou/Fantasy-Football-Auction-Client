@@ -121,10 +121,10 @@ export class TableComponent implements OnInit, OnDestroy {
 
   public setDataColor(value: number | string) {
     if (typeof value !== 'string') {
-      if (value > 0) {
-        return '#4bb543';
-      } else {
+      if (value < 0) {
         return '#dd0031';
+      } else {
+        return '#4bb543';
       }
     }
     return;

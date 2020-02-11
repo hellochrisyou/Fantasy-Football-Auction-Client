@@ -12,6 +12,8 @@ import { URL_VALIDATOR } from 'src/app/shared/validator/validator';
 })
 export class SignupComponent extends CreateBaseForm implements OnInit, OnDestroy {
 
+  imgUrl = "https://material.angular.io/assets/img/examples/shiba2.jpg";
+
   constructor(
     protected fb: FormBuilder,
     protected changeDetectorRef: ChangeDetectorRef,
@@ -25,7 +27,7 @@ export class SignupComponent extends CreateBaseForm implements OnInit, OnDestroy
       alert('Please correctly fill all the required fields');
       return false;
     } else {
-      // this.auth.signupEmail(this.formGroup.get('signupEmailCtrl').value, this.formGroup.get('signupPassCtrl').value);
+      this.auth.signupEmail(this.formGroup.get('signupEmailCtrl').value, this.formGroup.get('signupPassCtrl').value);
     }
   }
   public ngOnInit(): void {
@@ -56,5 +58,7 @@ export class SignupComponent extends CreateBaseForm implements OnInit, OnDestroy
     super.ngOnDestroy();
   }
 
-
+  public preview() {
+    this.imgUrl = this.formGroup.get('photoCtrl').value;
+  }
 }

@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { CreateBaseForm } from 'src/app/shared/base/base-form';
-
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'user-signin',
@@ -32,7 +31,7 @@ export class SigninComponent extends CreateBaseForm implements OnInit, OnDestroy
       alert('correctly  required fields!');
       return false;
     } else {
-      // this.auth.signinEmail(this.formGroup.get('loginEmailCtrl').value, this.formGroup.get('loginPassCtrl').value);
+      this.auth.signinEmail(this.formGroup.get('loginEmailCtrl').value, this.formGroup.get('loginPassCtrl').value);
     }
   }
 
@@ -45,7 +44,7 @@ export class SigninComponent extends CreateBaseForm implements OnInit, OnDestroy
       ]],
       loginPassCtrl: ['', [
         Validators.required,
-        Validators.minLength(6),
+        Validators.minLength(8),
         Validators.maxLength(25)
       ]]
     });
@@ -56,7 +55,7 @@ export class SigninComponent extends CreateBaseForm implements OnInit, OnDestroy
   }
 
   public loginGoogle(): void {
-    // this.auth.signinGoogle();
+    this.auth.signinGoogle();
   }
 
 }
