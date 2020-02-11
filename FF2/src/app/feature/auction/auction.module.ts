@@ -16,6 +16,6 @@ import { JoinAuctionComponent } from './join-auction/join-auction.component';
     SharedModule,
     AuctionRoutingModule
   ],
-  exports: [CreateAuctionComponent, LiveAuctionComponent]
+  exports: [CreateAuctionComponent, LiveAuctionComponent, AuctionComponent, JoinAuctionComponent]
 })
 export class AuctionModule { }

@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "_color";
 
 html,
 body {
@@ -6,8 +7,18 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #090979;
+  font-family: "Roboto Mono", monospace; // background-color: #090979;
+  background-color: $body-color;
+}
+
+h1 {
+  font-family: "Roboto Mono", monospace !important;
+  color: white;
+  font-weight: 800;
+}
+
+div {
+  font-family: "Roboto Mono", monospace !important;
 }
 
 main-layout {
@@ -35,13 +46,11 @@ router-outlet {
   left: 0;
   width: 100vw;
   height: 100%;
-  z-index: 20;
 }
 
 main-auction,
 my-team {
   position: absolute;
-  margin: 10% auto;
   left: 0;
   width: 100vw;
   height: 100%;
@@ -54,24 +63,46 @@ highlight-card {
   z-index: 10;
 }
 
+.flex-form {
+  min-height: 100vh;
+}
+button.mat-button {
+  background-color: $control-color;
+  color: white;
+  margin: 0 auto;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: $control-color;
+}
+
 section {
   min-height: 100%;
   min-width: 100vw;
 }
 
 .mat-form-field-appearance-legacy .mat-hint {
-  color: goldenrod;
+  color: goldenrod !important;
 }
 
 .mat-form-field-empty.mat-form-field-label,
 .signup-form .mat-input-element::placeholder,
 .signup-form .mat-input-element {
-  color: darkgrey;
+  color: black !important;
 }
 
 .mat-form-field-appearance-legacy .mat-form-field-underline {
-  background-color: darkgrey;
+  background-color: black;
 }
 
+.mat-tab-label .mat-tab-label-content {
+  color: black;
+}
+
+.text-center {
+  text-align: center;
+  color: $primary-background;
+}
 @media screen and (max-width: 1025px) {
 }

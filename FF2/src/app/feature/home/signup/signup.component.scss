@@ -1,7 +1,12 @@
 @import "_button";
-@import "_font";
 @import "_home";
 
 @include home();
-@include font();
 @include button();
+
+#photoUrl {
+  width: 100%;
+}
+#left-flex {
+  padding: 0 10px 0;
+}

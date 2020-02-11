@@ -1,7 +1,14 @@
 @import "_button";
-@import "_font";
 @import "_home";
-
+@import "_color";
 @include home();
-@include font();
 @include button();
+
+button.mat-fab {
+  background-color: $control-color;
+}
+
+section {
+  min-height: auto;
+  min-width: auto;
+}

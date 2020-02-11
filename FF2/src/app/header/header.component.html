@@ -1,22 +1,20 @@
-<mat-toolbar class="toolbar mat-elevation-z7" role="banner" fxLayout="row" fxLayoutAlign="space-around center">
-    <div id="left-spacer">
-        <div class="menu-collapsed">
-            <div class="bar"></div>
-            <nav>
-                <ul>
-                    <li><a routerLink="/my-team" routerLinkActive="active">My Teams</a></li>
-                    <li><a routerLink="/auction" routerLinkActive="active">Auction</a></li>
-                    <li><a routerLink="/my-account" routerLinkActive="active">My Account</a></li>
-                </ul>
-            </nav>
-        </div>
+<mat-toolbar class="toolbar mat-elevation-z7" role="banner">
+    <div id="left-spacer"></div>
+    <div class="menu-collapsed">
+        <div class="bar"></div>
+        <nav>
+            <ul>
+                <li><a routerLink="/my-team" routerLinkActive="active">My Teams</a></li>
+                <li><a routerLink="/auction" routerLinkActive="active">Auction</a></li>
+                <li><a routerLink="/my-account" routerLinkActive="active">My Account</a></li>
+            </ul>
+        </nav>
     </div>
-    <div class="spacer">
-        <h1 class="mat-typography mat-display-1 text-center profile-typography">Fantasy Football Auction</h1>
-
+    <div id="mid-spacer">
+        <h1>Fantasy Football Auction</h1>
     </div>
 
-    <div id="right-spacer" class="spacer">
+    <div id="right-spacer">
         <span id="logout">Logout</span>
     </div>
 </mat-toolbar>

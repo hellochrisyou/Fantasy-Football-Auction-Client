@@ -1,87 +1,87 @@
-<section>
-    <div class="portfoliocard">
-        <div class="coverphoto"></div>
-        <div class="profile_picture"></div>
+<div class="portfoliocard">
+    <div class="coverphoto"></div>
+    <div class="profile_picture"></div>
+    <form [formGroup]="formGroup">
+
         <div class="left_col">
-            <div fxLayout="column" fxLayoutAlign="end center" fxLayoutGap="14rem">
+            <div id="left-flex" fxLayout="column" fxLayoutAlign="space-around center">
                 <button mat-fab color="primary" class="button-home mat-elevation-z7">Preview</button>
+                <mat-form-field id="photoUrl" class="signup-form">
+                    <mat-label class="white-color">Photo URL</mat-label>
+                    <br>
+                    <input matInput formControlName="photoCtrl" type="url" placeholder="http"
+                        [errorStateMatcher]="matcher">
+                    <mat-hint color="white">Start with http:// or https://</mat-hint>
+                    <mat-error *ngIf="formGroup.controls.photoCtrl.hasError('required')">
+                        PhotoURL is <strong>Required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="formGroup.controls.photoCtrl.hasError('pattern')">
+                        Invalid <Strong>URL</Strong>
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+        </div>
+        <div class="right_col">
+
+            <h1 class="text-center"><u>Sign Up</u></h1>
+            <div fxLayout="column" fxLayoutAlign="space-between center">
+                <mat-form-field class="signup-form">
+                    <mat-label>Name</mat-label>
+                    <br>
+                    <input matInput placeholder="Name" formControlName="nameCtrl" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="formGroup.controls.nameCtrl.hasError('maxlength')">
+                        Maximum of
+                        <strong>{{formGroup.controls.nameCtrl.errors.maxlength.requiredLength}}</strong>
+                        characters
+                    </mat-error>
+                    <mat-error r *ngIf="formGroup.controls.nameCtrl.hasError('required')">
+                        Name is <strong>REQUIRED</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="signup-form">
+                    <mat-label>Email</mat-label>
+                    <br>
+                    <input matInput placeholder="Email" formControlName="emailCtrl" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="formGroup.controls.emailCtrl.hasError('maxlength')">
+                        Maximum of
+                        <strong>{{formGroup.controls.emailCtrl.errors.maxlength.requiredLength}}</strong>
+                        characters
+                    </mat-error>
+                    <mat-error
+                        *ngIf="formGroup.controls.emailCtrl.hasError('email') && !formGroup.controls.emailCtrl.hasError('required')">
+                        Please enter a <strong>valid</strong> email address
+                    </mat-error>
+                    <mat-error r
+                        *ngIf="!formGroup.controls.emailCtrl.hasError('email') && formGroup.controls.emailCtrl.hasError('required')">
+                        Email is <strong>REQUIRED</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="signup-form">
+                    <mat-label class="mat-label-black-color">Password</mat-label>
+                    <br>
+                    <input matInput placeholder="Password" formControlName="passwordCtrl" [errorStateMatcher]="matcher">
+                    <mat-error
+                        *ngIf="!formGroup.get('passwordCtrl').errors &&formGroup.controls.passwordCtrl.hasError('minlength')">
+                        Miniumum of
+                        <strong>{{formGroup.controls.passwordCtrl.errors.minlength.requiredLength}}</strong>
+                        characters
+                    </mat-error>
+                    <mat-error
+                        *ngIf="formGroup.get('passwordCtrl').errors &&formGroup.controls.passwordCtrl.hasError('maxlength')">
+                        Maximum of
+                        <strong>{{formGroup.controls.passwordCtrl.errors.maxlength.requiredLength}}</strong>
+                        characters
+                    </mat-error>
+                    <mat-error
+                        *ngIf="formGroup.get('passwordCtrl').errors &&
+                            formGroup.get('passwordCtrl').dirty && !formGroup.controls.passwordCtrl.hasError('required')">
+                        Password is <strong>REQUIRED</strong>
+                    </mat-error>
+                </mat-form-field>
                 <button mat-button class="button-home mat-elevation-z4" type="submit" (click)="signup()">Sign
                     Up</button>
             </div>
         </div>
-        <div class="right_col">
-            <form [formGroup]="formGroup">
-                <h1 class="mobile-h1">Create Account</h1>
-                <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="5px">
-                    <mat-form-field class="signup-form">
-                        <mat-label>Name</mat-label>
-                        <br>
-                        <input matInput placeholder="Name" formControlName="nameCtrl" [errorStateMatcher]="matcher">
-                        <mat-error *ngIf="formGroup.controls.nameCtrl.hasError('maxlength')">
-                            Maximum of
-                            <strong>{{formGroup.controls.nameCtrl.errors.maxlength.requiredLength}}</strong>
-                            characters
-                        </mat-error>
-                        <mat-error r *ngIf="formGroup.controls.nameCtrl.hasError('required')">
-                            Name is <strong>REQUIRED</strong>
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="signup-form">
-                        <mat-label>Email</mat-label>
-                        <br>
-                        <input matInput placeholder="Email" formControlName="emailCtrl" [errorStateMatcher]="matcher">
-                        <mat-error *ngIf="formGroup.controls.emailCtrl.hasError('maxlength')">
-                            Maximum of
-                            <strong>{{formGroup.controls.emailCtrl.errors.maxlength.requiredLength}}</strong>
-                            characters
-                        </mat-error>
-                        <mat-error
-                            *ngIf="formGroup.controls.emailCtrl.hasError('email') && !formGroup.controls.emailCtrl.hasError('required')">
-                            Please enter a <strong>valid</strong> email address
-                        </mat-error>
-                        <mat-error r
-                            *ngIf="!formGroup.controls.emailCtrl.hasError('email') && formGroup.controls.emailCtrl.hasError('required')">
-                            Email is <strong>REQUIRED</strong>
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="signup-form">
-                        <mat-label class="white-color">Photo URL</mat-label>
-                        <br>
-                        <input matInput formControlName="photoCtrl" type="url" placeholder="http"
-                            [errorStateMatcher]="matcher">
-                        <mat-hint color="white">Start with http:// or https://</mat-hint>
-                        <mat-error *ngIf="formGroup.controls.photoCtrl.hasError('required')">
-                            PhotoURL is <strong>Required</strong>
-                        </mat-error>
-                        <mat-error *ngIf="formGroup.controls.photoCtrl.hasError('pattern')">
-                            Invalid <Strong>URL</Strong>
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="signup-form">
-                        <mat-label class="mat-label-black-color">Password</mat-label>
-                        <br>
-                        <input matInput placeholder="Password" formControlName="passwordCtrl"
-                            [errorStateMatcher]="matcher">
-                        <mat-error
-                            *ngIf="!formGroup.get('passwordCtrl').errors &&formGroup.controls.passwordCtrl.hasError('minlength')">
-                            Miniumum of
-                            <strong>{{formGroup.controls.passwordCtrl.errors.minlength.requiredLength}}</strong>
-                            characters
-                        </mat-error>
-                        <mat-error
-                            *ngIf="formGroup.get('passwordCtrl').errors &&formGroup.controls.passwordCtrl.hasError('maxlength')">
-                            Maximum of
-                            <strong>{{formGroup.controls.passwordCtrl.errors.maxlength.requiredLength}}</strong>
-                            characters
-                        </mat-error>
-                        <mat-error
-                            *ngIf="formGroup.get('passwordCtrl').errors &&
-                            formGroup.get('passwordCtrl').dirty && !formGroup.controls.passwordCtrl.hasError('required')">
-                            Password is <strong>REQUIRED</strong>
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-            </form>
-        </div>
-    </div>
-</section>
+    </form>
+</div>

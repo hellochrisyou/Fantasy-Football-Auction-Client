@@ -54,12 +54,17 @@ mat-paginator {
   position: absolute;
   top: 15vh;
   left: 15vw;
+  color: white;
+  background-color: $control-color;
 }
-
 #search-field {
   top: 10vh;
   left: 15vw;
   position: absolute;
+}
+
+.mat-select-value {
+  color: white !important;
 }
 
 .icon-red {
@@ -80,11 +85,11 @@ tr.mat-header-row {
   // background-color:darkslateblue;
   // background-color:slateblue;
   // background-color: cornflowerblue;
-  background-color: rgb(25, 118, 210); //  background-color:dodgerblue;
+  background-color: $control-color; //  background-color:dodgerblue;
 }
 
 .mat-row:nth-child(even) {
-  background-color: whitesmoke;
+  background-color: $table-lighter-color;
 }
 
 .mat-row:nth-child(odd) {

@@ -1,10 +1,29 @@
+@import "_color";
+
 mat-toolbar {
   min-width: 100vw;
   position: fixed;
   left: 0;
-  background-color: #448aff;
+  background-color: $primary-background;
 }
 
+h1 {
+  // padding-left: 2vw;
+}
+
+#left-spacer {
+  float: left;
+}
+
+#mid-spacer {
+  margin: 0 auto;
+  padding-left: 3.5vw;
+}
+
+#right-spacer {
+  float: right;
+  margin-right: 1vw;
+}
 .b-a,
 .bar,
 .bar:before,

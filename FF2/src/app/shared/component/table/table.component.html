@@ -2,7 +2,8 @@
     <div fxFlex></div>
     <section fxLayout="column" fxLayoutAlign="center start">
         <mat-form-field id="search-field">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" />
+            <mat-icon matPrefix id="search-icon">search</mat-icon>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" />
         </mat-form-field>
         <table class="mat-elevation-z7" mat-table [dataSource]="dataSource" matSort matSortDirection="asc">
             <ng-container *ngFor="let col of columnObjects" [matColumnDef]="col.columnId">

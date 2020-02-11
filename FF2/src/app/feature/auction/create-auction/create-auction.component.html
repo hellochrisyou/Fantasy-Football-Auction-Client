@@ -1,1 +1,50 @@
-<p>create-auction works!</p>
+<h1 class="text-center"><u>Create Auction</u></h1>
+<form class="flex-form" [formGroup]="formGroup" (ngSubmit)="submit(formGroup.value)">
+    <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="1.5vw">
+        <mat-form-field>
+            <mat-label class="white-color">DisplayName</mat-label>
+            <br>
+            <input matInput color="white" type="text" formControlName="displayNameCtrl" [errorStateMatcher]="matcher">
+            <mat-hint color="white">This will not change any 3rd-party provider name properties</mat-hint>
+            <mat-error *ngIf="formGroup.controls.displayNameCtrl.hasError('required')">
+                Display Name is <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf="formGroup.controls.displayNameCtrl.hasError('maxlength')">
+                Maximum of
+                <strong>{{formGroup.controls.displayNameCtrl.errors.maxlength.requiredLength}}</strong>
+                characters
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label class="white-color">Country</mat-label>
+            <br>
+            <input matInput type="text" formControlName="countryCtrl" [errorStateMatcher]="matcher">
+            <mat-hint color="white">Abbreviations accepted</mat-hint>
+            <mat-error *ngIf="formGroup.controls.countryCtrl.hasError('required')">
+                Country is <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf="formGroup.controls.countryCtrl.hasError('maxlength')">
+                Maximum of
+                <strong>{{formGroup.controls.countryCtrl.errors.maxlength.requiredLength}}</strong>
+                characters
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label class="white-color">Photo URL</mat-label>
+            <br>
+            <input matInput formControlName="photoCtrl" type="url" [errorStateMatcher]="matcher">
+            <mat-hint color="white">Start with http:// or https://</mat-hint>
+            <mat-error *ngIf="formGroup.controls.photoCtrl.hasError('required')">
+                PhotoURL is <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf="formGroup.controls.photoCtrl.hasError('pattern')">
+                Invalid <Strong>URL</Strong>
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <br />
+    <br />
+    <div fxLayout="column" fxLayoutAlign="space-around center">
+        <button mat-button class="non-home-button mat-elevation-z7 margin-center" type="submit">Submit</button>
+    </div>
+</form>

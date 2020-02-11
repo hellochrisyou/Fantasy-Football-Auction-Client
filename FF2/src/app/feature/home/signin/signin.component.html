@@ -1,63 +1,56 @@
-<section>
-    <div class="portfoliocard">
-        <div class="coverphoto"></div>
-        <div class="profile_picture"></div>
-        <div class="left_col">
-        </div>
-        <div class="right_col">
-            <section fxLayout="column" fxLayoutAlign="space-around center">
-                <h1 class="mobile-h1">Sign In</h1>
-                <div class="social-container" fxLayout="row" fxLayoutAlign="center center">
-                    <a (click)="loginGoogle()" class="social mat-elevation-z5">
-                        <i class="fa fa-google"></i>
-                    </a>
-                </div>
-                <form [formGroup]="formGroup" fxLayout="column" fxLayoutAlign="space-around center">
-                    <mat-form-field>
-                        <mat-label>Email</mat-label>
-                        <br>
-                        <input matInput placeholder="Email" formControlName="loginEmailCtrl"
-                            [errorStateMatcher]="matcher">
-                        <mat-error *ngIf="formGroup.controls.loginEmailCtrl.hasError('maxlength')">
-                            Maximum of
-                            <strong>{{formGroup.controls.loginEmailCtrl.errors.maxlength.requiredLength}}</strong>
-                            characters
-                        </mat-error>
-                        <mat-error
-                            *ngIf="formGroup.controls.loginEmailCtrl.hasError('email') && !formGroup.controls.loginEmailCtrl.hasError('required')">
-                            Please enter a <strong>valid</strong> email address
-                        </mat-error>
-                        <mat-error *ngIf="formGroup.controls.loginEmailCtrl.hasError('required')">
-                            Email is <strong>REQUIRED</strong>
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Password</mat-label>
-                        <input matInput placeholder="Password" formControlName="loginPassCtrl"
-                            [errorStateMatcher]="matcher">
-                        <br>
-                        <br>
-                        <mat-error *ngIf="formGroup.get('loginPassCtrl').errors &&
-                    formGroup.get('loginPassCtrl').dirty && formGroup.controls.loginPassCtrl.hasError('required')">
-                            Password is <strong>REQUIRED</strong>
-                        </mat-error>
-                        <mat-error *ngIf="formGroup.get('loginPassCtrl').errors &&
-                    formGroup.get('loginPassCtrl').dirty && !formGroup.controls.loginPassCtrl.hasError('required')">
-                            Password is <strong>REQUIRED</strong>
-                        </mat-error>
-                        <mat-error *ngIf="formGroup.get('loginPassCtrl').errors &&
-                    formGroup.get('loginPassCtrl').dirty && formGroup.controls.loginPassCtrl.hasError('maxlength')">
-                            Maximum of
-                            <strong>{{formGroup.controls.loginPassCtrl.errors.maxlength.requiredLength}}</strong>
-                            characters
-                        </mat-error>
-                    </mat-form-field>
-                    <div fxLayout="row" fxLayoutAlign="space-around center">
-                        <button class="button-home mat-elevation-z4" type="submit" (click)="login()">Sign
-                            in</button>
-                    </div>
-                </form>
-            </section>
+<div class="portfoliocard">
+    <div class="coverphoto"></div>
+    <div class="profile_picture"></div>
+    <div class="left_col">
+        <div class="social-container" fxLayout="row" fxLayoutAlign="center center">
+            <button mat-fab class="mat-elevation-z5"><a (click)="loginGoogle()">
+                    <i class="fa fa-google"></i>
+                </a></button>
         </div>
     </div>
-</section>
+    <div class="right_col">
+        <h1 class="text-center"><u>Sign in</u></h1>
+        <!-- <section fxLayout="column" fxLayoutAlign="center center"> -->
+        <form [formGroup]="formGroup" fxLayout="column" fxLayoutAlign="space-around center">
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <br>
+                <input matInput placeholder="Email" formControlName="loginEmailCtrl" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="formGroup.controls.loginEmailCtrl.hasError('maxlength')">
+                    Maximum of
+                    <strong>{{formGroup.controls.loginEmailCtrl.errors.maxlength.requiredLength}}</strong>
+                    characters
+                </mat-error>
+                <mat-error
+                    *ngIf="formGroup.controls.loginEmailCtrl.hasError('email') && !formGroup.controls.loginEmailCtrl.hasError('required')">
+                    Please enter a <strong>valid</strong> email address
+                </mat-error>
+                <mat-error *ngIf="formGroup.controls.loginEmailCtrl.hasError('required')">
+                    Email is <strong>REQUIRED</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Password" formControlName="loginPassCtrl" [errorStateMatcher]="matcher">
+                <br>
+                <br>
+                <mat-error *ngIf="formGroup.get('loginPassCtrl').errors &&
+                    formGroup.get('loginPassCtrl').dirty && formGroup.controls.loginPassCtrl.hasError('required')">
+                    Password is <strong>REQUIRED</strong>
+                </mat-error>
+                <mat-error *ngIf="formGroup.get('loginPassCtrl').errors &&
+                    formGroup.get('loginPassCtrl').dirty && !formGroup.controls.loginPassCtrl.hasError('required')">
+                    Password is <strong>REQUIRED</strong>
+                </mat-error>
+                <mat-error *ngIf="formGroup.get('loginPassCtrl').errors &&
+                    formGroup.get('loginPassCtrl').dirty && formGroup.controls.loginPassCtrl.hasError('maxlength')">
+                    Maximum of
+                    <strong>{{formGroup.controls.loginPassCtrl.errors.maxlength.requiredLength}}</strong>
+                    characters
+                </mat-error>
+            </mat-form-field>
+            <button mat-button class="mat-elevation-z4" type="submit" (click)="login()">Sign in</button>
+        </form>
+        <!-- </section> -->
+    </div>
+</div>
