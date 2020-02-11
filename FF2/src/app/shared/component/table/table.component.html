@@ -9,9 +9,11 @@
             <ng-container *ngFor="let col of columnObjects" [matColumnDef]="col.columnId">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>{{col.propertyName}}</th>
                 <td mat-cell *matCellDef="let dataArray;index as i"
-                    [style.color]="setDataColor(dataArray[col.propertyName])">{{dataArray[col.propertyName]}}
-                    <button *ngIf="col.columnId==='Select'" mat-raised-button class="customize-button"
-                        (click)="select(i)"></button>
+                    [style.color]="setDataColor(dataArray[col.propertyName])">
+                    {{dataArray[col.propertyName]}}
+                    <button *ngIf="col.columnId==='button'" mat-raised-button (click)="select(i)">
+                        <mat-icon class="icon-green">add</mat-icon>
+                    </button>
                 </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="columnIds; sticky: true"></tr>

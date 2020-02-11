@@ -1,2 +1,21 @@
 <h1 class="text-center"><u>Live Auction</u></h1>
-<base-table></base-table>
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Quaterback">
+        <base-table [dataType]="QB" [dataArray]="this.lastSeasonPlayers.quaterBacks"></base-table>
+    </mat-tab>
+    <mat-tab label="Runningback">
+        <base-table [dataType]="RB" [dataArray]="this.lastSeasonPlayers.runningsBacks"></base-table>
+    </mat-tab>
+    <mat-tab label="Wide Receiver">
+        <base-table [dataType]="RECEIVING" [dataArray]="this.lastSeasonPlayers.wideReceivers"></base-table>
+    </mat-tab>
+    <mat-tab label="Tight End">
+        <base-table [dataType]="RECEIVING" [dataArray]="this.lastSeasonPlayers.tightEnds"></base-table>
+    </mat-tab>
+    <mat-tab label="Defense">
+        <base-table [dataType]="DEF" [dataArray]="this.lastSeasonPlayers.defenses"></base-table>
+    </mat-tab>
+    <mat-tab label="Kicker">
+        <base-table [dataType]="KICKER" [dataArray]="this.lastSeasonPlayers.kickers"></base-table>
+    </mat-tab>
+</mat-tab-group>

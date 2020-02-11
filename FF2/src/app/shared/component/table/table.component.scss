@@ -1,49 +1,6 @@
 @import "_table";
 @import "_color";
 
-@include mat-table-cols(
-  (
-    Symbol: (
-      width: 3.5rem,
-      color: gray
-    ),
-    Name: (
-      width: 12rem,
-      color: gray
-    ),
-    Exchange: (
-      width: 12rem,
-      color: gray
-    ),
-    Open: (
-      width: 5rem
-    ),
-    Low: (
-      width: 5rem
-    ),
-    High: (
-      width: 5rem
-    ),
-    LatestPrice: (
-      width: 5rem
-    ),
-    Change: (
-      width: 5rem
-    ),
-    ChangePercent: (
-      width: 5rem
-    ),
-    Week52Low: (
-      width: 5rem
-    ),
-    Week52High: (
-      width: 5rem
-    ),
-    YtdChange: (
-      width: 5rem
-    )
-  )
-);
 section {
   height: 100vh;
 }
@@ -196,9 +153,12 @@ mat-error {
   color: white;
 }
 .mat-select-arrow {
-  color: white !important;
+  color: black !important;
 }
-
+mat-cell,
+.mat-cell {
+  color: black;
+}
 @media screen and (max-width: 1024px) {
   tr.mat-header-row {
     background-color: transparent;

@@ -1,20 +1,20 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { QB, RB, WR, TE, DEF, Kicker } from 'src/app/shared/interface/model.interface';
-import { APIURL } from '../../shared/const/url.const'
-import { StatsService } from './stats.service';
-import { HttpService } from './http.service';
-import { FilterPlayersService } from './filter-players.service';
-import { NotifyService } from './emit/notify.service';
+import { Injectable } from '@angular/core';
+import { DEF, Kicker, QB, RB, TE, WR } from 'src/app/shared/interface/model.interface';
+
+import { APIURL } from '../../shared/const/url.const';
 import {
-  calculateQBFantasy,
-  calculateRBFantasy,
-  calculateTEFantasy,
-  calculateDEFFantasy,
-  calculateKickerFantasy,
-  calculateWRFantasy
-} from '../util/calculate-stats';
-import { Observable } from 'rxjs';
+  CALCULATE_DEFENSE_POINTS,
+  CALCULATE_KICKER_POINTS,
+  CALCULATE_QB_POINTS,
+  CALCULATE_RB_POINTS,
+  CALCULATE_RECEIVER_POINTS,
+} from '../util/calculate-stats.util';
+import { EmitService } from './emit.service';
+import { NotifyService } from './emit/notify.service';
+import { FilterPlayersService } from './filter-players.service';
+import { HttpService } from './http.service';
+import { StatsService } from './stats.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,19 +33,19 @@ export class LastSeasonStatService {
     public statsFunctionService: StatsService,
     public httpService: HttpService,
     public filterService: FilterPlayersService,
-    public notifyService: NotifyService
+    public notifyService: NotifyService,
+    private emitService: EmitService
   ) {
   }
 
   public setLastSeasonQB(): any {
     this.httpService.get(APIURL.LASTSEASONSTATS + 'QB').subscribe(
       data => {
-        console.log('data here', data);
         this.qbArray = this.statsFunctionService.returnQbStats(data.players);
         this.qbArray = this.filterService.filterArray(this.qbArray);
         this.qbArray.forEach(qb => {
-          qb.fantasy_points = calculateQBFantasy(qb);
-          return this.qbArray;
+          qb.FantasyPoints = CALCULATE_QB_POINTS(qb);
+          this.emitService.mergeQb(this.qbArray);
         });
       },
       err => {
@@ -59,8 +59,8 @@ export class LastSeasonStatService {
         this.rbArray = this.statsFunctionService.returnRbStats(data.players);
         this.rbArray = this.filterService.filterArray(this.rbArray);
         this.rbArray.forEach(rb => {
-          rb.fantasy_points = calculateRBFantasy(rb);
-          return this.rbArray;
+          rb.FantasyPoints = CALCULATE_RB_POINTS(rb);
+          this.emitService.mergeRb(this.rbArray);
         });
       },
       err => {
@@ -74,8 +74,8 @@ export class LastSeasonStatService {
         this.wrArray = this.statsFunctionService.returnWrStats(data.players);
         this.wrArray = this.filterService.filterArray(this.wrArray);
         this.wrArray.forEach(wr => {
-          wr.fantasy_points = calculateWRFantasy(wr);
-          return this.wrArray;
+          wr.FantasyPoints = CALCULATE_RECEIVER_POINTS(wr);
+          this.emitService.mergeWr(this.wrArray);
         });
       },
       err => {
@@ -89,8 +89,8 @@ export class LastSeasonStatService {
         this.teArray = this.statsFunctionService.returnTeStats(data.players);
         this.teArray = this.filterService.filterArray(this.teArray);
         this.teArray.forEach(te => {
-          te.fantasy_points = calculateTEFantasy(te);
-          return this.teArray;
+          te.FantasyPoints = CALCULATE_RECEIVER_POINTS(te);
+          this.emitService.mergeTe(this.teArray);
         });
       },
       err => {
@@ -104,8 +104,8 @@ export class LastSeasonStatService {
         this.defArray = this.statsFunctionService.returnDEFStats(data.players);
         this.defArray = this.filterService.filterArray(this.defArray);
         this.defArray.forEach(def => {
-          def.fantasy_points = calculateDEFFantasy(def);
-          return this.defArray;
+          def.FantasyPoints = CALCULATE_DEFENSE_POINTS(def);
+          this.emitService.mergeDef(this.defArray);
         });
       },
       err => {
@@ -119,8 +119,8 @@ export class LastSeasonStatService {
         this.kArray = this.statsFunctionService.returnKickerStats(data.players);
         this.kArray = this.filterService.filterArray(this.kArray);
         this.kArray.forEach(k => {
-          k.fantasy_points = calculateKickerFantasy(k);
-          return this.kArray;
+          k.FantasyPoints = CALCULATE_KICKER_POINTS(k);
+          this.emitService.mergeKicker(this.kArray);
         });
       },
       err => {

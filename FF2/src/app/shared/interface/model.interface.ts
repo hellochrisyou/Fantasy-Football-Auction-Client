@@ -1,42 +1,41 @@
 export interface QB extends Player {
-    name?: string;
-    passingTD?: number;
-    passingYard?: number;
-    interception?: number;
-    sack?: number;
-    rushingYard?: number;
-    rushingTD?: number;
-    fumble?: number;
+    PassYD?: number;
+    PassTD?: number;
+    INT?: number;
+    Sack?: number;
+    RushYD?: number;
+    RushTD?: number;
+    Fumble?: number;
 }
 
 export interface RB extends Player {
-    rushingYard?: number;
-    rushingTD?: number;
-    reception?: number;
-    receivingYard?: number;
-    receivingTD?: number;
-    fumble?: number;
+    RushYD?: number;
+    RushTD?: number;
+    Rec?: number;
+    RecYD?: number;
+    RecTD?: number;
+    Fumble?: number;
 }
 
 export interface WR extends Player {
-    reception?: number;
-    receivingYard?: number;
-    receivingTD?: number;
+    Rec?: number;
+    RecYD?: number;
+    RecTD?: number;
 }
 
 export interface TE extends Player {
-    reception?: number;
-    receivingYard?: number;
-    receivingTD?: number;
+    Rec?: number;
+    RecYD?: number;
+    RecTD?: number;
 }
 
 export interface DEF extends Player {
-    sack?: number;
-    interception?: number;
-    fumblesRecovered?: number;
-    safety?: number;
+    Sack?: number;
+    INT?: number;
+    FumbleRec?: number;
+    Safety?: number;
     TD?: number;
-    pointsAllowed?: number;
+    PointsAllowed?: number;
 }
 
 export interface Kicker extends Player {
@@ -73,20 +72,20 @@ export interface Team {
 
 export interface Player {
     id?: number | string;
-    name?: string;
-    position?: string;
+    Name?: string;
+    Position?: string;
     team?: string;
-    minPrice?: number;
-    maxPrice?: number;
-    avgPrice?: number;
-    fantasy_points?: number;
+    MinPrice?: number;
+    MaxPrice?: number;
+    AvgPrice?: number;
+    FantasyPoints?: number;
 }
 
 export interface LastSeasonPlayers {
-    quaterBacks: QB[];
-    runningsBacks: RB[];
-    wideReceivers: WR[];
-    tightEnds: TE[];
-    defenses: DEF[];
-    kickers: Kicker[];
+    quaterBacks: any[];
+    runningsBacks: any[];
+    wideReceivers: any[];
+    tightEnds: any[];
+    defenses: any[];
+    kickers: any[];
 }
