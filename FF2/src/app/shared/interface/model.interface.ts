@@ -1,51 +1,51 @@
 export interface QB extends Player {
-    name: string;
-    passingTD: number;
-    passingYard: number;
-    interception: number;
-    sack: number;
-    rushingYard: number;
-    rushingTD: number;
-    fumble: number;
+    name?: string;
+    passingTD?: number;
+    passingYard?: number;
+    interception?: number;
+    sack?: number;
+    rushingYard?: number;
+    rushingTD?: number;
+    fumble?: number;
 }
 
 export interface RB extends Player {
-    rushingYard: number;
-    rushingTD: number;
-    reception: number;
-    receivingYard: number;
-    receivingTD: number;
-    fumble: number;
+    rushingYard?: number;
+    rushingTD?: number;
+    reception?: number;
+    receivingYard?: number;
+    receivingTD?: number;
+    fumble?: number;
 }
 
 export interface WR extends Player {
-    reception: number;
-    receivingYard: number;
-    receivingTD: number;
+    reception?: number;
+    receivingYard?: number;
+    receivingTD?: number;
 }
 
 export interface TE extends Player {
-    reception: number;
-    receivingYard: number;
-    receivingTD: number;
+    reception?: number;
+    receivingYard?: number;
+    receivingTD?: number;
 }
 
 export interface DEF extends Player {
-    sack: number;
-    interception: number;
-    fumblesRecovered: number;
-    safety: number;
-    TD: number;
-    pointsAllowed: number;
+    sack?: number;
+    interception?: number;
+    fumblesRecovered?: number;
+    safety?: number;
+    TD?: number;
+    pointsAllowed?: number;
 }
 
 export interface Kicker extends Player {
-    PAT: number;
-    fg0To19: number;
-    fg20To29: number;
-    fg30To39: number;
-    fg40To49: number;
-    fg50Plus: number;
+    PAT?: number;
+    fg0To19?: number;
+    fg20To29?: number;
+    fg30To39?: number;
+    fg40To49?: number;
+    fg50Plus?: number;
 }
 
 export interface User {
@@ -73,10 +73,20 @@ export interface Team {
 
 export interface Player {
     id?: number | string;
-    name: string;
-    position: string;
-    minPrice: number;
-    maxPrice: number;
-    averagePrice: number;
+    name?: string;
+    position?: string;
+    team?: string;
+    minPrice?: number;
+    maxPrice?: number;
+    avgPrice?: number;
     fantasy_points?: number;
+}
+
+export interface LastSeasonPlayers {
+    quaterBacks: QB[];
+    runningsBacks: RB[];
+    wideReceivers: WR[];
+    tightEnds: TE[];
+    defenses: DEF[];
+    kickers: Kicker[];
 }

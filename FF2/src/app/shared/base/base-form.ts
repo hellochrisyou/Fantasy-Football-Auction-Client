@@ -13,8 +13,10 @@ export class CreateBaseForm implements OnInit, OnDestroy {
     protected componentIdle: Subject<boolean> = new Subject();
     protected abstractControl: AbstractControl;
 
-    constructor(public formBuilder: FormBuilder,
-        protected changeDetectorRef: ChangeDetectorRef) {
+    constructor(
+        public formBuilder: FormBuilder,
+        protected changeDetectorRef: ChangeDetectorRef
+    ) {
     }
 
     public ngOnInit(): void {

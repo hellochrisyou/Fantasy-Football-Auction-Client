@@ -20,19 +20,9 @@ export class StatsService {
   tmpKArray: Kicker[] = [];
   constructor() { }
 
-  returnQbStats(qbArray: any[]): QB[] {
+  public returnQbStats(qbArray: any[]): QB[] {
     for (const qb of qbArray) {
-      this.tmpQb = {
-        name: '',
-        passingTD: 0,
-        passingYard: 0,
-        interception: 0,
-        sack: 0,
-        rushingYard: 0,
-        rushingTD: 0,
-        fumble: 0,
-        fantasy_points: 0
-      };
+      this.tmpQb = {};
       this.tmpQb.name = qb.name;
       qb.stats['5'] != null ? (this.tmpQb.passingYard = qb.stats['5']) : (this.tmpQb.passingYard = 0);
 
@@ -48,18 +38,9 @@ export class StatsService {
     return this.tmpQbArray;
   }
 
-  returnRbStats(rbArray: any[]): RB[] {
+  public returnRbStats(rbArray: any[]): RB[] {
     for (const rb of rbArray) {
-      this.tmpRb = {
-        name: '',
-        rushingYard: 0,
-        rushingTD: 0,
-        reception: 0,
-        receivingYard: 0,
-        receivingTD: 0,
-        fumble: 0,
-        fantasy_points: 0
-      };
+      this.tmpRb = {};
       this.tmpRb.name = rb.name;
       rb.stats['14'] != null ? (this.tmpRb.rushingYard = rb.stats['14']) : (this.tmpRb.rushingYard = 0);
       rb.stats['15'] != null ? (this.tmpRb.rushingTD = rb.stats['15']) : (this.tmpRb.rushingTD = 0);
@@ -72,15 +53,9 @@ export class StatsService {
     return this.tmpRbArray;
   }
 
-  returnWrStats(wrArray: any[]): WR[] {
+  public returnWrStats(wrArray: any[]): WR[] {
     for (const wr of wrArray) {
-      this.tmpWr = {
-        name: '',
-        reception: 0,
-        receivingYard: 0,
-        receivingTD: 0,
-        fantasy_points: 0
-      };
+      this.tmpWr = {};
 
       this.tmpWr.name = wr.name;
       wr.stats['20'] != null ? (this.tmpWr.reception = wr.stats['20']) : (this.tmpWr.reception = 0);
@@ -91,15 +66,9 @@ export class StatsService {
     return this.tmpWrArray;
   }
 
-  returnTeStats(teArray: any[]): TE[] {
+  public returnTeStats(teArray: any[]): TE[] {
     for (const te of teArray) {
-      this.tmpTe = {
-        name: '',
-        reception: 0,
-        receivingYard: 0,
-        receivingTD: 0,
-        fantasy_points: 0
-      };
+      this.tmpTe = {};
       this.tmpTe.name = te.name;
       te.stats['20'] != null ? (this.tmpTe.reception = te.stats['20']) : (this.tmpTe.reception = 0);
       te.stats['21'] != null ? (this.tmpTe.receivingYard = te.stats['21']) : (this.tmpTe.receivingYard = 0);
@@ -109,18 +78,9 @@ export class StatsService {
     return this.tmpTeArray;
   }
 
-  returnDEFStats(defArray: any[]): DEF[] {
+  public returnDEFStats(defArray: any[]): DEF[] {
     for (const def of defArray) {
-      this.tmpDef = {
-        name: '',
-        sack: 0,
-        interception: 0,
-        fumblesRecovered: 0,
-        safety: 0,
-        TD: 0,
-        pointsAllowed: 0,
-        fantasy_points: 0
-      };
+      this.tmpDef = {};
       this.tmpDef.name = def.name;
       def.stats['45'] != null ? (this.tmpDef.sack = def.stats['45']) : (this.tmpDef.sack = 0);
       def.stats['46'] != null ? (this.tmpDef.interception = def.stats['46']) : (this.tmpDef.interception = 0);
@@ -135,16 +95,7 @@ export class StatsService {
 
   returnKickerStats(kArray: any[]): Kicker[] {
     for (const kicker of kArray) {
-      this.tmpKicker = {
-        name: '',
-        PAT: 0,
-        fg0To19: 0,
-        fg20To29: 0,
-        fg30To39: 0,
-        fg40To49: 0,
-        fg50Plus: 0,
-        fantasy_points: 0
-      };
+      this.tmpKicker = {};
       this.tmpKicker.name = kicker.name;
       kicker.stats['33'] != null ? (this.tmpKicker.PAT = kicker.stats['33']) : (this.tmpKicker.PAT = 0);
       kicker.stats['35'] != null ? (this.tmpKicker.fg0To19 = kicker.stats['35']) : (this.tmpKicker.fg0To19 = 0);

@@ -1,14 +1,15 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { CreateBaseForm } from 'src/app/shared/base/base-form';
-import { FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/core/service/auth.service';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { URL_VALIDATOR } from 'src/app/shared/validator/validator';
+import { AuthService } from 'src/app/core/service/auth.service';
+import { CreateBaseForm } from 'src/app/shared/base/base-form';
 import { User } from 'src/app/shared/interface/model.interface';
+import { URL_VALIDATOR } from 'src/app/shared/validator/validator';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'create-auction',
   templateUrl: './create-auction.component.html',
   styleUrls: ['./create-auction.component.scss']
