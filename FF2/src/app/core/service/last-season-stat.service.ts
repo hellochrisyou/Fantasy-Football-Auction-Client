@@ -6,6 +6,16 @@ import { StatsService } from './stats.service';
 import { HttpService } from './http.service';
 import { FilterPlayersService } from './filter-players.service';
 import { NotifyService } from './emit/notify.service';
+import {
+  calculateQBFantasy,
+  calculateRBFantasy,
+  calculateTEFantasy,
+  calculateDEFFantasy,
+  calculateKickerFantasy,
+  calculateWRFantasy
+} from '../util/calculate-stats';
+import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -27,73 +37,91 @@ export class LastSeasonStatService {
   ) {
   }
 
-  setLastSeasonQB(): void {
+  public setLastSeasonQB(): any {
     this.httpService.get(APIURL.LASTSEASONSTATS + 'QB').subscribe(
       data => {
-        console.log('qbdata', data);
+        console.log('data here', data);
         this.qbArray = this.statsFunctionService.returnQbStats(data.players);
         this.qbArray = this.filterService.filterArray(this.qbArray);
-        this.notifyService.emitDraftRb(this.rbArray);
+        this.qbArray.forEach(qb => {
+          qb.fantasy_points = calculateQBFantasy(qb);
+          return this.qbArray;
+        });
       },
       err => {
         console.log(err);
       }
     );
   }
-  setLastSeasonRB(): void {
+  public setLastSeasonRB(): any {
     this.httpService.get(APIURL.LASTSEASONSTATS + 'RB').subscribe(
       data => {
         this.rbArray = this.statsFunctionService.returnRbStats(data.players);
         this.rbArray = this.filterService.filterArray(this.rbArray);
-        this.notifyService.emitDraftWr(this.wrArray);
+        this.rbArray.forEach(rb => {
+          rb.fantasy_points = calculateRBFantasy(rb);
+          return this.rbArray;
+        });
       },
       err => {
         console.log(err);
       }
     );
   }
-  setLastSeasonWR(): void {
+  public setLastSeasonWR(): any {
     this.httpService.get(APIURL.LASTSEASONSTATS + 'WR').subscribe(
       data => {
         this.wrArray = this.statsFunctionService.returnWrStats(data.players);
         this.wrArray = this.filterService.filterArray(this.wrArray);
-        this.notifyService.emitDraftTe(this.teArray);
+        this.wrArray.forEach(wr => {
+          wr.fantasy_points = calculateWRFantasy(wr);
+          return this.wrArray;
+        });
       },
       err => {
         console.log(err);
       }
     );
   }
-  setLastSeasonTE(): void {
+  public setLastSeasonTE(): any {
     this.httpService.get(APIURL.LASTSEASONSTATS + 'TE').subscribe(
       data => {
         this.teArray = this.statsFunctionService.returnTeStats(data.players);
         this.teArray = this.filterService.filterArray(this.teArray);
-        this.notifyService.emitDraftDef(this.defArray);
+        this.teArray.forEach(te => {
+          te.fantasy_points = calculateTEFantasy(te);
+          return this.teArray;
+        });
       },
       err => {
         console.log(err);
       }
     );
   }
-  setLastSeasonDEF(): void {
+  public setLastSeasonDEF(): any {
     this.httpService.get(APIURL.LASTSEASONSTATS + 'DEF').subscribe(
       data => {
         this.defArray = this.statsFunctionService.returnDEFStats(data.players);
         this.defArray = this.filterService.filterArray(this.defArray);
-        this.notifyService.emitDraftDef(this.defArray);
+        this.defArray.forEach(def => {
+          def.fantasy_points = calculateDEFFantasy(def);
+          return this.defArray;
+        });
       },
       err => {
         console.log(err);
       }
     );
   }
-  setLastSeasonK(): void {
+  public setLastSeasonK(): any {
     this.httpService.get(APIURL.LASTSEASONSTATS + 'K').subscribe(
       data => {
         this.kArray = this.statsFunctionService.returnKickerStats(data.players);
         this.kArray = this.filterService.filterArray(this.kArray);
-        this.notifyService.emitDraftK(this.kArray);
+        this.kArray.forEach(k => {
+          k.fantasy_points = calculateKickerFantasy(k);
+          return this.kArray;
+        });
       },
       err => {
         console.log(err);

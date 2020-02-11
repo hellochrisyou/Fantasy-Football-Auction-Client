@@ -1,3 +1,4 @@
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -5,19 +6,22 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { HomeModule } from './feature/home/home.module';
-import { LayoutComponent } from './layout/layout.component';
-import { AuctionModule } from './feature/auction/auction.module';
-import { MyTeamModule } from './feature/my-team/my-team.module';
-import { MyAccountModule } from './feature/my-account/my-account.module';
-import { SharedModule } from './shared/shared.module';
-import { HeaderComponent } from './header/header.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HeaderInterceptor } from './core/interceptor/header.interceptor';
 import { CachingInterceptor } from './core/interceptor/caching.interceptor';
+import { HeaderInterceptor } from './core/interceptor/header.interceptor';
+import { HomeModule } from './feature/home/home.module';
+import { MyAccountModule } from './feature/my-account/my-account.module';
+import { MyTeamModule } from './feature/my-team/my-team.module';
+import { HeaderComponent } from './header/header.component';
+import { LayoutComponent } from './layout/layout.component';
+import { SharedModule } from './shared/shared.module';
+import { CreateAuctionComponent } from './feature/create-auction/create-auction.component';
+import { CreateAuctionModule } from './feature/create-auction/create-auction.module';
+import { JoinAuctionModule } from './feature/join-auction/join-auction.module';
+import { LiveAuctionModule } from './feature/live-auction/live-auction.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,9 @@ import { CachingInterceptor } from './core/interceptor/caching.interceptor';
     HttpClientModule,
     CoreModule,
     HomeModule,
-    AuctionModule,
+    CreateAuctionModule,
+    JoinAuctionModule,
+    LiveAuctionModule,
     SharedModule,
     MyTeamModule,
     MyAccountModule,

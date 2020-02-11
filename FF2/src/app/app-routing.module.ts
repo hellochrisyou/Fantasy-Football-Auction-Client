@@ -12,8 +12,16 @@ const routes: Routes = [
     loadChildren: () => import('./feature/my-team/my-team.module').then(mod => mod.MyTeamModule),
   },
   {
-    path: 'auction',
-    loadChildren: () => import('./feature/auction/auction.module').then(mod => mod.AuctionModule),
+    path: 'create-auction',
+    loadChildren: () => import('./feature/create-auction/create-auction.module').then(mod => mod.CreateAuctionModule),
+  },
+  {
+    path: 'join-auction',
+    loadChildren: () => import('./feature/join-auction/join-auction.module').then(mod => mod.JoinAuctionModule),
+  },
+  {
+    path: 'live-auction',
+    loadChildren: () => import('./feature/live-auction/live-auction.module').then(mod => mod.LiveAuctionModule),
   },
   {
     path: 'my-account',
@@ -24,7 +32,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { enableTracing: true } // <-- debugging purposes only
+  imports: [RouterModule.forRoot(routes, { enableTracing: false } // <-- debugging purposes only
   )],
   exports: [RouterModule]
 })

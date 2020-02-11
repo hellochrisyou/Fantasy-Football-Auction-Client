@@ -3,10 +3,21 @@ import { MatDialog } from '@angular/material';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { QB_DISPLAY, RB_DISPLAY, RECEIVING_DISPLAY, DEF_DISPLAY, K_DISPLAY, TEAM_DISPLAY, PLAYER_DISPLAY } from '../../const/column.const';
-import { QB, RB, WR, TE, DEF, Player, Team, Kicker } from '../../interface/model.interface';
 import { EmitService } from 'src/app/core/service/emit.service';
-import { ErrorDialogComponent } from '../dialog/error/error.component';
+
+import {
+  DEF_COL_OBJ,
+  DEF_DISPLAY,
+  K_COL_OBJ,
+  K_DISPLAY,
+  QB_COL_OBJ,
+  QB_DISPLAY,
+  RB_COL_OBJ,
+  RB_DISPLAY,
+  RECEIVING_COL_OBJ,
+  RECEIVING_DISPLAY,
+} from '../../const/column.const';
+import { DEF, Kicker, Player, QB, RB, TE, Team, WR } from '../../interface/model.interface';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -17,23 +28,19 @@ import { ErrorDialogComponent } from '../dialog/error/error.component';
 export class TableComponent implements OnInit, OnDestroy {
 
   columnDisplay = '';
-  qbColumns = QB_DISPLAY;
-  rbColumns = RB_DISPLAY;
-  receivingColumns = RECEIVING_DISPLAY;
-  defenseColumns = DEF_DISPLAY;
-  kickerColumns = K_DISPLAY;
-  teamColumns = TEAM_DISPLAY;
-  playerColumns = PLAYER_DISPLAY;
 
   dataSource: MatTableDataSource<QB | RB | WR | TE | DEF | Kicker | Player | Team>;
   index: number;
 
   // tslint:disable-next-line: variable-name
-  private _columnIds: string[] = [];
+  public columnIds: string[] = [];
   // tslint:disable-next-line: variable-name
-  private _columnObjects: any[];
+  public columnObjects: any[];
   // tslint:disable-next-line: variable-name
   private _dataArray: any[];
+  // tslint:disable-next-line: variable-name
+  private _dataType: string;
+
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -47,23 +54,38 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   @Input()
-  public get columnIds(): any[] {
-    return this._columnIds;
+  public get dataType(): string {
+    return this._dataType;
   }
-  public set columnIds(colObjArr: any[]) {
-    if (colObjArr) {
-      this._columnIds = colObjArr.map(c => c.columnId);
+  public set dataType(value: string) {
+    this._dataType = value;
+    switch (value) {
+      case 'QB':
+        this.columnIds = QB_DISPLAY;
+        this.columnObjects = QB_COL_OBJ;
+        break;
+      case 'RB':
+        this.columnIds = RB_DISPLAY;
+        this.columnObjects = RB_COL_OBJ;
+        break;
+      case 'WR':
+        this.columnIds = RECEIVING_DISPLAY;
+        this.columnObjects = RECEIVING_COL_OBJ;
+        break;
+      case 'TE':
+        this.columnIds = RECEIVING_DISPLAY;
+        this.columnObjects = RECEIVING_COL_OBJ;
+        break;
+      case 'DEF':
+        this.columnIds = DEF_DISPLAY;
+        this.columnObjects = DEF_COL_OBJ;
+        break;
+      case 'K':
+        this.columnIds = K_DISPLAY;
+        this.columnObjects = K_COL_OBJ;
+        break;
     }
   }
-
-  @Input()
-  public get columnObjects() {
-    return this._columnObjects;
-  }
-  public set columnObjects(colObjArr: any[]) {
-    this._columnObjects = colObjArr;
-  }
-
   constructor(
     public dialog: MatDialog,
     private emitService: EmitService,

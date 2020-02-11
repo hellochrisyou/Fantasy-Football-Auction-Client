@@ -1,5 +1,7 @@
-export const calculateQBFantasy(qb: QB): number {
-    let fantasyPoints =
+import { QB, RB, WR, TE, DEF, Kicker } from 'src/app/shared/interface/model.interface';
+
+export const calculateQBFantasy = (qb: QB): number => {
+    const fantasyPoints =
         qb.passingTD * 4 +
         qb.passingYard / 25 -
         qb.interception * 2 +
@@ -7,10 +9,10 @@ export const calculateQBFantasy(qb: QB): number {
         qb.rushingTD * 6 -
         qb.fumble * 2;
     return Number.parseFloat(parseInt(fantasyPoints.toString(), 10).toFixed(2));
-}
+};
 
-export const calculateRBFantasy(rb: RB): number {
-    let fantasyPoints =
+export const calculateRBFantasy = (rb: RB): number => {
+    const fantasyPoints =
         rb.rushingYard / 10 +
         rb.rushingTD * 6 +
         rb.reception * 1 +
@@ -18,16 +20,19 @@ export const calculateRBFantasy(rb: RB): number {
         rb.receivingTD * 6 -
         rb.fumble * 2;
     return Number.parseFloat(parseInt(fantasyPoints.toString(), 10).toFixed(2));
-}
-export const calculateWRFantasy(wr: WR): number {
-    let fantasyPoints = wr.reception * 1 + wr.receivingYard / 10 + wr.receivingTD * 6;
+};
+
+export const calculateWRFantasy = (wr: WR): number => {
+    const fantasyPoints = wr.reception * 1 + wr.receivingYard / 10 + wr.receivingTD * 6;
     return Number.parseFloat(parseInt(fantasyPoints.toString(), 10).toFixed(2));
-}
-export const calculateTEFantasy(te: TE): number {
-    let fantasyPoints = te.reception * 1 + te.receivingYard / 10 + te.receivingTD * 6;
+};
+
+export const calculateTEFantasy = (te: TE): number => {
+    const fantasyPoints = te.reception * 1 + te.receivingYard / 10 + te.receivingTD * 6;
     return Number.parseFloat(parseInt(fantasyPoints.toString(), 10).toFixed(2));
-}
-export const calculateDEFFantasy(def: DEF): number {
+};
+
+export const calculateDEFFantasy = (def: DEF): number => {
     let pointsAllowed = 0;
     def.pointsAllowed === 0
         ? (pointsAllowed = 10)
@@ -42,9 +47,7 @@ export const calculateDEFFantasy(def: DEF): number {
                         : def.pointsAllowed > 27 && def.pointsAllowed < 35
                             ? (pointsAllowed = -1)
                             : (pointsAllowed = -4);
-
-    // tslint:disable-next-line:max-line-length
-    let fantasyPoints =
+    const fantasyPoints =
         +def.sack + +def.interception + +def.fumblesRecovered + +def.safety + +def.TD + +def.pointsAllowed;
 
     //   parseInt(def.sack, 10) +
@@ -54,9 +57,10 @@ export const calculateDEFFantasy(def: DEF): number {
     //   parseInt(def.TD, 10) +
     //   parseInt(def.pointsAllowed, 10);
     return Number.parseFloat(fantasyPoints.toFixed(2));
-}
-export const calculateKickerFantasy(kicker: Kicker): number {
-    let fantasyPoints =
+};
+
+export const calculateKickerFantasy = (kicker: Kicker): number => {
+    const fantasyPoints =
         +kicker.PAT +
         +kicker.fg0To19 * 3 +
         +kicker.fg20To29 * 3 +
@@ -64,4 +68,4 @@ export const calculateKickerFantasy(kicker: Kicker): number {
         +kicker.fg40To49 * 4 +
         +kicker.fg50Plus * 5;
     return Number.parseFloat(parseInt(fantasyPoints.toString(), 10).toFixed(2));
-}
+};
