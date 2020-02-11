@@ -2,9 +2,7 @@
  Second version of the fantasy football site that decouples the backend into microservices, multi-threading, etc.
  
  ## API URL: https://www.fantasyfootballnerd.com/fantasy-football-api
- <p align="center">
-<img  src=" https://chrisyou-backup-website.s3.amazonaws.com/assets/github-preview/auction/auction1.png" width="50%"/>
-</p>
+<img  src=" https://chrisyou-backup-website.s3.amazonaws.com/assets/github-preview/auction/auction1.png" width="100%"/>
  
 
  
