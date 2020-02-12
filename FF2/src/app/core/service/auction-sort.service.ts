@@ -68,7 +68,6 @@ export class AuctionSortService {
   }
 
   public sortAuctionPlayers(auctionArr: any): LastSeasonPlayers {
-    console.log('here');
     for (const player of auctionArr) {
       switch (player.position) {
         case 'QB': {
@@ -97,7 +96,6 @@ export class AuctionSortService {
         }
       }
     }
-    console.log('check', this.lastSeasonPlayers);
     return this.lastSeasonPlayers;
   }
 }
