@@ -55,12 +55,10 @@ export class CreateAuctionComponent extends CreateBaseForm {
   }
 
   public submit(value: any): boolean {
-    console.log('d', this.formGroup.valid);
     if (!this.formGroup.valid) {
       alert('Please correctly fill all the required fields!');
       return false;
     } else {
-      console.log(value);
       this.user.displayName = this.formGroup.get('displayNameCtrl').value;
       this.user.photoURL = this.formGroup.get('photoCtrl').value;
       this.changeDetectorRef.detectChanges();

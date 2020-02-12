@@ -24,7 +24,6 @@ export class HttpService {
 
 
   public get(url: string): Observable<any> {
-    console.log('get url: ', url);
     return this.http.get(url, httpOptions).pipe(
       catchError(this.handleError)
     );

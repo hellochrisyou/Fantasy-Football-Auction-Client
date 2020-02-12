@@ -1,8 +1,9 @@
 import { ColumnObject } from '../interface/interface';
 
 export const QB_COL_OBJ: ColumnObject[] = [
-    { columnId: 'button', propertyName: 'button' },
+    { columnId: 'Options', propertyName: 'Options' },
     { columnId: 'Name', propertyName: 'Name' },
+    { columnId: 'Team', propertyName: 'Team' },
     { columnId: 'MinPrice', propertyName: 'MinPrice' },
     { columnId: 'MaxPrice', propertyName: 'MaxPrice' },
     { columnId: 'AvgPrice', propertyName: 'AvgPrice' },
@@ -17,8 +18,9 @@ export const QB_COL_OBJ: ColumnObject[] = [
 ];
 
 export const RB_COL_OBJ: ColumnObject[] = [
-    { columnId: 'button', propertyName: 'button' },
+    { columnId: 'Options', propertyName: 'Options' },
     { columnId: 'Name', propertyName: 'Name' },
+    { columnId: 'Team', propertyName: 'Team' },
     { columnId: 'MinPrice', propertyName: 'MinPrice' },
     { columnId: 'MaxPrice', propertyName: 'MaxPrice' },
     { columnId: 'AvgPrice', propertyName: 'AvgPrice' },
@@ -31,9 +33,10 @@ export const RB_COL_OBJ: ColumnObject[] = [
     { columnId: 'FantasyPoints', propertyName: 'FantasyPoints' }
 ];
 
-export const RECEIVING_COL_OBJ: ColumnObject[] = [
-    { columnId: 'button', propertyName: 'button' },
+export const REC_COL_OBJ: ColumnObject[] = [
+    { columnId: 'Options', propertyName: 'Options' },
     { columnId: 'Name', propertyName: 'Name' },
+    { columnId: 'Team', propertyName: 'Team' },
     { columnId: 'MinPrice', propertyName: 'MinPrice' },
     { columnId: 'MaxPrice', propertyName: 'MaxPrice' },
     { columnId: 'AvgPrice', propertyName: 'AvgPrice' },
@@ -44,8 +47,9 @@ export const RECEIVING_COL_OBJ: ColumnObject[] = [
 ];
 
 export const DEF_COL_OBJ: ColumnObject[] = [
-    { columnId: 'button', propertyName: 'button' },
+    { columnId: 'Options', propertyName: 'Options' },
     { columnId: 'Name', propertyName: 'Name' },
+    { columnId: 'Team', propertyName: 'Team' },
     { columnId: 'MinPrice', propertyName: 'MinPrice' },
     { columnId: 'MaxPrice', propertyName: 'MaxPrice' },
     { columnId: 'AvgPrice', propertyName: 'AvgPrice' },
@@ -59,8 +63,9 @@ export const DEF_COL_OBJ: ColumnObject[] = [
 ]
 
 export const K_COL_OBJ: ColumnObject[] = [
-    { columnId: 'button', propertyName: 'button' },
+    { columnId: 'Options', propertyName: 'Options' },
     { columnId: 'Name', propertyName: 'Name' },
+    { columnId: 'Team', propertyName: 'Team' },
     { columnId: 'MinPrice', propertyName: 'MinPrice' },
     { columnId: 'MaxPrice', propertyName: 'MaxPrice' },
     { columnId: 'AvgPrice', propertyName: 'AvgPrice' },
@@ -80,33 +85,34 @@ export const TEAM_COL_OBJ: ColumnObject[] = [
 
 export const PLAYER_COL_OBJ: ColumnObject[] = [
     { columnId: 'name', propertyName: 'Name' },
+    { columnId: 'Team', propertyName: 'Team' },
     { columnId: 'position', propertyName: 'Position' },
     { columnId: 'fantasy_points', propertyName: 'Fantasy Points' },
 ]
 export const QB_DISPLAY = [
-    'button', 'Name', 'MinPrice', 'MaxPrice', 'AvgPrice', 'PassYD', 'PassTD', 'INT', 'RushYD', 'RushTD', 'Sack', 'Fumble', 'FantasyPoints'
+    'Options', 'Name', 'Team', 'MinPrice', 'MaxPrice', 'AvgPrice', 'PassYD', 'PassTD', 'INT', 'RushYD', 'RushTD', 'Sack', 'Fumble', 'FantasyPoints'
 ]
 
 export const RB_DISPLAY = [
-    'button', 'Name', 'MinPrice', 'MaxPrice', 'AvgPrice', 'RushYD', 'RushTD', 'Rec', 'RecYD', 'RecTD', 'Fumble', 'FantasyPoints'
+    'Options', 'Name', 'Team', 'MinPrice', 'MaxPrice', 'AvgPrice', 'RushYD', 'RushTD', 'Rec', 'RecYD', 'RecTD', 'Fumble', 'FantasyPoints'
 ]
 
-export const RECEIVING_DISPLAY = [
-    'button', 'Name', 'MinPrice', 'MaxPrice', 'AvgPrice', 'Rec', 'RecYD', 'RecTD', 'FantasyPoints'
+export const REC_DISPLAY = [
+    'Options', 'Name', 'Team', 'MinPrice', 'MaxPrice', 'AvgPrice', 'Rec', 'RecYD', 'RecTD', 'FantasyPoints'
 ]
 
 export const DEF_DISPLAY = [
-    'button', 'Name', 'MinPrice', 'MaxPrice', 'AvgPrice', 'PointsAllowed', 'TD', 'Sack', 'INT', 'FumbleRec', 'Safety', 'FantasyPoints'
+    'Options', 'Name', 'Team', 'MinPrice', 'MaxPrice', 'AvgPrice', 'PointsAllowed', 'TD', 'Sack', 'INT', 'FumbleRec', 'Safety', 'FantasyPoints'
 ]
 
 export const K_DISPLAY = [
-    'button', 'Name', 'MinPrice', 'MaxPrice', 'AvgPrice', 'fg0To19', 'fg20To29', 'fg30To39', 'fg40To49', 'fg50Plus', 'PAT', 'FantasyPoints'
+    'Options', 'Name', 'Team', 'MinPrice', 'MaxPrice', 'AvgPrice', 'fg0To19', 'fg20To29', 'fg30To39', 'fg40To49', 'fg50Plus', 'PAT', 'FantasyPoints'
 ]
 
 export const TEAM_DISPLAY = [
-    'name', 'draftPosition'
+    'Options', 'Name', 'DraftPosition'
 ]
 
 export const PLAYER_DISPLAY = [
-    'name', 'position', 'fantasy_points'
+    'Options', 'Name', 'Team', 'position', 'FantasyPoints'
 ]

@@ -3,7 +3,26 @@ import { ActivatedRoute } from '@angular/router';
 import { AuctionSortService } from 'src/app/core/service/auction-sort.service';
 import { EmitService } from 'src/app/core/service/emit.service';
 import { LastSeasonStatService } from 'src/app/core/service/last-season-stat.service';
-import { MERGEQBSTATS, MERGERBSTATS, MERGEWRSTATS, MERGETESTATS, MERGEDEFSTATS, MERGEKSTATS } from 'src/app/core/util/merge-stats.util';
+import {
+  MERGE_DEF_STATS,
+  MERGE_K_STATS,
+  MERGE_QB_STATS,
+  MERGE_RB_STATS,
+  MERGE_TE_STATS,
+  MERGE_WR_STATS,
+} from 'src/app/core/util/merge-stats.util';
+import {
+  DEF_COL_OBJ,
+  DEF_DISPLAY,
+  K_COL_OBJ,
+  K_DISPLAY,
+  QB_COL_OBJ,
+  QB_DISPLAY,
+  RB_COL_OBJ,
+  RB_DISPLAY,
+  REC_COL_OBJ,
+  REC_DISPLAY,
+} from 'src/app/shared/const/column.const';
 import { DEF, Kicker, LastSeasonPlayers, QB, RB, TE, WR } from 'src/app/shared/interface/model.interface';
 
 @Component({
@@ -23,11 +42,17 @@ export class LiveAuctionComponent implements OnInit {
     kickers: []
   };
 
-  readonly QB = 'QB';
-  readonly RB = 'RB';
-  readonly RECEIVING = 'RECEIVING';
-  readonly DEF = 'DEF';
-  readonly KICKER = 'K';
+  readonly QB_COL_OBJ = QB_COL_OBJ;
+  readonly RB_COL_OBJ = RB_COL_OBJ;
+  readonly REC_COL_OBJ = REC_COL_OBJ;
+  readonly DEF_COL_OBJ = DEF_COL_OBJ;
+  readonly K_COL_OBJ = K_COL_OBJ;
+
+  readonly QB_DISPLAY = QB_DISPLAY;
+  readonly RB_DISPLAY = RB_DISPLAY;
+  readonly REC_DISPLAY = REC_DISPLAY;
+  readonly DEF_DISPLAY = DEF_DISPLAY;
+  readonly K_DISPLAY = K_DISPLAY;
 
   qbArray: QB[] = [];
   rbArray: RB[] = [];
@@ -45,7 +70,7 @@ export class LiveAuctionComponent implements OnInit {
 
   ngOnInit(): void {
     this.emitService.mergeQbOutput.subscribe(qbArray => {
-      this.lastSeasonPlayers.quaterBacks = MERGEQBSTATS(qbArray, this.lastSeasonPlayers.quaterBacks);
+      this.lastSeasonPlayers.quaterBacks = MERGE_QB_STATS(qbArray, this.lastSeasonPlayers.quaterBacks);
       this.emitService.refreshTable();
     },
       err => {
@@ -53,7 +78,7 @@ export class LiveAuctionComponent implements OnInit {
       });
 
     this.emitService.mergeRbOutput.subscribe(rbArray => {
-      this.lastSeasonPlayers.runningsBacks = MERGERBSTATS(rbArray, this.lastSeasonPlayers.runningsBacks);
+      this.lastSeasonPlayers.runningsBacks = MERGE_RB_STATS(rbArray, this.lastSeasonPlayers.runningsBacks);
       this.emitService.refreshTable();
 
     },
@@ -62,7 +87,7 @@ export class LiveAuctionComponent implements OnInit {
       });
 
     this.emitService.mergeWrOutput.subscribe(wrArray => {
-      this.lastSeasonPlayers.wideReceivers = MERGEWRSTATS(wrArray, this.lastSeasonPlayers.wideReceivers);
+      this.lastSeasonPlayers.wideReceivers = MERGE_WR_STATS(wrArray, this.lastSeasonPlayers.wideReceivers);
       this.emitService.refreshTable();
     },
       err => {
@@ -70,7 +95,7 @@ export class LiveAuctionComponent implements OnInit {
       });
 
     this.emitService.mergeTeOutput.subscribe(teArray => {
-      this.lastSeasonPlayers.tightEnds = MERGETESTATS(teArray, this.lastSeasonPlayers.tightEnds);
+      this.lastSeasonPlayers.tightEnds = MERGE_TE_STATS(teArray, this.lastSeasonPlayers.tightEnds);
       this.emitService.refreshTable();
     },
       err => {
@@ -78,7 +103,7 @@ export class LiveAuctionComponent implements OnInit {
       });
 
     this.emitService.mergeDefOutput.subscribe(defArray => {
-      this.lastSeasonPlayers.defenses = MERGEDEFSTATS(defArray, this.lastSeasonPlayers.defenses);
+      this.lastSeasonPlayers.defenses = MERGE_DEF_STATS(defArray, this.lastSeasonPlayers.defenses);
       this.emitService.refreshTable();
 
     },
@@ -87,7 +112,7 @@ export class LiveAuctionComponent implements OnInit {
       });
 
     this.emitService.mergeKickerOutput.subscribe(kArray => {
-      this.lastSeasonPlayers.kickers = MERGEKSTATS(kArray, this.lastSeasonPlayers.kickers);
+      this.lastSeasonPlayers.kickers = MERGE_K_STATS(kArray, this.lastSeasonPlayers.kickers);
       this.emitService.refreshTable();
     },
       err => {
@@ -98,8 +123,6 @@ export class LiveAuctionComponent implements OnInit {
     this.route.data.subscribe((data: { auctionValues: any }) => {
       this.lastSeasonPlayers = this.auctionSortService.sortAuctionPlayers(data.auctionValues);
       this.emitService.refreshTable();
-
-      console.log('qbArray', this.lastSeasonPlayers);
     },
       err => {
         console.log('error in resolve service: ', err);

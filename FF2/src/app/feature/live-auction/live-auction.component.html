@@ -1,21 +1,32 @@
 <h1 class="text-center"><u>Live Auction</u></h1>
 <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Quaterback">
-        <base-table [dataType]="QB" [dataArray]="this.lastSeasonPlayers.quaterBacks"></base-table>
+        <base-table [columnObjects]="QB_COL_OBJ" [colDisplay]="QB_DISPLAY"
+            [dataArray]="this.lastSeasonPlayers.quaterBacks">
+        </base-table>
     </mat-tab>
     <mat-tab label="Runningback">
-        <base-table [dataType]="RB" [dataArray]="this.lastSeasonPlayers.runningsBacks"></base-table>
+        <base-table [columnObjects]="RB_COL_OBJ" [colDisplay]="RB_COL_OBJ"
+            [dataArray]="this.lastSeasonPlayers.runningsBacks">
+        </base-table>
     </mat-tab>
     <mat-tab label="Wide Receiver">
-        <base-table [dataType]="RECEIVING" [dataArray]="this.lastSeasonPlayers.wideReceivers"></base-table>
+        <base-table [columnObjects]="REC_COL_OBJ" [colDisplay]="REC_DISPLAY"
+            [dataArray]="this.lastSeasonPlayers.wideReceivers">
+        </base-table>
     </mat-tab>
     <mat-tab label="Tight End">
-        <base-table [dataType]="RECEIVING" [dataArray]="this.lastSeasonPlayers.tightEnds"></base-table>
+        <base-table [columnObjects]="REC_COL_OBJ" [colDisplay]="REC_DISPLAY"
+            [dataArray]="this.lastSeasonPlayers.tightEnds">
+        </base-table>
     </mat-tab>
     <mat-tab label="Defense">
-        <base-table [dataType]="DEF" [dataArray]="this.lastSeasonPlayers.defenses"></base-table>
+        <base-table [columnObjects]="DEF_COL_OBJ" [colDisplay]="DEF_DISPLAY"
+            [dataArray]="this.lastSeasonPlayers.defenses">
+        </base-table>
     </mat-tab>
     <mat-tab label="Kicker">
-        <base-table [dataType]="KICKER" [dataArray]="this.lastSeasonPlayers.kickers"></base-table>
+        <base-table [columnObjects]="K_COL_OBJ" [colDisplay]="K_DISPLAY" [dataArray]="this.lastSeasonPlayers.kickers">
+        </base-table>
     </mat-tab>
 </mat-tab-group>

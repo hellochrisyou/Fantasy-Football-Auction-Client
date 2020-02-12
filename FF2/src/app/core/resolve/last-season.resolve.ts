@@ -28,7 +28,6 @@ export class LastSeasonResolver implements Resolve<any> {
         this.lastSeasonStatService.setLastSeasonTE();
         this.lastSeasonStatService.setLastSeasonDEF();
         this.lastSeasonStatService.setLastSeasonK();
-        console.log(this.AUCTIONURL + this.APIKEY);
         return this.httpService.get(this.AUCTIONURL + this.APIKEY).pipe(map(data => data.AuctionValues),
             catchError((error) => {
                 console.log('error in resolve, http get: ', error);

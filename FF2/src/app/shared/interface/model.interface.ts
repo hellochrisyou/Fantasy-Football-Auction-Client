@@ -66,18 +66,19 @@ export interface Team {
     id?: number | string;
     email: string;
     name: string;
-    draft_position?: number;
+    DraftPosition?: number;
     players?: Player[];
 }
 
 export interface Player {
     id?: number | string;
     Name?: string;
+    Team?: string;
     Position?: string;
-    team?: string;
     MinPrice?: number;
     MaxPrice?: number;
     AvgPrice?: number;
+    Options?: string;
     FantasyPoints?: number;
 }
 

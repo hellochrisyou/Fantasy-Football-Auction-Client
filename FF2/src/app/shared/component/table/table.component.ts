@@ -5,90 +5,67 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmitService } from 'src/app/core/service/emit.service';
 
-import {
-  DEF_COL_OBJ,
-  DEF_DISPLAY,
-  K_COL_OBJ,
-  K_DISPLAY,
-  QB_COL_OBJ,
-  QB_DISPLAY,
-  RB_COL_OBJ,
-  RB_DISPLAY,
-  RECEIVING_COL_OBJ,
-  RECEIVING_DISPLAY,
-} from '../../const/column.const';
-import { DEF, Kicker, Player, QB, RB, TE, Team, WR } from '../../interface/model.interface';
+import { expandRowTransition } from '../../animation/animation';
+import { League, Team } from '../../interface/model.interface';
 
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'base-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
+  animations: [expandRowTransition]
 })
 export class TableComponent implements OnInit, OnDestroy {
 
-  columnDisplay = '';
-
-  dataSource: MatTableDataSource<any>;
-  index: number;
-
-  // tslint:disable-next-line: variable-name
-  public columnIds: string[] = [];
-  // tslint:disable-next-line: variable-name
-  public columnObjects: any[];
-  // tslint:disable-next-line: variable-name
-  private _dataArray: any[];
-  // tslint:disable-next-line: variable-name
-  private _dataType: string;
-
-
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @Input()
+  public get columnObjects() {
+    return this._columnObjects;
+  }
+  public set columnObjects(colObjArr: any[]) {
+    if (colObjArr) {
+      this.columnIds = colObjArr.map(c => c.columnId);
+    }
+    this._columnObjects = colObjArr;
+  }
 
   @Input()
   public get dataArray(): any[] {
     return this._dataArray;
   }
   public set dataArray(value: any[]) {
-    console.log('value', value);
-
     this._dataArray = value;
   }
 
   @Input()
-  public get dataType(): string {
-    return this._dataType;
+  public get colDisplay(): string {
+    return this._colDisplay;
   }
-  public set dataType(value: string) {
-    this._dataType = value;
-    switch (value) {
-      case 'QB':
-        this.columnIds = QB_DISPLAY;
-        this.columnObjects = QB_COL_OBJ;
-        break;
-      case 'RB':
-        this.columnIds = RB_DISPLAY;
-        this.columnObjects = RB_COL_OBJ;
-        break;
-      case 'RECEIVING':
-        this.columnIds = RECEIVING_DISPLAY;
-        this.columnObjects = RECEIVING_COL_OBJ;
-        break;
-      case 'DEF':
-        this.columnIds = DEF_DISPLAY;
-        this.columnObjects = DEF_COL_OBJ;
-        break;
-      case 'K':
-        this.columnIds = K_DISPLAY;
-        this.columnObjects = K_COL_OBJ;
-        break;
-    }
+  public set colDisplay(value: string) {
+    this._colDisplay = value;
   }
   constructor(
     public dialog: MatDialog,
     private emitService: EmitService,
   ) {
   }
+
+  expandRow: League | Team | any;
+  dataSource: MatTableDataSource<any>;
+  index: number;
+
+  // tslint:disable-next-line: variable-name
+  public columnIds: string[] = [];
+  // tslint:disable-next-line: variable-name
+  public _columnObjects: any[];
+  // tslint:disable-next-line: variable-name
+  private _dataArray: any[];
+  // tslint:disable-next-line: variable-name
+  private _colDisplay: string;
+
+
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  return;
 
   public ngOnInit() {
     this.emitService.refreshOutput.subscribe(x => {
@@ -120,13 +97,13 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   public setDataColor(value: number | string) {
-    if (typeof value !== 'string') {
-      if (value < 0) {
-        return '#dd0031';
-      } else {
-        return '#4bb543';
-      }
+    if (value >= 1) {
+      return '#4bb543';
+
+    } else if (value < 1) {
+      return '#dd0031';
+    } else {
+      return;
     }
-    return;
   }
 }
