@@ -24,6 +24,10 @@ const routes: Routes = [
     loadChildren: () => import('./feature/live-auction/live-auction.module').then(mod => mod.LiveAuctionModule),
   },
   {
+    path: 'profile',
+    loadChildren: () => import('./feature/profile/profile-routing.module').then(mod => mod.ProfileRoutingModule),
+  },
+  {
     path: 'my-account',
     loadChildren: () => import('./feature/my-account/my-account.module').then(mod => mod.MyAccountModule),
   },

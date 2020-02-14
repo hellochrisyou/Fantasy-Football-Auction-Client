@@ -35,20 +35,20 @@ export interface DEF extends Player {
     FumbleRec?: number;
     Safety?: number;
     TD?: number;
-    PointsAllowed?: number;
+    Points_Allowed?: number;
 }
 
 export interface Kicker extends Player {
     PAT?: number;
-    fg0To19?: number;
-    fg20To29?: number;
-    fg30To39?: number;
-    fg40To49?: number;
-    fg50Plus?: number;
+    Fg0To19?: number;
+    Fg20To29?: number;
+    Fg30To39?: number;
+    Fg40To49?: number;
+    Fg50Plus?: number;
 }
 
 export interface User {
-    uid?: string;
+    uId?: string;
     displayName?: string;
     email?: string;
     photoURL?: string;
@@ -56,30 +56,34 @@ export interface User {
 
 export interface League {
     id?: number | string;
-    name: string;
-    userCount?: number;
-    draftOrder?: number;
+    Name?: string;
     teams?: Team[];
+    PPR?: string;
+    TotalBudget?: number;
+    TeamCount?: number;
+    MaxPlayers?: number;
 }
 
 export interface Team {
     id?: number | string;
-    email: string;
-    name: string;
+    Name?: string;
     DraftPosition?: number;
     players?: Player[];
+    Current_Budget?: number;
 }
 
 export interface Player {
     id?: number | string;
+    Select?: string;
     Name?: string;
     Team?: string;
     Position?: string;
     MinPrice?: number;
     MaxPrice?: number;
     AvgPrice?: number;
-    Options?: string;
-    FantasyPoints?: number;
+    Current_Bid?: number;
+    Current_Owner?: string;
+    Points?: number;
 }
 
 export interface LastSeasonPlayers {

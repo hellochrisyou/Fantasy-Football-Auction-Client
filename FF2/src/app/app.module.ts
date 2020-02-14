@@ -22,6 +22,7 @@ import { CreateAuctionComponent } from './feature/create-auction/create-auction.
 import { CreateAuctionModule } from './feature/create-auction/create-auction.module';
 import { JoinAuctionModule } from './feature/join-auction/join-auction.module';
 import { LiveAuctionModule } from './feature/live-auction/live-auction.module';
+import { ProfileModule } from './feature/profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { LiveAuctionModule } from './feature/live-auction/live-auction.module';
     LiveAuctionModule,
     SharedModule,
     MyTeamModule,
+    ProfileModule,
     MyAccountModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -46,6 +48,7 @@ import { LiveAuctionModule } from './feature/live-auction/live-auction.module';
     AngularFirestoreModule,
     AppRoutingModule,
   ],
+  bootstrap: [AppComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -58,6 +61,5 @@ import { LiveAuctionModule } from './feature/live-auction/live-auction.module';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
 })
 export class AppModule { }

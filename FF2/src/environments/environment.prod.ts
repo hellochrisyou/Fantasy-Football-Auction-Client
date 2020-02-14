@@ -1,13 +1,13 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyAkhDM99HlqRgbZfAfTVFRiw3G2EDyEf_s",
-    authDomain: "stockwebapp-cb30d.firebaseapp.com",
-    databaseURL: "https://stockwebapp-cb30d.firebaseio.com",
-    projectId: "stockwebapp-cb30d",
-    storageBucket: "stockwebapp-cb30d.appspot.com",
-    messagingSenderId: "688697869224",
-    appId: "1:688697869224:web:bcf92158d5f1f5b260d39d",
-    measurementId: "G-CDSWRNJ83N"
+    apiKey: "AIzaSyDGh9uYTfx-7ETu_I6gTAjGZAX8ZvxQ8lo",
+    authDomain: "fantasy-football-auction.firebaseapp.com",
+    databaseURL: "https://fantasy-football-auction.firebaseio.com",
+    projectId: "fantasy-football-auction",
+    storageBucket: "fantasy-football-auction.appspot.com",
+    messagingSenderId: "335626132114",
+    appId: "1:335626132114:web:a4471e779791489f5a244b",
+    measurementId: "G-GYB4DM73DG"
   }
 };

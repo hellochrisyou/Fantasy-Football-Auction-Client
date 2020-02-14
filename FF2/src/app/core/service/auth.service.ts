@@ -136,7 +136,7 @@ export class AuthService {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
 
     const data: User = {
-      uid: user.uid,
+      uId: user.uId,
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL
@@ -147,18 +147,18 @@ export class AuthService {
   get userData(): any {
     if (!this.isAuthenticated) {
       return [];
-    }
-
-    return [
-      {
-        uid: this.authState.uid,
-        displayName: this.authState.displayName,
-        email: this.authState.email,
-        phoneNumber: this.authState.phoneNumber,
-        photoURL: this.authState.photoURL,
-        country: this.authState.country
-      }
-    ];
+    } else {
+      return [
+        {
+          uid: this.authState.uid,
+          displayName: this.authState.displayName,
+          email: this.authState.email,
+          phoneNumber: this.authState.phoneNumber,
+          photoURL: this.authState.photoURL,
+          country: this.authState.country
+        }
+      ]
+    };
   }
 
 }
