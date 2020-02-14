@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuctionSortService } from 'src/app/core/service/auction-sort.service';
 import { EmitService } from 'src/app/core/service/emit.service';
@@ -23,7 +23,9 @@ import {
   REC_COL_OBJ,
   REC_DISPLAY,
 } from 'src/app/shared/const/column.const';
-import { DEF, Kicker, LastSeasonPlayers, QB, RB, TE, WR } from 'src/app/shared/interface/model.interface';
+import { DEF, Kicker, LastSeasonPlayers, QB, RB, TE, WR, Team, League, User } from 'src/app/shared/interface/model.interface';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -31,7 +33,7 @@ import { DEF, Kicker, LastSeasonPlayers, QB, RB, TE, WR } from 'src/app/shared/i
   templateUrl: './live-auction.component.html',
   styleUrls: ['./live-auction.component.scss']
 })
-export class LiveAuctionComponent implements OnInit {
+export class LiveAuctionComponent implements OnInit, OnDestroy {
 
   lastSeasonPlayers: LastSeasonPlayers = {
     quaterBacks: [],
@@ -40,6 +42,21 @@ export class LiveAuctionComponent implements OnInit {
     tightEnds: [],
     defenses: [],
     kickers: []
+  };
+  public user: User = {};
+
+  thisLeague: League = {
+    Name: 'thisLeague',
+    teams: [],
+    PPR: 'Yes',
+    TotalBudget: 10000,
+    TeamCount: 0,
+    MaxPlayers: 10
+  }
+  thisTeam: Team = {
+    Name: this.authService.userData.displayName,
+    players: [],
+    Current_Budget: 10000
   };
 
   readonly QB_COL_OBJ = QB_COL_OBJ;
@@ -65,16 +82,38 @@ export class LiveAuctionComponent implements OnInit {
     private route: ActivatedRoute,
     private lastSeasonStatService: LastSeasonStatService,
     private auctionSortService: AuctionSortService,
-    private emitService: EmitService
+    private emitService: EmitService,
+    private authService: AuthService,
+    private db: AngularFirestore
   ) { }
 
+  ngOnDestroy(): void {
+    this.emitService.mergeQbOutput.unsubscribe();
+    this.emitService.mergeRbOutput.unsubscribe();
+    this.emitService.mergeWrOutput.unsubscribe();
+    this.emitService.mergeTeOutput.unsubscribe();
+    this.emitService.mergeDefOutput.unsubscribe();
+    this.emitService.mergeKickerOutput.unsubscribe();
+  }
+
   ngOnInit(): void {
+    // this.user.displayName = 'Chris You';
+    // this.user.uId = this.authService.authState.uid;
+    // this.user.email = this.authService.authState.email;
+    // this.user.photoURL = '';
+    // this.authService.updateUserData(this.user);
+    // console.log('done');
+
+
     this.emitService.mergeQbOutput.subscribe(qbArray => {
       this.lastSeasonPlayers.quaterBacks = MERGE_QB_STATS(qbArray, this.lastSeasonPlayers.quaterBacks);
       this.emitService.refreshTable();
     },
       err => {
         console.log('error in resolve service: ', err);
+      },
+      () => {
+        this.emitService.refreshTable();
       });
 
     this.emitService.mergeRbOutput.subscribe(rbArray => {
@@ -84,6 +123,9 @@ export class LiveAuctionComponent implements OnInit {
     },
       err => {
         console.log('error in resolve service: ', err);
+      },
+      () => {
+        this.emitService.refreshTable();
       });
 
     this.emitService.mergeWrOutput.subscribe(wrArray => {
@@ -92,6 +134,9 @@ export class LiveAuctionComponent implements OnInit {
     },
       err => {
         console.log('error in resolve service: ', err);
+      },
+      () => {
+        this.emitService.refreshTable();
       });
 
     this.emitService.mergeTeOutput.subscribe(teArray => {
@@ -100,15 +145,20 @@ export class LiveAuctionComponent implements OnInit {
     },
       err => {
         console.log('error in resolve service: ', err);
+      },
+      () => {
+        this.emitService.refreshTable();
       });
 
     this.emitService.mergeDefOutput.subscribe(defArray => {
       this.lastSeasonPlayers.defenses = MERGE_DEF_STATS(defArray, this.lastSeasonPlayers.defenses);
       this.emitService.refreshTable();
-
     },
       err => {
         console.log('error in resolve service: ', err);
+      },
+      () => {
+        this.emitService.refreshTable();
       });
 
     this.emitService.mergeKickerOutput.subscribe(kArray => {
@@ -117,15 +167,58 @@ export class LiveAuctionComponent implements OnInit {
     },
       err => {
         console.log('error in resolve service: ', err);
+      },
+      () => {
+        this.emitService.refreshTable();
       });
 
     // Subscribed to Auction Values
     this.route.data.subscribe((data: { auctionValues: any }) => {
       this.lastSeasonPlayers = this.auctionSortService.sortAuctionPlayers(data.auctionValues);
-      this.emitService.refreshTable();
+      console.log(this.lastSeasonPlayers);
     },
       err => {
         console.log('error in resolve service: ', err);
+      },
+      () => {
+        this.emitService.refreshTable();
+        console.log(this.lastSeasonPlayers);
       });
+  }
+
+  public addQbPlayer(index: number): void {
+    this.thisTeam.players.push(this.lastSeasonPlayers.quaterBacks[index]);
+    let setDoc = this.db.collection('Leagues').doc('chris').set(this.thisLeague)
+    this.db.collection("Leagues").doc('Chris').set({
+      name: "Los Angeles",
+      state: "CA",
+      country: "USA"
+    })
+      // leagueDoc.doc('newLeague').collection('this.authService.userData.displayName');
+      // leagueDoc.doc('newLeague').collection(this.authService.userData.displayName).add(this.thisTeam).then(docRef => {
+      //   console.log('Document added to Team collection: ', docRef);
+      .catch(error => {
+        console.error('Error adding document to Team collection: ' + error.message);
+      });
+  }
+
+  public addRbPlayer(index: number): void {
+    console.log('add player index #: ', index);
+  }
+
+  public addWrPlayer(index: number): void {
+    console.log('add player index #: ', index);
+  }
+
+  public addTePlayer(index: number): void {
+    console.log('add player index #: ', index);
+  }
+
+  public addDefPlayer(index: number): void {
+    console.log('add player index #: ', index);
+  }
+
+  public addKPlayer(index: number): void {
+    console.log('add player index #: ', index);
   }
 }

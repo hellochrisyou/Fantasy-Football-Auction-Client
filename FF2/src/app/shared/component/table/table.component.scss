@@ -1,8 +1,114 @@
 @import "_table";
 @import "_color";
 
+// @include mat-table-cols(
+//   (
+//     Select: (
+//       width: 1rem
+//     ),
+//     Name: (
+//       width: 10rem
+//     ),
+//     Team: (
+//       width: 1rem
+//     ),
+//     MinPrice: (
+//       width: 1rem
+//     ),
+//     MaxPrice: (
+//       width: 1rem
+//     ),
+//     AvgPrice: (
+//       width: 1rem
+//     ),
+//     Rec: (
+//       width: 1rem
+//     ),
+//     RecYD: (
+//       width: 1rem
+//     ),
+//     RedTD: (
+//       width: 1rem
+//     ),
+//     Fantasy_Points: ()
+//   )
+// );
+
+@include mat-table-cols(
+  (
+    Select: (
+      width: 1rem
+    ),
+    Name: (
+      width: 10rem
+    ),
+    Team: (
+      width: 1rem
+    ),
+    MinPrice: (
+      width: 1rem
+    ),
+    MaxPrice: (
+      width: 1rem
+    ),
+    AvgPrice: (
+      width: 1rem
+    ),
+    PassYD: (
+      width: 1rem
+    ),
+    PassTD: (
+      width: 1rem
+    ),
+    INT: (
+      width: 1rem
+    ),
+    RushYD: (
+      width: 1rem
+    ),
+    RushTD: (
+      width: 1rem
+    ),
+    Rec: (
+      width: 1rem
+    ),
+    RecYD: (
+      width: 1rem
+    ),
+    RedTD: (
+      width: 1rem
+    ),
+    Sack: (
+      width: 1rem
+    ),
+    TD: (
+      width: 1rem
+    ),
+    FumbleRec: (
+      width: 1rem
+    ),
+    Safety: (
+      width: 1rem
+    ),
+    Fumble: (
+      width: 1rem
+    ),
+    Points_Allowed: (
+      width: 1rem
+    ),
+    Fantasy_Points: (
+      width: 1rem
+    )
+  )
+);
+
 section {
   height: 100%;
+  max-width: 75vw;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  margin: 5% auto;
 }
 table {
   max-width: 70vw;
@@ -14,7 +120,7 @@ table {
   background-color: $control-color;
 }
 mat-paginator {
-  width: auto;
+  width: 100%;
   margin: 0 auto;
   position: relative;
   background-color: $control-color;
@@ -62,28 +168,16 @@ mat-cell,
 mat-header-cell,
 .mat-header-cell:nth-child(n + 3) {
   min-height: auto; // overrides the 'inherit' that set the min height of the row
-  padding: 0 6px 0;
-}
-
-mat-header-cell,
-.mat-header-cell:nth-child(n + 6) {
-  min-height: auto; // overrides the 'inherit' that set the min height of the row
-  padding: 0 0 0 1.35rem;
-}
-
-mat-cell:nth-child(n + 6),
-.mat-cell:nth-child(n + 6) {
+  padding: 0;
   text-align: center;
 }
 
 .mat-cell:first-child {
-  padding-left: 4rem;
-  text-align: left;
 }
 
 .mat-header-cell:first-child {
-  padding-left: 5.5rem;
-  text-align: left;
+  padding-left: 0.5rem;
+  text-align: center;
 }
 
 div.mat-sort-header-container {
@@ -121,14 +215,6 @@ tr.expanded-row:not(.expanded-row):active {
   border-bottom-width: 0;
 }
 
-#option-image {
-  width: 1rem;
-}
-
-#option-row {
-  width: 100%;
-}
-
 .delete-tooltip-red {
   background: $red;
 }
@@ -139,6 +225,10 @@ tr.expanded-row:not(.expanded-row):active {
 
 td {
   text-transform: capitalize;
+}
+
+td.mat-cell {
+  border-bottom: 0;
 }
 
 #search-icon {
@@ -163,6 +253,11 @@ mat-cell,
 .mat-cell {
   color: black;
 }
+
+.fa-user-plus {
+  color: green;
+}
+
 @media screen and (max-width: 1024px) {
   tr.mat-header-row {
     background-color: transparent;

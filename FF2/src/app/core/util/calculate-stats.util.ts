@@ -29,21 +29,21 @@ export const CALCULATE_RECEIVER_POINTS = (data: WR | TE): number => {
 
 export const CALCULATE_DEFENSE_POINTS = (def: DEF): number => {
     let pointsAllowed = 0;
-    def.PointsAllowed === 0
+    def.Points_Allowed === 0
         ? (pointsAllowed = 10)
-        : def.PointsAllowed > 0 && def.PointsAllowed < 7
+        : def.Points_Allowed > 0 && def.Points_Allowed < 7
             ? (pointsAllowed = 7)
-            : def.PointsAllowed > 6 && def.PointsAllowed < 14
+            : def.Points_Allowed > 6 && def.Points_Allowed < 14
                 ? (pointsAllowed = 4)
-                : def.PointsAllowed > 13 && def.PointsAllowed < 21
+                : def.Points_Allowed > 13 && def.Points_Allowed < 21
                     ? (pointsAllowed = 1)
-                    : def.PointsAllowed > 20 && def.PointsAllowed < 28
+                    : def.Points_Allowed > 20 && def.Points_Allowed < 28
                         ? (pointsAllowed = 0)
-                        : def.PointsAllowed > 27 && def.PointsAllowed < 35
+                        : def.Points_Allowed > 27 && def.Points_Allowed < 35
                             ? (pointsAllowed = -1)
                             : (pointsAllowed = -4);
     const fantasyPoints =
-        +def.Sack + +def.INT + +def.FumbleRec + +def.Safety + +def.TD + +def.PointsAllowed;
+        +def.Sack + +def.INT + +def.FumbleRec + +def.Safety + +def.TD + +def.Points_Allowed;
 
     //   parseInt(def.sack, 10) +
     //   parseInt(def.interception, 10) +
@@ -57,10 +57,10 @@ export const CALCULATE_DEFENSE_POINTS = (def: DEF): number => {
 export const CALCULATE_KICKER_POINTS = (kicker: Kicker): number => {
     const fantasyPoints =
         +kicker.PAT +
-        +kicker.fg0To19 * 3 +
-        +kicker.fg20To29 * 3 +
-        +kicker.fg30To39 * 3 +
-        +kicker.fg40To49 * 4 +
-        +kicker.fg50Plus * 5;
+        +kicker.Fg0To19 * 3 +
+        +kicker.Fg20To29 * 3 +
+        +kicker.Fg30To39 * 3 +
+        +kicker.Fg40To49 * 4 +
+        +kicker.Fg50Plus * 5;
     return Number.parseFloat(parseInt(fantasyPoints.toString(), 10).toFixed(2));
 };

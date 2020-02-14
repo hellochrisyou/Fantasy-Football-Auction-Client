@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild, AfterViewInit, ContentChild, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -15,7 +15,11 @@ import { League, Team } from '../../interface/model.interface';
   styleUrls: ['./table.component.scss'],
   animations: [expandRowTransition]
 })
-export class TableComponent implements OnInit, OnDestroy {
+export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  index: number;
+
+  expandTeam: Team;
 
   @Input()
   public get columnObjects() {
@@ -51,7 +55,6 @@ export class TableComponent implements OnInit, OnDestroy {
 
   expandRow: League | Team | any;
   dataSource: MatTableDataSource<any>;
-  index: number;
 
   // tslint:disable-next-line: variable-name
   public columnIds: string[] = [];
@@ -62,18 +65,21 @@ export class TableComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line: variable-name
   private _colDisplay: string;
 
-
+  @ContentChild('buttonTemplate', { static: false }) optionTemplateRef: TemplateRef<any>;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  return;
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.emitService.refreshOutput.subscribe(x => {
       this.refresh();
     });
   }
 
-  public ngOnDestroy() {
+  public ngAfterViewInit(): void {
+
+  }
+
+  public ngOnDestroy(): void {
     this.emitService.refreshOutput.unsubscribe();
   }
 
@@ -83,8 +89,16 @@ export class TableComponent implements OnInit, OnDestroy {
     this.dataSource.paginator = this.paginator;
   }
 
-  public select(value: number): void {
+  public joinLeague(index: number): void {
+    //
+  }
 
+  public enterAuction(index: number): void {
+    //
+  }
+
+  public addPlayer(index: number): void {
+    console.log('add player index #: ', index);
   }
 
   // SORTING
@@ -106,4 +120,5 @@ export class TableComponent implements OnInit, OnDestroy {
       return;
     }
   }
+
 }
