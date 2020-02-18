@@ -16,28 +16,24 @@
                     </ng-container>
                 </ng-container>
 
-                <ng-container *ngIf="col.propertyName!=='Select'">
-                    {{dataArray[col.propertyName]}}
-                </ng-container>
-
                 <ng-container
                     *ngIf="col.propertyName!=='Select' && !dataArray[col.propertyName] && dataArray[col.propertyName]!==0">
                     {{"-"}}
                 </ng-container>
-            </td>
-        </ng-container>
-        <ng-container matColumnDef="expandedDetail">
-            <td mat-cell *matCellDef="let expand" [attr.colspan]="colDisplay.length">
-                <div class="expand-detail" [@detailExpand]="expand == expandTeam ? 'expanded' : 'collapsed'">
 
-                </div>
+                <ng-container *ngIf="col.propertyName!=='Select'">
+                    {{dataArray[col.propertyName]}}
+                </ng-container>
+
             </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="columnIds; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: columnIds" class="item-row" [class.expanded-row]="expandTeam === row"
-            (click)="expandTeam = row"></tr>
-        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnIds" class="item-row" (click)="expandTeam = row"></tr>
     </table>
     <mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[7]">
     </mat-paginator>
 </section>
+
+<ng-template #tpl>
+
+</ng-template>

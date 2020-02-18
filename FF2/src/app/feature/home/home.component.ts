@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabsModule } from '@angular/material';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,9 @@ import { MatTabsModule } from '@angular/material';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public auth: AuthService
+  ) { }
 
   ngOnInit(): void {
   }

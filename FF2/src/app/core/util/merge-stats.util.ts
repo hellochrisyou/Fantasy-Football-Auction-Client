@@ -42,7 +42,6 @@ export const MERGE_WR_STATS = (wrStatArr: WR[], wrAuctionArr: any[]): WR[] => {
   }
   return wrStatArr;
 };
-
 export const MERGE_TE_STATS = (teStatArr: TE[], teAuctionArr: any[]): TE[] => {
   for (const player of teStatArr) {
     for (const player2 of teAuctionArr) {

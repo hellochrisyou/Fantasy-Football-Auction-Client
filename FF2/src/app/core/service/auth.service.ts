@@ -93,7 +93,7 @@ export class AuthService {
   public signinGoogle() {
     console.log('hello');
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((credential) => {
-      this.router.navigate(['/my-team']);
+      this.router.navigate(['home/profile']);
     });
     // return this.OAuthProvider(new this.authState.GoogleAuthProvider())
     // .then(res => { }).catch(error => { });
@@ -112,7 +112,7 @@ export class AuthService {
       .auth
       .signInWithEmailAndPassword(email, password)
       .then(credential => {
-        this.router.navigateByUrl('my-team');
+        this.router.navigateByUrl('home/profile');
         window.location.reload();
       })
       .catch(err => { });
