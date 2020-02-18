@@ -16,6 +16,7 @@ import { URL_VALIDATOR } from 'src/app/shared/validator/validator';
 })
 export class CreateAuctionComponent extends CreateBaseForm {
 
+  public checked:boolean = true;
   public user: User = {};
 
   constructor(
@@ -34,19 +35,19 @@ export class CreateAuctionComponent extends CreateBaseForm {
     super.ngOnInit();
 
     this.formGroup = this.fb.group({
-      displayNameCtrl: ['', [
+      leagueNameCtrl: ['', [
         Validators.required,
         Validators.maxLength(30)
       ]],
-      countryCtrl: ['', [
-        Validators.required,
-        Validators.maxLength(30)
+      budgetCtrl: ['', [  
+        Validators.required
       ]],
-      photoCtrl: ['', [
-        Validators.required,
-        Validators.pattern(URL_VALIDATOR)
+      pprCtrl: ['', [
+        Validators.required
       ]],
     });
+
+    this.formGroup.get('pprCtrl').setValue(true);
   }
 
   // tslint:disable-next-line: use-lifecycle-interface
@@ -54,17 +55,9 @@ export class CreateAuctionComponent extends CreateBaseForm {
     super.ngOnDestroy();
   }
 
-  public submit(value: any): boolean {
-    if (!this.formGroup.valid) {
-      alert('Please correctly fill all the required fields!');
-      return false;
-    } else {
-      this.user.displayName = this.formGroup.get('displayNameCtrl').value;
-      this.user.photoURL = this.formGroup.get('photoCtrl').value;
-      this.changeDetectorRef.detectChanges();
-      // this.auth.updateUserData(this.user);
+  public submit(value: any): void {
+      console.log('thischecked', this.formGroup.get('pprCtrl').value);
       this.snackBar.open('Profile Update', 'SUCCESS', {});
       this.router.navigateByUrl('/home');
     }
   }
-}
