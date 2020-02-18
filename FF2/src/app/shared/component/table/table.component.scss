@@ -117,7 +117,7 @@ table {
   position: relative;
   width: auto;
   color: white;
-  background-color: $control-color;
+  // background-color: $control-color; <- Do not do this
 }
 mat-paginator {
   width: 100%;
@@ -155,6 +155,18 @@ tr.mat-header-row {
   background-color: $control-color; //  background-color:dodgerblue;
 }
 
+table {
+  border-collapse: collapse;
+}
+
+table,
+th,
+mat-cell,
+.mat-cell,
+td {
+  border: 0;
+}
+
 .mat-row:nth-child(even) {
   background-color: $table-lighter-color;
 }
@@ -176,43 +188,12 @@ mat-header-cell,
 }
 
 .mat-header-cell:first-child {
-  padding-left: 0.5rem;
+  padding-left: 1rem;
   text-align: center;
 }
 
 div.mat-sort-header-container {
   text-align: center;
-}
-
-// Expandable Row
-.expand-detail {
-  overflow: hidden;
-  display: flex;
-}
-
-.dataArray-diagram {
-  min-width: 80px;
-  border: 2px solid black;
-  padding: 8px;
-  font-weight: lighter;
-  margin: 8px 0;
-  height: 104px;
-}
-
-tr.detail-row {
-  height: 0;
-}
-
-tr.expanded-row:not(.expanded-row):hover {
-  background: whitesmoke;
-}
-
-tr.expanded-row:not(.expanded-row):active {
-  background: #efefef;
-}
-
-.expanded-row td {
-  border-bottom-width: 0;
 }
 
 .delete-tooltip-red {

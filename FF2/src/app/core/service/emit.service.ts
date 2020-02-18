@@ -21,6 +21,7 @@ export class EmitService {
   }
   public mergeQb(qbArray: QB[]): void {
     this.mergeQbOutput.emit(qbArray);
+
   }
   public mergeRb(rbArray: RB[]): void {
     this.mergeRbOutput.emit(rbArray);

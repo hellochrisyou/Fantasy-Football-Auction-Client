@@ -6,6 +6,7 @@ import { AuthService } from '../core/service/auth.service';
 declare var $: any;
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'toolbar-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']

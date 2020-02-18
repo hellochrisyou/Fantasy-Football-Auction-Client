@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 export const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'localhost:4200',
+    'Access-Control-Allow-Origin': 'localhost:4200/live-auction',
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
   })

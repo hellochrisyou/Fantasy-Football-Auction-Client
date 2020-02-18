@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild, AfterViewInit, ContentChild, TemplateRef } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild, AfterViewInit, ContentChild, TemplateRef, ViewContainerRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -76,7 +76,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public ngAfterViewInit(): void {
-
+    this.refresh();
   }
 
   public ngOnDestroy(): void {
