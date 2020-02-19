@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/core/service/auth.service';
 import { CreateBaseForm } from 'src/app/shared/base/base-form';
 import { User } from 'src/app/shared/interface/model.interface';
 import { URL_VALIDATOR } from 'src/app/shared/validator/validator';
+declare var $: any;
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -48,6 +49,14 @@ export class CreateAuctionComponent extends CreateBaseForm {
     });
 
     this.formGroup.get('pprCtrl').setValue(true);
+    $(function() {
+      $("#input").keypress(function(event) {
+          if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+              $(".alert").html("Enter only digits!").show().fadeOut(2000);
+              return false;
+          }
+      });
+  });
   }
 
   // tslint:disable-next-line: use-lifecycle-interface
