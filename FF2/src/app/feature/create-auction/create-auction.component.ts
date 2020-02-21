@@ -4,11 +4,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/service/auth.service';
-import { CreateBaseForm } from 'src/app/shared/base/base-form';
-import { User, League } from 'src/app/shared/interface/model.interface';
-import { URL_VALIDATOR } from 'src/app/shared/validator/validator';
 import { HttpService } from 'src/app/core/service/http.service';
+import { CreateBaseForm } from 'src/app/shared/base/base-form';
 import { APIURL } from 'src/app/shared/const/url.const';
+import { League, User } from 'src/app/shared/interface/model.interface';
+
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -57,7 +57,6 @@ export class CreateAuctionComponent extends CreateBaseForm {
         Validators.required
       ]],
     });
-
 
     this.formGroup.get('pprCtrl').setValue(true);
     this.formGroup.get('typeCtrl').setValue(true);
