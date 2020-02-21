@@ -1,8 +1,8 @@
 import { QB, RB, WR, TE, DEF, Kicker } from 'src/app/shared/interface/model.interface';
 
-export const MERGE_QB_STATS = (qbStatArr: QB[], qbAuctionArr: any[]): QB[] => {
-  for (const player of qbStatArr) {
-    for (const player2 of qbAuctionArr) {
+export const MERGE_PLAYER_STATS = (statArr: any[], auctionArr: any[]): any[] => {
+  for (const player of statArr) {
+    for (const player2 of auctionArr) {
       if (player2.displayName === player.Name) {
         player.MinPrice = player2.minPrice;
         player.MaxPrice = player2.maxPrice;
@@ -12,7 +12,7 @@ export const MERGE_QB_STATS = (qbStatArr: QB[], qbAuctionArr: any[]): QB[] => {
       }
     }
   }
-  return qbStatArr;
+  return statArr;
 };
 
 export const MERGE_RB_STATS = (rbStatArr: RB[], rbAuctionArr: any[]): RB[] => {

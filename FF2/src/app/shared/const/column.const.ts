@@ -78,16 +78,6 @@ export const K_COL_OBJ: ColumnObject[] = [
     { columnId: 'Points', propertyName: 'Points' }
 ];
 
-export const LEAGUE_COL_OBJ: ColumnObject[] = [
-    { columnId: 'Join_League', propertyName: 'Join_League' },
-    { columnId: 'Enter_Auction', propertyName: 'Enter_Auction' },
-    { columnId: 'Name', propertyName: 'Name' },
-    { columnId: 'View_Teams', propertyName: 'View_Teams' },
-    { columnId: 'Team_Count', propertyName: 'Team_Count' },
-    { columnId: 'PPR', propertyName: 'PPR' },
-    { columnId: 'Total_Budget', propertyName: 'Total_Budget' },
-    { columnId: 'Maximum_Players', propertyName: 'Maximum_Players' },
-];
 
 export const TEAM_COL_OBJ: ColumnObject[] = [
     { columnId: 'View_Players', propertyName: 'View_Players' },
@@ -103,6 +93,16 @@ export const PLAYER_COL_OBJ: ColumnObject[] = [
     { columnId: 'Current_Bid', propertyName: 'Current_Bid' },
     { columnId: 'Current_Owner', propertyName: 'Current_Owner' },
     { columnId: 'Points', propertyName: 'Points' },
+];
+
+export const LEAGUE_COL_OBJ: ColumnObject[] = [
+    { columnId: 'Select', propertyName: 'Select' },
+    { columnId: 'Name', propertyName: 'name' },
+    { columnId: 'TeamCount', propertyName: 'teamCount' },
+    { columnId: 'TotalBudget', propertyName: 'totalBudget' },
+    { columnId: 'MaxPlayers', propertyName: 'maxPlayers' },
+    { columnId: 'ppr', propertyName: 'ppr' },
+    // { columnId: 'Type', propertyName: 'Type' },
 ];
 
 export const QB_DISPLAY = [
@@ -129,7 +129,7 @@ export const K_DISPLAY = [
 ];
 
 export const LEAGUE_DISPLAY = [
-    'Join_League', 'Enter_Auction', 'View_Teams', 'Name', 'Team_Count', 'PPR', 'Total_Budget', 'Maximum_Players'
+    'Select', 'Name', 'TeamCount', 'TotalBudget', 'MaxPlayers', 'ppr'
 ];
 
 export const TEAM_DISPLAY = [

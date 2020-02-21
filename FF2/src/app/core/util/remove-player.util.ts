@@ -1,12 +1,12 @@
 import { QB, DEF, RB, WR, TE, Kicker } from 'src/app/shared/interface/model.interface';
 
-export const REMOVE_QBS = (qbStatArr: QB[]): QB[] => {
-    for (let i = 0; i < qbStatArr.length; i++) {
-        if (qbStatArr[i].MinPrice === undefined) {
-            qbStatArr.splice(i, 1);
+export const REMOVE_EXTRA_PLAYERS = (statArr: any[]): any[] => {
+    for (let i = 0; i < statArr.length; i++) {
+        if (statArr[i].MinPrice === undefined) {
+            statArr.splice(i, 1);
         }
     }
-    return qbStatArr;
+    return statArr;
 };
 export const REMOVE_RBS = (rbStatArr: RB[]): RB[] => {
     for (let i = 0; i < rbStatArr.length; i++) {

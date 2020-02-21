@@ -4,6 +4,7 @@ import { APIURL } from '../../shared/const/url.const';
 import { TOKENS } from '../../shared/const/api-key';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { League } from 'src/app/shared/interface/model.interface';
 
 export const httpOptions = {
   headers: new HttpHeaders({
@@ -28,6 +29,12 @@ export class HttpService {
 
   public get(url: string): Observable<any> {
     return this.http.get(url, httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public post(url: string, body: League): Observable<any> {
+    return this.http.post(url, body, httpOptions).pipe(
       catchError(this.handleError)
     );
   }

@@ -55,13 +55,14 @@ export interface User {
 }
 
 export interface League {
-    id?: number | string;
+    leagueId?: number | string;
     Name?: string;
     teams?: Team[];
+    Type?: string;
     PPR?: string;
-    TotalBudget?: number;
-    TeamCount?: number;
-    MaxPlayers?: number;
+    TotalBudget?: string;
+    TeamCount?: string;
+    MaxPlayers?: string;
 }
 
 export interface Team {
@@ -84,6 +85,17 @@ export interface Player {
     Current_Bid?: number;
     Current_Owner?: string;
     Points?: number;
+}
+
+export interface AuctionPlayer {
+    playerId: string;
+    ppr: string;
+    minPrice: string;
+    maxPrice: string;
+    avgPrice: string;
+    displayName: string;
+    team: string;
+    position: string;
 }
 
 export interface LastSeasonPlayers {

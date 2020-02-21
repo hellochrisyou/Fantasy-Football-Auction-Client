@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild, AfterViewInit, ContentChild, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild, AfterViewInit, ContentChild, TemplateRef, ViewContainerRef, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -26,6 +26,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     return this._columnObjects;
   }
   public set columnObjects(colObjArr: any[]) {
+    console.log('colobjarr', colObjArr);
     if (colObjArr) {
       this.columnIds = colObjArr.map(c => c.columnId);
     }
@@ -37,7 +38,9 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     return this._dataArray;
   }
   public set dataArray(value: any[]) {
+    console.log('table dataArray', value);
     this._dataArray = value;
+    this.refresh();
   }
 
   @Input()
@@ -45,11 +48,13 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     return this._colDisplay;
   }
   public set colDisplay(value: string) {
+    console.log('col display', value);
     this._colDisplay = value;
   }
   constructor(
     public dialog: MatDialog,
     private emitService: EmitService,
+    private cd: ChangeDetectorRef
   ) {
   }
 

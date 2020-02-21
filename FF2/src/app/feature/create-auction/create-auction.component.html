@@ -20,10 +20,19 @@
                 Budget is <strong>Required</strong>
             </mat-error>
         </mat-form-field>
-            <mat-slide-toggle
-            formControlName="pprCtrl" [checked]="checked">
-          PPR
-        </mat-slide-toggle>   
+        <mat-form-field>
+            <mat-label>Max players</mat-label>
+            <input matInput type="number" formControlName="maxPlayerCtrl" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="formGroup.controls.maxPlayerCtrl.hasError('required')">
+                Maximum number of players is <strong>Required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-slide-toggle formControlName="pprCtrl">
+            PPR
+        </mat-slide-toggle>
+        <mat-slide-toggle (click)="toggleTypeOfDraft()" formControlName="typeCtrl">
+            {{typeOfDraft}}
+        </mat-slide-toggle>
     </div>
     <br />
     <br />
