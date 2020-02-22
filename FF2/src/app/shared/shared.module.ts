@@ -6,11 +6,12 @@ import { TableComponent } from './component/table/table.component';
 import { MaterialModule } from './module/material.module';
 import { ConfirmComponent } from './component/dialog/confirm/confirm.component';
 import { ErrorDialogComponent } from './component/dialog/error/error.component';
+import { CreateComponent } from './component/dialog/create/create.component';
 
 
 
 @NgModule({
-  declarations: [ConfirmComponent, ErrorDialogComponent, TableComponent],
+  declarations: [ConfirmComponent, ErrorDialogComponent, TableComponent, CreateComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -31,7 +32,7 @@ import { ErrorDialogComponent } from './component/dialog/error/error.component';
     }
   ],
   entryComponents: [
-    ConfirmComponent, ErrorDialogComponent
+    ConfirmComponent, ErrorDialogComponent, CreateComponent
   ]
 })
 export class SharedModule { }

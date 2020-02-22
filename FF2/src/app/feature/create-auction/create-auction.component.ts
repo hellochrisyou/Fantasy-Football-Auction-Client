@@ -19,6 +19,7 @@ import { League, User } from 'src/app/shared/interface/model.interface';
 export class CreateAuctionComponent extends CreateBaseForm {
 
   typeOfDraft = 'Snake';
+  ppr = 'PPR';
   thisLeague: League = {};
 
   public user: User = {};
@@ -73,22 +74,41 @@ export class CreateAuctionComponent extends CreateBaseForm {
       this.typeOfDraft = 'Snake';
     }
   }
-  public submit(value: any): void {
-    console.log('thischecked', this.formGroup.get('pprCtrl').value);
-    this.thisLeague.Name = this.formGroup.get('leagueNameCtrl').value;
-    this.thisLeague.PPR = this.formGroup.get('pprCtrl').value;
-    this.thisLeague.TeamCount = '0';
-    this.thisLeague.TotalBudget = this.formGroup.get('budgetCtrl').value;
-    this.thisLeague.MaxPlayers = this.formGroup.get('maxPlayerCtrl').value;
-    if (this.formGroup.get('typeCtrl').value === true) {
-      this.thisLeague.Type = 'Snake';
+
+  public togglePPR() {
+    if (this.formGroup.get('pprCtrl').value === true) {
+      this.typeOfDraft = 'Non-PPR';
     } else {
-      this.thisLeague.Type = 'Auction';
+      this.typeOfDraft = 'PPR';
     }
-    this.snackBar.open('Profile Update', 'SUCCESS', {});
-    this.httpService.post(APIURL.BACKENDCALL + '/createLeague/', this.thisLeague).subscribe(x =>
-      console.log('data:', x)
-    );
-    // this.router.navigateByUrl('/home');
+  }
+
+  public submit(value: any): void {
+
+    // tslint:disable-next-line: max-line-length
+    this.httpService.get(APIURL.BACKENDCALL + '/league/leagueNameExist/' + `${this.formGroup.get('leagueNameCtrl').value}`).subscribe((nameExist) => {
+      console.log('data here', nameExist);
+      if (nameExist === true) {
+        this.snackBar.open('Duplicate name exists', 'FAIL', {});
+        this.formGroup.reset();
+      } else {
+        this.thisLeague.name = this.formGroup.get('leagueNameCtrl').value;
+        this.thisLeague.PPR = this.formGroup.get('pprCtrl').value;
+        this.thisLeague.teamCount = '0';
+        this.thisLeague.totalBudget = this.formGroup.get('budgetCtrl').value;
+        this.thisLeague.maxPlayers = this.formGroup.get('maxPlayerCtrl').value;
+        if (this.formGroup.get('typeCtrl').value === true) {
+          this.thisLeague.type = 'Snake';
+        } else {
+          this.thisLeague.type = 'Auction';
+        }
+        this.httpService.post(APIURL.BACKENDCALL + '/league/createLeague/', this.thisLeague).subscribe(data => {
+          console.log('data:', data);
+          this.snackBar.open('League Created', 'SUCCESS', {});
+        }
+        );
+        // this.router.navigateByUrl('/home');
+      }
+    });
   }
 }

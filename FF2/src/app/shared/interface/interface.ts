@@ -1,3 +1,5 @@
+import { League } from './model.interface';
+
 export interface DialogData {
     title: string;
     subTitle: string;
@@ -8,3 +10,4 @@ export interface ColumnObject {
     columnId: string;
     propertyName: string;
 }
+

@@ -105,14 +105,15 @@ section {
   color: $primary-background;
 }
 
-button:hover {
-  transform: scale3d(1.2, 1.2, 1);
-  -webkit-transform: scale3d(1.2, 1.2, 1);
-  transition: all 0.5s cubic-bezier(0, 1.27, 0.46, 1.65);
-  -webkit-transition: all 0.5s cubic-bezier(0, 1.27, 0.46, 1.65);
-}
+// button:hover {
+//   transform: scale3d(1.2, 1.2, 1);
+//   -webkit-transform: scale3d(1.2, 1.2, 1);
+//   transition: all 0.5s cubic-bezier(0, 1.27, 0.46, 1.65);
+//   -webkit-transition: all 0.5s cubic-bezier(0, 1.27, 0.46, 1.65);
+// }
 
-i {
+i,
+mat-icon {
   cursor: pointer;
 }
 

@@ -26,7 +26,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     return this._columnObjects;
   }
   public set columnObjects(colObjArr: any[]) {
-    console.log('colobjarr', colObjArr);
     if (colObjArr) {
       this.columnIds = colObjArr.map(c => c.columnId);
     }
@@ -38,7 +37,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     return this._dataArray;
   }
   public set dataArray(value: any[]) {
-    console.log('table dataArray', value);
     this._dataArray = value;
     this.refresh();
   }
@@ -54,7 +52,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     public dialog: MatDialog,
     private emitService: EmitService,
-    private cd: ChangeDetectorRef
   ) {
   }
 

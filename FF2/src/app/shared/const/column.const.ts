@@ -96,7 +96,7 @@ export const PLAYER_COL_OBJ: ColumnObject[] = [
 ];
 
 export const LEAGUE_COL_OBJ: ColumnObject[] = [
-    { columnId: 'Select', propertyName: 'Select' },
+    { columnId: 'Select', propertyName: 'select' },
     { columnId: 'Name', propertyName: 'name' },
     { columnId: 'TeamCount', propertyName: 'teamCount' },
     { columnId: 'TotalBudget', propertyName: 'totalBudget' },

@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>{{leagueName}}</h1>
+<div mat-dialog-content>
+    <form [formGroup]="formGroup" (ngSubmit)="submit(formGroup.value)">
+        <mat-form-field>
+            <br>
+            <input matInput color="black" type="text" formControlName="teamNameCtrl" placeholder="Team Name"
+                [errorStateMatcher]="matcher">
+            <mat-hint color="goldenrod">Your default team name is your display name.</mat-hint>
+        </mat-form-field>
+        <button mat-button class="dialog-button" type="submit" cdkFocusInitial>Ok</button>
+        <button mat-button class="dialog-button" (click)="onNoClick()">Cancel</button>
+    </form>
+</div>

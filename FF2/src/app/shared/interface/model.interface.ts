@@ -55,22 +55,22 @@ export interface User {
 }
 
 export interface League {
-    leagueId?: number | string;
-    Name?: string;
+    leagueId?: string;
+    name?: string;
     teams?: Team[];
-    Type?: string;
+    type?: string;
     PPR?: string;
-    TotalBudget?: string;
-    TeamCount?: string;
-    MaxPlayers?: string;
+    totalBudget?: string;
+    teamCount?: string;
+    maxPlayers?: string;
 }
 
 export interface Team {
-    id?: number | string;
-    Name?: string;
-    DraftPosition?: number;
+    id?: string;
+    name?: string;
+    draftPosition?: string;
     players?: Player[];
-    Current_Budget?: number;
+    currentBudget?: string;
 }
 
 export interface Player {

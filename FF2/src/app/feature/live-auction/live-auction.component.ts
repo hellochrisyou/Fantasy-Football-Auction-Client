@@ -40,9 +40,9 @@ export class LiveAuctionComponent implements OnInit, OnDestroy {
   public user: User = {};
 
   thisTeam: Team = {
-    Name: this.auth.userData.displayName,
+    name: this.auth.userData.displayName,
     players: [],
-    Current_Budget: 10000
+    currentBudget: '10000'
   };
 
   readonly QB_COL_OBJ = QB_COL_OBJ;
