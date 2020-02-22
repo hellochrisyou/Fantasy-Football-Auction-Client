@@ -86,9 +86,9 @@ export class CreateAuctionComponent extends CreateBaseForm {
   public submit(value: any): void {
 
     // tslint:disable-next-line: max-line-length
-    this.httpService.get(APIURL.BACKENDCALL + '/league/leagueNameExist/' + `${this.formGroup.get('leagueNameCtrl').value}`).subscribe((nameExist) => {
-      console.log('data here', nameExist);
-      if (nameExist === true) {
+    this.httpService.get(APIURL.BACKENDCALL + '/league/leagueNameExists/' + `${this.formGroup.get('leagueNameCtrl').value}`).subscribe((nameExists) => {
+      console.log('data here', nameExists);
+      if (nameExists === true) {
         this.snackBar.open('Duplicate name exists', 'FAIL', {});
         this.formGroup.reset();
       } else {

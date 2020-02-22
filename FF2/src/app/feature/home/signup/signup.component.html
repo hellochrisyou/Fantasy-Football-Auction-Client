@@ -14,7 +14,7 @@
                         [errorStateMatcher]="matcher">
                     <mat-hint color="white">Start with http:// or https://</mat-hint>
                     <mat-error *ngIf="formGroup.controls.photoCtrl.hasError('required')">
-                        PhotoURL is <strong>Required</strong>
+                        photoUrl is <strong>Required</strong>
                     </mat-error>
                     <mat-error *ngIf="formGroup.controls.photoCtrl.hasError('pattern')">
                         Invalid <Strong>URL</Strong>

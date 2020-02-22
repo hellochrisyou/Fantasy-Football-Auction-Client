@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { User } from 'src/app/shared/interface/model.interface';
 import { AuthService } from 'src/app/core/service/auth.service';
+import { User } from 'src/app/shared/interface/model.interface';
 
 @Component({
   // tslint:disable-next-line: component-selector

@@ -89,7 +89,7 @@ export class LiveAuctionComponent implements OnInit, OnDestroy {
     // this.user.displayName = 'Chris You';
     // this.user.uId = this.auth.authState.uid;
     // this.user.email = this.auth.authState.email;
-    // this.user.photoURL = '';
+    // this.user.photoUrl = '';
     // this.auth.updateUserData(this.user);
     // console.log('done');
 

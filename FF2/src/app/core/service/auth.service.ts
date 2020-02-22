@@ -139,7 +139,7 @@ export class AuthService {
       uId: user.uId,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL
+      photoUrl: user.photoUrl
     };
     return userRef.set(data, { merge: true });
   }
@@ -154,7 +154,7 @@ export class AuthService {
           displayName: this.authState.displayName,
           email: this.authState.email,
           phoneNumber: this.authState.phoneNumber,
-          photoURL: this.authState.photoURL,
+          photoUrl: this.authState.photoUrl,
           country: this.authState.country
         }
       ]

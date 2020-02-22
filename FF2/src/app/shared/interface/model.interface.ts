@@ -49,9 +49,10 @@ export interface Kicker extends Player {
 
 export interface User {
     uId?: string;
+    userId?: string;
     displayName?: string;
     email?: string;
-    photoURL?: string;
+    photoUrl?: string;
 }
 
 export interface League {
