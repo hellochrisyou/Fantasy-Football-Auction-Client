@@ -8,4 +8,17 @@
         </mat-tab>
     </mat-tab-group>
 </ng-container>
-<router-outlet *ngIf="auth.isAuthenticated"></router-outlet>
+<router-outlet *ngIf="auth.isAuthenticated">
+    <!-- <section>
+        <div>You</div>
+        <div>
+            <span id="home-text">are LOGGED IN</span>
+        </div>
+    </section> -->
+    <section>
+        <div id="text">
+            <h1>L<span id="offset">ogg</span>ed</h1>
+            <h1>I<span id="offset">n</span></h1>
+        </div>
+    </section>
+</router-outlet>

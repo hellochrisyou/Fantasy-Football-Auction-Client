@@ -1,6 +1,8 @@
 @import "_button";
 @import "_home";
 @import "_color";
+@import "_input";
+
 @include home();
 @include button();
 

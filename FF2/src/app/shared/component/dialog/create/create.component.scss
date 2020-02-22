@@ -1,3 +1,5 @@
+@import "_color";
+
 .mat-dialog-content {
   overflow: hidden;
   padding-bottom: 4rem;
@@ -10,6 +12,6 @@
 }
 
 button.mat-button.dialog-button {
-  background-color: #ffca28;
+  background-color: $button-color;
   color: black;
 }
