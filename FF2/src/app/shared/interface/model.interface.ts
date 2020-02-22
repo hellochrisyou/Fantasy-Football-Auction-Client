@@ -1,3 +1,18 @@
+export interface BasePlayer {
+    playerName?: string;
+    flex?: string;
+    position?: string;
+}
+
+export interface Player extends BasePlayer {
+    select?: string;
+    team?: string;
+    minPrice?: number;
+    maxPrice?: number;
+    avgPrice?: number;
+    points?: number;
+}
+
 export interface QB extends Player {
     PassYD?: number;
     PassTD?: number;
@@ -47,56 +62,43 @@ export interface Kicker extends Player {
     Fg50Plus?: number;
 }
 
+export interface BaseLeague {
+    leagueName?: string;
+    maxPlayers?: string;
+    teams?: Team[];
+}
+
+export interface SnakeLeague extends BaseLeague {
+    leagueId?: string;
+    defaultAutoPick: string;
+    draftTurn?: string;
+    draftRound: string;
+}
+
+export interface AuctionLeague extends BaseLeague {
+    leagueId?: string;
+    draftTurn?: string;
+    draftRound: string;
+    totalBudget?: string;
+    currentBidder: string;
+    currentBid: string;
+}
+
 export interface User {
     uId?: string;
     userId?: string;
     displayName?: string;
     email?: string;
     photoUrl?: string;
-}
-
-export interface League {
-    leagueId?: string;
-    name?: string;
     teams?: Team[];
-    type?: string;
-    PPR?: string;
-    totalBudget?: string;
-    teamCount?: string;
-    maxPlayers?: string;
 }
 
-export interface Team {
-    id?: string;
-    name?: string;
+export interface Team extends BaseLeague {
     draftPosition?: string;
-    players?: Player[];
     currentBudget?: string;
-}
-
-export interface Player {
-    id?: number | string;
-    Select?: string;
-    Name?: string;
-    Team?: string;
-    Position?: string;
-    MinPrice?: number;
-    MaxPrice?: number;
-    AvgPrice?: number;
-    Current_Bid?: number;
-    Current_Owner?: string;
-    Points?: number;
-}
-
-export interface AuctionPlayer {
-    playerId: string;
-    ppr: string;
-    minPrice: string;
-    maxPrice: string;
-    avgPrice: string;
-    displayName: string;
-    team: string;
-    position: string;
+    players?: Player[];
+    ppr?: string;
+    leagueType: string;
 }
 
 export interface LastSeasonPlayers {

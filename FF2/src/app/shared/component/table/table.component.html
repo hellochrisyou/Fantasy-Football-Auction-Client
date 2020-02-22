@@ -10,18 +10,18 @@
             <td mat-cell *matCellDef="let dataArray; let i = index;"
                 [style.color]="setDataColor(dataArray[col.propertyName])">
 
-                <ng-container *ngIf=" col.columnId==='Select'">
+                <ng-container *ngIf=" col.columnId==='select'">
                     <ng-container [ngTemplateOutlet]=" optionTemplateRef"
                         [ngTemplateOutletContext]="{ $implicit: dataArray, index: dataSource.filteredData.indexOf(dataArray) }">
                     </ng-container>
                 </ng-container>
 
                 <ng-container
-                    *ngIf="col.propertyName!=='Select' && !dataArray[col.propertyName] && dataArray[col.propertyName]!==0">
+                    *ngIf="col.propertyName!=='select' && !dataArray[col.propertyName] && dataArray[col.propertyName]!==0">
                     {{"-"}}
                 </ng-container>
 
-                <ng-container *ngIf="col.propertyName!=='Select'">
+                <ng-container *ngIf="col.propertyName!=='select'">
                     {{dataArray[col.propertyName]}}
                 </ng-container>
 
