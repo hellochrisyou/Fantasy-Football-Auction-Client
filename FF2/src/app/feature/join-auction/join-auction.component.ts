@@ -5,7 +5,7 @@ import { HttpService } from 'src/app/core/service/http.service';
 import { CreateComponent } from 'src/app/shared/component/dialog/create/create.component';
 import { LEAGUE_COL_OBJ, LEAGUE_DISPLAY } from 'src/app/shared/const/column.const';
 import { APIURL } from 'src/app/shared/const/url.const';
-import { League } from 'src/app/shared/interface/model.interface';
+import { AuctionLeague } from 'src/app/shared/interface/model.interface';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -17,7 +17,7 @@ export class JoinAuctionComponent implements OnInit {
 
   LEAGUE_COL_OBJ = LEAGUE_COL_OBJ;
   LEAGUE_DISPLAY = LEAGUE_DISPLAY;
-  leagueArr: League[] = [];
+  leagueArr: AuctionLeague[] = [];
   constructor(
     private emitService: EmitService,
     private httpService: HttpService,

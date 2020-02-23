@@ -8,7 +8,11 @@ body {
 body {
   margin: 0;
   font-family: "Roboto Mono", monospace; // background-color: #090979;
-  background: $body-color;
+  // background: rgb(12, 9, 121);
+  // background: -moz-linear-gradient(90deg, rgba(12, 9, 121, 1) 0%, rgba(7, 0, 255, 1) 100%);
+  // background: -webkit-linear-gradient(90deg, rgba(12, 9, 121, 1) 0%, rgba(7, 0, 255, 1) 100%);
+  // background: linear-gradient(90deg, rgba(12, 9, 121, 1) 0%, rgba(7, 0, 255, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0c0979",endColorstr="#0700ff",GradientType=1);
 }
 
 h1 {

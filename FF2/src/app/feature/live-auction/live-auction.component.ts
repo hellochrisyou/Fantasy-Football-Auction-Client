@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/core/service/auth.service';
 import { EmitService } from 'src/app/core/service/emit.service';
 import { LastSeasonStatService } from 'src/app/core/service/last-season-stat.service';
 import { MERGE_PLAYER_STATS } from 'src/app/core/util/merge-stats.util';
-import { REMOVE_EXTRA_PLAYERS, REMOVE_TES } from 'src/app/core/util/remove-player.util';
+import { REMOVE_EXTRA_PLAYERS } from 'src/app/core/util/remove-player.util';
 import {
   DEF_COL_OBJ,
   DEF_DISPLAY,
@@ -40,9 +40,10 @@ export class LiveAuctionComponent implements OnInit, OnDestroy {
   public user: User = {};
 
   thisTeam: Team = {
-    name: this.auth.userData.displayName,
+    teamName: this.auth.userData.displayName,
     players: [],
-    currentBudget: '10000'
+    currentBudget: '10000',
+    leagueType: 'Auction'
   };
 
   readonly QB_COL_OBJ = QB_COL_OBJ;

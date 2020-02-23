@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/core/service/auth.service';
 import { HttpService } from 'src/app/core/service/http.service';
 import { CreateBaseForm } from 'src/app/shared/base/base-form';
 import { APIURL } from 'src/app/shared/const/url.const';
-import { League, User } from 'src/app/shared/interface/model.interface';
+import { AuctionLeague, User } from 'src/app/shared/interface/model.interface';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class CreateAuctionComponent extends CreateBaseForm {
 
   typeOfDraft = 'Snake';
   ppr = 'PPR';
-  thisLeague: League = {};
+  thisLeague: AuctionLeague = {};
 
   public user: User = {};
 
@@ -92,16 +92,14 @@ export class CreateAuctionComponent extends CreateBaseForm {
         this.snackBar.open('Duplicate name exists', 'FAIL', {});
         this.formGroup.reset();
       } else {
-        this.thisLeague.name = this.formGroup.get('leagueNameCtrl').value;
-        this.thisLeague.PPR = this.formGroup.get('pprCtrl').value;
-        this.thisLeague.teamCount = '0';
+        this.thisLeague.leagueName = this.formGroup.get('leagueNameCtrl').value;
         this.thisLeague.totalBudget = this.formGroup.get('budgetCtrl').value;
         this.thisLeague.maxPlayers = this.formGroup.get('maxPlayerCtrl').value;
-        if (this.formGroup.get('typeCtrl').value === true) {
-          this.thisLeague.type = 'Snake';
-        } else {
-          this.thisLeague.type = 'Auction';
-        }
+        // if (this.formGroup.get('typeCtrl').value === true) {
+        //   this.thisLeague.type = 'Snake';
+        // } else {
+        //   this.thisLeague.type = 'Auction';
+        // }
         this.httpService.post(APIURL.BACKENDCALL + '/league/createLeague/', this.thisLeague).subscribe(data => {
           console.log('data:', data);
           this.snackBar.open('League Created', 'SUCCESS', {});

@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Component, Inject, OnInit, AfterViewInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { AfterViewInit, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
-import { CreateBaseForm } from 'src/app/shared/base/base-form';
-import { League, Team } from 'src/app/shared/interface/model.interface';
 import { HttpService } from 'src/app/core/service/http.service';
+import { CreateBaseForm } from 'src/app/shared/base/base-form';
 import { APIURL } from 'src/app/shared/const/url.const';
+import { BaseLeague, Team, AuctionLeague, SnakeLeague } from 'src/app/shared/interface/model.interface';
 
 @Component({
   selector: 'app-create',
@@ -21,7 +21,7 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
     private snackBar: MatSnackBar,
     private httpService: HttpService,
     private dialogRef: MatDialogRef<CreateComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: League,
+    @Inject(MAT_DIALOG_DATA) public data: AuctionLeague | SnakeLeague,
   ) {
     super(fb, changeDetectorRefs);
   }
@@ -39,8 +39,8 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
   }
 
   ngAfterViewInit(): void {
-    this.leagueName = this.data.name;
-    console.log('dialog', this.data.name);
+    this.leagueName = this.data.leagueName;
+    console.log('dialog', this.data.leagueName);
     this.changeDetectorRefs.detectChanges();
   }
 
@@ -56,9 +56,7 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
         this.snackBar.open('Name already exists', 'FAIL', {});
       } else {
         this.thisTeam = {
-          name: this.formGroup.get('teamNameCtrl').value,
-          draftPosition: this.data.teamCount,
-          currentBudget: this.data.totalBudget
+          teamName: this.formGroup.get('teamNameCtrl').value
         };
         if (this.data.teams === null) {
           this.data.teams = [];

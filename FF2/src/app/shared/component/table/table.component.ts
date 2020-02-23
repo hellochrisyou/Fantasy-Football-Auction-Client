@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild, AfterViewInit, ContentChild, TemplateRef, ViewContainerRef, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, Component, ContentChild, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { EmitService } from 'src/app/core/service/emit.service';
 
 import { expandRowTransition } from '../../animation/animation';
-import { League, Team } from '../../interface/model.interface';
+import { Team } from '../../interface/model.interface';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -55,7 +55,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
   }
 
-  expandRow: League | Team | any;
   dataSource: MatTableDataSource<any>;
 
   // tslint:disable-next-line: variable-name

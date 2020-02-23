@@ -29,7 +29,11 @@
 }
 
 .card.highlight-card {
-  background: $secondary-background;
+  background: rgb(57, 9, 121);
+  background: -moz-linear-gradient(90deg, rgba(57, 9, 121, 1) 0%, rgba(7, 0, 255, 1) 51%);
+  background: -webkit-linear-gradient(90deg, rgba(57, 9, 121, 1) 0%, rgba(7, 0, 255, 1) 51%);
+  background: linear-gradient(90deg, rgba(57, 9, 121, 1) 0%, rgba(7, 0, 255, 1) 51%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#390979",endColorstr="#0700ff",GradientType=1);
   color: #fff;
   font-weight: 600;
   top: 5vh;

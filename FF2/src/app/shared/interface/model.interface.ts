@@ -6,7 +6,7 @@ export interface BasePlayer {
 
 export interface Player extends BasePlayer {
     select?: string;
-    team?: string;
+    footballTeam?: string;
     minPrice?: number;
     maxPrice?: number;
     avgPrice?: number;
@@ -78,10 +78,10 @@ export interface SnakeLeague extends BaseLeague {
 export interface AuctionLeague extends BaseLeague {
     leagueId?: string;
     draftTurn?: string;
-    draftRound: string;
+    draftRound?: string;
     totalBudget?: string;
-    currentBidder: string;
-    currentBid: string;
+    currentBidder?: string;
+    currentBid?: string;
 }
 
 export interface User {
@@ -94,11 +94,12 @@ export interface User {
 }
 
 export interface Team extends BaseLeague {
+    teamName?: string;
     draftPosition?: string;
     currentBudget?: string;
     players?: Player[];
     ppr?: string;
-    leagueType: string;
+    leagueType?: string;
 }
 
 export interface LastSeasonPlayers {
