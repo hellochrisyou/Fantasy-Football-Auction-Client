@@ -9,6 +9,8 @@ import { User } from 'src/app/shared/interface/model.interface';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ConfirmComponent } from 'src/app/shared/component/dialog/confirm/confirm.component';
 import * as firebase from 'firebase';
+import { HttpService } from './http.service';
+import { APIURL } from 'src/app/shared/const/url.const';
 
 
 @Injectable({
@@ -21,6 +23,7 @@ export class AuthService {
   // tslint:disable-next-line: variable-name
   private _user: Observable<User>;
 
+  private newUser: User;
   public get user(): Observable<User> {
     return this._user;
   }
@@ -43,6 +46,7 @@ export class AuthService {
     private snackBar: MatSnackBar,
     private afs: AngularFirestore,
     public dialog: MatDialog,
+    private httpService: HttpService
   ) {
     this.user = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -74,6 +78,7 @@ export class AuthService {
       .then(res => {
         this.snackBar.open('Registration', 'SUCCESS', {
         });
+        this.checkUserExists(email);
         this.router.navigateByUrl('my-team');
         window.location.reload();
       })
@@ -93,6 +98,7 @@ export class AuthService {
   public signinGoogle() {
     console.log('hello');
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((credential) => {
+      this.checkUserExists(credential.user.email);
       this.router.navigate(['home/profile']);
     });
     // return this.OAuthProvider(new this.authState.GoogleAuthProvider())
@@ -112,6 +118,7 @@ export class AuthService {
       .auth
       .signInWithEmailAndPassword(email, password)
       .then(credential => {
+        this.checkUserExists(email);
         this.router.navigateByUrl('home/profile');
         window.location.reload();
       })
@@ -160,7 +167,23 @@ export class AuthService {
       ]
     };
   }
+  public checkUserExists(email: string): void {
+    console.log('begin, check user exists');
 
+    this.httpService.get(APIURL.BACKENDCALL + '/user/existsByEmail/' + `${email}`).subscribe((data) => {
+      if (data !== true) {
+        this.newUser = {
+          uId: this.authState.uId,
+          displayName: this.authState.displayName,
+          email: this.authState.email,
+          photoUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg'
+        };
+        this.httpService.post(APIURL.BACKENDCALL + '/user/createUser', this.newUser).subscribe(x => {
+          console.log('create data returned: ', x);
+        });
+      }
+    });
+  }
 }
 
 // https://stackoverflow.com/questions/42073340/angular2-firebase-get-current-user
