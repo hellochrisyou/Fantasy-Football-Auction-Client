@@ -40,10 +40,10 @@ export class LiveAuctionComponent implements OnInit, OnDestroy {
   public user: User = {};
 
   thisTeam: Team = {
-    teamName: this.auth.userData.displayName,
+    Name: this.auth.userData.displayName,
     players: [],
-    currentBudget: '10000',
-    leagueType: 'Auction'
+    CurrentBudget: '10000',
+    LeagueType: 'Auction'
   };
 
   readonly QB_COL_OBJ = QB_COL_OBJ;
@@ -87,17 +87,25 @@ export class LiveAuctionComponent implements OnInit, OnDestroy {
     console.log(REC_COL_OBJ);
     console.log(REC_DISPLAY);
 
-    // this.user.displayName = 'Chris You';
-    // this.user.uId = this.auth.authState.uid;
-    // this.user.email = this.auth.authState.email;
-    // this.user.photoUrl = '';
-    // this.auth.updateUserData(this.user);
-    // console.log('done');
-
+    // Subscribed to Auction Values
+    this.route.data.subscribe((data: { auctionValues: any }) => {
+      this.lastSeasonPlayers = this.auctionSortService.sortAuctionPlayers(data.auctionValues);
+      console.log(this.lastSeasonPlayers);
+    },
+      err => {
+        console.log('error in resolve service: ', err);
+      },
+      () => {
+        this.emitService.refreshTable();
+        console.log(this.lastSeasonPlayers);
+      });
 
     this.emitService.mergeQbOutput.subscribe(qbArray => {
+      console.log('quaterback1', this.lastSeasonPlayers.quaterBacks);
       this.lastSeasonPlayers.quaterBacks = MERGE_PLAYER_STATS(qbArray, this.lastSeasonPlayers.quaterBacks);
+      console.log('quaterback2', this.lastSeasonPlayers.quaterBacks);
       this.lastSeasonPlayers.quaterBacks = REMOVE_EXTRA_PLAYERS(this.lastSeasonPlayers.quaterBacks);
+      console.log('quaterback3', this.lastSeasonPlayers.quaterBacks);
       this.emitService.refreshTable();
     },
       err => {
@@ -169,18 +177,7 @@ export class LiveAuctionComponent implements OnInit, OnDestroy {
         this.emitService.refreshTable();
       });
 
-    // Subscribed to Auction Values
-    this.route.data.subscribe((data: { auctionValues: any }) => {
-      this.lastSeasonPlayers = this.auctionSortService.sortAuctionPlayers(data.auctionValues);
-      console.log(this.lastSeasonPlayers);
-    },
-      err => {
-        console.log('error in resolve service: ', err);
-      },
-      () => {
-        this.emitService.refreshTable();
-        console.log(this.lastSeasonPlayers);
-      });
+
   }
 
   public addQbPlayer(index: number): void {

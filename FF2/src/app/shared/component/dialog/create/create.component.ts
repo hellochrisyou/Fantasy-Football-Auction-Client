@@ -13,6 +13,7 @@ import { BaseLeague, Team, AuctionLeague, SnakeLeague } from 'src/app/shared/int
 })
 export class CreateComponent extends CreateBaseForm implements OnInit, AfterViewInit {
 
+  thisDto: CreateDto;
   thisTeam: Team;
   leagueName: string;
   constructor(
@@ -55,9 +56,16 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
       if (nameExists === true) {
         this.snackBar.open('Name already exists', 'FAIL', {});
       } else {
-        this.thisTeam = {
+        this.thisDto = {
+          leagueName: this.data.LeagueName,
           teamName: this.formGroup.get('teamNameCtrl').value
         };
+        this.thisTeam = {
+          LeagueName: this.data.LeagueName,
+          Name: this.formGroup.get('teamNameCtrl').value,
+          // Need to set league type here
+          PPR:  this.data.PPR        
+        }
 
         if (this.data.teams === null) {
           this.data.teams = [];

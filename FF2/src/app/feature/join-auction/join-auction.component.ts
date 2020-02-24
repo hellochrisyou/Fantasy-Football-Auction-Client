@@ -25,7 +25,7 @@ export class JoinAuctionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.httpService.get(APIURL.BACKENDCALL + '/league/getAllLeagues/').subscribe((data) => {
+    this.httpService.get(APIURL.LEAGUECALL + '/getAllLeagues/').subscribe((data) => {
       console.log('data here', data);
       this.leagueArr = data;
       this.emitService.refreshTable();

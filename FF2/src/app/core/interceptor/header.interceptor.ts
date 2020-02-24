@@ -17,7 +17,7 @@ export class HeaderInterceptor implements HttpInterceptor {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': 'http://localhost:4200/',
         'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+        'Access-Control-Allow-Headers': 'Origin, Methods, Headers, Content-Type, X-Auth-Token'
       }
     });
     return next.handle(req);

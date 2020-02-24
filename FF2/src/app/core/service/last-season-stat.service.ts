@@ -44,7 +44,7 @@ export class LastSeasonStatService {
         this.qbArray = this.statsFunctionService.returnQbStats(data.players);
         this.qbArray = this.filterService.filterArray(this.qbArray);
         this.qbArray.forEach(qb => {
-          qb.points = CALCULATE_QB_POINTS(qb);
+          qb.Points = CALCULATE_QB_POINTS(qb);
           this.emitService.mergeQb(this.qbArray);
         });
       },
@@ -59,7 +59,7 @@ export class LastSeasonStatService {
         this.rbArray = this.statsFunctionService.returnRbStats(data.players);
         this.rbArray = this.filterService.filterArray(this.rbArray);
         this.rbArray.forEach(rb => {
-          rb.points = CALCULATE_RB_POINTS(rb);
+          rb.Points = CALCULATE_RB_POINTS(rb);
           this.emitService.mergeRb(this.rbArray);
         });
       },
@@ -74,7 +74,7 @@ export class LastSeasonStatService {
         this.wrArray = this.statsFunctionService.returnWrStats(data.players);
         this.wrArray = this.filterService.filterArray(this.wrArray);
         this.wrArray.forEach(wr => {
-          wr.points = CALCULATE_RECEIVER_POINTS(wr);
+          wr.Points = CALCULATE_RECEIVER_POINTS(wr);
           this.emitService.mergeWr(this.wrArray);
         });
       },
@@ -89,7 +89,7 @@ export class LastSeasonStatService {
         this.teArray = this.statsFunctionService.returnTeStats(data.players);
         this.teArray = this.filterService.filterArray(this.teArray);
         this.teArray.forEach(te => {
-          te.points = CALCULATE_RECEIVER_POINTS(te);
+          te.Points = CALCULATE_RECEIVER_POINTS(te);
           this.emitService.mergeTe(this.teArray);
         });
       },
@@ -104,7 +104,7 @@ export class LastSeasonStatService {
         this.defArray = this.statsFunctionService.returnDEFStats(data.players);
         this.defArray = this.filterService.filterArray(this.defArray);
         this.defArray.forEach(def => {
-          def.points = CALCULATE_DEFENSE_POINTS(def);
+          def.Points = CALCULATE_DEFENSE_POINTS(def);
           this.emitService.mergeDef(this.defArray);
         });
       },
@@ -119,7 +119,7 @@ export class LastSeasonStatService {
         this.kArray = this.statsFunctionService.returnKickerStats(data.players);
         this.kArray = this.filterService.filterArray(this.kArray);
         this.kArray.forEach(k => {
-          k.points = CALCULATE_KICKER_POINTS(k);
+          k.Points = CALCULATE_KICKER_POINTS(k);
           this.emitService.mergeKicker(this.kArray);
         });
       },

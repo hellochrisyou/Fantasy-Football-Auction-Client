@@ -21,6 +21,7 @@ export class CreateAuctionComponent extends CreateBaseForm {
   typeOfDraft = 'Snake';
   ppr = 'PPR';
   thisLeague: AuctionLeague = {};
+  createDto: CreateDto;
 
   public user: User = {};
 
@@ -77,30 +78,32 @@ export class CreateAuctionComponent extends CreateBaseForm {
 
   public togglePPR() {
     if (this.formGroup.get('pprCtrl').value === true) {
-      this.typeOfDraft = 'Non-PPR';
+      this.ppr = 'Non-PPR';
     } else {
-      this.typeOfDraft = 'PPR';
+      this.ppr = 'PPR';
     }
   }
 
   public submit(value: any): void {
 
     // tslint:disable-next-line: max-line-length
-    this.httpService.get(APIURL.LEAGUECALL + '/league/existsByLeagueName/' + `${this.formGroup.get('leagueNameCtrl').value}`).subscribe((nameExists) => {
+    this.httpService.get(APIURL.LEAGUECALL + '/existsByLeagueName/' + `${this.formGroup.get('leagueNameCtrl').value}`).subscribe((nameExists) => {
       console.log('data here', nameExists);
       if (nameExists === true) {
         this.snackBar.open('Duplicate name exists', 'FAIL', {});
         this.formGroup.reset();
       } else {
-        this.thisLeague.leagueName = this.formGroup.get('leagueNameCtrl').value;
-        this.thisLeague.totalBudget = this.formGroup.get('budgetCtrl').value;
-        this.thisLeague.maxPlayers = this.formGroup.get('maxPlayerCtrl').value;
+        this.createDto.LeagueName = this.formGroup.get('leagueNameCtrl').value;
+        this.createDto.TotalBudget = this.formGroup.get('budgetCtrl').value;
+        this.createDto.MaxPlayers = this.formGroup.get('maxPlayerCtrl').value;
+        this.createDto.PPR = this.formGroup.get('pprCtrl').value;
+        console.log('thisleague', this.createDto);
         // if (this.formGroup.get('typeCtrl').value === true) {
         //   this.thisLeague.type = 'Snake';
         // } else {
         //   this.thisLeague.type = 'Auction';
         // }
-        this.httpService.post(APIURL.LEAGUECALL + '/league/createLeague/', this.thisLeague).subscribe(data => {
+        this.httpService.post(APIURL.LEAGUECALL + '/createLeague/', this.createDto).subscribe(data => {
           console.log('data:', data);
           this.snackBar.open('League Created', 'SUCCESS', {});
         }

@@ -1,16 +1,16 @@
 export interface BasePlayer {
-    playerName?: string;
-    flex?: string;
-    position?: string;
+    Name?: string;
+    Flex?: string;
+    Team?: string;
+    Position?: string;
 }
 
 export interface Player extends BasePlayer {
-    select?: string;
-    footballTeam?: string;
-    minPrice?: number;
-    maxPrice?: number;
-    avgPrice?: number;
-    points?: number;
+    Select?: string;
+    MinPrice?: number;
+    MaxPrice?: number;
+    AvgPrice?: number;
+    Points?: number;
 }
 
 export interface QB extends Player {
@@ -63,26 +63,28 @@ export interface Kicker extends Player {
 }
 
 export interface BaseLeague {
-    leagueName?: string;
-    maxPlayers?: string;
-    leagueType?: string;
+    LeagueName?: string;
+    MaxPlayers?: string;
+    LeagueType?: string;
+    PPR?: string;
     teams?: Team[];
+    Status?: string;
 }
 
 export interface SnakeLeague extends BaseLeague {
     leagueId?: string;
-    defaultAutoPick: string;
-    draftTurn?: string;
-    draftRound: string;
+    DefaultAutoPick?: string;
+    DraftTurn?: string;
+    DraftRound?: string;
 }
 
 export interface AuctionLeague extends BaseLeague {
     leagueId?: string;
-    draftTurn?: string;
-    draftRound?: string;
-    totalBudget?: string;
-    currentBidder?: string;
-    currentBid?: string;
+    DraftTurn?: string;
+    DraftRound?: string;
+    TotalBudget?: string;
+    CurrentBidder?: string;
+    CurrentBid?: string;
 }
 
 export interface User {
@@ -95,11 +97,10 @@ export interface User {
 }
 
 export interface Team extends BaseLeague {
-    teamName?: string;
-    draftPosition?: string;
-    currentBudget?: string;
+    Name?: string;
+    DraftPosition?: string;
+    CurrentBudget?: string;
     players?: Player[];
-    ppr?: string;
 }
 
 export interface LastSeasonPlayers {
