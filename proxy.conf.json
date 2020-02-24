@@ -1,6 +1,15 @@
 {
     "/dynamoDb": {
-        "target": "http://localhost:8080",
+        "target": "http://localhost:8081",
+        "secure": false,
+        "logLevel": "debug",
+        "pathRewrite": {
+            "^/dynamoDb": ""
+        },
+        "changeOrigin": true
+    },
+    "/league": {
+        "target": "http://localhost:8082",
         "secure": false,
         "logLevel": "debug",
         "pathRewrite": {

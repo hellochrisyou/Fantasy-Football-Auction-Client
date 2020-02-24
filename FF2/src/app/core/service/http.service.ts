@@ -33,7 +33,7 @@ export class HttpService {
     );
   }
 
-  public post(url: string, body: AuctionLeague | SnakeLeague): Observable<any> {
+  public post(url: string, body: AuctionLeague | SnakeLeague | string): Observable<any> {
     return this.http.post(url, body, httpOptions).pipe(
       catchError(this.handleError)
     );

@@ -86,7 +86,7 @@ export class CreateAuctionComponent extends CreateBaseForm {
   public submit(value: any): void {
 
     // tslint:disable-next-line: max-line-length
-    this.httpService.get(APIURL.BACKENDCALL + '/league/leagueNameExists/' + `${this.formGroup.get('leagueNameCtrl').value}`).subscribe((nameExists) => {
+    this.httpService.get(APIURL.LEAGUECALL + '/league/existsByLeagueName/' + `${this.formGroup.get('leagueNameCtrl').value}`).subscribe((nameExists) => {
       console.log('data here', nameExists);
       if (nameExists === true) {
         this.snackBar.open('Duplicate name exists', 'FAIL', {});
@@ -100,7 +100,7 @@ export class CreateAuctionComponent extends CreateBaseForm {
         // } else {
         //   this.thisLeague.type = 'Auction';
         // }
-        this.httpService.post(APIURL.BACKENDCALL + '/league/createLeague/', this.thisLeague).subscribe(data => {
+        this.httpService.post(APIURL.LEAGUECALL + '/league/createLeague/', this.thisLeague).subscribe(data => {
           console.log('data:', data);
           this.snackBar.open('League Created', 'SUCCESS', {});
         }

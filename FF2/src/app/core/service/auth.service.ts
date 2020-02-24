@@ -170,7 +170,7 @@ export class AuthService {
   public checkUserExists(email: string): void {
     console.log('begin, check user exists');
 
-    this.httpService.get(APIURL.BACKENDCALL + '/user/existsByEmail/' + `${email}`).subscribe((data) => {
+    this.httpService.post(APIURL.BACKENDCALL + '/user/existsByEmail/', email).subscribe((data) => {
       if (data !== true) {
         this.newUser = {
           uId: this.authState.uId,

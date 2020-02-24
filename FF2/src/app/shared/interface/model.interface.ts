@@ -65,6 +65,7 @@ export interface Kicker extends Player {
 export interface BaseLeague {
     leagueName?: string;
     maxPlayers?: string;
+    leagueType?: string;
     teams?: Team[];
 }
 
@@ -99,7 +100,6 @@ export interface Team extends BaseLeague {
     currentBudget?: string;
     players?: Player[];
     ppr?: string;
-    leagueType?: string;
 }
 
 export interface LastSeasonPlayers {

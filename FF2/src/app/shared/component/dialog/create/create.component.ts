@@ -58,16 +58,17 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
         this.thisTeam = {
           teamName: this.formGroup.get('teamNameCtrl').value
         };
+
         if (this.data.teams === null) {
           this.data.teams = [];
         }
+
         this.data.teams.push(this.thisTeam);
         this.httpService.post(APIURL.BACKENDCALL + '/team/createTeam/', this.data).subscribe((data) => {
           console.log('create team data:', data);
-          this.snackBar.open('You have joined: ' + `${this.formGroup.get('teamNameCtrl').value}`, 'SUCCESS', {});
         });
       }
+      this.snackBar.open('You have joined: ' + `${this.formGroup.get('teamNameCtrl').value}`, 'SUCCESS', {});
     });
   }
 }
-
