@@ -1,49 +1,73 @@
 <h1 class="text-center"><u>Live Auction</u></h1>
 <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Quaterback">
+        <ng-template matTabLabel>
+            <span [matBadge]="numQb" matBadgeOverlap="false">QB</span>
+        </ng-template>
         <base-table [columnObjects]="QB_COL_OBJ" [colDisplay]="QB_DISPLAY"
             [dataArray]="this.lastSeasonPlayers.quaterBacks">
             <ng-template #buttonTemplate let-i=index>
-                <mat-icon (click)="addQbPlayer(i)">exit_to_app</mat-icon>
+                <mat-icon (click)="addQbPlayer(i)" matTooltip="Add Player" matTooltipPosition="before">exit_to_app
+                </mat-icon>
             </ng-template>
         </base-table>
     </mat-tab>
     <mat-tab label="Runningback">
+        <ng-template matTabLabel>
+            <span [matBadge]="numRb" matBadgeOverlap="false">RB</span>
+        </ng-template>
         <base-table [columnObjects]="RB_COL_OBJ" [colDisplay]="RB_COL_OBJ"
             [dataArray]="this.lastSeasonPlayers.runningsBacks">
             <ng-template #buttonTemplate let-i=index>
-                <mat-icon (click)="addRbPlayer(i)">exit_to_app</mat-icon>
+                <mat-icon (click)="addRbPlayer(i)" matTooltip="Add Player" matTooltipPosition="before">exit_to_app
+                </mat-icon>
             </ng-template>
         </base-table>
     </mat-tab>
     <mat-tab label="Wide Receiver">
+        <ng-template matTabLabel>
+            <span [matBadge]="numWr" matBadgeOverlap="false">WR</span>
+        </ng-template>
         <base-table [columnObjects]="REC_COL_OBJ" [colDisplay]="REC_DISPLAY"
             [dataArray]="this.lastSeasonPlayers.wideReceivers">
             <ng-template #buttonTemplate let-i=index>
-                <mat-icon (click)="addWrPlayer(i)">exit_to_app</mat-icon>
+                <mat-icon (click)="addWrPlayer(i)" matTooltip="Add Player" matTooltipPosition="before">exit_to_app
+                </mat-icon>
             </ng-template>
         </base-table>
     </mat-tab>
     <mat-tab label="Tight End">
+        <ng-template matTabLabel>
+            <span [matBadge]="numTe" matBadgeOverlap="false">TE</span>
+        </ng-template>
         <base-table [columnObjects]="REC_COL_OBJ" [colDisplay]="REC_DISPLAY"
             [dataArray]="this.lastSeasonPlayers.tightEnds">
             <ng-template #buttonTemplate let-i=index>
-                <mat-icon (click)="addTePlayer(i)">exit_to_app</mat-icon>
+                <mat-icon (click)="addTePlayer(i)" matTooltip="Add Player" matTooltipPosition="before">exit_to_app
+                </mat-icon>
             </ng-template>
         </base-table>
     </mat-tab>
     <mat-tab label="Defense">
+        <ng-template matTabLabel>
+            <span [matBadge]="numDef" matBadgeOverlap="false">DEF</span>
+        </ng-template>
         <base-table [columnObjects]="DEF_COL_OBJ" [colDisplay]="DEF_DISPLAY"
             [dataArray]="this.lastSeasonPlayers.defenses">
             <ng-template #buttonTemplate let-i=index>
-                <mat-icon (click)="addDefPlayer(i)">exit_to_app</mat-icon>
+                <mat-icon (click)="addDefPlayer(i)" matTooltip="Add Player" matTooltipPosition="before">exit_to_app
+                </mat-icon>
             </ng-template>
         </base-table>
     </mat-tab>
     <mat-tab label="Kicker">
+        <ng-template matTabLabel>
+            <span [matBadge]="numKicker" matBadgeOverlap="false">K</span>
+        </ng-template>
         <base-table [columnObjects]="K_COL_OBJ" [colDisplay]="K_DISPLAY" [dataArray]="this.lastSeasonPlayers.kickers">
             <ng-template #buttonTemplate let-i=index>
-                <mat-icon (click)="addKPlayer(i)">exit_to_app</mat-icon>
+                <mat-icon (click)="addKPlayer(i)" matTooltip="Add Player" matTooltipPosition="before">exit_to_app
+                </mat-icon>
             </ng-template>
         </base-table>
     </mat-tab>

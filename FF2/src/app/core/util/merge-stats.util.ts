@@ -18,7 +18,6 @@ export const MERGE_PLAYER_STATS = (statArr: any[], auctionArr: ApiPlayer[]): any
 export const REMOVE_EXTRA_PLAYERS = (statArr: any[]): any[] => {
   while (statArr.find(statPlayer => statPlayer.MinPrice === undefined)) {
     const deleteIndex = statArr.findIndex(statPlayer => statPlayer.MinPrice === undefined);
-    console.log('deleteIndex', deleteIndex, statArr[deleteIndex].MinPrice);
     statArr.splice(deleteIndex, 1);
   }
   return statArr;

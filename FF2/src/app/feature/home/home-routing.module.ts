@@ -17,7 +17,7 @@ const routes: Routes = [
     loadChildren: () => import('../create-league/create-league.module').then(mod => mod.CreateLeagueModule),
   },
   {
-    path: 'join-auction',
+    path: 'join-league',
     loadChildren: () => import('../join-league/join-league.module').then(mod => mod.JoinAuctionModule),
   },
   {

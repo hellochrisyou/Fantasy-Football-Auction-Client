@@ -4,7 +4,6 @@
 
 @include home();
 @include button();
-
 button.mat-fab {
   background-color: $control-color;
 }
@@ -12,4 +11,8 @@ button.mat-fab {
 section {
   min-height: auto;
   min-width: auto;
+}
+
+button.oval {
+  margin-top: 2rem;
 }

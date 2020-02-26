@@ -1,6 +1,13 @@
 @import "_home";
+@import "_button";
+
 @include home();
+@include button();
 
 mat-label.mat-label-color {
   color: black;
+}
+
+div.portfoliocard {
+  background-color: #fafafa;
 }

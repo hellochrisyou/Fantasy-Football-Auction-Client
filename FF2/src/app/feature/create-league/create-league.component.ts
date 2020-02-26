@@ -77,7 +77,7 @@ export class CreateLeagueComponent extends CreateBaseForm {
     }
   }
 
-  public togglePPR() {
+  public togglePpr() {
     if (this.formGroup.get('pprCtrl').value === true) {
       this.ppr = 'Non-PPR';
     } else {

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { AuctionSortService } from 'src/app/core/service/auction-sort.service';
@@ -27,7 +27,14 @@ import { DEF, Kicker, LastSeasonPlayers, QB, RB, TE, Team, User, WR } from 'src/
   templateUrl: './live-auction.component.html',
   styleUrls: ['./live-auction.component.scss']
 })
-export class LiveAuctionComponent implements OnInit, OnDestroy {
+export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  numQb: number;
+  numRb: number;
+  numWr: number;
+  numTe: number;
+  numDef: number;
+  numKicker: number;
 
   lastSeasonPlayers: LastSeasonPlayers = {
     quaterBacks: [],
@@ -72,22 +79,7 @@ export class LiveAuctionComponent implements OnInit, OnDestroy {
     private emitService: EmitService,
     private auth: AuthService,
     private db: AngularFirestore
-  ) { }
-
-  ngOnDestroy(): void {
-    this.emitService.mergeQbOutput.unsubscribe();
-    this.emitService.mergeRbOutput.unsubscribe();
-    this.emitService.mergeWrOutput.unsubscribe();
-    this.emitService.mergeTeOutput.unsubscribe();
-    this.emitService.mergeDefOutput.unsubscribe();
-    this.emitService.mergeKickerOutput.unsubscribe();
-  }
-
-  ngOnInit(): void {
-    console.log(REC_COL_OBJ);
-    console.log(REC_DISPLAY);
-
-    // Subscribed to Auction Values
+  ) {
     this.route.data.subscribe((data: { auctionValues: any }) => {
       this.lastSeasonPlayers = this.auctionSortService.sortAuctionPlayers(data.auctionValues);
     },
@@ -104,77 +96,91 @@ export class LiveAuctionComponent implements OnInit, OnDestroy {
       }
       const tmpQbArray = MERGE_PLAYER_STATS(qbArray, this.lastSeasonPlayers.quaterBacks);
       this.lastSeasonPlayers.quaterBacks = REMOVE_EXTRA_PLAYERS(tmpQbArray);
-      this.emitService.refreshTable();
+      this.numQb = this.lastSeasonPlayers.quaterBacks.length;
     },
       err => {
         console.log('error in resolve service: ', err);
       },
       () => {
-        this.emitService.refreshTable();
       });
 
     this.emitService.mergeRbOutput.subscribe(rbArray => {
       const tmpRbArray = MERGE_PLAYER_STATS(rbArray, this.lastSeasonPlayers.runningsBacks);
       this.lastSeasonPlayers.runningsBacks = REMOVE_EXTRA_PLAYERS(tmpRbArray);
-      this.emitService.refreshTable();
+      this.numRb = this.lastSeasonPlayers.runningsBacks.length;
 
     },
       err => {
         console.log('error in resolve service: ', err);
       },
       () => {
-        this.emitService.refreshTable();
       });
 
     this.emitService.mergeWrOutput.subscribe(wrArray => {
       const tmpWrArray = MERGE_PLAYER_STATS(wrArray, this.lastSeasonPlayers.wideReceivers);
       this.lastSeasonPlayers.wideReceivers = REMOVE_EXTRA_PLAYERS(tmpWrArray);
+      this.numWr = this.lastSeasonPlayers.wideReceivers.length;
       this.emitService.refreshTable();
     },
       err => {
         console.log('error in resolve service: ', err);
       },
       () => {
-        this.emitService.refreshTable();
       });
 
     this.emitService.mergeTeOutput.subscribe(teArray => {
       const tmpTeArray = MERGE_PLAYER_STATS(teArray, this.lastSeasonPlayers.tightEnds);
       this.lastSeasonPlayers.tightEnds = REMOVE_EXTRA_PLAYERS(tmpTeArray);
-      this.emitService.refreshTable();
+      this.numTe = this.lastSeasonPlayers.tightEnds.length;
     },
       err => {
         console.log('error in resolve service: ', err);
       },
       () => {
-        this.emitService.refreshTable();
       });
 
     this.emitService.mergeDefOutput.subscribe(defArray => {
       const tmpDefArray = MERGE_PLAYER_STATS(defArray, this.lastSeasonPlayers.defenses);
       this.lastSeasonPlayers.defenses = REMOVE_EXTRA_PLAYERS(tmpDefArray);
-      this.emitService.refreshTable();
+      this.numDef = this.lastSeasonPlayers.defenses.length;
     },
       err => {
         console.log('error in resolve service: ', err);
       },
       () => {
-        this.emitService.refreshTable();
       });
 
     this.emitService.mergeKickerOutput.subscribe(kArray => {
       const tmpKArray = MERGE_PLAYER_STATS(kArray, this.lastSeasonPlayers.kickers);
       this.lastSeasonPlayers.kickers = REMOVE_EXTRA_PLAYERS(tmpKArray);
-      this.emitService.refreshTable();
+      this.numKicker = this.lastSeasonPlayers.kickers.length;
     },
       err => {
         console.log('error in resolve service: ', err);
       },
       () => {
-        this.emitService.refreshTable();
       });
 
 
+  }
+
+  ngOnDestroy(): void {
+    this.emitService.mergeQbOutput.unsubscribe();
+    this.emitService.mergeRbOutput.unsubscribe();
+    this.emitService.mergeWrOutput.unsubscribe();
+    this.emitService.mergeTeOutput.unsubscribe();
+    this.emitService.mergeDefOutput.unsubscribe();
+    this.emitService.mergeKickerOutput.unsubscribe();
+  }
+
+  ngOnInit(): void {
+    console.log(REC_COL_OBJ);
+    console.log(REC_DISPLAY);
+    this.emitService.refreshTable();
+  }
+
+  ngAfterViewInit(): void {
+    this.emitService.refreshTable();
   }
 
   public addQbPlayer(index: number): void {

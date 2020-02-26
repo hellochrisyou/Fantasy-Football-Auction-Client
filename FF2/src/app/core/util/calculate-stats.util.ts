@@ -8,7 +8,6 @@ export const CALCULATE_QB_POINTS = (qb: QB): number => {
         qb.RushYD / 10 +
         qb.RushTD * 6 -
         qb.Fumble * 2;
-    console.log('fantasy points', qb, fantasyPoints);
     return Number.parseFloat(parseInt(fantasyPoints.toString(), 10).toFixed(2));
 };
 

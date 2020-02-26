@@ -1,11 +1,11 @@
 <div class="portfoliocard">
     <div class="coverphoto"></div>
-    <img [src]="imgUrl" id="profile_picture">
+    <img [src]="imgUrl" id="profile_picture" class="mat-elevation-z4">
     <form [formGroup]="formGroup">
 
         <div class="left_col">
             <div id="left-flex" fxLayout="column" fxLayoutAlign="space-around center">
-                <button mat-fab color="primary" class="button-home mat-elevation-z7"
+                <button mat-fab color="primary" class="button-home mat-elevation-z4"
                     (click)="preview()">Preview</button>
                 <mat-form-field id="photoURL" class="signup-form">
                     <mat-label class="white-color">Photo URL</mat-label>
@@ -82,7 +82,8 @@
                         Password is <strong>REQUIRED</strong>
                     </mat-error>
                 </mat-form-field>
-                <button mat-button id="signup-button" class="mat-elevation-z4" type="submit" (click)="signup()">Sign
+                <button mat-button id="signup-button" class="mat-elevation-z4 oval" type="submit"
+                    (click)="signup()">Sign
                     Up</button>
             </div>
         </div>
