@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AuctionSortService } from './auction-sort.service';
+import { EmitService } from '../service/emit.service';
 
-describe('AuctionSortService', () => {
-  let service: AuctionSortService;
+describe('EmitService', () => {
+  let service: EmitService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AuctionSortService);
+    service = TestBed.inject(EmitService);
   });
 
   it('should be created', () => {

@@ -65,7 +65,7 @@ export class ProfileEditComponent extends CreateBaseForm {
     } else {
       console.log(value);
       this.user.displayName = this.formGroup.get('displayNameCtrl').value;
-      this.user.photoUrl = this.formGroup.get('photoCtrl').value;
+      this.user.photoURL = this.formGroup.get('photoCtrl').value;
       this.changeDetectorRefs.detectChanges();
       this.auth.updateUserData(this.user);
       this.snackBar.open('Profile Update', 'SUCCESS', {});

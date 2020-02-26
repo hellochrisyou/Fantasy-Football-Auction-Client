@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HighlightCardComponent } from './highlight-card.component';
+import { HighlightCardComponent } from '../component/highlight-card/highlight-card.component';
 
 describe('HighlightCardComponent', () => {
   let component: HighlightCardComponent;
@@ -8,9 +8,9 @@ describe('HighlightCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HighlightCardComponent ]
+      declarations: [HighlightCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

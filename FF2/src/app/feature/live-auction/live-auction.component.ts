@@ -5,8 +5,8 @@ import { AuctionSortService } from 'src/app/core/service/auction-sort.service';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { EmitService } from 'src/app/core/service/emit.service';
 import { LastSeasonStatService } from 'src/app/core/service/last-season-stat.service';
-import { MERGE_PLAYER_STATS } from 'src/app/core/util/merge-stats.util';
-import { REMOVE_EXTRA_PLAYERS } from 'src/app/core/util/remove-player.util';
+import { MERGE_PLAYER_STATS, REMOVE_EXTRA_PLAYERS } from 'src/app/core/util/merge-stats.util';
+
 import {
   DEF_COL_OBJ,
   DEF_DISPLAY,
@@ -90,22 +90,20 @@ export class LiveAuctionComponent implements OnInit, OnDestroy {
     // Subscribed to Auction Values
     this.route.data.subscribe((data: { auctionValues: any }) => {
       this.lastSeasonPlayers = this.auctionSortService.sortAuctionPlayers(data.auctionValues);
-      console.log(this.lastSeasonPlayers);
     },
       err => {
         console.log('error in resolve service: ', err);
       },
       () => {
         this.emitService.refreshTable();
-        console.log(this.lastSeasonPlayers);
       });
 
     this.emitService.mergeQbOutput.subscribe(qbArray => {
-      console.log('quaterback1', this.lastSeasonPlayers.quaterBacks);
-      this.lastSeasonPlayers.quaterBacks = MERGE_PLAYER_STATS(qbArray, this.lastSeasonPlayers.quaterBacks);
-      console.log('quaterback2', this.lastSeasonPlayers.quaterBacks);
-      this.lastSeasonPlayers.quaterBacks = REMOVE_EXTRA_PLAYERS(this.lastSeasonPlayers.quaterBacks);
-      console.log('quaterback3', this.lastSeasonPlayers.quaterBacks);
+      if (qbArray.length === 0) {
+        this.emitService.refreshTable();
+      }
+      const tmpQbArray = MERGE_PLAYER_STATS(qbArray, this.lastSeasonPlayers.quaterBacks);
+      this.lastSeasonPlayers.quaterBacks = REMOVE_EXTRA_PLAYERS(tmpQbArray);
       this.emitService.refreshTable();
     },
       err => {
@@ -116,8 +114,8 @@ export class LiveAuctionComponent implements OnInit, OnDestroy {
       });
 
     this.emitService.mergeRbOutput.subscribe(rbArray => {
-      this.lastSeasonPlayers.runningsBacks = MERGE_PLAYER_STATS(rbArray, this.lastSeasonPlayers.runningsBacks);
-      this.lastSeasonPlayers.runningsBacks = REMOVE_EXTRA_PLAYERS(this.lastSeasonPlayers.runningsBacks);
+      const tmpRbArray = MERGE_PLAYER_STATS(rbArray, this.lastSeasonPlayers.runningsBacks);
+      this.lastSeasonPlayers.runningsBacks = REMOVE_EXTRA_PLAYERS(tmpRbArray);
       this.emitService.refreshTable();
 
     },
@@ -129,11 +127,9 @@ export class LiveAuctionComponent implements OnInit, OnDestroy {
       });
 
     this.emitService.mergeWrOutput.subscribe(wrArray => {
-      this.lastSeasonPlayers.wideReceivers = MERGE_PLAYER_STATS(wrArray, this.lastSeasonPlayers.wideReceivers);
-      this.lastSeasonPlayers.wideReceivers = REMOVE_EXTRA_PLAYERS(this.lastSeasonPlayers.wideReceivers);
+      const tmpWrArray = MERGE_PLAYER_STATS(wrArray, this.lastSeasonPlayers.wideReceivers);
+      this.lastSeasonPlayers.wideReceivers = REMOVE_EXTRA_PLAYERS(tmpWrArray);
       this.emitService.refreshTable();
-      console.log('wr this', this.lastSeasonPlayers.wideReceivers);
-      // console.log('te this', this.lastSeasonPlayers.tightEnds);
     },
       err => {
         console.log('error in resolve service: ', err);
@@ -143,8 +139,8 @@ export class LiveAuctionComponent implements OnInit, OnDestroy {
       });
 
     this.emitService.mergeTeOutput.subscribe(teArray => {
-      this.lastSeasonPlayers.tightEnds = MERGE_PLAYER_STATS(teArray, this.lastSeasonPlayers.tightEnds);
-      this.lastSeasonPlayers.tightEnds = REMOVE_EXTRA_PLAYERS(this.lastSeasonPlayers.tightEnds);
+      const tmpTeArray = MERGE_PLAYER_STATS(teArray, this.lastSeasonPlayers.tightEnds);
+      this.lastSeasonPlayers.tightEnds = REMOVE_EXTRA_PLAYERS(tmpTeArray);
       this.emitService.refreshTable();
     },
       err => {
@@ -155,8 +151,8 @@ export class LiveAuctionComponent implements OnInit, OnDestroy {
       });
 
     this.emitService.mergeDefOutput.subscribe(defArray => {
-      this.lastSeasonPlayers.defenses = MERGE_PLAYER_STATS(defArray, this.lastSeasonPlayers.defenses);
-      this.lastSeasonPlayers.defenses = REMOVE_EXTRA_PLAYERS(this.lastSeasonPlayers.defenses);
+      const tmpDefArray = MERGE_PLAYER_STATS(defArray, this.lastSeasonPlayers.defenses);
+      this.lastSeasonPlayers.defenses = REMOVE_EXTRA_PLAYERS(tmpDefArray);
       this.emitService.refreshTable();
     },
       err => {
@@ -167,7 +163,8 @@ export class LiveAuctionComponent implements OnInit, OnDestroy {
       });
 
     this.emitService.mergeKickerOutput.subscribe(kArray => {
-      this.lastSeasonPlayers.kickers = REMOVE_EXTRA_PLAYERS(this.lastSeasonPlayers.kickers);
+      const tmpKArray = MERGE_PLAYER_STATS(kArray, this.lastSeasonPlayers.kickers);
+      this.lastSeasonPlayers.kickers = REMOVE_EXTRA_PLAYERS(tmpKArray);
       this.emitService.refreshTable();
     },
       err => {

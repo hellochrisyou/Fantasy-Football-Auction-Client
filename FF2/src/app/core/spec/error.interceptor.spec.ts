@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpRequest } from '@angular/common/http';
 import { HttpHandler } from '@angular/common/http';
-import { ErrorInterceptor } from './error.interceptor';
+import { ErrorInterceptor } from '../interceptor/error.interceptor';
 describe('ErrorInterceptor', () => {
   let service: ErrorInterceptor;
   beforeEach(() => {

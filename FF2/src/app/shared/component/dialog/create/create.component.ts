@@ -4,7 +4,8 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { HttpService } from 'src/app/core/service/http.service';
 import { CreateBaseForm } from 'src/app/shared/base/base-form';
 import { APIURL } from 'src/app/shared/const/url.const';
-import { BaseLeague, Team, AuctionLeague, SnakeLeague } from 'src/app/shared/interface/model.interface';
+import { CreateAuctionDto, CreateSnakeDto } from 'src/app/shared/interface/dto.interface';
+import { AuctionLeague, Team, SnakeLeague } from 'src/app/shared/interface/model.interface';
 
 @Component({
   selector: 'app-create',
@@ -13,7 +14,8 @@ import { BaseLeague, Team, AuctionLeague, SnakeLeague } from 'src/app/shared/int
 })
 export class CreateComponent extends CreateBaseForm implements OnInit, AfterViewInit {
 
-  thisDto: CreateDto;
+  auctionDto: CreateAuctionDto;
+  snakeDto: CreateSnakeDto;
   thisTeam: Team;
   leagueName: string;
   constructor(
@@ -40,8 +42,8 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
   }
 
   ngAfterViewInit(): void {
-    this.leagueName = this.data.leagueName;
-    console.log('dialog', this.data.leagueName);
+    this.leagueName = this.data.LeagueName;
+    console.log('dialog', this.data.LeagueName);
     this.changeDetectorRefs.detectChanges();
   }
 
@@ -56,27 +58,42 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
       if (nameExists === true) {
         this.snackBar.open('Name already exists', 'FAIL', {});
       } else {
-        this.thisDto = {
-          leagueName: this.data.LeagueName,
-          teamName: this.formGroup.get('teamNameCtrl').value
-        };
-        this.thisTeam = {
-          LeagueName: this.data.LeagueName,
-          Name: this.formGroup.get('teamNameCtrl').value,
-          // Need to set league type here
-          PPR:  this.data.PPR        
-        }
-
+        this.data.teams.push(this.thisTeam);
         if (this.data.teams === null) {
           this.data.teams = [];
         }
-
-        this.data.teams.push(this.thisTeam);
-        this.httpService.post(APIURL.BACKENDCALL + '/team/createTeam/', this.data).subscribe((data) => {
-          console.log('create team data:', data);
-        });
+        // Create Auction Team
+        if (this.data.LeagueType === 'Auction') {
+          this.auctionDto = {
+            LeagueName: this.data.LeagueName,
+            TeamName: this.formGroup.get('teamNameCtrl').value,
+            // Figure out how to explicitly assign dynamic value for total budget
+            // TotalBudget: this.data.TotalBudget,
+            PPR: this.data.PPR,
+            MaxPlayers: this.data.MaxPlayers,
+          };
+          this.httpService.post(APIURL.AUCTIONCALL + '/team/createTeam/', this.auctionDto).subscribe((data) => {
+            console.log('create team data:', data);
+          });
+        } else {
+          // Create Snake Team
+          this.snakeDto = {
+            LeagueName: this.data.LeagueName,
+            TeamName: this.formGroup.get('teamNameCtrl').value,
+            PPR: this.data.PPR,
+            MaxPlayers: this.data.MaxPlayers,
+          };
+          this.httpService.post(APIURL.SNAKECALL + '/team/createTeam/', this.snakeDto).subscribe((data) => {
+          });
+        }
+        this.thisTeam = {
+          LeagueName: this.data.LeagueName,
+          Name: this.formGroup.get('teamNameCtrl').value,
+          LeagueType: this.data.LeagueType,
+          PPR: this.data.PPR
+        };
+        this.snackBar.open('You have joined: ' + `${this.formGroup.get('teamNameCtrl').value}`, 'SUCCESS', {});
       }
-      this.snackBar.open('You have joined: ' + `${this.formGroup.get('teamNameCtrl').value}`, 'SUCCESS', {});
     });
   }
 }

@@ -1,7 +1,7 @@
 import { ColumnObject } from '../interface/interface';
 
 export const QB_COL_OBJ: ColumnObject[] = [
-    { columnId: 'Select', propertyName: 'Select' },
+    { columnId: 'Select', propertyName: '' },
     { columnId: 'Name', propertyName: 'Name' },
     { columnId: 'Team', propertyName: 'Team' },
     { columnId: 'MinPrice', propertyName: 'MinPrice' },
@@ -18,7 +18,7 @@ export const QB_COL_OBJ: ColumnObject[] = [
 ];
 
 export const RB_COL_OBJ: ColumnObject[] = [
-    { columnId: 'Select', propertyName: 'Select' },
+    { columnId: 'Select', propertyName: '' },
     { columnId: 'Name', propertyName: 'Name' },
     { columnId: 'Team', propertyName: 'Team' },
     { columnId: 'MinPrice', propertyName: 'MinPrice' },
@@ -34,12 +34,12 @@ export const RB_COL_OBJ: ColumnObject[] = [
 ];
 
 export const REC_COL_OBJ: ColumnObject[] = [
-    { columnId: 'Select', propertyName: 'Select' },
+    { columnId: 'Select', propertyName: '' },
     { columnId: 'Name', propertyName: 'Name' },
     { columnId: 'Team', propertyName: 'Team' },
-    { columnId: 'minPrice', propertyName: 'minPrice' },
-    { columnId: 'maxPrice', propertyName: 'maxPrice' },
-    { columnId: 'avgPrice', propertyName: 'avgPrice' },
+    { columnId: 'MinPrice', propertyName: 'MinPrice' },
+    { columnId: 'MaxPrice', propertyName: 'MaxPrice' },
+    { columnId: 'AvgPrice', propertyName: 'AvgPrice' },
     { columnId: 'Rec', propertyName: 'Rec' },
     { columnId: 'RecYD', propertyName: 'RecYD' },
     { columnId: 'RecTD', propertyName: 'RecTD' },
@@ -47,7 +47,7 @@ export const REC_COL_OBJ: ColumnObject[] = [
 ];
 
 export const DEF_COL_OBJ: ColumnObject[] = [
-    { columnId: 'Select', propertyName: 'Select' },
+    { columnId: 'Select', propertyName: '' },
     { columnId: 'Name', propertyName: 'Name' },
     { columnId: 'Team', propertyName: 'Team' },
     { columnId: 'MinPrice', propertyName: 'MinPrice' },
@@ -63,7 +63,7 @@ export const DEF_COL_OBJ: ColumnObject[] = [
 ]
 
 export const K_COL_OBJ: ColumnObject[] = [
-    { columnId: 'Select', propertyName: 'Select' },
+    { columnId: 'Select', propertyName: '' },
     { columnId: 'Name', propertyName: 'Name' },
     { columnId: 'Team', propertyName: 'Team' },
     { columnId: 'MinPrice', propertyName: 'MinPrice' },
@@ -80,10 +80,10 @@ export const K_COL_OBJ: ColumnObject[] = [
 
 
 export const TEAM_COL_OBJ: ColumnObject[] = [
-    { columnId: 'View_Players', propertyName: 'View_Players' },
+    { columnId: 'ViewPlayers', propertyName: '' },
     { columnId: 'Name', propertyName: 'Name' },
-    { columnId: 'Draft_Position', propertyName: 'Draft_Position' },
-    { columnId: 'Current_Budget', propertyName: 'Current_Budget' },
+    { columnId: 'DraftPosition', propertyName: 'DraftPosition' },
+    { columnId: 'CurrentBudget', propertyName: 'CurrentBudget' },
 ];
 
 export const PLAYER_COL_OBJ: ColumnObject[] = [
@@ -95,9 +95,18 @@ export const PLAYER_COL_OBJ: ColumnObject[] = [
     { columnId: 'Points', propertyName: 'Points' },
 ];
 
-export const LEAGUE_COL_OBJ: ColumnObject[] = [
-    { columnId: 'Select', propertyName: 'Select' },
-    { columnId: 'Name', propertyName: 'name' },
+export const SNAKE_COL_OBJ: ColumnObject[] = [
+    { columnId: 'Select', propertyName: '' },
+    { columnId: 'Name', propertyName: 'Name' },
+    { columnId: 'TeamCount', propertyName: 'TeamCount' },
+    { columnId: 'MaxPlayers', propertyName: 'MaxPlayers' },
+    { columnId: 'PPR', propertyName: 'PPR' },
+    // { columnId: 'Type', propertyName: 'Type' },
+];
+
+export const AUCTION_COL_OBJ: ColumnObject[] = [
+    { columnId: 'Select', propertyName: '' },
+    { columnId: 'Name', propertyName: 'Name' },
     { columnId: 'TeamCount', propertyName: 'TeamCount' },
     { columnId: 'TotalBudget', propertyName: 'TotalBudget' },
     { columnId: 'MaxPlayers', propertyName: 'MaxPlayers' },
@@ -128,8 +137,12 @@ export const K_DISPLAY = [
     'Select', 'Name', 'Team', 'MinPrice', 'MaxPrice', 'AvgPrice', 'Fg0To19', 'Fg20To29', 'Fg30To39', 'Fg40To49', 'Fg50Plus', 'PAT', 'Points'
 ];
 
-export const LEAGUE_DISPLAY = [
-    'Select', 'Name', 'TeamCount', 'TotalBudget', 'MaxPlayers', 'ppr'
+export const SNAKE_DISPLAY = [
+    'Select', 'Name', 'TeamCount', 'MaxPlayers', 'PPR'
+];
+
+export const AUCTION_DISPLAY = [
+    'Select', 'Name', 'TeamCount', 'TotalBudget', 'MaxPlayers', 'PPR'
 ];
 
 export const TEAM_DISPLAY = [

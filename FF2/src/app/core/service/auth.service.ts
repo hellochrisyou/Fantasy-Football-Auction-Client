@@ -37,8 +37,6 @@ export class AuthService {
     this._authState = value;
   }
 
-
-
   constructor(
     public router: Router,
     public ngZone: NgZone,
@@ -71,16 +69,15 @@ export class AuthService {
   }
 
   /* Sign up */
-  public signupEmail(email: string, password: string) {
+  public signupEmail(email: string, password: string, displayName: string, photoURL: string) {
     this.afAuth
       .auth
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
         this.snackBar.open('Registration', 'SUCCESS', {
         });
-        this.checkUserExists(email);
+        this.checkUserExists(email, displayName, photoURL);
         this.router.navigateByUrl('my-team');
-        window.location.reload();
       })
       .catch(error => {
         this.signupErrorPopup(error.message);
@@ -98,7 +95,7 @@ export class AuthService {
   public signinGoogle() {
     console.log('hello');
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((credential) => {
-      this.checkUserExists(credential.user.email);
+      this.checkUserExists(credential.user.email, credential.user.displayName, credential.user.email);
       this.router.navigate(['home/profile']);
     });
     // return this.OAuthProvider(new this.authState.GoogleAuthProvider())
@@ -118,7 +115,7 @@ export class AuthService {
       .auth
       .signInWithEmailAndPassword(email, password)
       .then(credential => {
-        this.checkUserExists(email);
+        this.checkUserExists(credential.user.email, credential.user.displayName, credential.user.email);
         this.router.navigateByUrl('home/profile');
         window.location.reload();
       })
@@ -146,7 +143,7 @@ export class AuthService {
       uId: user.uId,
       email: user.email,
       displayName: user.displayName,
-      photoUrl: user.photoUrl
+      photoURL: user.photoURL
     };
     return userRef.set(data, { merge: true });
   }
@@ -161,27 +158,29 @@ export class AuthService {
           displayName: this.authState.displayName,
           email: this.authState.email,
           phoneNumber: this.authState.phoneNumber,
-          photoUrl: this.authState.photoUrl,
+          photoURL: this.authState.photoURL,
           country: this.authState.country
         }
       ]
     };
   }
-  public checkUserExists(email: string): void {
+  public checkUserExists(argEmail: string, argDisplayName: string, argPhotoUrl: string): void {
     console.log('begin, check user exists');
 
-    this.httpService.post(APIURL.BACKENDCALL + '/user/existsByEmail/', email).subscribe((data) => {
-      if (data !== true) {
-        this.newUser = {
-          uId: this.authState.uId,
-          displayName: this.authState.displayName,
-          email: this.authState.email,
-          photoUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg'
-        };
-        this.httpService.post(APIURL.BACKENDCALL + '/user/createUser', this.newUser).subscribe(x => {
-          console.log('create data returned: ', x);
-        });
-      }
+    this.httpService.post(APIURL.BACKENDCALL + '/user/existsByEmail/', argEmail).subscribe((data) => {
+      console.log('existsbyemail1', data);
+      // if (data !== true) {
+      this.newUser = {
+        uId: '',
+        displayName: argDisplayName,
+        email: argEmail,
+        photoURL: argPhotoUrl
+      };
+      console.log('existsby email', data);
+      this.httpService.post(APIURL.BACKENDCALL + '/user/createUser', this.newUser).subscribe(x => {
+        console.log('create data returned: ', x);
+      });
+      // }
     });
   }
 }

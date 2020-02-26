@@ -1,0 +1,6 @@
+<h1 class="text-center"><u>JOIN SNAKE DRAFT</u></h1>
+<base-table [columnObjects]="SNAKE_COL_OBJ" [colDisplay]="SNAKE_DISPLAY" [dataArray]="this.snakeArr">
+    <ng-template #buttonTemplate let-i=index>
+        <mat-icon (click)="addLeague(i)">add</mat-icon>
+    </ng-template>
+</base-table>

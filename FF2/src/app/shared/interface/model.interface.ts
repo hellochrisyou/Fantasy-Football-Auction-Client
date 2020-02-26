@@ -73,15 +73,13 @@ export interface BaseLeague {
 
 export interface SnakeLeague extends BaseLeague {
     leagueId?: string;
-    DefaultAutoPick?: string;
     DraftTurn?: string;
     DraftRound?: string;
+    DefaultAutoPick?: string;
 }
 
-export interface AuctionLeague extends BaseLeague {
-    leagueId?: string;
-    DraftTurn?: string;
-    DraftRound?: string;
+
+export interface AuctionLeague extends SnakeLeague {
     TotalBudget?: string;
     CurrentBidder?: string;
     CurrentBid?: string;
@@ -92,7 +90,7 @@ export interface User {
     userId?: string;
     displayName?: string;
     email?: string;
-    photoUrl?: string;
+    photoURL?: string;
     teams?: Team[];
 }
 

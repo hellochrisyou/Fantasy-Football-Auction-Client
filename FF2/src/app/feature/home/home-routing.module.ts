@@ -13,12 +13,12 @@ const routes: Routes = [
     loadChildren: () => import('./../my-team/my-team.module').then(mod => mod.MyTeamModule),
   },
   {
-    path: 'create-auction',
-    loadChildren: () => import('./../create-auction/create-auction.module').then(mod => mod.CreateAuctionModule),
+    path: 'create-league',
+    loadChildren: () => import('../create-league/create-league.module').then(mod => mod.CreateLeagueModule),
   },
   {
     path: 'join-auction',
-    loadChildren: () => import('./../join-auction/join-auction.module').then(mod => mod.JoinAuctionModule),
+    loadChildren: () => import('../join-league/join-league.module').then(mod => mod.JoinAuctionModule),
   },
   {
     path: 'live-auction',

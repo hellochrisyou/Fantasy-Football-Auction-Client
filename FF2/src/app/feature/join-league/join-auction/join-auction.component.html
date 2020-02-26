@@ -1,0 +1,6 @@
+<h1 class="text-center"><u>JOIN AUCTION DRAFT</u></h1>
+<base-table [columnObjects]="AUCTION_COL_OBJ" [colDisplay]="AUCTION_DISPLAY" [dataArray]="this.auctionArr">
+    <ng-template #buttonTemplate let-i=index>
+        <mat-icon (click)="addLeague(i)">add</mat-icon>
+    </ng-template>
+</base-table>

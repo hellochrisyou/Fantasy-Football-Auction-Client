@@ -2,8 +2,9 @@ import { TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { Router } from '@angular/router';
 import { RouterStateSnapshot } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
-import { AuthGuard } from './auth.guard';
+
+import { AuthGuard } from '../guard/auth.guard';
+import { AuthService } from '../service/auth.service';
 describe('AuthGuard', () => {
   let service: AuthGuard;
   beforeEach(() => {

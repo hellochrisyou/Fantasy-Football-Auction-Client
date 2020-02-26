@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { AUCTION_COL_OBJ, AUCTION_DISPLAY } from 'src/app/shared/const/column.const';
+import { AuctionLeague } from 'src/app/shared/interface/model.interface';
 import { EmitService } from 'src/app/core/service/emit.service';
 import { HttpService } from 'src/app/core/service/http.service';
-import { CreateComponent } from 'src/app/shared/component/dialog/create/create.component';
-import { LEAGUE_COL_OBJ, LEAGUE_DISPLAY } from 'src/app/shared/const/column.const';
+import { MatDialog } from '@angular/material';
 import { APIURL } from 'src/app/shared/const/url.const';
-import { AuctionLeague } from 'src/app/shared/interface/model.interface';
+import { CreateComponent } from 'src/app/shared/component/dialog/create/create.component';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -15,9 +15,10 @@ import { AuctionLeague } from 'src/app/shared/interface/model.interface';
 })
 export class JoinAuctionComponent implements OnInit {
 
-  LEAGUE_COL_OBJ = LEAGUE_COL_OBJ;
-  LEAGUE_DISPLAY = LEAGUE_DISPLAY;
-  leagueArr: AuctionLeague[] = [];
+  AUCTION_COL_OBJ = AUCTION_COL_OBJ;
+  AUCTION_DISPLAY = AUCTION_DISPLAY;
+  auctionArr: AuctionLeague[] = [];
+
   constructor(
     private emitService: EmitService,
     private httpService: HttpService,
@@ -25,9 +26,9 @@ export class JoinAuctionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.httpService.get(APIURL.LEAGUECALL + '/getAllLeagues/').subscribe((data) => {
-      console.log('data here', data);
-      this.leagueArr = data;
+    this.httpService.get(APIURL.AUCTIONCALL + '/getAllLeagues/').subscribe((leagueData) => {
+      console.log('auction data: ', leagueData);
+      this.auctionArr = leagueData;
       this.emitService.refreshTable();
     });
   }
@@ -37,10 +38,16 @@ export class JoinAuctionComponent implements OnInit {
   }
 
   private openDialog(index: number): void {
-    console.log(this.leagueArr[index]);
+    console.log(this.auctionArr[index]);
     const dialogRef = this.dialog.open(CreateComponent, {
       // width: '250px',
-      data: this.leagueArr[index]
+      data: {
+        LeagueName: this.auctionArr[index].LeagueName,
+        MaxPlayers: this.auctionArr[index].MaxPlayers,
+        LeagueType: 'Auction',
+        PPR: this.auctionArr[index].PPR,
+        TotalBudget: this.auctionArr[index].TotalBudget,
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {

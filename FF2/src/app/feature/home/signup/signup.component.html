@@ -7,14 +7,16 @@
             <div id="left-flex" fxLayout="column" fxLayoutAlign="space-around center">
                 <button mat-fab color="primary" class="button-home mat-elevation-z7"
                     (click)="preview()">Preview</button>
-                <mat-form-field id="photoUrl" class="signup-form">
+                <mat-form-field id="photoURL" class="signup-form">
                     <mat-label class="white-color">Photo URL</mat-label>
                     <br>
-                    <input matInput formControlName="photoCtrl" type="url" placeholder="http"
+                    <input matInput formControlName="photoCtrl" type="url"
+                        placeholder=" https://material.angular.io/assets/img/examples/shiba2.jpg"
                         [errorStateMatcher]="matcher">
-                    <mat-hint color="white">Start with http:// or https://</mat-hint>
+                    <mat-hint>Default: https://material.angular.io/assets/img/examples/shiba2.jpg
+                    </mat-hint>
                     <mat-error *ngIf="formGroup.controls.photoCtrl.hasError('required')">
-                        photoUrl is <strong>Required</strong>
+                        photoURL is <strong>Required</strong>
                     </mat-error>
                     <mat-error *ngIf="formGroup.controls.photoCtrl.hasError('pattern')">
                         Invalid <Strong>URL</Strong>

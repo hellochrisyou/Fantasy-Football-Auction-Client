@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CreateAuctionComponent } from './create-auction.component';
+import { AuthGuard } from 'src/app/core/guard/auth.guard';
+
+import { JoinLeagueComponent } from './join-league.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: CreateAuctionComponent,
+    component: JoinLeagueComponent,
+    canActivate: [AuthGuard]
   },
 ];
 
@@ -14,4 +17,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CreateAuctionRoutingModule { }
+export class JoinLeagueRoutingModule { }

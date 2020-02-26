@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpHandler } from '@angular/common/http';
 import { HttpRequest } from '@angular/common/http';
-import { LoggingInterceptor } from './logging.interceptor';
+import { LoggingInterceptor } from '../interceptor/logging.interceptor';
 describe('LoggingInterceptor', () => {
   let service: LoggingInterceptor;
   beforeEach(() => {

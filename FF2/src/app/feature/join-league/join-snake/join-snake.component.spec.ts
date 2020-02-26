@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateAuctionComponent } from './create-auction.component';
+import { JoinSnakeComponent } from './join-snake.component';
 
-describe('CreateAuctionComponent', () => {
-  let component: CreateAuctionComponent;
-  let fixture: ComponentFixture<CreateAuctionComponent>;
+describe('JoinSnakeComponent', () => {
+  let component: JoinSnakeComponent;
+  let fixture: ComponentFixture<JoinSnakeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateAuctionComponent ]
+      declarations: [ JoinSnakeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateAuctionComponent);
+    fixture = TestBed.createComponent(JoinSnakeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

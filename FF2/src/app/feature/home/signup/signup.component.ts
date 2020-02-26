@@ -27,7 +27,11 @@ export class SignupComponent extends CreateBaseForm implements OnInit, OnDestroy
       alert('Please correctly fill all the required fields');
       return false;
     } else {
-      this.auth.signupEmail(this.formGroup.get('signupEmailCtrl').value, this.formGroup.get('signupPassCtrl').value);
+      const email = this.formGroup.get('emailCtrl').value;
+      const password = this.formGroup.get('passwordCtrl').value;
+      const displayName = this.formGroup.get('nameCtrl').value;
+      const photoURL = this.formGroup.get('photoCtrl').value;
+      this.auth.signupEmail(email, password, displayName, photoURL);
     }
   }
   public ngOnInit(): void {
@@ -35,7 +39,6 @@ export class SignupComponent extends CreateBaseForm implements OnInit, OnDestroy
     this.formGroup = this.fb.group({
       nameCtrl: ['', [
         Validators.required,
-        Validators.email,
         Validators.maxLength(25),
       ]],
       photoCtrl: ['', [

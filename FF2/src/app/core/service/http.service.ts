@@ -4,7 +4,8 @@ import { APIURL } from '../../shared/const/url.const';
 import { TOKENS } from '../../shared/const/api-key';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AuctionLeague, SnakeLeague } from 'src/app/shared/interface/model.interface';
+import { AuctionLeague, SnakeLeague, User } from 'src/app/shared/interface/model.interface';
+import { CreateAuctionDto, CreateSnakeDto } from 'src/app/shared/interface/dto.interface';
 
 export const httpOptions = {
   headers: new HttpHeaders({
@@ -33,7 +34,7 @@ export class HttpService {
     );
   }
 
-  public post(url: string, body: AuctionLeague | SnakeLeague | string): Observable<any> {
+  public post(url: string, body: CreateSnakeDto | CreateAuctionDto | User | string): Observable<any> {
     return this.http.post(url, body, httpOptions).pipe(
       catchError(this.handleError)
     );

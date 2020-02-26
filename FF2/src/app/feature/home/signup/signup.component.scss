@@ -3,7 +3,7 @@
 @include home();
 @include button();
 
-#photoUrl {
+#photoURL {
   width: 100%;
 }
 #left-flex {
@@ -30,4 +30,9 @@ div.portfoliocard .right_col {
 
 button.mat-button#signup-button {
   background-color: #1a237e;
+}
+
+mat-hint {
+  max-width: 100%;
+  word-wrap: break-word;
 }
