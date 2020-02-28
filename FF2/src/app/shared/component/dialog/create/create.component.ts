@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { HttpService } from 'src/app/core/service/http.service';
 import { CreateBaseForm } from 'src/app/shared/base/base-form';
 import { APIURL } from 'src/app/shared/const/url.const';
-import { CreateAuctionDto, CreateSnakeDto } from 'src/app/shared/interface/dto.interface';
+import { CreateAuctionDto, CreateSnakeDto, CreateTeamDto } from 'src/app/shared/interface/dto.interface';
 import { AuctionLeague, Team, SnakeLeague } from 'src/app/shared/interface/model.interface';
 
 @Component({
@@ -14,8 +14,8 @@ import { AuctionLeague, Team, SnakeLeague } from 'src/app/shared/interface/model
 })
 export class CreateComponent extends CreateBaseForm implements OnInit, AfterViewInit {
 
-  auctionDto: CreateAuctionDto;
-  snakeDto: CreateSnakeDto;
+  auctionDto: CreateTeamDto;
+  // snakeDto: CreateSnakeDto;
   thisTeam: Team;
   leagueName: string;
   constructor(
@@ -65,26 +65,26 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
         // Create Auction Team
         if (this.data.LeagueType === 'Auction') {
           this.auctionDto = {
-            LeagueName: this.data.LeagueName,
-            TeamName: this.formGroup.get('teamNameCtrl').value,
+            leagueName: this.data.LeagueName,
+            teamName: this.formGroup.get('teamNameCtrl').value,
             // Figure out how to explicitly assign dynamic value for total budget
             // TotalBudget: this.data.TotalBudget,
-            PPR: this.data.PPR,
-            MaxPlayers: this.data.MaxPlayers,
+            pPR: this.data.PPR,
+            maxPlayers: this.data.MaxPlayers,
           };
-          this.httpService.post(APIURL.AUCTIONCALL + '/team/createTeam/', this.auctionDto).subscribe((data) => {
+          this.httpService.post(APIURL.AUCTIONCALL + '/team/creaceTeam/', this.auctionDto).subscribe((data) => {
             console.log('create team data:', data);
           });
         } else {
           // Create Snake Team
-          this.snakeDto = {
-            LeagueName: this.data.LeagueName,
-            TeamName: this.formGroup.get('teamNameCtrl').value,
-            PPR: this.data.PPR,
-            MaxPlayers: this.data.MaxPlayers,
-          };
-          this.httpService.post(APIURL.SNAKECALL + '/team/createTeam/', this.snakeDto).subscribe((data) => {
-          });
+          // this.snakeDto = {
+          //   LeagueName: this.data.LeagueName,
+          //   TeamName: this.formGroup.get('teamNameCtrl').value,
+          //   PPR: this.data.PPR,
+          //   MaxPlayers: this.data.MaxPlayers,
+          // };
+          // this.httpService.post(APIURL.SNAKECALL + '/team/createTeam/', this.snakeDto).subscribe((data) => {
+          // });
         }
         this.thisTeam = {
           LeagueName: this.data.LeagueName,

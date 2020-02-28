@@ -22,7 +22,7 @@ export class CreateLeagueComponent extends CreateBaseForm {
   typeOfDraft = 'Snake';
   ppr = 'PPR';
   thisLeague: AuctionLeague = {};
-  createAuctionDto: CreateAuctionDto;
+  createAuctionDto: CreateAuctionDto = {};
 
   public user: User = {};
 
@@ -86,31 +86,29 @@ export class CreateLeagueComponent extends CreateBaseForm {
   }
 
   public submit(value: any): void {
-
     // tslint:disable-next-line: max-line-length
-    this.httpService.get(APIURL.AUCTIONCALL + '/existsByLeagueName/' + `${this.formGroup.get('leagueNameCtrl').value}`).subscribe((nameExists) => {
-      console.log('data here', nameExists);
-      if (nameExists === true) {
-        this.snackBar.open('Duplicate name exists', 'FAIL', {});
-        this.formGroup.reset();
-      } else {
-        this.createAuctionDto.LeagueName = this.formGroup.get('leagueNameCtrl').value;
-        this.createAuctionDto.TotalBudget = this.formGroup.get('budgetCtrl').value;
-        this.createAuctionDto.MaxPlayers = this.formGroup.get('maxPlayerCtrl').value;
-        this.createAuctionDto.PPR = this.formGroup.get('pprCtrl').value;
-        console.log('thisleague', this.createAuctionDto);
-        // if (this.formGroup.get('typeCtrl').value === true) {
-        //   this.thisLeague.type = 'Snake';
-        // } else {
-        //   this.thisLeague.type = 'Auction';
-        // }
-        this.httpService.post(APIURL.AUCTIONCALL + '/createLeague/', this.createAuctionDto).subscribe(data => {
-          console.log('data:', data);
-          this.snackBar.open('League Created', 'SUCCESS', {});
+    if (this.formGroup.get('typeCtrl').value === false) {
+      // tslint:disable-next-line: max-line-length
+      this.httpService.get(APIURL.AUCTIONCALL + '/existsByLeagueName/' + `${this.formGroup.get('leagueNameCtrl').value}`).subscribe((nameExists) => {
+        if (nameExists === true) {
+          this.snackBar.open('Duplicate name exists', 'FAIL', {});
+          this.formGroup.reset();
+        } else {
+          this.createAuctionDto.leagueName = this.formGroup.get('leagueNameCtrl').value;
+          this.createAuctionDto.budget = this.formGroup.get('budgetCtrl').value;
+          this.createAuctionDto.maxPlayers = this.formGroup.get('maxPlayerCtrl').value;
+          this.createAuctionDto.pPR = this.formGroup.get('pprCtrl').value;
+          console.log('thisleague', this.createAuctionDto);
+          this.httpService.post(APIURL.AUCTIONCALL + '/createAuctionLeague/', this.createAuctionDto).subscribe(data => {
+            console.log('data:', data);
+            this.snackBar.open('League Created', 'SUCCESS', {});
+          }
+          );
+          // this.router.navigateByUrl('/home');
         }
-        );
-        // this.router.navigateByUrl('/home');
-      }
-    });
+      });
+    } else {
+      // Snake Draft implmentation
+    }
   }
 }

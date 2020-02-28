@@ -177,7 +177,7 @@ export class AuthService {
         photoURL: argPhotoUrl
       };
       console.log('existsby email', data);
-      this.httpService.post(APIURL.BACKENDCALL + '/user/createUser', this.newUser).subscribe(x => {
+      this.httpService.post(APIURL.BACKENDCALL + '/user/createUser/', this.newUser).subscribe(x => {
         console.log('create data returned: ', x);
       });
       // }
