@@ -1,14 +1,13 @@
-export interface CreateAuctionDto extends CreateSnakeDto {
-    budget?: string;
-}
 
-export interface CreateSnakeDto {
+export interface CreateLeagueDto {
+    email?: string;
     leagueName?: string;
     ppr?: string;
+    budget?: string;
     maxPlayers?: string;
 }
 
-export interface CreateTeamDto extends CreateAuctionDto {
+export interface CreateTeamDto extends CreateLeagueDto {
     teamName?: string;
     leagueType?: string;
 }
@@ -21,5 +20,5 @@ export interface ApiPlayer {
     playerId: string;
     position: string;
     ppr: string;
-    team: string;
+    team: string; 
 }

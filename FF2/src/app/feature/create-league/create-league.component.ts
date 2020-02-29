@@ -8,7 +8,7 @@ import { HttpService } from 'src/app/core/service/http.service';
 import { CreateBaseForm } from 'src/app/shared/base/base-form';
 import { APIURL } from 'src/app/shared/const/url.const';
 import { AuctionLeague, User } from 'src/app/shared/interface/model.interface';
-import { CreateAuctionDto } from 'src/app/shared/interface/dto.interface';
+import { CreateLeagueDto } from 'src/app/shared/interface/dto.interface';
 
 
 @Component({
@@ -24,7 +24,7 @@ export class CreateLeagueComponent extends CreateBaseForm {
   thisLeague: AuctionLeague = {
     Select: 'select'
   };
-  createAuctionDto: CreateAuctionDto = {};
+  createAuctionDto: CreateLeagueDto = {};
 
   public user: User = {};
 

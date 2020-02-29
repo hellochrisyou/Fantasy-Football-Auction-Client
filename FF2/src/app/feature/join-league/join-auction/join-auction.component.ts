@@ -46,7 +46,7 @@ export class JoinAuctionComponent implements OnInit {
         maxPlayers: this.auctionArr[index].maxPlayers,
         leagueType: 'Auction',
         ppr: this.auctionArr[index].ppr,
-        budget: this.auctionArr[index].budget,
+        budget: this.auctionArr[index].budget
       }
     });
 

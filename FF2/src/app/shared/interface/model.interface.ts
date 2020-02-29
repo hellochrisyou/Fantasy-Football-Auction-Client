@@ -77,13 +77,14 @@ export interface SnakeLeague extends BaseLeague {
     draftTurn?: string;
     draftRound?: string;
     DefaultAutoPick?: string;
+    budget?: string;
 }
 
 
 export interface AuctionLeague extends SnakeLeague {
     budget?: string;
     currentBidder?: string;
-    currentBid?: string;
+    currentBid?: string;    
 }
 
 export interface User {
