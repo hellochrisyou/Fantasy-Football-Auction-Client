@@ -4,7 +4,7 @@ export interface CreateAuctionDto extends CreateSnakeDto {
 
 export interface CreateSnakeDto {
     leagueName?: string;
-    pPR?: string;
+    ppr?: string;
     maxPlayers?: string;
 }
 

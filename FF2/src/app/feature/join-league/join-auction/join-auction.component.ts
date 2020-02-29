@@ -42,11 +42,11 @@ export class JoinAuctionComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateComponent, {
       // width: '250px',
       data: {
-        LeagueName: this.auctionArr[index].LeagueName,
-        MaxPlayers: this.auctionArr[index].MaxPlayers,
-        LeagueType: 'Auction',
-        PPR: this.auctionArr[index].PPR,
-        TotalBudget: this.auctionArr[index].TotalBudget,
+        leagueName: this.auctionArr[index].leagueName,
+        maxPlayers: this.auctionArr[index].maxPlayers,
+        leagueType: 'Auction',
+        ppr: this.auctionArr[index].ppr,
+        budget: this.auctionArr[index].budget,
       }
     });
 

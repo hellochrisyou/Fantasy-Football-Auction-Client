@@ -21,7 +21,9 @@ export class CreateLeagueComponent extends CreateBaseForm {
 
   typeOfDraft = 'Snake';
   ppr = 'PPR';
-  thisLeague: AuctionLeague = {};
+  thisLeague: AuctionLeague = {
+    Select: 'select'
+  };
   createAuctionDto: CreateAuctionDto = {};
 
   public user: User = {};
@@ -97,7 +99,7 @@ export class CreateLeagueComponent extends CreateBaseForm {
           this.createAuctionDto.leagueName = this.formGroup.get('leagueNameCtrl').value;
           this.createAuctionDto.budget = this.formGroup.get('budgetCtrl').value;
           this.createAuctionDto.maxPlayers = this.formGroup.get('maxPlayerCtrl').value;
-          this.createAuctionDto.pPR = this.formGroup.get('pprCtrl').value;
+          this.createAuctionDto.ppr = this.formGroup.get('pprCtrl').value;
           console.log('thisleague', this.createAuctionDto);
           this.httpService.post(APIURL.AUCTIONCALL + '/createAuctionLeague/', this.createAuctionDto).subscribe(data => {
             console.log('data:', data);

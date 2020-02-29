@@ -42,8 +42,8 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
   }
 
   ngAfterViewInit(): void {
-    this.leagueName = this.data.LeagueName;
-    console.log('dialog', this.data.LeagueName);
+    this.leagueName = this.data.leagueName;
+    console.log('dialog', this.data.leagueName);
     this.changeDetectorRefs.detectChanges();
   }
 
@@ -63,16 +63,16 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
           this.data.teams = [];
         }
         // Create Auction Team
-        if (this.data.LeagueType === 'Auction') {
+        if (this.data.leagueType === 'Auction') {
           this.auctionDto = {
-            leagueName: this.data.LeagueName,
+            leagueName: this.data.leagueName,
             teamName: this.formGroup.get('teamNameCtrl').value,
             // Figure out how to explicitly assign dynamic value for total budget
             // TotalBudget: this.data.TotalBudget,
-            pPR: this.data.PPR,
-            maxPlayers: this.data.MaxPlayers,
+            ppr: this.data.ppr,
+            maxPlayers: this.data.maxPlayers,
           };
-          this.httpService.post(APIURL.AUCTIONCALL + '/team/creaceTeam/', this.auctionDto).subscribe((data) => {
+          this.httpService.post(APIURL.AUCTIONCALL + '/team/createTeam/', this.auctionDto).subscribe((data) => {
             console.log('create team data:', data);
           });
         } else {
@@ -87,10 +87,11 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
           // });
         }
         this.thisTeam = {
-          LeagueName: this.data.LeagueName,
-          Name: this.formGroup.get('teamNameCtrl').value,
-          LeagueType: this.data.LeagueType,
-          PPR: this.data.PPR
+          Select: 'select',
+          leagueName: this.data.leagueName,
+          teamName: this.formGroup.get('teamNameCtrl').value,
+          leagueType: this.data.leagueType,
+          ppr: this.data.ppr
         };
         this.snackBar.open('You have joined: ' + `${this.formGroup.get('teamNameCtrl').value}`, 'SUCCESS', {});
       }

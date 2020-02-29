@@ -105,13 +105,18 @@ export const SNAKE_COL_OBJ: ColumnObject[] = [
 ];
 
 export const AUCTION_COL_OBJ: ColumnObject[] = [
-    { columnId: 'Select', propertyName: '' },
-    { columnId: 'Name', propertyName: 'Name' },
-    { columnId: 'TeamCount', propertyName: 'TeamCount' },
-    { columnId: 'TotalBudget', propertyName: 'TotalBudget' },
-    { columnId: 'MaxPlayers', propertyName: 'MaxPlayers' },
-    { columnId: 'PPR', propertyName: 'PPR' },
+    { columnId: 'Select', propertyName: 'select' },
+    { columnId: 'LeagueName', propertyName: 'leagueName' },
+    { columnId: 'TeamCount', propertyName: 'teamCount' },
+    { columnId: 'Budget', propertyName: 'budget' },
+    { columnId: 'MaxPlayers', propertyName: 'maxPlayers' },
+    { columnId: 'PPR', propertyName: 'ppr' },
+    { columnId: 'Status', propertyName: 'status' },
     // { columnId: 'Type', propertyName: 'Type' },
+];
+
+export const AUCTION_DISPLAY = [
+    'Select', 'LeagueName', 'TeamCount', 'Budget', 'MaxPlayers', 'PPR', 'Status'
 ];
 
 export const QB_DISPLAY = [
@@ -139,10 +144,6 @@ export const K_DISPLAY = [
 
 export const SNAKE_DISPLAY = [
     'Select', 'Name', 'TeamCount', 'MaxPlayers', 'PPR'
-];
-
-export const AUCTION_DISPLAY = [
-    'Select', 'Name', 'TeamCount', 'TotalBudget', 'MaxPlayers', 'PPR'
 ];
 
 export const TEAM_DISPLAY = [

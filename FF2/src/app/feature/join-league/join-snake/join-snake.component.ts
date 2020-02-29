@@ -42,10 +42,10 @@ export class JoinSnakeComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateComponent, {
       // width: '250px',
       data: {
-        LeagueName: this.snakeArr[index].LeagueName,
-        MaxPlayers: this.snakeArr[index].MaxPlayers,
-        LeagueType: 'Snake',
-        PPR: this.snakeArr[index].PPR,
+        leagueName: this.snakeArr[index].leagueName,
+        maxPlayers: this.snakeArr[index].maxPlayers,
+        leagueType: 'Snake',
+        ppr: this.snakeArr[index].ppr,
       }
     });
 

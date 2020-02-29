@@ -47,10 +47,11 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
   public user: User = {};
 
   thisTeam: Team = {
-    Name: this.auth.userData.displayName,
+    Select: 'select',
+    teamName: this.auth.userData.displayName,
     players: [],
-    CurrentBudget: '10000',
-    LeagueType: 'Auction'
+    currentBudget: '10000',
+    leagueType: 'Auction'
   };
 
   readonly QB_COL_OBJ = QB_COL_OBJ;
