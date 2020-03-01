@@ -115,6 +115,21 @@ export const AUCTION_COL_OBJ: ColumnObject[] = [
     // { columnId: 'Type', propertyName: 'Type' },
 ];
 
+export const MY_AUCTION_COL_OBJ: ColumnObject[] = [
+    { columnId: 'Select', propertyName: 'select' },
+    { columnId: 'LeagueName', propertyName: 'leagueName' },
+    { columnId: 'Budget', propertyName: 'budget' },
+    { columnId: 'MaxPlayers', propertyName: 'draftPosition' },
+    // { columnId: 'Players', propertyName: 'playerCount' },
+    { columnId: 'PPR', propertyName: 'ppr' },
+    { columnId: 'Status', propertyName: 'status' },
+    // { columnId: 'Type', propertyName: 'Type' },
+];
+
+export const MY_AUCTION_DISPLAY = [
+    'Select', 'LeagueName', 'Budget', 'MaxPlayers', 'PPR', 'Status'
+];
+
 export const AUCTION_DISPLAY = [
     'Select', 'LeagueName', 'TeamCount', 'Budget', 'MaxPlayers', 'PPR', 'Status'
 ];

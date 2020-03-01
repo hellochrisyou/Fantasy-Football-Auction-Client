@@ -95,7 +95,7 @@ export class AuthService {
   public signinGoogle() {
     console.log('hello');
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((credential) => {
-      this.checkUserExists(credential.user.email, credential.user.displayName, credential.user.email);
+      this.checkUserExists(credential.user.email, credential.user.displayName, "https://material.angular.io/assets/img/examples/shiba2.jpg");
       this.router.navigate(['home/profile']);
     });
     // return this.OAuthProvider(new this.authState.GoogleAuthProvider())
@@ -115,7 +115,7 @@ export class AuthService {
       .auth
       .signInWithEmailAndPassword(email, password)
       .then(credential => {
-        this.checkUserExists(credential.user.email, credential.user.displayName, credential.user.email);
+        this.checkUserExists(credential.user.email, credential.user.displayName, "https://material.angular.io/assets/img/examples/shiba2.jpg");
         this.router.navigateByUrl('home/profile');
         window.location.reload();
       })

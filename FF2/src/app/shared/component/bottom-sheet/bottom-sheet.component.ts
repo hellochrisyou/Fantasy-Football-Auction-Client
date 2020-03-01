@@ -1,40 +1,37 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
+import { CreateTeamDto } from '../../interface/dto.interface';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
-import { HttpService } from 'src/app/core/service/http.service';
-import { CreateBaseForm } from 'src/app/shared/base/base-form';
-import { APIURL } from 'src/app/shared/const/url.const';
-import { CreateLeagueDto, CreateTeamDto } from 'src/app/shared/interface/dto.interface';
-import { AuctionLeague, Team, SnakeLeague } from 'src/app/shared/interface/model.interface';
+import { MatBottomSheetRef, MatSnackBar, MatDialogRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 import { AuthService } from 'src/app/core/service/auth.service';
-import { EmitService } from 'src/app/core/service/emit.service';
-import { SnackbarComponent } from '../../snackbar/snackbar.component';
+import { HttpService } from 'src/app/core/service/http.service';
+import { CreateComponent } from '../dialog/create/create.component';
+import { APIURL } from '../../const/url.const';
+import { SnackbarComponent } from '../snackbar/snackbar.component';
+import { CreateBaseForm } from '../../base/base-form';
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss']
+  selector: 'app-bottom-sheet',
+  templateUrl: './bottom-sheet.component.html',
+  styleUrls: ['./bottom-sheet.component.scss']
 })
-export class CreateComponent extends CreateBaseForm implements OnInit, AfterViewInit {
-
-
-
+export class BottomSheetComponent extends CreateBaseForm implements OnInit {
 
   auctionDto: CreateTeamDto;
   // snakeDto: CreateSnakeDto;
   leagueName: string;
   constructor(
     protected fb: FormBuilder,
+    private bottomSheetRef: MatBottomSheetRef<BottomSheetComponent>,
     private auth: AuthService,
     private changeDetectorRefs: ChangeDetectorRef,
     private snackBar: MatSnackBar,
     private httpService: HttpService,
+
     private dialogRef: MatDialogRef<CreateComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: AuctionLeague | SnakeLeague,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
   ) {
     super(fb, changeDetectorRefs);
   }
-
 
   ngOnInit(): void {
     super.ngOnInit();
@@ -78,8 +75,7 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
           };
           // NEED TO GET EMAIL AND SET IT ABOVE
           this.httpService.post(APIURL.AUCTIONCALL + '/team/createTeam/', this.auctionDto).subscribe((data) => {
-            this.openSnackBar('League Joined', 'createTeam');
-            console.log('hell1');
+            this.bottomSheetRef.dismiss();
           });
         } else {
           // Create Snake Team

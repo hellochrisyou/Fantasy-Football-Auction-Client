@@ -3,9 +3,11 @@ import { AUCTION_COL_OBJ, AUCTION_DISPLAY } from 'src/app/shared/const/column.co
 import { AuctionLeague } from 'src/app/shared/interface/model.interface';
 import { EmitService } from 'src/app/core/service/emit.service';
 import { HttpService } from 'src/app/core/service/http.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatBottomSheet } from '@angular/material';
 import { APIURL } from 'src/app/shared/const/url.const';
 import { CreateComponent } from 'src/app/shared/component/dialog/create/create.component';
+import { AuthService } from 'src/app/core/service/auth.service';
+import { BottomSheetComponent } from 'src/app/shared/component/bottom-sheet/bottom-sheet.component';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -22,11 +24,14 @@ export class JoinAuctionComponent implements OnInit {
   constructor(
     private emitService: EmitService,
     private httpService: HttpService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private bottomSheet: MatBottomSheet,
+    private auth: AuthService
   ) { }
 
   ngOnInit(): void {
-    this.httpService.get(APIURL.AUCTIONCALL + '/getAllLeagues/').subscribe((leagueData) => {
+    console.log('explicit  email', APIURL.AUCTIONCALL + '/getAllOtherLeagues/');
+    this.httpService.post(APIURL.AUCTIONCALL + '/getAllOtherLeagues/', this.auth.userData[0].email).subscribe((leagueData) => {
       console.log('auction data: ', leagueData);
       this.auctionArr = leagueData;
       this.emitService.refreshTable();
@@ -36,7 +41,6 @@ export class JoinAuctionComponent implements OnInit {
   addLeague(index: number) {
     this.openDialog(index);
   }
-
   private openDialog(index: number): void {
     console.log(this.auctionArr[index]);
     const dialogRef = this.dialog.open(CreateComponent, {

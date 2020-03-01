@@ -102,8 +102,8 @@ export class CreateLeagueComponent extends CreateBaseForm {
           this.createAuctionDto.ppr = this.formGroup.get('pprCtrl').value;
           console.log('thisleague', this.createAuctionDto);
           this.httpService.post(APIURL.AUCTIONCALL + '/createAuctionLeague/', this.createAuctionDto).subscribe(data => {
-            console.log('data:', data);
             this.snackBar.open('League Created', 'SUCCESS', {});
+            console.log('data:', data);
           }
           );
           // this.router.navigateByUrl('/home');

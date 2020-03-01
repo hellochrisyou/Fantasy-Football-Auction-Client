@@ -70,6 +70,8 @@ export interface BaseLeague {
     ppr?: string;
     teams?: Team[];
     status?: string;
+    playerCount?: string;
+    budget?: string;
 }
 
 export interface SnakeLeague extends BaseLeague {
@@ -84,7 +86,7 @@ export interface SnakeLeague extends BaseLeague {
 export interface AuctionLeague extends SnakeLeague {
     budget?: string;
     currentBidder?: string;
-    currentBid?: string;    
+    currentBid?: string;
 }
 
 export interface User {
