@@ -4,9 +4,9 @@ export const QB_COL_OBJ: ColumnObject[] = [
     { columnId: 'Select', propertyName: '' },
     { columnId: 'Name', propertyName: 'Name' },
     { columnId: 'Team', propertyName: 'Team' },
-    { columnId: 'MinPrice', propertyName: 'MinPrice' },
-    { columnId: 'MaxPrice', propertyName: 'MaxPrice' },
-    { columnId: 'AvgPrice', propertyName: 'AvgPrice' },
+    { columnId: 'Min Price', propertyName: 'MinPrice' },
+    { columnId: 'Max Price', propertyName: 'MaxPrice' },
+    { columnId: 'Avg Price', propertyName: 'AvgPrice' },
     { columnId: 'PassYD', propertyName: 'PassYD' },
     { columnId: 'PassTD', propertyName: 'PassTD' },
     { columnId: 'INT', propertyName: 'INT' },
@@ -21,9 +21,9 @@ export const RB_COL_OBJ: ColumnObject[] = [
     { columnId: 'Select', propertyName: '' },
     { columnId: 'Name', propertyName: 'Name' },
     { columnId: 'Team', propertyName: 'Team' },
-    { columnId: 'MinPrice', propertyName: 'MinPrice' },
-    { columnId: 'MaxPrice', propertyName: 'MaxPrice' },
-    { columnId: 'AvgPrice', propertyName: 'AvgPrice' },
+    { columnId: 'Min Price', propertyName: 'MinPrice' },
+    { columnId: 'Max Price', propertyName: 'MaxPrice' },
+    { columnId: 'Avg Price', propertyName: 'AvgPrice' },
     { columnId: 'RushYD', propertyName: 'RushYD' },
     { columnId: 'RushTD', propertyName: 'RushTD' },
     { columnId: 'Rec', propertyName: 'Rec' },
@@ -37,9 +37,9 @@ export const REC_COL_OBJ: ColumnObject[] = [
     { columnId: 'Select', propertyName: '' },
     { columnId: 'Name', propertyName: 'Name' },
     { columnId: 'Team', propertyName: 'Team' },
-    { columnId: 'MinPrice', propertyName: 'MinPrice' },
-    { columnId: 'MaxPrice', propertyName: 'MaxPrice' },
-    { columnId: 'AvgPrice', propertyName: 'AvgPrice' },
+    { columnId: 'Min Price', propertyName: 'MinPrice' },
+    { columnId: 'Max Price', propertyName: 'MaxPrice' },
+    { columnId: 'Avg Price', propertyName: 'AvgPrice' },
     { columnId: 'Rec', propertyName: 'Rec' },
     { columnId: 'RecYD', propertyName: 'RecYD' },
     { columnId: 'RecTD', propertyName: 'RecTD' },
@@ -49,11 +49,10 @@ export const REC_COL_OBJ: ColumnObject[] = [
 export const DEF_COL_OBJ: ColumnObject[] = [
     { columnId: 'Select', propertyName: '' },
     { columnId: 'Name', propertyName: 'Name' },
-    { columnId: 'Team', propertyName: 'Team' },
-    { columnId: 'MinPrice', propertyName: 'MinPrice' },
-    { columnId: 'MaxPrice', propertyName: 'MaxPrice' },
-    { columnId: 'AvgPrice', propertyName: 'AvgPrice' },
-    { columnId: 'Points_Allowed', propertyName: 'Points_Allowed' },
+    { columnId: 'Min Price', propertyName: 'MinPrice' },
+    { columnId: 'Max Price', propertyName: 'MaxPrice' },
+    { columnId: 'Avg Price', propertyName: 'AvgPrice' },
+    { columnId: 'Points Allowed', propertyName: 'PointsAllowed' },
     { columnId: 'TD', propertyName: 'TD' },
     { columnId: 'Sack', propertyName: 'Sack' },
     { columnId: 'INT', propertyName: 'INT' },
@@ -66,14 +65,14 @@ export const K_COL_OBJ: ColumnObject[] = [
     { columnId: 'Select', propertyName: '' },
     { columnId: 'Name', propertyName: 'Name' },
     { columnId: 'Team', propertyName: 'Team' },
-    { columnId: 'MinPrice', propertyName: 'MinPrice' },
-    { columnId: 'MaxPrice', propertyName: 'MaxPrice' },
-    { columnId: 'AvgPrice', propertyName: 'AvgPrice' },
-    { columnId: 'Fg0To19', propertyName: 'Fg0To19' },
-    { columnId: 'Fg20To29', propertyName: 'Fg20To29' },
-    { columnId: 'Fg30To39', propertyName: 'Fg30To39' },
-    { columnId: 'Fg40To49', propertyName: 'Fg40To49' },
-    { columnId: 'Fg50Plus', propertyName: 'Fg50Plus' },
+    { columnId: 'Min Price', propertyName: 'MinPrice' },
+    { columnId: 'Max Price', propertyName: 'MaxPrice' },
+    { columnId: 'Avg Price', propertyName: 'AvgPrice' },
+    { columnId: '0-19', propertyName: 'Fg0To19' },
+    { columnId: '20-29', propertyName: 'Fg20To29' },
+    { columnId: '30-39', propertyName: 'Fg30To39' },
+    { columnId: '40-49', propertyName: 'Fg40To49' },
+    { columnId: '50+', propertyName: 'Fg50Plus' },
     { columnId: 'PAT', propertyName: 'PAT' },
     { columnId: 'Points', propertyName: 'Points' }
 ];
@@ -86,15 +85,6 @@ export const TEAM_COL_OBJ: ColumnObject[] = [
     { columnId: 'CurrentBudget', propertyName: 'CurrentBudget' },
 ];
 
-export const PLAYER_COL_OBJ: ColumnObject[] = [
-    { columnId: 'Name', propertyName: 'Name' },
-    { columnId: 'Team', propertyName: 'Team' },
-    { columnId: 'Position', propertyName: 'Position' },
-    { columnId: 'CurrentBid', propertyName: 'CurrentBid' },
-    { columnId: 'CurrentOwner', propertyName: 'CurrentOwner' },
-    { columnId: 'Points', propertyName: 'Points' },
-];
-
 export const SNAKE_COL_OBJ: ColumnObject[] = [
     { columnId: 'Select', propertyName: '' },
     { columnId: 'Name', propertyName: 'Name' },
@@ -105,11 +95,11 @@ export const SNAKE_COL_OBJ: ColumnObject[] = [
 ];
 
 export const AUCTION_COL_OBJ: ColumnObject[] = [
-    { columnId: 'Select', propertyName: 'select' },
-    { columnId: 'LeagueName', propertyName: 'leagueName' },
-    { columnId: 'TeamCount', propertyName: 'teamCount' },
+    { columnId: 'Select', propertyName: '' },
+    { columnId: 'League Name', propertyName: 'leagueName' },
+    { columnId: 'Team Count', propertyName: 'teamCount' },
     { columnId: 'Budget', propertyName: 'budget' },
-    { columnId: 'MaxPlayers', propertyName: 'maxPlayers' },
+    { columnId: 'Max Players', propertyName: 'maxPlayers' },
     { columnId: 'PPR', propertyName: 'ppr' },
     { columnId: 'Status', propertyName: 'status' },
     // { columnId: 'Type', propertyName: 'Type' },
@@ -117,44 +107,64 @@ export const AUCTION_COL_OBJ: ColumnObject[] = [
 
 export const MY_AUCTION_COL_OBJ: ColumnObject[] = [
     { columnId: 'Select', propertyName: 'select' },
-    { columnId: 'LeagueName', propertyName: 'leagueName' },
+    { columnId: 'League Name', propertyName: 'leagueName' },
     { columnId: 'Budget', propertyName: 'budget' },
-    { columnId: 'MaxPlayers', propertyName: 'draftPosition' },
+    { columnId: 'Max Players', propertyName: 'maxPlayers' },
     // { columnId: 'Players', propertyName: 'playerCount' },
     { columnId: 'PPR', propertyName: 'ppr' },
     { columnId: 'Status', propertyName: 'status' },
     // { columnId: 'Type', propertyName: 'Type' },
 ];
 
+export const AUCTION_TEAM_COL_OBJ: ColumnObject[] = [
+    { columnId: 'Select', propertyName: 'select' },
+    { columnId: 'Team Name', propertyName: 'teamName' },
+    { columnId: 'Budget', propertyName: 'budget' },
+    { columnId: 'Position', propertyName: 'draftPosition' },
+];
+
+export const PLAYER_COL_OBJ: ColumnObject[] = [
+    { columnId: 'Name', propertyName: 'Name' },
+    { columnId: 'Team', propertyName: 'Team' },
+    { columnId: 'Position', propertyName: 'Position' },
+    { columnId: 'Bid', propertyName: 'Bid' },
+    { columnId: 'Points', propertyName: 'Points' },
+
+];
+
+export const AUCTION_TEAM_DISPLAY = [
+    'Select', 'Team Name', 'Budget', 'Position'
+];
+
 export const MY_AUCTION_DISPLAY = [
-    'Select', 'LeagueName', 'Budget', 'MaxPlayers', 'PPR', 'Status'
+    'Select', 'League Name', 'Team Name', 'Budget', 'Max Players', 'PPR', 'Status'
 ];
 
 export const AUCTION_DISPLAY = [
-    'Select', 'LeagueName', 'TeamCount', 'Budget', 'MaxPlayers', 'PPR', 'Status'
+    'Select', 'League Name', 'Team Count', 'Budget', 'Max Players', 'PPR', 'Status'
 ];
 
 export const QB_DISPLAY = [
     // tslint:disable-next-line: max-line-length
-    'Select', 'Name', 'Team', 'MinPrice', 'MaxPrice', 'AvgPrice', 'PassYD', 'PassTD', 'INT', 'RushYD', 'RushTD', 'Sack', 'Fumble', 'Points'
+    'Select', 'Name', 'Team', 'Min Price', 'Max Price', 'Avg Price', 'PassYD', 'PassTD', 'INT', 'RushYD', 'RushTD', 'Sack', 'Fumble', 'Points'
 ];
 
 export const RB_DISPLAY = [
-    'Select', 'Name', 'Team', 'MinPrice', 'MaxPrice', 'AvgPrice', 'RushYD', 'RushTD', 'Rec', 'RecYD', 'RecTD', 'Fumble', 'Points'
+    'Select', 'Name', 'Team', 'Min Price', 'Max Price', 'Avg Price', 'RushYD', 'RushTD', 'Rec', 'RecYD', 'RecTD', 'Fumble', 'Points'
 ];
 
 export const REC_DISPLAY = [
-    'Select', 'Name', 'Team', 'MinPrice', 'MaxPrice', 'AvgPrice', 'Rec', 'RecYD', 'RecTD', 'Points'
+    'Select', 'Name', 'Team', 'Min Price', 'Max Price', 'Avg Price', 'Rec', 'RecYD', 'RecTD', 'Points'
 ];
 
 export const DEF_DISPLAY = [
     // tslint:disable-next-line: max-line-length
-    'Select', 'Name', 'Team', 'MinPrice', 'MaxPrice', 'AvgPrice', 'Points_Allowed', 'TD', 'Sack', 'INT', 'FumbleRec', 'Safety', 'Points'
+    'Select', 'Name', 'Min Price', 'Max Price', 'Avg Price', 'Points Allowed', 'TD', 'Sack', 'INT', 'FumbleRec', 'Safety', 'Points'
 ];
 
 export const K_DISPLAY = [
     // tslint:disable-next-line: max-line-length
-    'Select', 'Name', 'Team', 'MinPrice', 'MaxPrice', 'AvgPrice', 'Fg0To19', 'Fg20To29', 'Fg30To39', 'Fg40To49', 'Fg50Plus', 'PAT', 'Points'
+    'Select', 'Name', 'Team', 'Min Price', 'Max Price', 'Avg Price', '0-19', '20-29', '30-39', '40-49', '50+', 'PAT', 'Points'
 ];
 
 export const SNAKE_DISPLAY = [
@@ -166,5 +176,5 @@ export const TEAM_DISPLAY = [
 ];
 
 export const PLAYER_DISPLAY = [
-    'Name', 'Team', 'position', 'Current_Bid', 'Current_Owner', 'Points'
+    'Name', 'Team', 'Position', 'Bid', 'Points'
 ];

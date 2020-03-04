@@ -1,13 +1,13 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
+import { AuthService } from 'src/app/core/service/auth.service';
 import { HttpService } from 'src/app/core/service/http.service';
 import { CreateBaseForm } from 'src/app/shared/base/base-form';
 import { APIURL } from 'src/app/shared/const/url.const';
-import { CreateLeagueDto, CreateTeamDto } from 'src/app/shared/interface/dto.interface';
-import { AuctionLeague, Team, SnakeLeague } from 'src/app/shared/interface/model.interface';
-import { AuthService } from 'src/app/core/service/auth.service';
-import { EmitService } from 'src/app/core/service/emit.service';
+import { CreateTeamDto } from 'src/app/shared/interface/dto.interface';
+import { AuctionLeague, SnakeLeague } from 'src/app/shared/interface/model.interface';
+
 import { SnackbarComponent } from '../../snackbar/snackbar.component';
 
 @Component({
@@ -16,9 +16,6 @@ import { SnackbarComponent } from '../../snackbar/snackbar.component';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent extends CreateBaseForm implements OnInit, AfterViewInit {
-
-
-
 
   auctionDto: CreateTeamDto;
   // snakeDto: CreateSnakeDto;
@@ -66,20 +63,28 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
         this.snackBar.open('Name already exists', 'FAIL', {});
       } else {
         console.log('email', this.auth.userData[0].email);
+        let positionVal = String(1);
+        if (this.data.auctionTeams) {
+          positionVal = String(this.data.auctionTeams.length + 1);
+        }
         // Create Auction Team
         if (this.data.leagueType === 'Auction') {
           this.auctionDto = {
             leagueName: this.data.leagueName,
             teamName: this.formGroup.get('teamNameCtrl').value,
             budget: this.data.budget,
+            photoUrl: this.auth.userData[0].photoURL,
+            leagueType: 'Auction',
+            draftPosition: positionVal,
             ppr: this.data.ppr,
             maxPlayers: this.data.maxPlayers,
             email: this.auth.userData[0].email
           };
           // NEED TO GET EMAIL AND SET IT ABOVE
           this.httpService.post(APIURL.AUCTIONCALL + '/team/createTeam/', this.auctionDto).subscribe((data) => {
-            this.openSnackBar('League Joined', 'createTeam');
+            this.openSnackBar('Created Team', 'Create-Team');
             console.log('hell1');
+            this.dialogRef.close();
           });
         } else {
           // Create Snake Team

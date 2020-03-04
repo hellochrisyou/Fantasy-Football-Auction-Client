@@ -11,6 +11,7 @@ export interface Player extends BasePlayer {
     MaxPrice?: number;
     AvgPrice?: number;
     Points?: number;
+    Bid?: string;
 }
 
 export interface QB extends Player {
@@ -50,7 +51,7 @@ export interface DEF extends Player {
     FumbleRec?: number;
     Safety?: number;
     TD?: number;
-    Points_Allowed?: number;
+    PointsAllowed?: number;
 }
 
 export interface Kicker extends Player {
@@ -68,7 +69,7 @@ export interface BaseLeague {
     maxPlayers?: string;
     leagueType?: string;
     ppr?: string;
-    teams?: Team[];
+    auctionTeams?: Team[];
     status?: string;
     playerCount?: string;
     budget?: string;
@@ -85,6 +86,7 @@ export interface SnakeLeague extends BaseLeague {
 
 export interface AuctionLeague extends SnakeLeague {
     budget?: string;
+    currentPlayer?: string;
     currentBidder?: string;
     currentBid?: string;
 }
@@ -100,8 +102,19 @@ export interface User {
 
 export interface Team extends BaseLeague {
     teamName?: string;
+    email?: string;
+    teamStatus?: string;
     draftPosition?: string;
     currentBudget?: string;
+    players?: Player[];
+    photoUrl?: string;
+}
+
+export interface OtherTeams {
+    teams?: Team[];
+}
+
+export interface TeamPlayers {
     players?: Player[];
 }
 

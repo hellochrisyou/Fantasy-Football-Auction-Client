@@ -29,21 +29,21 @@ export const CALCULATE_RECEIVER_POINTS = (data: WR | TE): number => {
 
 export const CALCULATE_DEFENSE_POINTS = (def: DEF): number => {
     let pointsAllowed = 0;
-    def.Points_Allowed === 0
+    def.PointsAllowed === 0
         ? (pointsAllowed = 10)
-        : def.Points_Allowed > 0 && def.Points_Allowed < 7
+        : def.PointsAllowed > 0 && def.PointsAllowed < 7
             ? (pointsAllowed = 7)
-            : def.Points_Allowed > 6 && def.Points_Allowed < 14
+            : def.PointsAllowed > 6 && def.PointsAllowed < 14
                 ? (pointsAllowed = 4)
-                : def.Points_Allowed > 13 && def.Points_Allowed < 21
+                : def.PointsAllowed > 13 && def.PointsAllowed < 21
                     ? (pointsAllowed = 1)
-                    : def.Points_Allowed > 20 && def.Points_Allowed < 28
+                    : def.PointsAllowed > 20 && def.PointsAllowed < 28
                         ? (pointsAllowed = 0)
-                        : def.Points_Allowed > 27 && def.Points_Allowed < 35
+                        : def.PointsAllowed > 27 && def.PointsAllowed < 35
                             ? (pointsAllowed = -1)
                             : (pointsAllowed = -4);
     const fantasyPoints =
-        +def.Sack + +def.INT + +def.FumbleRec + +def.Safety + +def.TD + +def.Points_Allowed;
+        +def.Sack + +def.INT + +def.FumbleRec + +def.Safety + +def.TD + +def.PointsAllowed;
 
     //   parseInt(def.sack, 10) +
     //   parseInt(def.interception, 10) +

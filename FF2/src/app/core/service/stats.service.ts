@@ -99,7 +99,7 @@ export class StatsService {
       def.stats['47'] != null ? (this.tmpDef.FumbleRec = def.stats['47']) : (this.tmpDef.FumbleRec = 0);
       def.stats['49'] != null ? (this.tmpDef.Safety = def.stats['49']) : (this.tmpDef.Safety = 0);
       def.stats['50'] != null ? (this.tmpDef.TD = def.stats['50']) : (this.tmpDef.TD = 0);
-      def.stats['54'] != null ? (this.tmpDef.Points_Allowed = def.stats['54']) : (this.tmpDef.Points_Allowed = 0);
+      def.stats['54'] != null ? (this.tmpDef.PointsAllowed = def.stats['54']) : (this.tmpDef.PointsAllowed = 0);
       this.tmpDef.Points = CALCULATE_DEFENSE_POINTS(this.tmpDef);
       this.tmpDefArray.push(this.tmpDef);
     }

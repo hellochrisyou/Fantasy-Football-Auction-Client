@@ -4,4 +4,5 @@ export const enum APIURL {
     BACKENDCALL = 'http://localhost:8081/dynamoDb',
     AUCTIONCALL = 'http://localhost:8082/auction',
     SNAKECALL = 'http://localhost:8083/snake',
+    LEAGUECALL = "LEAGUECALL"
 }

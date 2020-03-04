@@ -1,0 +1,12 @@
+<div fxLayout="column" fxLayoutAlign="space-around center" >
+{{leagueStatus}}
+<ng-container *ngIf="leagueStatus=='Ready'"> 
+</ng-container>
+<!-- {{thisTeam.email}} -->
+<ng-container *ngIf="leagueStatus!='Ready'"> 
+<mat-slide-toggle (click)="clickReady()" matTooltip="Click if you are ready or not"
+                matTooltipPosition="above">
+                {{thisTeam.teamStatus}}
+            </mat-slide-toggle>
+</ng-container> 
+</div>

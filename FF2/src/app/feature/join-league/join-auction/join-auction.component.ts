@@ -30,15 +30,13 @@ export class JoinAuctionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('explicit  email', APIURL.AUCTIONCALL + '/getAllOtherLeagues/');
     this.httpService.post(APIURL.AUCTIONCALL + '/getAllOtherLeagues/', this.auth.userData[0].email).subscribe((leagueData) => {
-      console.log('auction data: ', leagueData);
       this.auctionArr = leagueData;
       this.emitService.refreshTable();
     });
   }
 
-  addLeague(index: number) {
+  public addLeague(index: number) {
     this.openDialog(index);
   }
   private openDialog(index: number): void {

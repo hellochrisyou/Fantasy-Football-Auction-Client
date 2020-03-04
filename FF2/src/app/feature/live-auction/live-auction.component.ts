@@ -18,8 +18,15 @@ import {
   RB_DISPLAY,
   REC_COL_OBJ,
   REC_DISPLAY,
+  AUCTION_TEAM_COL_OBJ,
+  AUCTION_TEAM_DISPLAY
 } from 'src/app/shared/const/column.const';
-import { DEF, Kicker, LastSeasonPlayers, QB, RB, TE, Team, User, WR } from 'src/app/shared/interface/model.interface';
+import { DEF, Kicker, LastSeasonPlayers, QB, RB, TE, Team, AuctionLeague, User, WR } from 'src/app/shared/interface/model.interface';
+import { APIURL } from 'src/app/shared/const/url.const';
+import { HttpService } from 'src/app/core/service/http.service';
+import { AuctionDto } from 'src/app/shared/interface/dto.interface';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -35,6 +42,11 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
   numTe: number;
   numDef: number;
   numKicker: number;
+
+  auctionLeague: AuctionLeague;
+  auctionTeam: Team;
+
+  status: string;
 
   lastSeasonPlayers: LastSeasonPlayers = {
     quaterBacks: [],
@@ -59,12 +71,14 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly REC_COL_OBJ = REC_COL_OBJ;
   readonly DEF_COL_OBJ = DEF_COL_OBJ;
   readonly K_COL_OBJ = K_COL_OBJ;
+  readonly AUCTION_TEAM_COL_OBJ = AUCTION_TEAM_COL_OBJ;
 
   readonly QB_DISPLAY = QB_DISPLAY;
   readonly RB_DISPLAY = RB_DISPLAY;
   readonly REC_DISPLAY = REC_DISPLAY;
   readonly DEF_DISPLAY = DEF_DISPLAY;
   readonly K_DISPLAY = K_DISPLAY;
+  readonly AUCTION_TEAM_DISPLAY = AUCTION_TEAM_DISPLAY;
 
   qbArray: QB[] = [];
   rbArray: RB[] = [];
@@ -72,24 +86,19 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
   teArray: TE[] = [];
   defArray: DEF[] = [];
   kArray: Kicker[] = [];
+  teamArr: Team[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private lastSeasonStatService: LastSeasonStatService,
     private auctionSortService: AuctionSortService,
     private emitService: EmitService,
     private auth: AuthService,
+    private httpService: HttpService,
     private db: AngularFirestore
   ) {
     this.route.data.subscribe((data: { auctionValues: any }) => {
       this.lastSeasonPlayers = this.auctionSortService.sortAuctionPlayers(data.auctionValues);
-    },
-      err => {
-        console.log('error in resolve service: ', err);
-      },
-      () => {
-        this.emitService.refreshTable();
-      });
+    });
 
     this.emitService.mergeQbOutput.subscribe(qbArray => {
       if (qbArray.length === 0) {
@@ -98,23 +107,12 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       const tmpQbArray = MERGE_PLAYER_STATS(qbArray, this.lastSeasonPlayers.quaterBacks);
       this.lastSeasonPlayers.quaterBacks = REMOVE_EXTRA_PLAYERS(tmpQbArray);
       this.numQb = this.lastSeasonPlayers.quaterBacks.length;
-    },
-      err => {
-        console.log('error in resolve service: ', err);
-      },
-      () => {
       });
 
     this.emitService.mergeRbOutput.subscribe(rbArray => {
       const tmpRbArray = MERGE_PLAYER_STATS(rbArray, this.lastSeasonPlayers.runningsBacks);
       this.lastSeasonPlayers.runningsBacks = REMOVE_EXTRA_PLAYERS(tmpRbArray);
-      this.numRb = this.lastSeasonPlayers.runningsBacks.length;
-
-    },
-      err => {
-        console.log('error in resolve service: ', err);
-      },
-      () => {
+    this.numRb = this.lastSeasonPlayers.runningsBacks.length;
       });
 
     this.emitService.mergeWrOutput.subscribe(wrArray => {
@@ -122,47 +120,50 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       this.lastSeasonPlayers.wideReceivers = REMOVE_EXTRA_PLAYERS(tmpWrArray);
       this.numWr = this.lastSeasonPlayers.wideReceivers.length;
       this.emitService.refreshTable();
-    },
-      err => {
-        console.log('error in resolve service: ', err);
-      },
-      () => {
       });
 
     this.emitService.mergeTeOutput.subscribe(teArray => {
       const tmpTeArray = MERGE_PLAYER_STATS(teArray, this.lastSeasonPlayers.tightEnds);
       this.lastSeasonPlayers.tightEnds = REMOVE_EXTRA_PLAYERS(tmpTeArray);
       this.numTe = this.lastSeasonPlayers.tightEnds.length;
-    },
-      err => {
-        console.log('error in resolve service: ', err);
-      },
-      () => {
       });
 
     this.emitService.mergeDefOutput.subscribe(defArray => {
       const tmpDefArray = MERGE_PLAYER_STATS(defArray, this.lastSeasonPlayers.defenses);
       this.lastSeasonPlayers.defenses = REMOVE_EXTRA_PLAYERS(tmpDefArray);
       this.numDef = this.lastSeasonPlayers.defenses.length;
-    },
-      err => {
-        console.log('error in resolve service: ', err);
-      },
-      () => {
       });
 
     this.emitService.mergeKickerOutput.subscribe(kArray => {
       const tmpKArray = MERGE_PLAYER_STATS(kArray, this.lastSeasonPlayers.kickers);
       this.lastSeasonPlayers.kickers = REMOVE_EXTRA_PLAYERS(tmpKArray);
       this.numKicker = this.lastSeasonPlayers.kickers.length;
-    },
-      err => {
-        console.log('error in resolve service: ', err);
-      },
-      () => {
       });
 
 
+    // this.auctionDto = {
+    //   email: this.auth.authState.email,
+    //   leagueName: this.state,
+    // };
+
+
+  }
+
+
+  ngOnInit(): void {
+    console.log('history state', history.state.league.status);
+    this.auctionLeague = history.state.league;
+    
+    // this.teamArr = history.state.league.auctionTeams;
+
+    // this.auctionDto = {
+    //   email: this.auth.authState.email,
+    //   leagueName: history.state.league
+    // };
+    // this.httpService.post(APIURL.AUCTIONCALL + '/goAuction/init/', this.auctionDto).subscribe(auctionData => {
+    //   console.log('return dadta from goAuctionInit', auctionData);
+    // });
+    this.emitService.refreshTable();
   }
 
   ngOnDestroy(): void {
@@ -173,13 +174,6 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
     this.emitService.mergeDefOutput.unsubscribe();
     this.emitService.mergeKickerOutput.unsubscribe();
   }
-
-  ngOnInit(): void {
-    console.log(REC_COL_OBJ);
-    console.log(REC_DISPLAY);
-    this.emitService.refreshTable();
-  }
-
   ngAfterViewInit(): void {
     this.emitService.refreshTable();
   }
@@ -189,22 +183,22 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public addRbPlayer(index: number): void {
-    console.log('add player index #: ', index);
+    // console.log('add player index #: ', index);
   }
 
   public addWrPlayer(index: number): void {
-    console.log('add player index #: ', index);
+    // console.log('add player index #: ', index);
   }
 
   public addTePlayer(index: number): void {
-    console.log('add player index #: ', index);
+    // console.log('add player index #: ', index);
   }
 
   public addDefPlayer(index: number): void {
-    console.log('add player index #: ', index);
+    // console.log('add player index #: ', index);
   }
 
   public addKPlayer(index: number): void {
-    console.log('add player index #: ', index);
+    // console.log('add player index #: ', index);
   }
 }

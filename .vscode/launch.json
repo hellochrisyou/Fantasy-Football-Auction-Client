@@ -5,11 +5,27 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch Angular",
+            "type": "edge",
+            "version": "dev",
+            "request": "launch",
+            "preLaunchTask": "npm: start",
+            "url": "http://localhost:4200/",
+            "webRoot": "${workspaceFolder}"
+        }
+        {
+            "name": "Launch Angular",
             "type": "chrome",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:4200",
+            "url": "http://localhost:4200/",
             "webRoot": "${workspaceFolder}"
+        }
+        {
+            "name": "Launch index.html",
+            "type": "firefox",
+            "request": "launch",
+            "reAttach": true,
+            "file": "${workspaceFolder}/index.html"
         }
     ]
 }

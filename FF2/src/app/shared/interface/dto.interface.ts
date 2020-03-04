@@ -5,11 +5,13 @@ export interface CreateLeagueDto {
     ppr?: string;
     budget?: string;
     maxPlayers?: string;
+    leagueType?: string;
 }
 
 export interface CreateTeamDto extends CreateLeagueDto {
     teamName?: string;
-    leagueType?: string;
+    photoUrl?: string;
+    draftPosition?: string;
 }
 
 export interface ApiPlayer {
@@ -20,5 +22,10 @@ export interface ApiPlayer {
     playerId: string;
     position: string;
     ppr: string;
-    team: string; 
+    team: string;
+}
+
+export interface AuctionDto {
+    email?: string;
+    leagueName?: string;
 }

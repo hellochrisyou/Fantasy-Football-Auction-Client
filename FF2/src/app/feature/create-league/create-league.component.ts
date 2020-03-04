@@ -7,8 +7,9 @@ import { AuthService } from 'src/app/core/service/auth.service';
 import { HttpService } from 'src/app/core/service/http.service';
 import { CreateBaseForm } from 'src/app/shared/base/base-form';
 import { APIURL } from 'src/app/shared/const/url.const';
-import { AuctionLeague, User } from 'src/app/shared/interface/model.interface';
 import { CreateLeagueDto } from 'src/app/shared/interface/dto.interface';
+import { AuctionLeague, User } from 'src/app/shared/interface/model.interface';
+import { SnackbarComponent } from 'src/app/shared/component/snackbar/snackbar.component';
 
 
 @Component({
@@ -93,16 +94,25 @@ export class CreateLeagueComponent extends CreateBaseForm {
       // tslint:disable-next-line: max-line-length
       this.httpService.get(APIURL.AUCTIONCALL + '/existsByLeagueName/' + `${this.formGroup.get('leagueNameCtrl').value}`).subscribe((nameExists) => {
         if (nameExists === true) {
-          this.snackBar.open('Duplicate name exists', 'FAIL', {});
+          this.openSnackBar('Duplicate Name exists', 'Duplicate-Name');
           this.formGroup.reset();
         } else {
           this.createAuctionDto.leagueName = this.formGroup.get('leagueNameCtrl').value;
           this.createAuctionDto.budget = this.formGroup.get('budgetCtrl').value;
           this.createAuctionDto.maxPlayers = this.formGroup.get('maxPlayerCtrl').value;
-          this.createAuctionDto.ppr = this.formGroup.get('pprCtrl').value;
+          if (this.formGroup.get('pprCtrl').value === true) {
+            this.createAuctionDto.ppr = 'YES';
+          } else {
+            this.createAuctionDto.ppr = 'NO';
+          }
+          if (this.typeOfDraft === 'Auction') {
+            this.createAuctionDto.leagueType = 'Auction';
+          } else {
+            this.createAuctionDto.leagueType = 'Snake';
+          }
           console.log('thisleague', this.createAuctionDto);
           this.httpService.post(APIURL.AUCTIONCALL + '/createAuctionLeague/', this.createAuctionDto).subscribe(data => {
-            this.snackBar.open('League Created', 'SUCCESS', {});
+            this.openSnackBar('Created League', 'Create-League');
             console.log('data:', data);
           }
           );
@@ -112,5 +122,13 @@ export class CreateLeagueComponent extends CreateBaseForm {
     } else {
       // Snake Draft implmentation
     }
+  }
+
+  public openSnackBar(message: string, panelClass: string): void {
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      data: message,
+      panelClass: panelClass,
+      duration: 10000
+    });
   }
 }

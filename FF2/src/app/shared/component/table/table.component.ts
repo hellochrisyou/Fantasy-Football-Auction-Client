@@ -46,7 +46,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     return this._colDisplay;
   }
   public set colDisplay(value: string) {
-    console.log('col display', value);
     this._colDisplay = value;
   }
   constructor(
