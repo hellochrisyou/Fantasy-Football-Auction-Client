@@ -1,12 +1,21 @@
-<div fxLayout="column" fxLayoutAlign="space-around center" >
-{{leagueStatus}}
-<ng-container *ngIf="leagueStatus=='Ready'"> 
-</ng-container>
-<!-- {{thisTeam.email}} -->
-<ng-container *ngIf="leagueStatus!='Ready'"> 
-<mat-slide-toggle (click)="clickReady()" matTooltip="Click if you are ready or not"
-                matTooltipPosition="above">
-                {{thisTeam.teamStatus}}
+<div fxLayout="column" fxLayoutAlign="space-around center">
+    <div class="jumbotron">
+        <h1 class="display-1">{{thisTeam.leagueName}}</h1>
+        <p class="lead">Status: {{auctionLeague.status}}</p>
+        <hr class="my-4">
+        <p>Team Name: {{thisTeam.teamName}}</p>
+    </div>
+    <ng-container *ngIf="leagueIsReady=='Yes'">
+        <ongoing-draft [ongoingLeague]="auctionLeague"></ongoing-draft>
+    </ng-container>
+
+    <ng-container *ngIf="leagueIsReady!='No'">
+        <form class="flex-form" [formGroup]="formGroup">
+            <mat-label>Are you ready?</mat-label>
+            <mat-slide-toggle (click)="clickReady()" formControlName="readyCtrl"
+                matTooltip="Click if you are ready or not" matTooltipPosition="above">
+                {{thisTeam.isReady}}
             </mat-slide-toggle>
-</ng-container> 
+        </form>
+    </ng-container>
 </div>

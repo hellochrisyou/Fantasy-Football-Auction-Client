@@ -107,38 +107,38 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       const tmpQbArray = MERGE_PLAYER_STATS(qbArray, this.lastSeasonPlayers.quaterBacks);
       this.lastSeasonPlayers.quaterBacks = REMOVE_EXTRA_PLAYERS(tmpQbArray);
       this.numQb = this.lastSeasonPlayers.quaterBacks.length;
-      });
+    });
 
     this.emitService.mergeRbOutput.subscribe(rbArray => {
       const tmpRbArray = MERGE_PLAYER_STATS(rbArray, this.lastSeasonPlayers.runningsBacks);
       this.lastSeasonPlayers.runningsBacks = REMOVE_EXTRA_PLAYERS(tmpRbArray);
-    this.numRb = this.lastSeasonPlayers.runningsBacks.length;
-      });
+      this.numRb = this.lastSeasonPlayers.runningsBacks.length;
+    });
 
     this.emitService.mergeWrOutput.subscribe(wrArray => {
       const tmpWrArray = MERGE_PLAYER_STATS(wrArray, this.lastSeasonPlayers.wideReceivers);
       this.lastSeasonPlayers.wideReceivers = REMOVE_EXTRA_PLAYERS(tmpWrArray);
       this.numWr = this.lastSeasonPlayers.wideReceivers.length;
       this.emitService.refreshTable();
-      });
+    });
 
     this.emitService.mergeTeOutput.subscribe(teArray => {
       const tmpTeArray = MERGE_PLAYER_STATS(teArray, this.lastSeasonPlayers.tightEnds);
       this.lastSeasonPlayers.tightEnds = REMOVE_EXTRA_PLAYERS(tmpTeArray);
       this.numTe = this.lastSeasonPlayers.tightEnds.length;
-      });
+    });
 
     this.emitService.mergeDefOutput.subscribe(defArray => {
       const tmpDefArray = MERGE_PLAYER_STATS(defArray, this.lastSeasonPlayers.defenses);
       this.lastSeasonPlayers.defenses = REMOVE_EXTRA_PLAYERS(tmpDefArray);
       this.numDef = this.lastSeasonPlayers.defenses.length;
-      });
+    });
 
     this.emitService.mergeKickerOutput.subscribe(kArray => {
       const tmpKArray = MERGE_PLAYER_STATS(kArray, this.lastSeasonPlayers.kickers);
       this.lastSeasonPlayers.kickers = REMOVE_EXTRA_PLAYERS(tmpKArray);
       this.numKicker = this.lastSeasonPlayers.kickers.length;
-      });
+    });
 
 
     // this.auctionDto = {
@@ -153,7 +153,7 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     console.log('history state', history.state.league.status);
     this.auctionLeague = history.state.league;
-    
+
     // this.teamArr = history.state.league.auctionTeams;
 
     // this.auctionDto = {
@@ -167,12 +167,12 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.emitService.mergeQbOutput.unsubscribe();
-    this.emitService.mergeRbOutput.unsubscribe();
-    this.emitService.mergeWrOutput.unsubscribe();
-    this.emitService.mergeTeOutput.unsubscribe();
-    this.emitService.mergeDefOutput.unsubscribe();
-    this.emitService.mergeKickerOutput.unsubscribe();
+    if (!!this.emitService.mergeQbOutput) { this.emitService.mergeQbOutput.unsubscribe(); }
+    if (!!this.emitService.mergeRbOutput) { this.emitService.mergeRbOutput.unsubscribe(); }
+    if (!!this.emitService.mergeWrOutput) { this.emitService.mergeWrOutput.unsubscribe(); }
+    if (!!this.emitService.mergeTeOutput) { this.emitService.mergeTeOutput.unsubscribe(); }
+    if (!!this.emitService.mergeDefOutput) { this.emitService.mergeDefOutput.unsubscribe(); }
+    if (!!this.emitService.mergeKickerOutput) { this.emitService.mergeKickerOutput.unsubscribe(); }
   }
   ngAfterViewInit(): void {
     this.emitService.refreshTable();

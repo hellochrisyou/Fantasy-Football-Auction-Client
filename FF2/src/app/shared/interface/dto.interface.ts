@@ -1,7 +1,12 @@
 
-export interface CreateLeagueDto {
-    email?: string;
+export interface TeamDto {
     leagueName?: string;
+    teamName?: string;
+    isReady?: string;
+}
+
+export interface CreateLeagueDto extends TeamDto {
+    email?: string;
     ppr?: string;
     budget?: string;
     maxPlayers?: string;
@@ -9,7 +14,6 @@ export interface CreateLeagueDto {
 }
 
 export interface CreateTeamDto extends CreateLeagueDto {
-    teamName?: string;
     photoUrl?: string;
     draftPosition?: string;
 }

@@ -1,0 +1,33 @@
+<div class="jumbotron">
+    <h1 class="display-4">On the Block</h1>
+    <div id="flxOnBlock" fxLayout="row" fxLayoutAlign="space-around center">
+        <section>
+            <p class="lead">{{currentPlayer.Name}}</p>
+            <p>Min. Price: {{currentPlayer.MinPrice}}</p>
+            <p>Avg. Price: {{currentPlayer.AvgPrice}}</p>
+            <p>Max. Price: {{currentPlayer.MaxPrice}}</p>
+        </section>
+        <section>
+            <p>Current Bid: {{currentBid}}</p>
+            <form class="formGroup">
+
+                <span>
+                    <mat-form-field>
+                        <mat-label>Bid Amount</mat-label>
+                        <input matInput type="number" class="number" formControlName="bidCtrl"
+                            [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="formGroup.controls.budgetCtrl.hasError('required')">
+                            Bid amount is <strong>Required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </span>
+                <span class="button-container">
+                    <button><span>Bid</span></button>
+                </span>
+            </form>
+
+            <div class="button-container">
+                <button (click)="passTurn()"><span>Pass</span></button>
+            </div>
+        </section>
+    </div>

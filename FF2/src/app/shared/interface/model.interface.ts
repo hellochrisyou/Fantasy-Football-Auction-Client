@@ -108,6 +108,7 @@ export interface Team extends BaseLeague {
     currentBudget?: string;
     players?: Player[];
     photoUrl?: string;
+    isReady?: string;
 }
 
 export interface OtherTeams {

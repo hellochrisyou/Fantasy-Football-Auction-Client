@@ -1,0 +1,71 @@
+.button-container {
+  margin: 0 60px;
+  text-align: center;
+}
+
+.button-container button {
+  outline: 0;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  background: 0;
+  width: 240px;
+  border: 2px solid #e3e3e3;
+  padding: 20px 0;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  overflow: hidden;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.button-container button span {
+  position: relative;
+  z-index: 1;
+  color: #ddd;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.button-container button:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  background: #ed2553;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  margin: -15px 0 0 -15px;
+  opacity: 0;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.button-container button:hover,
+.button-container button:active,
+.button-container button:focus {
+  border-color: #ed2553;
+}
+.button-container button:hover span,
+.button-container button:active span,
+.button-container button:focus span {
+  color: #ed2553;
+}
+.button-container button:active span,
+.button-container button:focus span {
+  color: #ffffff;
+}
+.button-container button:active:before,
+.button-container button:focus:before {
+  opacity: 1;
+  -webkit-transform: scale(10);
+  transform: scale(10);
+}
+
+#flxOnBlock {
+  max-width: 100vw;
+}
