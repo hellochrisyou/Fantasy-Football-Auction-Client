@@ -7,6 +7,8 @@ import { APIURL } from 'src/app/shared/const/url.const';
 import { TeamDto } from 'src/app/shared/interface/dto.interface';
 import { AuctionLeague, Team } from 'src/app/shared/interface/model.interface';
 import { checkIsLeagueReady } from 'src/app/shared/utils/league.util';
+import { MatDialog } from '@angular/material';
+import { BidComponent } from 'src/app/shared/component/dialog/bid/bid.component';
 
 @Component({
   selector: 'auction-lobby',
@@ -29,7 +31,8 @@ export class AuctionLobbyComponent implements OnInit {
   public _auctionLeague: AuctionLeague;
 
   constructor(
-    private auth: AuthService
+    private auth: AuthService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -49,6 +52,16 @@ export class AuctionLobbyComponent implements OnInit {
     // Need to show table of whose the current player and what his bid is. and show button to bid or not to bid.  
     // logic for bidding or not bidding (service) needs to evaluate if everyone has made a decision or not.  create field for "madeBid" for Team. make a function in eclipse to finalize bid and move to next player w/ transaction.
   }
+
+  private openDialog(index: number): void {
+    const dialogRef = this.dialog.open(BidComponent, {
+      // width: '250px',
+      data: {
+        value: this.thisTeam.budget;
+      }
+    });
+  }
+
   public setReady() {
     return this.thisTeam.isReady ? true : false;
   }

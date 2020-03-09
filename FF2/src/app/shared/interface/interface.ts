@@ -9,3 +9,6 @@ export interface ColumnObject {
     propertyName: string;
 }
 
+export interface BidData {
+    value: number;
+}

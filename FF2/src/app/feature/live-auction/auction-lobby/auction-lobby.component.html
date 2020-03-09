@@ -8,5 +8,5 @@
     <ng-container>
         <ongoing-draft [ongoingLeague]="auctionLeague"></ongoing-draft>
     </ng-container>
-    <other-teams [otherTeamsArr]="teamArr"></other-teams>
+    <other-teams [otherTeamsArr]="this.auctionLeague.auctionTeams"></other-teams>
 </div>

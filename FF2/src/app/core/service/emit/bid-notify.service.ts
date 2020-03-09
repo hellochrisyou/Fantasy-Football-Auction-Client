@@ -4,7 +4,7 @@ import { QB, RB, WR, TE, DEF, Kicker } from 'src/app/shared/interface/model.inte
 @Injectable({
     providedIn: 'root'
 })
-export class NotifyService {
+export class BidNotifyService {
 
     @Output() sendBidAmount: EventEmitter<number> = new EventEmitter();
 

@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { Player, AuctionLeague } from 'src/app/shared/interface/model.interface';
 import { CreateBaseForm } from 'src/app/shared/base/base-form';
 import { FormBuilder, Validators } from '@angular/forms';
+import { BidNotifyService } from 'src/app/core/service/emit/bid-notify.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -9,7 +10,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   templateUrl: './ongoing-draft.component.html',
   styleUrls: ['./ongoing-draft.component.scss']
 })
-export class OngoingDraftComponent extends CreateBaseForm implements OnInit {
+export class OngoingDraftComponent implements OnInit {
 
   draftTurn: string;
   currentPlayer: Player;
@@ -27,10 +28,15 @@ export class OngoingDraftComponent extends CreateBaseForm implements OnInit {
     this._ongoingLeague = value;
   }
 
-  constructor() { }
+  constructor(
+    private bidNotifyService: BidNotifyService
+  ) { }
 
   ngOnInit(): void {
     // this.currentPlayer = this._ongoingLeague.currentPlayer;
+    this.bidNotifyService.sendBidAmount.subscribe(data => {
+
+    })
   }
 
   public passTurn() {
