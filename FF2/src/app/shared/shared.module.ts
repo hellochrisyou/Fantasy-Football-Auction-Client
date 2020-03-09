@@ -10,11 +10,12 @@ import { CreateComponent } from './component/dialog/create/create.component';
 import { SnackbarComponent } from './component/snackbar/snackbar.component';
 import { BottomSheetComponent } from './component/bottom-sheet/bottom-sheet.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { BidComponent } from './component/dialog/bid/bid.component';
 
 
 
 @NgModule({
-  declarations: [ConfirmComponent, ErrorDialogComponent, TableComponent, CreateComponent, SnackbarComponent, BottomSheetComponent],
+  declarations: [ConfirmComponent, ErrorDialogComponent, TableComponent, CreateComponent, SnackbarComponent, BottomSheetComponent, BidComponent],
   imports: [
     CommonModule,
     MaterialModule,

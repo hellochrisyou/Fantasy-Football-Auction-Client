@@ -1,21 +1,12 @@
 <div fxLayout="column" fxLayoutAlign="space-around center">
-    <div class="jumbotron">
+    <div id="lobbyJumbotron" class="jumbotron">
         <h1 class="display-1">{{thisTeam.leagueName}}</h1>
         <p class="lead">Status: {{auctionLeague.status}}</p>
         <hr class="my-4">
         <p>Team Name: {{thisTeam.teamName}}</p>
     </div>
-    <ng-container *ngIf="leagueIsReady=='Yes'">
+    <ng-container>
         <ongoing-draft [ongoingLeague]="auctionLeague"></ongoing-draft>
     </ng-container>
-
-    <ng-container *ngIf="leagueIsReady!='No'">
-        <form class="flex-form" [formGroup]="formGroup">
-            <mat-label>Are you ready?</mat-label>
-            <mat-slide-toggle (click)="clickReady()" formControlName="readyCtrl"
-                matTooltip="Click if you are ready or not" matTooltipPosition="above">
-                {{thisTeam.isReady}}
-            </mat-slide-toggle>
-        </form>
-    </ng-container>
+    <other-teams [otherTeamsArr]="teamArr"></other-teams>
 </div>

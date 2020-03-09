@@ -1,6 +1,6 @@
 <h1 class="text-center"><u>Live Auction</u></h1>
 <mat-tab-group mat-align-tabs="center">
-<mat-tab label="Lobby">
+    <mat-tab label="Lobby">
         <ng-template matTabLabel>
             Lobby
         </ng-template>
@@ -76,9 +76,5 @@
                 </mat-icon>
             </ng-template>
         </base-table>
-    </mat-tab>
-    <mat-tab label="Teams">
-        <ng-template matTabLabel>Teams</ng-template>        
-        <other-teams [otherTeamsArr]="teamArr"></other-teams>
     </mat-tab>
 </mat-tab-group>

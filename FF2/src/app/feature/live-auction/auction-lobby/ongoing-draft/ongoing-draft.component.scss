@@ -10,7 +10,7 @@
   display: inline-block;
   background: 0;
   width: 240px;
-  border: 2px solid #e3e3e3;
+  border: 2px solid grey;
   padding: 20px 0;
   font-size: 24px;
   font-weight: 600;
@@ -24,7 +24,7 @@
 .button-container button span {
   position: relative;
   z-index: 1;
-  color: #ddd;
+  color: grey;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
 }
@@ -67,5 +67,17 @@
 }
 
 #flxOnBlock {
-  max-width: 100vw;
+  max-width: 98vw;
+}
+
+.mat-form-field {
+  margin-left: 25%;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: black;
+}
+/* Font color */
+input.mat-input-element {
+  color: black;
 }

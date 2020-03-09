@@ -27,20 +27,9 @@ export class OngoingDraftComponent extends CreateBaseForm implements OnInit {
     this._ongoingLeague = value;
   }
 
-  constructor(
-    protected fb: FormBuilder,
-    protected changeDetectorRef: ChangeDetectorRef, ) {
-    super(fb, changeDetectorRef);
-  }
+  constructor() { }
 
   ngOnInit(): void {
-
-    this.formGroup = this.fb.group({
-      bidCtrl: ['', [
-        Validators.required
-      ]],
-    });
-
     // this.currentPlayer = this._ongoingLeague.currentPlayer;
   }
 
