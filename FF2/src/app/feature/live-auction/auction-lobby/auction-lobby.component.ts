@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/core/service/auth.service';
 import { TeamDto } from 'src/app/shared/interface/dto.interface';
 import { AuctionLeague, Team } from 'src/app/shared/interface/model.interface';
 import { findTeam } from 'src/app/shared/utils/findTeam.utils';
-import { LeagueStoreService } from 'src/app/core/service/league-store.service';
+import { LeagueStoreService } from 'src/app/core/service/store/league-store.service';
 
 @Component({
   selector: 'auction-lobby',

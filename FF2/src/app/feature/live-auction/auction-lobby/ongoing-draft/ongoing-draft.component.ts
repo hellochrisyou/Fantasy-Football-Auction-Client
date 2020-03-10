@@ -7,7 +7,7 @@ import { BidDto } from 'src/app/shared/interface/dto.interface';
 import { HttpService } from 'src/app/core/service/http.service';
 import { APIURL } from 'src/app/shared/const/url.const';
 import { SnackbarComponent } from 'src/app/shared/component/snackbar/snackbar.component';
-import { LeagueStoreService } from 'src/app/core/service/league-store.service';
+import { LeagueStoreService } from 'src/app/core/service/store/league-store.service';
 
 @Component({
   // tslint:disable-next-line: component-selector

@@ -38,7 +38,7 @@ import {
   WR,
 } from 'src/app/shared/interface/model.interface';
 import { findTeam } from 'src/app/shared/utils/findTeam.utils';
-import { LeagueStoreService } from '../../core/service/league-store.service';
+import { LeagueStoreService } from '../../core/service/store/league-store.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
