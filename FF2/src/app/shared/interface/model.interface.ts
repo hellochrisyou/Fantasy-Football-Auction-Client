@@ -64,7 +64,7 @@ export interface Kicker extends Player {
 }
 
 export interface BaseLeague {
-    Select: string;
+    Select?: string;
     leagueName?: string;
     maxPlayers?: string;
     leagueType?: string;
@@ -80,12 +80,10 @@ export interface SnakeLeague extends BaseLeague {
     draftTurn?: string;
     draftRound?: string;
     DefaultAutoPick?: string;
-    budget?: string;
 }
 
 
 export interface AuctionLeague extends SnakeLeague {
-    budget?: string;
     currentPlayer?: string;
     currentBidder?: string;
     currentBid?: string;
@@ -100,12 +98,15 @@ export interface User {
     teams?: Team[];
 }
 
-export interface Team extends BaseLeague {
+export interface Team {
+    Select?: string;
     teamName?: string;
     email?: string;
     teamStatus?: string;
     draftPosition?: string;
     currentBudget?: string;
+    leagueType?: string;
+    ppr?: string;
     players?: Player[];
     photoUrl?: string;
     endBid?: string;

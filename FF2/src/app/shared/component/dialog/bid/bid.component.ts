@@ -13,6 +13,8 @@ export class BidComponent extends CreateBaseForm implements OnInit {
 
   colorControl = new FormControl('primary');
 
+  thisCurrentBid: number;
+
   constructor(
     protected fb: FormBuilder,
     protected changeDetectorRef: ChangeDetectorRef,
@@ -25,11 +27,11 @@ export class BidComponent extends CreateBaseForm implements OnInit {
   ngOnInit(): void {
     console.log('budget', this.data.budget);
     console.log('currentBid', this.data.currentBid);
-
+    this.thisCurrentBid = +this.data.currentBid;
     this.formGroup = this.fb.group({
       bidCtrl: ['', [Validators.required, Validators.min(this.data.currentBid), Validators.max(this.data.budget)]]
     });
-    // this.dialogRef.updateSize('250px');
+    this.dialogRef.updateSize('300px');
 
   }
 

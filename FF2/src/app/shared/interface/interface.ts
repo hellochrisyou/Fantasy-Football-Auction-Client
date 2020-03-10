@@ -12,4 +12,5 @@ export interface ColumnObject {
 export interface BidData {
     budget: number;
     currentBid: number;
+    postion: string;
 }

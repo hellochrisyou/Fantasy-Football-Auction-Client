@@ -1,4 +1,4 @@
-<ng-container *ngIf="ongoingLeague.draftTurn === thisTeam.draftPosition && ongoingLeague.currentPlayer === ''">
+<ng-container *ngIf="thisActiveLeague.draftTurn === thisTeam.draftPosition && thisActiveLeague.currentPlayer === ''">
     <header>
         <section class="header-content">
             <h1 class="header-title animate-pop-in">It's your turn!</h1>
@@ -6,7 +6,7 @@
         </section>
     </header>
 </ng-container>
-<ng-container *ngIf="ongoingLeague.currentPlayer !== ''">
+<ng-container *ngIf="thisActiveLeague.currentPlayer !== ''">
     <header>
         <section class="header-content">
             <h1 class="header-title animate-pop-in">Make a move!</h1>
@@ -15,15 +15,15 @@
     </header>
     <mat-card>
         <div>
-            <h3><u>{{ongoingLeague.currentPlayer}}</u></h3>
+            <h3><u>{{thisActiveLeague.currentPlayer}}</u></h3>
             <br />
         </div>
         <mat-card-content>
-            <p class="lead">Current Bidder: <span id="tab"> {{ongoingLeague.currentBidder}}</span></p>
+            <p class="lead">Current Bidder: <span id="tab"> {{thisActiveLeague.currentBidder}}</span></p>
             <p class="lead">Current Bid: <span id="tab2"> {{bidAmount}}</span></p>
         </mat-card-content>
         <mat-card-actions>
-            <ng-container *ngIf="ongoingLeague.draftTurn !== thisTeam.draftPosition">
+            <ng-container *ngIf="thisActiveLeague.draftTurn !== thisTeam.draftPosition">
                 <div id="bid-glow" class="button-container">
                     <button (click)="openBidDialog()"><span>Bid</span></button>
                 </div>

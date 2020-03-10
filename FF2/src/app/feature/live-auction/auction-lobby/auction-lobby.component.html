@@ -1,12 +1,13 @@
 <ng-container>
-    <ongoing-draft [ongoingLeague]="auctionLeague" [thisTeam]="thisTeam"></ongoing-draft>
+    <ongoing-draft></ongoing-draft>
 </ng-container>
+
 <div fxLayout="column" fxLayoutAlign="space-around center">
     <div id="lobbyJumbotron" class="jumbotron">
-        <h1 class="display-1">{{thisTeam.leagueName}}</h1>
+        <h1 class="display-1">{{auctionLeague.leagueName}}</h1>
         <p class="lead">Status: {{auctionLeague.status}}</p>
         <hr class="my-4">
-        <p>Team Name: {{thisTeam.teamName}}</p>
+        <p>Team: {{thisTeam.teamName}}</p>
     </div>
 
     <other-teams [otherTeamsArr]="this.auctionLeague.auctionTeams"></other-teams>

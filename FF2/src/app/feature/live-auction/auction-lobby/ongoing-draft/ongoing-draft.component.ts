@@ -7,6 +7,7 @@ import { BidDto } from 'src/app/shared/interface/dto.interface';
 import { HttpService } from 'src/app/core/service/http.service';
 import { APIURL } from 'src/app/shared/const/url.const';
 import { SnackbarComponent } from 'src/app/shared/component/snackbar/snackbar.component';
+import { LeagueStoreService } from 'src/app/core/service/league-store.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -23,63 +24,67 @@ export class OngoingDraftComponent implements OnInit {
   bidAmount: number;
   thisBidDto: BidDto = {};
 
-  // tslint:disable-next-line: variable-name
-  private _ongoingLeague: AuctionLeague;
-  // tslint:disable-next-line: variable-name
-  private _thisTeam: Team;
+  thisActiveLeague: AuctionLeague;
+  thisTeam: Team;
 
-  @Input()
-  public get ongoingLeague(): AuctionLeague {
-    return this._ongoingLeague;
-  }
-  public set ongoingLeague(value: AuctionLeague) {
-    this._ongoingLeague = value;
-  }
-  @Input()
-  public get thisTeam(): Team {
-    return this._thisTeam;
-  }
-  public set thisTeam(value: Team) {
-    this._thisTeam = value;
-  }
   constructor(
     public dialog: MatDialog,
     private httpService: HttpService,
     private snackBar: MatSnackBar,
+    private leagueStoreService: LeagueStoreService
   ) { }
 
   ngOnInit(): void {
     // this.currentPlayer = this._ongoingLeague.currentPlayer;
-    this.bidAmount = Math.floor(+this.ongoingLeague.currentBid);
+    this.leagueStoreService.auctionLeague$.subscribe(leagueObservable => {
+      console.log('leagueObservable live this.ongoing-draft.ts', leagueObservable);
+      this.thisActiveLeague = leagueObservable;
+    });
+    console.log('2', this.thisTeam);
+    this.leagueStoreService.auctionTeam$.subscribe(teamObservable => {
+      console.log('teamObservable live this.ongoing-draft.ts' + teamObservable);
+      this.thisTeam = teamObservable;
+    });
+    this.bidAmount = Math.floor(+this.thisActiveLeague.currentBid);
   }
 
   public openBidDialog() {
     const dialogRef = this.dialog.open(BidComponent, {
       width: '300px',
       data: {
-        budget: +this.thisTeam.budget,
-        currentBid: this._ongoingLeague.currentBid
+        budget: +this.thisTeam.currentBudget,
+        currentBid: this.thisActiveLeague.currentBid,
+        // team:
+        // position:
       }
     });
     dialogRef.afterClosed().subscribe(bidAmountResult => {
       console.log('The dialog was closed.data:', bidAmountResult.bidAmount);
-      this.thisBidDto.leagueName = this._ongoingLeague.leagueName;
+      this.thisBidDto.leagueName = this.thisActiveLeague.leagueName;
       this.thisBidDto.teamName = this.thisTeam.teamName;
       this.thisBidDto.newBid = bidAmountResult.bidAmount;
-      this.thisBidDto.playerName = this._ongoingLeague.currentPlayer;
-      this.httpService.post(APIURL.AUCTIONCALL + '/makeBid/', this.thisBidDto).subscribe(data => {
+      this.thisBidDto.playerName = this.thisActiveLeague.currentPlayer;
+      // this.thisBigDto.position = 
+      // this.thisBigDto.team = 
+      this.httpService.post(APIURL.AUCTIONCALL + '/makeBid/', this.thisBidDto).subscribe(newLeague => {
         this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'make-bid');
+        this.leagueStoreService.auctionLeague = newLeague;
       });
     });
   }
 
   public passTurn() {
-    this.thisBidDto.leagueName = this._ongoingLeague.leagueName;
+    this.thisBidDto.leagueName = this.thisActiveLeague.leagueName;
+    console.log('this team name', this.thisTeam);
     this.thisBidDto.teamName = this.thisTeam.teamName;
-    this.thisBidDto.newBid = +this._ongoingLeague.currentBid;
-    this.thisBidDto.playerName = this._ongoingLeague.currentPlayer;
-    this.httpService.post(APIURL.AUCTIONCALL + '/noBid/', this.thisBidDto).subscribe(data => {
+    this.thisBidDto.newBid = +this.thisActiveLeague.currentBid;
+    this.thisBidDto.playerName = this.thisActiveLeague.currentPlayer;
+    this.thisBidDto.teamName = this.thisTeam.teamName;
+    // this.thisBidDto.position = 
+    // this.thisBigDto.team = 
+    this.httpService.post(APIURL.AUCTIONCALL + '/noBid/', this.thisBidDto).subscribe(newLeague => {
       this.openSnackBar('You choose to pass on: ' + this.thisBidDto.playerName, 'no-bid');
+      this.leagueStoreService.auctionLeague = newLeague;
     });
   }
 

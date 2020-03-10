@@ -43,4 +43,6 @@ export interface BidDto {
     teamName?: string;
     newBid?: number;
     playerName?: string;
+    team?: string;
+    position?: string;
 }

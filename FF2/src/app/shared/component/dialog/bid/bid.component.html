@@ -10,7 +10,7 @@
                 Bid amount is <strong>Required</strong>
             </mat-error>
             <mat-error *ngIf="bidCtrl.hasError('min')">
-                Minimum of 1$ is <strong>Required</strong>
+                <strong>Minimum</strong> of ${{thisCurrentBid}} is <strong>Required</strong>
             </mat-error>
             <mat-error *ngIf="bidCtrl.hasError('max')">
                 Maximum Bid <strong>Exceeded</strong>
