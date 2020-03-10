@@ -39,6 +39,12 @@ import {
 } from 'src/app/shared/interface/model.interface';
 import { findTeam } from 'src/app/shared/utils/findTeam.utils';
 import { LeagueStoreService } from '../../core/service/store/league-store.service';
+import { DefStoreService } from '../../core/service/store/def-store.service';
+import { KStoreService } from '../../core/service/store/k-store.service';
+import { QbStoreService } from '../../core/service/store/qb-store.service';
+import { RbStoreService } from '../../core/service/store/rb-store.service';
+import { WrStoreService } from '../../core/service/store/wr-store.service';
+import { TeStoreService } from '../../core/service/store/te-store.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -109,7 +115,15 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
     private auth: AuthService,
     private httpService: HttpService,
     private snackBar: MatSnackBar,
-    private leagueStoreService: LeagueStoreService
+    private leagueStoreService: LeagueStoreService,
+    public defStoreService: DefStoreService,
+    public kStoreService: KStoreService,
+    public qbStoreService: QbStoreService,
+    public rbStoreService: RbStoreService,
+    public wrStoreService: WrStoreService,
+    public teStoreService: TeStoreService
+
+
 
   ) {
     this.route.data.subscribe((data: { auctionValues: any }) => {
@@ -120,39 +134,46 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       if (qbArray.length === 0) {
         this.emitService.refreshTable();
       }
+
       const tmpQbArray = MERGE_PLAYER_STATS(qbArray, this.lastSeasonPlayers.quaterBacks);
-      this.lastSeasonPlayers.quaterBacks = REMOVE_EXTRA_PLAYERS(tmpQbArray);
+      this.qbStoreService.qbArr = REMOVE_EXTRA_PLAYERS(tmpQbArray);
+      // this.lastSeasonPlayers.quaterBacks = REMOVE_EXTRA_PLAYERS(tmpQbArray);
       this.numQb = this.lastSeasonPlayers.quaterBacks.length;
     });
 
     this.emitService.mergeRbOutput.subscribe(rbArray => {
       const tmpRbArray = MERGE_PLAYER_STATS(rbArray, this.lastSeasonPlayers.runningsBacks);
-      this.lastSeasonPlayers.runningsBacks = REMOVE_EXTRA_PLAYERS(tmpRbArray);
+      this.rbStoreService.rbArr = REMOVE_EXTRA_PLAYERS(tmpRbArray);
+      // this.lastSeasonPlayers.runningsBacks = REMOVE_EXTRA_PLAYERS(tmpRbArray);
       this.numRb = this.lastSeasonPlayers.runningsBacks.length;
     });
 
     this.emitService.mergeWrOutput.subscribe(wrArray => {
       const tmpWrArray = MERGE_PLAYER_STATS(wrArray, this.lastSeasonPlayers.wideReceivers);
-      this.lastSeasonPlayers.wideReceivers = REMOVE_EXTRA_PLAYERS(tmpWrArray);
+      this.wrStoreService.wrArr = REMOVE_EXTRA_PLAYERS(tmpWrArray);
+      // this.lastSeasonPlayers.wideReceivers = REMOVE_EXTRA_PLAYERS(tmpWrArray);
       this.numWr = this.lastSeasonPlayers.wideReceivers.length;
       this.emitService.refreshTable();
     });
 
     this.emitService.mergeTeOutput.subscribe(teArray => {
       const tmpTeArray = MERGE_PLAYER_STATS(teArray, this.lastSeasonPlayers.tightEnds);
-      this.lastSeasonPlayers.tightEnds = REMOVE_EXTRA_PLAYERS(tmpTeArray);
+      this.teStoreService.teArr = REMOVE_EXTRA_PLAYERS(tmpTeArray);
+      // this.lastSeasonPlayers.tightEnds = REMOVE_EXTRA_PLAYERS(tmpTeArray);
       this.numTe = this.lastSeasonPlayers.tightEnds.length;
     });
 
     this.emitService.mergeDefOutput.subscribe(defArray => {
       const tmpDefArray = MERGE_PLAYER_STATS(defArray, this.lastSeasonPlayers.defenses);
-      this.lastSeasonPlayers.defenses = REMOVE_EXTRA_PLAYERS(tmpDefArray);
+      this.defStoreService.defArr = REMOVE_EXTRA_PLAYERS(tmpDefArray);
+      // this.lastSeasonPlayers.defenses = REMOVE_EXTRA_PLAYERS(tmpDefArray);
       this.numDef = this.lastSeasonPlayers.defenses.length;
     });
 
     this.emitService.mergeKickerOutput.subscribe(kArray => {
       const tmpKArray = MERGE_PLAYER_STATS(kArray, this.lastSeasonPlayers.kickers);
-      this.lastSeasonPlayers.kickers = REMOVE_EXTRA_PLAYERS(tmpKArray);
+      this.kStoreService.kArr = REMOVE_EXTRA_PLAYERS(tmpKArray);
+      // this.lastSeasonPlayers.kickers = REMOVE_EXTRA_PLAYERS(tmpKArray);
       this.numKicker = this.lastSeasonPlayers.kickers.length;
     });
 

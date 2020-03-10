@@ -10,8 +10,8 @@
         <ng-template matTabLabel>
             <span [matBadge]="numQb" matBadgeOverlap="false">QB</span>
         </ng-template>
-        <base-table [columnObjects]="QB_COL_OBJ" [colDisplay]="QB_DISPLAY"
-            [dataArray]="this.lastSeasonPlayers.quaterBacks" [thisTeam]="thisTeam">
+        <base-table [columnObjects]="QB_COL_OBJ" [colDisplay]="QB_DISPLAY" [dataArray]="this.qbStoreService.qbArr$"
+            [thisTeam]="thisTeam">
             <ng-container *ngIf="thisActiveLeague.draftTurn === thisTeam.draftPosition">
                 <ng-template #buttonTemplate let-i=index>
                     <mat-icon (click)="bidQbPlayer(i)" matTooltip="Auction Player" matTooltipPosition="before">
@@ -25,8 +25,7 @@
         <ng-template matTabLabel>
             <span [matBadge]="numRb" matBadgeOverlap="false">RB</span>
         </ng-template>
-        <base-table [columnObjects]="RB_COL_OBJ" [colDisplay]="RB_COL_OBJ"
-            [dataArray]="this.lastSeasonPlayers.runningsBacks">
+        <base-table [columnObjects]="RB_COL_OBJ" [colDisplay]="RB_COL_OBJ" [dataArray]="this.rbStoreService.rbArr$">
             <ng-container *ngIf="thisActiveLeague.draftTurn === thisTeam.draftPosition">
                 <ng-template #buttonTemplate let-i=index>
                     <mat-icon (click)="bidRbPlayer(i)" matTooltip="Auction Player" matTooltipPosition="before">
@@ -40,8 +39,7 @@
         <ng-template matTabLabel>
             <span [matBadge]="numWr" matBadgeOverlap="false">WR</span>
         </ng-template>
-        <base-table [columnObjects]="REC_COL_OBJ" [colDisplay]="REC_DISPLAY"
-            [dataArray]="this.lastSeasonPlayers.wideReceivers">
+        <base-table [columnObjects]="REC_COL_OBJ" [colDisplay]="REC_DISPLAY" [dataArray]="this.wrStoreService.wrArr$">
             <ng-container *ngIf="thisActiveLeague.draftTurn === thisTeam.draftPosition">
                 <ng-template #buttonTemplate let-i=index>
                     <mat-icon (click)="bidWrPlayer(i)" matTooltip="Auction Player" matTooltipPosition="before">
@@ -55,8 +53,7 @@
         <ng-template matTabLabel>
             <span [matBadge]="numTe" matBadgeOverlap="false">TE</span>
         </ng-template>
-        <base-table [columnObjects]="REC_COL_OBJ" [colDisplay]="REC_DISPLAY"
-            [dataArray]="this.lastSeasonPlayers.tightEnds">
+        <base-table [columnObjects]="REC_COL_OBJ" [colDisplay]="REC_DISPLAY" [dataArray]="this.teStoreService.teArr$">
             <ng-container *ngIf="thisActiveLeague.draftTurn === thisTeam.draftPosition">
                 <ng-template #buttonTemplate let-i=index>
                     <mat-icon (click)="bidTePlayer(i)" matTooltip="Auction Player" matTooltipPosition="before">
@@ -70,8 +67,7 @@
         <ng-template matTabLabel>
             <span [matBadge]="numDef" matBadgeOverlap="false">DEF</span>
         </ng-template>
-        <base-table [columnObjects]="DEF_COL_OBJ" [colDisplay]="DEF_DISPLAY"
-            [dataArray]="this.lastSeasonPlayers.defenses">
+        <base-table [columnObjects]="DEF_COL_OBJ" [colDisplay]="DEF_DISPLAY" [dataArray]="this.defStoreService.defArr$">
             <ng-container *ngIf="thisActiveLeague.draftTurn === thisTeam.draftPosition">
                 <ng-template #buttonTemplate let-i=index>
                     <mat-icon (click)="bidDefPlayer(i)" matTooltip="Auction Player" matTooltipPosition="before">
@@ -85,7 +81,7 @@
         <ng-template matTabLabel>
             <span [matBadge]="numKicker" matBadgeOverlap="false">K</span>
         </ng-template>
-        <base-table [columnObjects]="K_COL_OBJ" [colDisplay]="K_DISPLAY" [dataArray]="this.lastSeasonPlayers.kickers">
+        <base-table [columnObjects]="K_COL_OBJ" [colDisplay]="K_DISPLAY" [dataArray]="this.kStoreService.kArr$">
             <ng-container *ngIf="thisActiveLeague.draftTurn === thisTeam.draftPosition">
                 <ng-template #buttonTemplate let-i=index>
                     <mat-icon (click)="bidKPlayer(i)" matTooltip="Auction Player" matTooltipPosition="before">
