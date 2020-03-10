@@ -5,8 +5,12 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmitService } from 'src/app/core/service/emit.service';
 
+import { HttpService } from '../../../core/service/http.service';
 import { expandRowTransition } from '../../animation/animation';
-import { Team } from '../../interface/model.interface';
+import { APIURL } from '../../const/url.const';
+import { BidDto } from '../../interface/dto.interface';
+import { AuctionLeague, Team } from '../../interface/model.interface';
+import { BidComponent } from '../dialog/bid/bid.component';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -18,7 +22,6 @@ import { Team } from '../../interface/model.interface';
 export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   index: number;
-
   expandTeam: Team;
 
   @Input()
@@ -49,9 +52,17 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     this._colDisplay = value;
   }
   constructor(
-    public dialog: MatDialog,
     private emitService: EmitService,
+    private httpService: HttpService
   ) {
+  }
+
+  @Input()
+  public get thisTeam(): Team {
+    return this._thisTeam;
+  }
+  public set thisTeam(team: Team) {
+    this._thisTeam = team;
   }
 
   dataSource: MatTableDataSource<any>;
@@ -64,19 +75,21 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   private _dataArray: any[];
   // tslint:disable-next-line: variable-name
   private _colDisplay: string;
+  // tslint:disable-next-line: variable-name
+  private _thisTeam: Team;
 
   @ContentChild('buttonTemplate', { static: false }) optionTemplateRef: TemplateRef<any>;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   public ngOnInit(): void {
-    this.emitService.refreshOutput.subscribe(x => {
-      this.refresh();
-    });
+
   }
 
   public ngAfterViewInit(): void {
-    this.refresh();
+    this.emitService.refreshOutput.subscribe(x => {
+      this.refresh();
+    });
   }
 
   public ngOnDestroy(): void {
@@ -98,7 +111,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public addPlayer(index: number): void {
-    console.log('add player index #: ', index);
+
   }
 
   // SORTING
@@ -119,6 +132,10 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       return;
     }
+  }
+
+  public openBidDialog() {
+
   }
 
 }

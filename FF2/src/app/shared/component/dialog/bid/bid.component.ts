@@ -1,10 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { CreateBaseForm } from 'src/app/shared/base/base-form';
-import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ConfirmComponent } from '../confirm/confirm.component';
-import { DialogData } from 'src/app/shared/interface/interface';
-import { BidNotifyService } from 'src/app/core/service/emit/bid-notify.service';
+import { BidData } from 'src/app/shared/interface/interface';
 
 @Component({
   selector: 'app-bid',
@@ -13,25 +11,35 @@ import { BidNotifyService } from 'src/app/core/service/emit/bid-notify.service';
 })
 export class BidComponent extends CreateBaseForm implements OnInit {
 
+  colorControl = new FormControl('primary');
+
   constructor(
     protected fb: FormBuilder,
-    private bidNotifyService: BidNotifyService,
     protected changeDetectorRef: ChangeDetectorRef,
     public dialogRef: MatDialogRef<BidComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: BidData
   ) {
     super(fb, changeDetectorRef);
   }
 
   ngOnInit(): void {
+    console.log('budget', this.data.budget);
+    console.log('currentBid', this.data.currentBid);
+
     this.formGroup = this.fb.group({
-      bidCtrl: ['', [
-        Validators.required
-      ]],
+      bidCtrl: ['', [Validators.required, Validators.min(this.data.currentBid), Validators.max(this.data.budget)]]
     });
+    // this.dialogRef.updateSize('250px');
+
   }
 
-  sendBid() {
-    this.bidNotifyService.emitBidAmount(this.formGroup.get('bidCtrl').value);
+  get bidCtrl(): AbstractControl {
+    return this.formGroup.get('bidCtrl');
+  }
+
+
+  public bid() {
+    this.dialogRef.close({ bidAmount: this.formGroup.get('bidCtrl').value });
   }
 }
+

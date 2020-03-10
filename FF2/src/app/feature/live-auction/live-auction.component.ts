@@ -1,13 +1,17 @@
-import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { AuctionSortService } from 'src/app/core/service/auction-sort.service';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { EmitService } from 'src/app/core/service/emit.service';
-import { LastSeasonStatService } from 'src/app/core/service/last-season-stat.service';
+import { HttpService } from 'src/app/core/service/http.service';
 import { MERGE_PLAYER_STATS, REMOVE_EXTRA_PLAYERS } from 'src/app/core/util/merge-stats.util';
-
+import { BidComponent } from 'src/app/shared/component/dialog/bid/bid.component';
+import { SnackbarComponent } from 'src/app/shared/component/snackbar/snackbar.component';
 import {
+  AUCTION_TEAM_COL_OBJ,
+  AUCTION_TEAM_DISPLAY,
   DEF_COL_OBJ,
   DEF_DISPLAY,
   K_COL_OBJ,
@@ -18,15 +22,22 @@ import {
   RB_DISPLAY,
   REC_COL_OBJ,
   REC_DISPLAY,
-  AUCTION_TEAM_COL_OBJ,
-  AUCTION_TEAM_DISPLAY
 } from 'src/app/shared/const/column.const';
-import { DEF, Kicker, LastSeasonPlayers, QB, RB, TE, Team, AuctionLeague, User, WR } from 'src/app/shared/interface/model.interface';
 import { APIURL } from 'src/app/shared/const/url.const';
-import { HttpService } from 'src/app/core/service/http.service';
-import { AuctionDto } from 'src/app/shared/interface/dto.interface';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BidDto } from 'src/app/shared/interface/dto.interface';
+import {
+  AuctionLeague,
+  DEF,
+  Kicker,
+  LastSeasonPlayers,
+  QB,
+  RB,
+  TE,
+  Team,
+  User,
+  WR,
+} from 'src/app/shared/interface/model.interface';
+import { findTeam } from 'src/app/shared/utils/findTeam.utils';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -42,6 +53,7 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
   numTe: number;
   numDef: number;
   numKicker: number;
+  thisBidDto: BidDto = {};
 
   auctionLeague: AuctionLeague;
   auctionTeam: Team;
@@ -89,12 +101,14 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
   teamArr: Team[] = [];
 
   constructor(
+    public dialog: MatDialog,
     private route: ActivatedRoute,
     private auctionSortService: AuctionSortService,
     private emitService: EmitService,
     private auth: AuthService,
     private httpService: HttpService,
-    private db: AngularFirestore
+    private snackBar: MatSnackBar,
+
   ) {
     this.route.data.subscribe((data: { auctionValues: any }) => {
       this.lastSeasonPlayers = this.auctionSortService.sortAuctionPlayers(data.auctionValues);
@@ -154,6 +168,8 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log('history state', history.state.league.status);
     this.auctionLeague = history.state.league;
 
+    this.thisTeam = findTeam(this.auth.authState.email, this.auctionLeague);
+
     // this.teamArr = history.state.league.auctionTeams;
 
     // this.auctionDto = {
@@ -178,27 +194,125 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
     this.emitService.refreshTable();
   }
 
-  public addQbPlayer(index: number): void {
-    this.thisTeam.players.push(this.lastSeasonPlayers.quaterBacks[index]);
+  public bidQbPlayer(index: number): void {
+    const dialogRef = this.dialog.open(BidComponent, {
+      width: '300px',
+      data: {
+        budget: +this.thisTeam.budget,
+        currentBid: 0
+      }
+    });
+    dialogRef.afterClosed().subscribe(bidAmountResult => {
+      this.thisBidDto.leagueName = this.auctionLeague.leagueName;
+      this.thisBidDto.teamName = this.thisTeam.teamName;
+      this.thisBidDto.newBid = bidAmountResult.bidAmount;
+      this.thisBidDto.playerName = this.lastSeasonPlayers.quaterBacks[index].Name;
+      this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(data => {
+        this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
+      });
+    });
   }
 
-  public addRbPlayer(index: number): void {
-    // console.log('add player index #: ', index);
+  public bidRbPlayer(index: number): void {
+    const dialogRef = this.dialog.open(BidComponent, {
+      width: '300px',
+      data: {
+        budget: +this.thisTeam.budget,
+        currentBid: 0
+      }
+    });
+    dialogRef.afterClosed().subscribe(bidAmountResult => {
+      this.thisBidDto.leagueName = this.auctionLeague.leagueName;
+      this.thisBidDto.teamName = this.thisTeam.teamName;
+      this.thisBidDto.newBid = bidAmountResult.bidAmount;
+      this.thisBidDto.playerName = this.lastSeasonPlayers.runningsBacks[index].Name;
+      this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(data => {
+        this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
+      });
+    });
   }
 
-  public addWrPlayer(index: number): void {
-    // console.log('add player index #: ', index);
+  public bidWrPlayer(index: number): void {
+    const dialogRef = this.dialog.open(BidComponent, {
+      width: '300px',
+      data: {
+        budget: +this.thisTeam.budget,
+        currentBid: 0
+      }
+    });
+    dialogRef.afterClosed().subscribe(bidAmountResult => {
+      this.thisBidDto.leagueName = this.auctionLeague.leagueName;
+      this.thisBidDto.teamName = this.thisTeam.teamName;
+      this.thisBidDto.newBid = bidAmountResult.bidAmount;
+      this.thisBidDto.playerName = this.lastSeasonPlayers.wideReceivers[index].Name;
+      this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(data => {
+        this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
+      });
+    });
   }
 
-  public addTePlayer(index: number): void {
-    // console.log('add player index #: ', index);
+  public bidTePlayer(index: number): void {
+    const dialogRef = this.dialog.open(BidComponent, {
+      width: '300px',
+      data: {
+        budget: +this.thisTeam.budget,
+        currentBid: 0
+      }
+    });
+    dialogRef.afterClosed().subscribe(bidAmountResult => {
+      this.thisBidDto.leagueName = this.auctionLeague.leagueName;
+      this.thisBidDto.teamName = this.thisTeam.teamName;
+      this.thisBidDto.newBid = bidAmountResult.bidAmount;
+      this.thisBidDto.playerName = this.lastSeasonPlayers.tightEnds[index].Name;
+      this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(data => {
+        this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
+      });
+    });
   }
 
-  public addDefPlayer(index: number): void {
-    // console.log('add player index #: ', index);
+  public bidDefPlayer(index: number): void {
+    const dialogRef = this.dialog.open(BidComponent, {
+      width: '300px',
+      data: {
+        budget: +this.thisTeam.budget,
+        currentBid: 0
+      }
+    });
+    dialogRef.afterClosed().subscribe(bidAmountResult => {
+      this.thisBidDto.leagueName = this.auctionLeague.leagueName;
+      this.thisBidDto.teamName = this.thisTeam.teamName;
+      this.thisBidDto.newBid = bidAmountResult.bidAmount;
+      this.thisBidDto.playerName = this.lastSeasonPlayers.defenses[index].Name;
+      this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(data => {
+        this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
+      });
+    });
   }
 
-  public addKPlayer(index: number): void {
-    // console.log('add player index #: ', index);
+  public bidKPlayer(index: number): void {
+    const dialogRef = this.dialog.open(BidComponent, {
+      width: '300px',
+      data: {
+        budget: +this.thisTeam.budget,
+        currentBid: 0
+      }
+    });
+    dialogRef.afterClosed().subscribe(bidAmountResult => {
+      this.thisBidDto.leagueName = this.auctionLeague.leagueName;
+      this.thisBidDto.teamName = this.thisTeam.teamName;
+      this.thisBidDto.newBid = bidAmountResult.bidAmount;
+      this.thisBidDto.playerName = this.lastSeasonPlayers.kickers[index].Name;
+      this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(data => {
+        this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
+      });
+    });
+  }
+
+  public openSnackBar(message: string, panelClass: string): void {
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      data: message,
+      panelClass: panelClass,
+      duration: 10000
+    });
   }
 }

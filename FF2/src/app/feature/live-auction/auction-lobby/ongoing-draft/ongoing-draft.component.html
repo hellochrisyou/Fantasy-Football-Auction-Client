@@ -1,22 +1,37 @@
-<div id="flxOnBlock" fxLayout="row" fxLayoutAlign="space-around center">
-    <div fxFlex></div>
-    <div>
-        <p class="lead">{{ongoingLeague.currentPlayer}}</p>
-        <p>Min. Price: {{currentPlayer.MinPrice}}</p>
-        <p>Avg. Price: {{currentPlayer.AvgPrice}}</p>
-        <p>Max. Price: {{currentPlayer.MaxPrice}}</p>
-        <p class="lead">Current Bid: {{ongoingLeague.currentBidder}}</p>
-        <p class="lead">Current Bidder: {{ongoingLeague.currentBid}}</p>
-        <br />
-        <div class="button-container">
-            <button><span>Bid</span></button>
+<ng-container *ngIf="ongoingLeague.draftTurn === thisTeam.draftPosition && ongoingLeague.currentPlayer === ''">
+    <header>
+        <section class="header-content">
+            <h1 class="header-title animate-pop-in">It's your turn!</h1>
+            <h3 class="header-subtitle animate-pop-in">Select a player</h3>
+        </section>
+    </header>
+</ng-container>
+<ng-container *ngIf="ongoingLeague.currentPlayer !== ''">
+    <header>
+        <section class="header-content">
+            <h1 class="header-title animate-pop-in">Make a move!</h1>
+            <h3 class="header-subtitle animate-pop-in">Bid or pass</h3>
+        </section>
+    </header>
+    <mat-card>
+        <div>
+            <h3><u>{{ongoingLeague.currentPlayer}}</u></h3>
+            <br />
         </div>
-        <br />
-        <div class="button-container">
-            <button (click)="passTurn()"><span>Pass</span></button>
-        </div>
-
-    </div>
-</div>
-<div fxFlex>
-</div>
+        <mat-card-content>
+            <p class="lead">Current Bidder: <span id="tab"> {{ongoingLeague.currentBidder}}</span></p>
+            <p class="lead">Current Bid: <span id="tab2"> {{bidAmount}}</span></p>
+        </mat-card-content>
+        <mat-card-actions>
+            <ng-container *ngIf="ongoingLeague.draftTurn !== thisTeam.draftPosition">
+                <div id="bid-glow" class="button-container">
+                    <button (click)="openBidDialog()"><span>Bid</span></button>
+                </div>
+                <br />
+                <div id="pass-glow" class="button-container">
+                    <button (click)="passTurn()"><span>Pass</span></button>
+                </div>
+            </ng-container>
+        </mat-card-actions>
+    </mat-card>
+</ng-container>

@@ -29,7 +29,18 @@ export interface ApiPlayer {
     team: string;
 }
 
+export interface PlayerDto {
+    name: string;
+}
+
 export interface AuctionDto {
     email?: string;
     leagueName?: string;
+}
+
+export interface BidDto {
+    leagueName?: string;
+    teamName?: string;
+    newBid?: number;
+    playerName?: string;
 }

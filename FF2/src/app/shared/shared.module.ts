@@ -15,11 +15,17 @@ import { BidComponent } from './component/dialog/bid/bid.component';
 
 
 @NgModule({
-  declarations: [ConfirmComponent, ErrorDialogComponent, TableComponent, CreateComponent, SnackbarComponent, BottomSheetComponent, BidComponent],
+  declarations: [
+    ConfirmComponent,
+    ErrorDialogComponent,
+    TableComponent,
+    CreateComponent,
+    SnackbarComponent,
+    BottomSheetComponent,
+    BidComponent],
   imports: [
     CommonModule,
     MaterialModule,
-    CommonModule,
     ReactiveFormsModule,
     FormsModule,
   ],
@@ -42,7 +48,7 @@ import { BidComponent } from './component/dialog/bid/bid.component';
     }
   ],
   entryComponents: [
-    ConfirmComponent, ErrorDialogComponent, CreateComponent, SnackbarComponent, BottomSheetComponent
+    ConfirmComponent, ErrorDialogComponent, CreateComponent, SnackbarComponent, BottomSheetComponent, BidComponent
   ]
 })
 export class SharedModule { }

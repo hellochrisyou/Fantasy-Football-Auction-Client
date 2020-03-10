@@ -1,7 +1,22 @@
-<form class="formGroup">
-    <mat-form-field>
-        <mat-label>Bid amount:</mat-label>
-        <input type="number" placeholder="" matInput value="1" formControl="bidCtrl">
-    </mat-form-field>
-    <button mat-button class="dialog-button" type="submit" cdkFocusInitial>Ok</button>
-</form>
+<h1 mat-dialog-title>Place your Bid</h1>
+<div mat-dialog-content>
+    <p>Your budget is: {{data.budget}}</p>
+    <form [formGroup]="formGroup">
+        <mat-form-field appearance="fill">
+            <mat-label>Bid amount:</mat-label>
+            <input type="number" placeholder="" matInput value="1" class="number" [formControl]="bidCtrl"
+                onkeydown="return event.keyCode !== 69" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="bidCtrl.hasError('required')">
+                Bid amount is <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf="bidCtrl.hasError('min')">
+                Minimum of 1$ is <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf="bidCtrl.hasError('max')">
+                Maximum Bid <strong>Exceeded</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <button mat-button (click)="bid()" [mat-dialog-close]="bidCtrl" cdkFocusInitial>Ok</button>
+    </form>
+</div>

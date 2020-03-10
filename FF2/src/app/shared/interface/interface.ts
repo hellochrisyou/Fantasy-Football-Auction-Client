@@ -10,5 +10,6 @@ export interface ColumnObject {
 }
 
 export interface BidData {
-    value: number;
+    budget: number;
+    currentBid: number;
 }
