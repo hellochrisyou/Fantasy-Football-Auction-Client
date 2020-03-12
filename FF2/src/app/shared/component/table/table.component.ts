@@ -41,6 +41,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   public set dataArray(value: any[]) {
     this._dataArray = value;
+    // console.log('dataArray', this._dataArray);
     this.refresh();
   }
 

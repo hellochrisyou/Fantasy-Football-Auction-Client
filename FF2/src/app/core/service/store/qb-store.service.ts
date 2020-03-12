@@ -13,7 +13,7 @@ export class QbStoreService {
   private readonly _qbArr = new BehaviorSubject<QB[]>([]);
 
   // Expose the observable$ part of the _todos subject (read only stream)
-  readonly kArr$ = this._qbArr.asObservable();
+  readonly qbArr$ = this._qbArr.asObservable();
 
 
   // the getter will return the last value emitted in _todos subject
