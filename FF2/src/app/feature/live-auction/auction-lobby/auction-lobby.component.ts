@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { TeamDto } from 'src/app/shared/interface/dto.interface';
@@ -10,7 +10,8 @@ import { EmitService } from '../../../core/service/emit.service';
 @Component({
   selector: 'auction-lobby',
   templateUrl: './auction-lobby.component.html',
-  styleUrls: ['./auction-lobby.component.scss']
+  styleUrls: ['./auction-lobby.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuctionLobbyComponent implements OnInit {
 

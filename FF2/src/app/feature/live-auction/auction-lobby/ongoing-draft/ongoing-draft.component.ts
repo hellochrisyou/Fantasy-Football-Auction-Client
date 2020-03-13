@@ -1,5 +1,5 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { BidComponent } from 'src/app/shared/component/dialog/bid/bid.component';
 import { AuctionLeague, Player, Team } from 'src/app/shared/interface/model.interface';
@@ -15,7 +15,8 @@ import { EmitService } from '../../../../core/service/emit.service';
   // tslint:disable-next-line: component-selector
   selector: 'ongoing-draft',
   templateUrl: './ongoing-draft.component.html',
-  styleUrls: ['./ongoing-draft.component.scss']
+  styleUrls: ['./ongoing-draft.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OngoingDraftComponent implements OnInit {
 
@@ -26,7 +27,7 @@ export class OngoingDraftComponent implements OnInit {
   bidAmount: number;
   thisBidDto: BidDto = {};
   mainSection: any;
-
+  dialogRef: any;
   // tslint:disable-next-line: variable-name
   private _thisActiveLeague: AuctionLeague;
   // tslint:disable-next-line: variable-name
@@ -66,7 +67,7 @@ export class OngoingDraftComponent implements OnInit {
   }
 
   public openBidDialog() {
-    const dialogRef = this.dialog.open(BidComponent, {
+    this.dialogRef = this.dialog.open(BidComponent, {
       width: '300px',
       data: {
         budget: +this.thisAuctionTeam.currentBudget,
@@ -75,7 +76,7 @@ export class OngoingDraftComponent implements OnInit {
         // position:
       }
     });
-    dialogRef.afterClosed().subscribe(bidAmountResult => {
+    this.dialogRef.afterClosed().subscribe(bidAmountResult => {
       console.log('The dialog was closed.data:', bidAmountResult.bidAmount);
       this.thisBidDto.leagueName = this.thisActiveLeague.leagueName;
       this.thisBidDto.teamName = this.thisAuctionTeam.teamName;
@@ -84,9 +85,10 @@ export class OngoingDraftComponent implements OnInit {
       // this.thisBigDto.position = 
       // this.thisBigDto.team = 
       this.httpService.post(APIURL.AUCTIONCALL + '/makeBid/', this.thisBidDto).subscribe(newLeague => {
+        this.refreshService(newLeague);
         this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'make-bid');
         console.log('drafted new bid: newLeague:', newLeague);
-        this.refreshService(newLeague);
+
       });
     });
   }
@@ -101,8 +103,9 @@ export class OngoingDraftComponent implements OnInit {
     // this.thisBidDto.position = 
     // this.thisBigDto.team = 
     this.httpService.post(APIURL.AUCTIONCALL + '/noBid/', this.thisBidDto).subscribe(newLeague => {
-      this.openSnackBar('You choose to pass on: ' + this.thisBidDto.playerName, 'no-bid');
       this.refreshService(newLeague);
+      this.openSnackBar('You choose to pass on: ' + this.thisBidDto.playerName, 'no-bid');
+
     });
   }
 
@@ -118,7 +121,7 @@ export class OngoingDraftComponent implements OnInit {
     this.leagueStoreService.auctionLeague = newLeague;
     this.thisActiveLeague = newLeague;
     this.thisAuctionTeam = this.leagueStoreService.auctionTeamStore;
-    this.emitService.refreshLeague(this.thisActiveLeague);
-    this.emitService.refreshTeam(this.thisAuctionTeam);
+    // this.emitService.refreshLeague(this.thisActiveLeague);
+    // this.emitService.refreshTeam(this.thisAuctionTeam);
   }
 }

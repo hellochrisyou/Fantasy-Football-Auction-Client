@@ -17,6 +17,15 @@
     </header>
 </ng-container>
 <ng-container
+    *ngIf="thisActiveLeague.currentBidder === thisAuctionTeam.teamName && thisActiveLeague.currentPlayer !== ''">
+    <header>
+        <section class="header-content">
+            <h1 class="header-title animate-pop-in">You are the current bidder</h1>
+            <h3 class="header-subtitle animate-pop-in">Wait for other players..</h3>
+        </section>
+    </header>
+</ng-container>
+<ng-container
     *ngIf="thisActiveLeague.draftTurn === thisAuctionTeam.draftPosition && thisActiveLeague.currentPlayer !== ''">
     <header>
         <section class="header-content">
@@ -32,7 +41,7 @@
     <div class="chevron"></div>
 </a>
 <ng-container
-    *ngIf="thisActiveLeague.draftTurn !== thisAuctionTeam.draftPosition && thisActiveLeague.currentPlayer !== ''">
+    *ngIf="thisActiveLeague.draftTurn !== thisAuctionTeam.draftPosition && thisActiveLeague.currentPlayer !== '' && thisActiveLeague.currentBidder !== thisAuctionTeam.teamName">
     <header>
         <section class="header-content">
             <h1 class="header-title animate-pop-in">Make a move!</h1>
