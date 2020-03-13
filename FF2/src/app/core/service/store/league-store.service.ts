@@ -11,26 +11,23 @@ export class LeagueStoreService {
 
   constructor() { }
 
-  // tslint:disable-next-line: variable-name
-  private readonly _auctionLeague = new BehaviorSubject<AuctionLeague>({});
-  private readonly _auctionTeam = new BehaviorSubject<Team>({});
-
-  readonly auctionLeague$ = this._auctionLeague.asObservable();
-  readonly auctionTeam$ = this._auctionTeam.asObservable();
+  private _auctionLeagueStore: AuctionLeague;
+  private _auctionTeamStore: Team;
 
   public get auctionLeague() {
-    return this._auctionLeague.getValue();
+    return this._auctionLeagueStore;
   }
 
   public set auctionLeague(auctionLeague: AuctionLeague) {
-    this._auctionLeague.next(auctionLeague);
+    this._auctionLeagueStore = auctionLeague;
   }
 
   public get auctionTeam() {
-    return this._auctionTeam.getValue();
+    return this._auctionTeamStore;
   }
 
-  public set auctionTeam(team: Team) {
-    this._auctionTeam.next(team);
+  public set auctionTeam(auctionTeam: Team) {
+    this._auctionTeamStore = auctionTeam;
   }
+
 }

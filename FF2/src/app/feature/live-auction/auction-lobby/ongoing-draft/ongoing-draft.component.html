@@ -1,4 +1,5 @@
-<ng-container *ngIf="thisActiveLeague.draftTurn === thisTeam.draftPosition && thisActiveLeague.currentPlayer === ''">
+<ng-container
+    *ngIf="thisActiveLeague.draftTurn === thisAuctionTeam.draftPosition && thisActiveLeague.currentPlayer === ''">
     <header>
         <section class="header-content">
             <h1 class="header-title animate-pop-in">It's your turn!</h1>
@@ -6,7 +7,27 @@
         </section>
     </header>
 </ng-container>
-<ng-container *ngIf="thisActiveLeague.currentPlayer !== ''">
+<ng-container
+    *ngIf="thisActiveLeague.draftTurn !== thisAuctionTeam.draftPosition && thisActiveLeague.currentPlayer === ''">
+    <header>
+        <section class="header-content">
+            <h1 class="header-title animate-pop-in">Not your turn.</h1>
+            <h3 class="header-subtitle animate-pop-in">Wait for current team to auction a player.</h3>
+        </section>
+    </header>
+</ng-container>
+<ng-container
+    *ngIf="thisActiveLeague.draftTurn === thisAuctionTeam.draftPosition && thisActiveLeague.currentPlayer !== ''">
+    <header>
+        <section class="header-content">
+            <h1 class="header-title animate-pop-in">You have auctioned:
+                {{thisActiveLeague.currentPlayer}}</h1>
+            <h3 class="header-subtitle animate-pop-in">Wait for other players..</h3>
+        </section>
+    </header>
+</ng-container>
+<ng-container
+    *ngIf="thisActiveLeague.draftTurn !== thisAuctionTeam.draftPosition && thisActiveLeague.currentPlayer !== ''">
     <header>
         <section class="header-content">
             <h1 class="header-title animate-pop-in">Make a move!</h1>
@@ -16,14 +37,16 @@
     <mat-card>
         <div>
             <h3><u>{{thisActiveLeague.currentPlayer}}</u></h3>
+            <hr>
             <br />
         </div>
         <mat-card-content>
-            <p class="lead">Current Bidder: <span id="tab"> {{thisActiveLeague.currentBidder}}</span></p>
+            <p class="lead">Current Bidder: <span id="tab"> {{thisActiveLeague.currentBidder}}</span>
+            </p>
             <p class="lead">Current Bid: <span id="tab2"> {{bidAmount}}</span></p>
         </mat-card-content>
         <mat-card-actions>
-            <ng-container *ngIf="thisActiveLeague.draftTurn !== thisTeam.draftPosition">
+            <ng-container *ngIf="thisActiveLeague.draftTurn !== thisAuctionTeam.draftPosition">
                 <div id="bid-glow" class="button-container">
                     <button (click)="openBidDialog()"><span>Bid</span></button>
                 </div>

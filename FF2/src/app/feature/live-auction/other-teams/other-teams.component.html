@@ -1,13 +1,12 @@
-<div class="flex-container" 
-     fxLayout="row" 
-     fxLayout.xs="column" fxLayoutGap="5vw">
-<div fxFlex=20 class="card flex-item" *ngFor="let otherTeam of otherTeamsArr; let i = index">
-  <div class="card_image">
-    <img [attr.src]="otherTeamsArr[i].photoUrl" />
+<div class="flex-container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5vw">
+  <div fxFlex=20 class="card flex-item" *ngFor="let otherTeam of otherTeamsArr; let i = index">
+    <div class="card_image">
+      <img [attr.src]="otherTeamsArr[i].photoUrl" />
+    </div>
+    <div class="cardContent">
+      <button class="cardContentButton" (click)="showPlayers(i);"><i class="material-icons">search</i></button>
+      <p class="cardContentName">{{otherTeam.teamName}}</p>
+      <p class="cardContentName">{{otherTeam.email}}</p>
+      <p class="cardContentJob">Draft Position: {{otherTeam.draftPosition}}</p>
+    </div>
   </div>
-  <div class="cardContent">
-    <button class="cardContentButton" (click)="showPlayers(i);"><i class="material-icons">search</i></button>
-    <p class="cardContentName">{{otherTeam.teamName}}</p>
-    <p class="cardContentJob">Draft Position: {{otherTeam.draftPosition}}</p>
-  </div>
-</div>

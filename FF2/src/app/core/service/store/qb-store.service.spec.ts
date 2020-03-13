@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { QbStoreService } from './qb-store.service';
+import { QbStoreService } from './player-store.service';
 
 describe('QbStoreService', () => {
   let service: QbStoreService;

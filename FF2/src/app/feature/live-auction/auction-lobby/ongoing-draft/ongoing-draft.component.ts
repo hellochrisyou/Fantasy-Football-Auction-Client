@@ -24,8 +24,27 @@ export class OngoingDraftComponent implements OnInit {
   bidAmount: number;
   thisBidDto: BidDto = {};
 
-  thisActiveLeague: AuctionLeague;
-  thisTeam: Team;
+
+  // tslint:disable-next-line: variable-name
+  private _thisActiveLeague: AuctionLeague;
+  // tslint:disable-next-line: variable-name
+  private _thisAuctionTeam: Team;
+
+  @Input()
+  public get thisAuctionTeam(): Team {
+    return this._thisAuctionTeam;
+  }
+  public set thisAuctionTeam(value: Team) {
+    this._thisAuctionTeam = value;
+  }
+  @Input()
+  public get thisActiveLeague(): AuctionLeague {
+    return this._thisActiveLeague;
+  }
+  public set thisActiveLeague(value: AuctionLeague) {
+    console.log('auction lobby this active league', value);
+    this._thisActiveLeague = value;
+  }
 
   constructor(
     public dialog: MatDialog,
@@ -36,23 +55,18 @@ export class OngoingDraftComponent implements OnInit {
 
   ngOnInit(): void {
     // this.currentPlayer = this._ongoingLeague.currentPlayer;
-    this.leagueStoreService.auctionLeague$.subscribe(leagueObservable => {
-      console.log('leagueObservable live this.ongoing-draft.ts', leagueObservable);
-      this.thisActiveLeague = leagueObservable;
-    });
-    console.log('2', this.thisTeam);
-    this.leagueStoreService.auctionTeam$.subscribe(teamObservable => {
-      console.log('teamObservable live this.ongoing-draft.ts' + teamObservable);
-      this.thisTeam = teamObservable;
-    });
+
     this.bidAmount = Math.floor(+this.thisActiveLeague.currentBid);
+
+    console.log('draft turn', this.thisActiveLeague.draftTurn);
+    console.log('draft positoin', this.thisAuctionTeam.draftPosition);
   }
 
   public openBidDialog() {
     const dialogRef = this.dialog.open(BidComponent, {
       width: '300px',
       data: {
-        budget: +this.thisTeam.currentBudget,
+        budget: +this.thisAuctionTeam.currentBudget,
         currentBid: this.thisActiveLeague.currentBid,
         // team:
         // position:
@@ -61,7 +75,7 @@ export class OngoingDraftComponent implements OnInit {
     dialogRef.afterClosed().subscribe(bidAmountResult => {
       console.log('The dialog was closed.data:', bidAmountResult.bidAmount);
       this.thisBidDto.leagueName = this.thisActiveLeague.leagueName;
-      this.thisBidDto.teamName = this.thisTeam.teamName;
+      this.thisBidDto.teamName = this.thisAuctionTeam.teamName;
       this.thisBidDto.newBid = bidAmountResult.bidAmount;
       this.thisBidDto.playerName = this.thisActiveLeague.currentPlayer;
       // this.thisBigDto.position = 
@@ -75,11 +89,11 @@ export class OngoingDraftComponent implements OnInit {
 
   public passTurn() {
     this.thisBidDto.leagueName = this.thisActiveLeague.leagueName;
-    console.log('this team name', this.thisTeam);
-    this.thisBidDto.teamName = this.thisTeam.teamName;
+    console.log('this team name', this.thisAuctionTeam);
+    this.thisBidDto.teamName = this.thisAuctionTeam.teamName;
     this.thisBidDto.newBid = +this.thisActiveLeague.currentBid;
     this.thisBidDto.playerName = this.thisActiveLeague.currentPlayer;
-    this.thisBidDto.teamName = this.thisTeam.teamName;
+    this.thisBidDto.teamName = this.thisAuctionTeam.teamName;
     // this.thisBidDto.position = 
     // this.thisBigDto.team = 
     this.httpService.post(APIURL.AUCTIONCALL + '/noBid/', this.thisBidDto).subscribe(newLeague => {

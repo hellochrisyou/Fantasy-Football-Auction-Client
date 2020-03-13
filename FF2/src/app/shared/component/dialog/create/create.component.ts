@@ -57,7 +57,7 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
   public submit() {
     console.log('hello');
     // tslint:disable-next-line: max-line-length
-    this.httpService.get(APIURL.AUCTIONCALL + '/team/teamNameExists/' + `${this.formGroup.get('teamNameCtrl').value}`).subscribe((nameExists) => {
+    this.httpService.get(APIURL.AUCTIONCALL + `/team/teamNameExists/' ${this.formGroup.get('teamNameCtrl').value}`).subscribe((nameExists) => {
       console.log('data here', nameExists);
       if (nameExists === true) {
         this.snackBar.open('Name already exists', 'FAIL', {});

@@ -6,5 +6,3 @@ export const enum APIURL {
     SNAKECALL = 'http://localhost:8083/snake',
     LEAGUECALL = "LEAGUECALL"
 }
-
-// https://www.fantasyfootballnerd.com/fantasy-football-api

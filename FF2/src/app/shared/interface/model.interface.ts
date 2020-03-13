@@ -1,15 +1,15 @@
 export interface BasePlayer {
     Select: string;
-    Name?: string;
+    displayName?: string;
     Flex?: string;
-    Team?: string;
-    Position?: string;
+    team?: string;
+    position?: string;
 }
 
 export interface Player extends BasePlayer {
-    MinPrice?: number;
-    MaxPrice?: number;
-    AvgPrice?: number;
+    minPrice?: number;
+    maxPrice?: number;
+    avgPrice?: number;
     Points?: number;
     Bid?: string;
 }
@@ -121,10 +121,10 @@ export interface TeamPlayers {
 }
 
 export interface LastSeasonPlayers {
-    quaterBacks: any[];
-    runningsBacks: any[];
-    wideReceivers: any[];
-    tightEnds: any[];
-    defenses: any[];
-    kickers: any[];
+    quaterBacks: Player[];
+    runningsBacks: Player[];
+    wideReceivers: Player[];
+    tightEnds: Player[];
+    defenses: Player[];
+    kickers: Player[];
 }

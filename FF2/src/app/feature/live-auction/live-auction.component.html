@@ -4,18 +4,19 @@
         <ng-template matTabLabel>
             Lobby
         </ng-template>
-        <auction-lobby></auction-lobby>
+        <auction-lobby [thisAuctionTeam]="thisAuctionTeam" [thisActiveLeague]="thisActiveLeague"></auction-lobby>
     </mat-tab>
     <mat-tab label="Quaterback">
         <ng-template matTabLabel>
             <span [matBadge]="numQb" matBadgeOverlap="false">QB</span>
         </ng-template>
-        <base-table [columnObjects]="QB_COL_OBJ" [colDisplay]="QB_DISPLAY"
-            [dataArray]="this.lastSeasonPlayers.quaterBacks" [thisTeam]="thisTeam">
-            <ng-container *ngIf="thisActiveLeague.draftTurn === thisTeam.draftPosition">
+        <base-table [columnObjects]="PLAYER_COL_OBJ" [colDisplay]="PLAYER_DISPLAY"
+            [dataArray]="this.playerStoreService.qbStore" [thisTeam]="thisAuctionTeam">
+            <ng-container
+                *ngIf="thisActiveLeague.draftTurn===thisAuctionTeam.draftPosition && thisActiveLeague.currentPlayer===''">
                 <ng-template #buttonTemplate let-i=index>
                     <mat-icon (click)="bidQbPlayer(i)" matTooltip="Auction Player" matTooltipPosition="before">
-                        exit_to_app
+                        add
                     </mat-icon>
                 </ng-template>
             </ng-container>
@@ -25,9 +26,9 @@
         <ng-template matTabLabel>
             <span [matBadge]="numRb" matBadgeOverlap="false">RB</span>
         </ng-template>
-        <base-table [columnObjects]="RB_COL_OBJ" [colDisplay]="RB_COL_OBJ"
-            [dataArray]="this.lastSeasonPlayers.runningsBacks">
-            <ng-container *ngIf="thisActiveLeague.draftTurn === thisTeam.draftPosition">
+        <base-table [columnObjects]="PLAYER_COL_OBJ" [colDisplay]="PLAYER_DISPLAY"
+            [dataArray]="this.playerStoreService.rbStore">
+            <ng-container *ngIf="thisActiveLeague.draftTurn === thisAuctionTeam.draftPosition">
                 <ng-template #buttonTemplate let-i=index>
                     <mat-icon (click)="bidRbPlayer(i)" matTooltip="Auction Player" matTooltipPosition="before">
                         exit_to_app
@@ -40,9 +41,9 @@
         <ng-template matTabLabel>
             <span [matBadge]="numWr" matBadgeOverlap="false">WR</span>
         </ng-template>
-        <base-table [columnObjects]="REC_COL_OBJ" [colDisplay]="REC_DISPLAY"
-            [dataArray]="this.lastSeasonPlayers.wideReceivers">
-            <ng-container *ngIf="thisActiveLeague.draftTurn === thisTeam.draftPosition">
+        <base-table [columnObjects]="PLAYER_COL_OBJ" [colDisplay]="PLAYER_DISPLAY"
+            [dataArray]="this.playerStoreService.wrStore">
+            <ng-container *ngIf="thisActiveLeague.draftTurn === thisAuctionTeam.draftPosition">
                 <ng-template #buttonTemplate let-i=index>
                     <mat-icon (click)="bidWrPlayer(i)" matTooltip="Auction Player" matTooltipPosition="before">
                         exit_to_app
@@ -55,9 +56,9 @@
         <ng-template matTabLabel>
             <span [matBadge]="numTe" matBadgeOverlap="false">TE</span>
         </ng-template>
-        <base-table [columnObjects]="REC_COL_OBJ" [colDisplay]="REC_DISPLAY"
-            [dataArray]="this.lastSeasonPlayers.tightEnds">
-            <ng-container *ngIf="thisActiveLeague.draftTurn === thisTeam.draftPosition">
+        <base-table [columnObjects]="PLAYER_COL_OBJ" [colDisplay]="PLAYER_DISPLAY"
+            [dataArray]="this.playerStoreService.teStore">
+            <ng-container *ngIf="thisActiveLeague.draftTurn === thisAuctionTeam.draftPosition">
                 <ng-template #buttonTemplate let-i=index>
                     <mat-icon (click)="bidTePlayer(i)" matTooltip="Auction Player" matTooltipPosition="before">
                         exit_to_app
@@ -70,9 +71,9 @@
         <ng-template matTabLabel>
             <span [matBadge]="numDef" matBadgeOverlap="false">DEF</span>
         </ng-template>
-        <base-table [columnObjects]="DEF_COL_OBJ" [colDisplay]="DEF_DISPLAY"
-            [dataArray]="this.lastSeasonPlayers.defenses">
-            <ng-container *ngIf="thisActiveLeague.draftTurn === thisTeam.draftPosition">
+        <base-table [columnObjects]="PLAYER_COL_OBJ" [colDisplay]="PLAYER_DISPLAY"
+            [dataArray]="this.playerStoreService.defStore">
+            <ng-container *ngIf="thisActiveLeague.draftTurn === thisAuctionTeam.draftPosition">
                 <ng-template #buttonTemplate let-i=index>
                     <mat-icon (click)="bidDefPlayer(i)" matTooltip="Auction Player" matTooltipPosition="before">
                         exit_to_app
@@ -85,8 +86,9 @@
         <ng-template matTabLabel>
             <span [matBadge]="numKicker" matBadgeOverlap="false">K</span>
         </ng-template>
-        <base-table [columnObjects]="K_COL_OBJ" [colDisplay]="K_DISPLAY" [dataArray]="this.lastSeasonPlayers.kickers">
-            <ng-container *ngIf="thisActiveLeague.draftTurn === thisTeam.draftPosition">
+        <base-table [columnObjects]="PLAYER_COL_OBJ" [colDisplay]="PLAYER_DISPLAY"
+            [dataArray]="this.playerStoreService.kStore">
+            <ng-container *ngIf="thisActiveLeague.draftTurn === thisAuctionTeam.draftPosition">
                 <ng-template #buttonTemplate let-i=index>
                     <mat-icon (click)="bidKPlayer(i)" matTooltip="Auction Player" matTooltipPosition="before">
                         exit_to_app

@@ -24,9 +24,9 @@ export class StatsService {
   public returnQbStats(qbArray: any[]): QB[] {
     for (const qb of qbArray) {
       this.tmpQb = {
-        Select: 'select',
+        Select: 'Select',
       };
-      this.tmpQb.Name = qb.name;
+      this.tmpQb.displayName = qb.name;
       qb.stats['5'] != null ? (this.tmpQb.PassYD = qb.stats['5']) : (this.tmpQb.PassYD = 0);
       qb.stats['6'] != null ? (this.tmpQb.PassTD = qb.stats['6']) : (this.tmpQb.PassTD = 0);
       qb.stats['7'] != null ? (this.tmpQb.INT = qb.stats['7']) : (this.tmpQb.INT = 0);
@@ -43,9 +43,9 @@ export class StatsService {
   public returnRbStats(rbArray: any[]): RB[] {
     for (const rb of rbArray) {
       this.tmpRb = {
-        Select: 'select'
+        Select: 'Select'
       };
-      this.tmpRb.Name = rb.name;
+      this.tmpRb.displayName = rb.name;
       rb.stats['14'] != null ? (this.tmpRb.RushYD = rb.stats['14']) : (this.tmpRb.RushYD = 0);
       rb.stats['15'] != null ? (this.tmpRb.RushTD = rb.stats['15']) : (this.tmpRb.RushTD = 0);
       rb.stats['20'] != null ? (this.tmpRb.Rec = rb.stats['20']) : (this.tmpRb.Rec = 0);
@@ -61,9 +61,9 @@ export class StatsService {
   public returnWrStats(wrArray: any[]): WR[] {
     for (const wr of wrArray) {
       this.tmpWr = {
-        Select: 'select'
+        Select: 'Select'
       };
-      this.tmpWr.Name = wr.name;
+      this.tmpWr.displayName = wr.name;
       wr.stats['20'] != null ? (this.tmpWr.Rec = wr.stats['20']) : (this.tmpWr.Rec = 0);
       wr.stats['21'] != null ? (this.tmpWr.RecYD = wr.stats['21']) : (this.tmpWr.RecYD = 0);
       wr.stats['22'] != null ? (this.tmpWr.RecTD = wr.stats['22']) : (this.tmpWr.RecTD = 0);
@@ -76,9 +76,9 @@ export class StatsService {
   public returnTeStats(teArray: any[]): TE[] {
     for (const te of teArray) {
       this.tmpTe = {
-        Select: 'select'
+        Select: 'Select'
       };
-      this.tmpTe.Name = te.name;
+      this.tmpTe.displayName = te.name;
       te.stats['20'] != null ? (this.tmpTe.Rec = te.stats['20']) : (this.tmpTe.Rec = 0);
       te.stats['21'] != null ? (this.tmpTe.RecYD = te.stats['21']) : (this.tmpTe.RecYD = 0);
       te.stats['22'] != null ? (this.tmpTe.RecTD = te.stats['22']) : (this.tmpTe.RecTD = 0);
@@ -91,9 +91,9 @@ export class StatsService {
   public returnDEFStats(defArray: any[]): DEF[] {
     for (const def of defArray) {
       this.tmpDef = {
-        Select: 'select'
+        Select: 'Select'
       };
-      this.tmpDef.Name = def.name;
+      this.tmpDef.displayName = def.name;
       def.stats['45'] != null ? (this.tmpDef.Sack = def.stats['45']) : (this.tmpDef.Sack = 0);
       def.stats['46'] != null ? (this.tmpDef.INT = def.stats['46']) : (this.tmpDef.INT = 0);
       def.stats['47'] != null ? (this.tmpDef.FumbleRec = def.stats['47']) : (this.tmpDef.FumbleRec = 0);
@@ -109,9 +109,9 @@ export class StatsService {
   returnKickerStats(kArray: any[]): Kicker[] {
     for (const kicker of kArray) {
       this.tmpKicker = {
-        Select: 'select'
+        Select: 'Select'
       };
-      this.tmpKicker.Name = kicker.name;
+      this.tmpKicker.displayName = kicker.name;
       kicker.stats['33'] != null ? (this.tmpKicker.PAT = kicker.stats['33']) : (this.tmpKicker.PAT = 0);
       kicker.stats['35'] != null ? (this.tmpKicker.Fg0To19 = kicker.stats['35']) : (this.tmpKicker.Fg0To19 = 0);
       kicker.stats['36'] != null ? (this.tmpKicker.Fg20To29 = kicker.stats['36']) : (this.tmpKicker.Fg20To29 = 0);

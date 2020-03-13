@@ -22,12 +22,12 @@ export class LastSeasonResolver implements Resolve<any> {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<any> | Promise<any> | any {
-        this.lastSeasonStatService.setLastSeasonQB();
-        this.lastSeasonStatService.setLastSeasonRB();
-        this.lastSeasonStatService.setLastSeasonWR();
-        this.lastSeasonStatService.setLastSeasonTE();
-        this.lastSeasonStatService.setLastSeasonDEF();
-        this.lastSeasonStatService.setLastSeasonK();
+        // this.lastSeasonStatService.setLastSeasonQB();
+        // this.lastSeasonStatService.setLastSeasonRB();
+        // this.lastSeasonStatService.setLastSeasonWR();
+        // this.lastSeasonStatService.setLastSeasonTE();
+        // this.lastSeasonStatService.setLastSeasonDEF();
+        // this.lastSeasonStatService.setLastSeasonK();
         return this.httpService.get(this.AUCTIONURL + this.APIKEY).pipe(map(data => data.AuctionValues),
             catchError((error) => {
                 console.log('error in resolve, http get: ', error);

@@ -4,11 +4,7 @@
     <div class="left_col">
         <div class="social-container" fxLayout="column" fxLayoutAlign="center center">
             <h4>Google Sign in</h4>
-            <button mat-fab class="mat-elevation-z4">
-                <a (click)="loginGoogle()">
-                    <i class="fa fa-google"></i>
-                </a>
-            </button>
+            <img id="googleSignInImg" src="../../../../../assets/img/googleplus.png" (click)="loginGoogle()">
         </div>
     </div>
     <div class="right_col">
@@ -57,7 +53,7 @@
                     characters
                 </mat-error>
             </mat-form-field>
-            <button mat-button class="mat-elevation-z4 oval" type="submit" (click)="login()">Sign in</button>
+            <button mat-button class="mat-elevation-z5 oval" type="submit" (click)="login()">Sign in</button>
         </form>
         <!-- </section> -->
     </div>

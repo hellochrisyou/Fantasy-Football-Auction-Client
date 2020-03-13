@@ -106,7 +106,7 @@ export const AUCTION_COL_OBJ: ColumnObject[] = [
 ];
 
 export const MY_AUCTION_COL_OBJ: ColumnObject[] = [
-    { columnId: 'Select', propertyName: 'select' },
+    { columnId: 'Select', propertyName: 'Select' },
     { columnId: 'League Name', propertyName: 'leagueName' },
     { columnId: 'Budget', propertyName: 'budget' },
     { columnId: 'Max Players', propertyName: 'maxPlayers' },
@@ -117,19 +117,24 @@ export const MY_AUCTION_COL_OBJ: ColumnObject[] = [
 ];
 
 export const AUCTION_TEAM_COL_OBJ: ColumnObject[] = [
-    { columnId: 'Select', propertyName: 'select' },
+    { columnId: 'Select', propertyName: 'Select' },
     { columnId: 'Team Name', propertyName: 'teamName' },
     { columnId: 'Budget', propertyName: 'budget' },
     { columnId: 'Position', propertyName: 'draftPosition' },
 ];
 
 export const PLAYER_COL_OBJ: ColumnObject[] = [
-    { columnId: 'Name', propertyName: 'Name' },
-    { columnId: 'Team', propertyName: 'Team' },
-    { columnId: 'Position', propertyName: 'Position' },
-    { columnId: 'Bid', propertyName: 'Bid' },
-    { columnId: 'Points', propertyName: 'Points' },
+    { columnId: 'Select', propertyName: 'Select' },
+    { columnId: 'Name', propertyName: 'displayName' },
+    { columnId: 'Team', propertyName: 'team' },
+    { columnId: 'Position', propertyName: 'position' },
+    { columnId: 'Min Price', propertyName: 'minPrice' },
+    { columnId: 'Avg Price', propertyName: 'avgPrice' },
+    { columnId: 'Max Price', propertyName: 'maxPrice' },
+];
 
+export const PLAYER_DISPLAY = [
+    'Name', 'Team', 'Position', 'Min Price', 'Avg Price', 'Max Price'
 ];
 
 export const AUCTION_TEAM_DISPLAY = [
@@ -175,6 +180,4 @@ export const TEAM_DISPLAY = [
     'View_Players', 'Name', 'DraftPosition', 'Current_Budget'
 ];
 
-export const PLAYER_DISPLAY = [
-    'Name', 'Team', 'Position', 'Bid', 'Points'
-];
+

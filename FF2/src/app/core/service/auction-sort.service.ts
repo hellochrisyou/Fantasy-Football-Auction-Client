@@ -1,12 +1,20 @@
 import { Injectable } from '@angular/core';
-import { QB, RB, WR, TE, DEF, Kicker, LastSeasonPlayers } from 'src/app/shared/interface/model.interface';
+import { QB, RB, WR, TE, DEF, Kicker, LastSeasonPlayers, Player } from 'src/app/shared/interface/model.interface';
+import { LeagueStoreService } from './store/league-store.service';
+import { PlayerStoreService } from './store/player-store.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuctionSortService {
 
-  constructor() { }
+  constructor(private playerStoreService: PlayerStoreService) { }
+
+  tmpPlayer: Player = {
+    Select: 'Select'
+  };
+
+
 
   lastSeasonPlayers: LastSeasonPlayers = {
     quaterBacks: [],
@@ -67,36 +75,81 @@ export class AuctionSortService {
     this._tmpKArray = value;
   }
 
-  public sortAuctionPlayers(auctionArr: any): LastSeasonPlayers {
+  public sortAuctionPlayers(auctionArr: any): void {
     for (const player of auctionArr) {
+      this.tmpPlayer = {
+        Select: 'Select'
+      };
       switch (player.position) {
         case 'QB': {
-          this.lastSeasonPlayers.quaterBacks.push(player);
+          this.tmpPlayer.Select = 'Select';
+          this.tmpPlayer.displayName = player.displayName;
+          this.tmpPlayer.team = player.team;
+          this.tmpPlayer.position = player.position;
+          this.tmpPlayer.minPrice = player.minPrice;
+          this.tmpPlayer.avgPrice = player.avgPrice;
+          this.tmpPlayer.maxPrice = player.maxPrice;
+          this.playerStoreService.addQb(this.tmpPlayer);
           break;
         }
         case 'RB': {
-          this.lastSeasonPlayers.runningsBacks.push(player);
+          this.tmpPlayer.Select = 'Select';
+          this.tmpPlayer.displayName = player.displayName;
+          this.tmpPlayer.team = player.team;
+          this.tmpPlayer.position = player.position;
+          this.tmpPlayer.minPrice = player.minPrice;
+          this.tmpPlayer.avgPrice = player.avgPrice;
+          this.tmpPlayer.maxPrice = player.maxPrice;
+          this.playerStoreService.addRb(this.tmpPlayer);
           break;
         }
         case 'WR': {
-          this.lastSeasonPlayers.wideReceivers.push(player);
+          this.tmpPlayer.Select = 'Select';
+          this.tmpPlayer.displayName = player.displayName;
+          this.tmpPlayer.team = player.team;
+          this.tmpPlayer.position = player.position;
+          this.tmpPlayer.minPrice = player.minPrice;
+          this.tmpPlayer.avgPrice = player.avgPrice;
+          this.tmpPlayer.maxPrice = player.maxPrice;
+          this.playerStoreService.addWr(this.tmpPlayer);
           break;
         }
         case 'TE': {
-          this.lastSeasonPlayers.tightEnds.push(player);
+          this.tmpPlayer.Select = 'Select';
+          this.tmpPlayer.displayName = player.displayName;
+          this.tmpPlayer.team = player.team;
+          this.tmpPlayer.position = player.position;
+          this.tmpPlayer.minPrice = player.minPrice;
+          this.tmpPlayer.avgPrice = player.avgPrice;
+          this.tmpPlayer.maxPrice = player.maxPrice;
+          this.playerStoreService.addTe(this.tmpPlayer);
           break;
         }
         case 'DEF': {
-          this.lastSeasonPlayers.defenses.push(player);
+          this.tmpPlayer.Select = 'Select';
+          this.tmpPlayer.displayName = player.displayName;
+          this.tmpPlayer.team = player.team;
+          this.tmpPlayer.position = player.position;
+          this.tmpPlayer.minPrice = player.minPrice;
+          this.tmpPlayer.avgPrice = player.avgPrice;
+          this.tmpPlayer.maxPrice = player.maxPrice;
+          this.playerStoreService.addDef(this.tmpPlayer);
           break;
         }
         case 'K': {
-          this.lastSeasonPlayers.kickers.push(player);
+          this.tmpPlayer.Select = 'Select';
+          this.tmpPlayer.displayName = player.displayName;
+          this.tmpPlayer.team = player.team;
+          this.tmpPlayer.position = player.position;
+          this.tmpPlayer.minPrice = player.minPrice;
+          this.tmpPlayer.avgPrice = player.avgPrice;
+          this.tmpPlayer.maxPrice = player.maxPrice;
+          this.playerStoreService.addKicker(this.tmpPlayer);
           break;
         }
       }
+
     }
-    return this.lastSeasonPlayers;
   }
 }
 

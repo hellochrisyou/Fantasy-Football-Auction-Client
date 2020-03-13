@@ -1,6 +1,12 @@
 <h1 class="text-center"><u>JOIN AUCTION DRAFT</u></h1>
-<base-table [columnObjects]="MY_AUCTION_COL_OBJ" [colDisplay]="MY_AUCTION_DISPLAY" [dataArray]="this.teamArr">
-    <ng-template #buttonTemplate let-i=index>
-        <mat-icon (click)="enterAuction(i)">exit_to_app</mat-icon>
-    </ng-template>
-</base-table>
+<ng-container *ngIf="this.teamArr.length>0">
+    <base-table [columnObjects]="MY_AUCTION_COL_OBJ" [colDisplay]="MY_AUCTION_DISPLAY" [dataArray]="this.teamArr">
+        <ng-template #buttonTemplate let-i=index>
+            <mat-icon (click)="enterAuction(i)">exit_to_app</mat-icon>
+        </ng-template>
+    </base-table>
+</ng-container>
+<ng-container *ngIf="this.teamArr.length===0">
+    <br>
+    <h2 id="noLeaguesLabel">No Pending Auction Leagues</h2>
+</ng-container>

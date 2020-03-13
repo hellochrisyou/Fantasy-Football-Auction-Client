@@ -26,8 +26,8 @@ export class PendingAuctionComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.httpService.post(APIURL.AUCTIONCALL + '/getMyLeagues/', this.auth.userData[0].email).subscribe((leagueData) => {
-      console.log('auction data: ', leagueData);
       this.teamArr = leagueData;
+      console.log('auction data: ', this.teamArr);
     });
   }
 

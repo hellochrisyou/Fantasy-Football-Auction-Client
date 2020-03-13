@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AUCTION_COL_OBJ, AUCTION_DISPLAY } from 'src/app/shared/const/column.const';
 import { AuctionLeague } from 'src/app/shared/interface/model.interface';
 import { EmitService } from 'src/app/core/service/emit.service';
@@ -8,6 +8,7 @@ import { APIURL } from 'src/app/shared/const/url.const';
 import { CreateComponent } from 'src/app/shared/component/dialog/create/create.component';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { BottomSheetComponent } from 'src/app/shared/component/bottom-sheet/bottom-sheet.component';
+import { refreshLeagues } from 'src/app/shared/utils/refreshLeagues.util';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -25,21 +26,19 @@ export class JoinAuctionComponent implements OnInit {
     private emitService: EmitService,
     private httpService: HttpService,
     public dialog: MatDialog,
-    private bottomSheet: MatBottomSheet,
-    private auth: AuthService
+    private changeDetectorRefs: ChangeDetectorRef,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
-    this.httpService.post(APIURL.AUCTIONCALL + '/getAllOtherLeagues/', this.auth.userData[0].email).subscribe((leagueData) => {
-      this.auctionArr = leagueData;
-      this.emitService.refreshTable();
-    });
+    this.fetchAllLeagues();
   }
 
   public addLeague(index: number) {
     this.openDialog(index);
   }
   private openDialog(index: number): void {
+    console.log('this.auctionarr', this.auctionArr);
     console.log(this.auctionArr[index]);
     const dialogRef = this.dialog.open(CreateComponent, {
       // width: '250px',
@@ -54,7 +53,15 @@ export class JoinAuctionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // this.animal = result;
+      this.fetchAllLeagues();
+    });
+  }
+
+  public fetchAllLeagues() {
+    this.httpService.post(APIURL.AUCTIONCALL + '/getAllOtherLeagues/', this.authService.userData[0].email).subscribe((leagueData) => {
+      this.auctionArr = leagueData;
+      this.auctionArr = refreshLeagues(this.auctionArr, this.authService.authState.email);
+      this.emitService.refreshTable();
     });
   }
 }

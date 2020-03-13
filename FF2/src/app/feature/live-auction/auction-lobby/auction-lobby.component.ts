@@ -15,24 +15,34 @@ export class AuctionLobbyComponent implements OnInit {
 
   isLeagueReady = false;
   thisDtoTeam: TeamDto = {};
-  thisTeam: Team;
   auctionLeague: AuctionLeague;
 
+  // tslint:disable-next-line: variable-name
+  private _thisActiveLeague: AuctionLeague;
+  // tslint:disable-next-line: variable-name
+  private _thisAuctionTeam: Team;
+
+  @Input()
+  public get thisAuctionTeam(): Team {
+    return this._thisAuctionTeam;
+  }
+  public set thisAuctionTeam(value: Team) {
+    this._thisAuctionTeam = value;
+  }
+  @Input()
+  public get thisActiveLeague(): AuctionLeague {
+    return this._thisActiveLeague;
+  }
+  public set thisActiveLeague(value: AuctionLeague) {
+    console.log('auction lobby this active league', value);
+    this._thisActiveLeague = value;
+  }
   constructor(
     public dialog: MatDialog,
     private leagueStoreService: LeagueStoreService
   ) { }
 
   ngOnInit(): void {
-    this.leagueStoreService.auctionLeague$.subscribe(leagueObservable => {
-      console.log('leagueObservable live this.auctionLeague.ts', leagueObservable);
-      this.auctionLeague = leagueObservable;
-    });
-    console.log('2', this.thisTeam);
-    this.leagueStoreService.auctionTeam$.subscribe(teamObservable => {
-      console.log('teamObservable live this.auctionLeague.ts' + teamObservable);
-      this.thisTeam = teamObservable;
-    });
     // transaction to make ready. update leagueStatus to ready as well. return League from this service. and if league is ready run another call to begin auction (goauction/init/) 
     // In html show table of whose turn it is. Need to send event emitter and use input for button to add player is available.
     // Need to show table of whose the current player and what his bid is. and show button to bid or not to bid.  

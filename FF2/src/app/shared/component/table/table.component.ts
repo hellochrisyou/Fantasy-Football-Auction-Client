@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ContentChild, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ContentChild, Input, OnDestroy, OnInit, TemplateRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -11,6 +11,7 @@ import { APIURL } from '../../const/url.const';
 import { BidDto } from '../../interface/dto.interface';
 import { AuctionLeague, Team } from '../../interface/model.interface';
 import { BidComponent } from '../dialog/bid/bid.component';
+import { tap } from 'rxjs/operators';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -54,7 +55,8 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   constructor(
     private emitService: EmitService,
-    private httpService: HttpService
+    private changeDetectorRefs: ChangeDetectorRef,
+
   ) {
   }
 
@@ -101,6 +103,9 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource = new MatTableDataSource<any>(this.dataArray);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    if (!this.changeDetectorRefs['destroyed']) {
+      this.changeDetectorRefs.detectChanges();
+    }
   }
 
   public joinLeague(index: number): void {

@@ -22,7 +22,7 @@ export class OtherTeamsComponent implements OnInit {
   }
   public set otherTeamsArr(value: Team[]) {
     this._otherTeamsArr = value;
-    console.log('other team array', this._otherTeamsArr);
+    // console.log('other team array', this._otherTeamsArr);
   }
 
   constructor(
