@@ -26,6 +26,11 @@
         </section>
     </header>
 </ng-container>
+<a class="outer_div">
+    <div class="chevron"></div>
+    <div class="chevron"></div>
+    <div class="chevron"></div>
+</a>
 <ng-container
     *ngIf="thisActiveLeague.draftTurn !== thisAuctionTeam.draftPosition && thisActiveLeague.currentPlayer !== ''">
     <header>
@@ -34,6 +39,11 @@
             <h3 class="header-subtitle animate-pop-in">Bid or pass</h3>
         </section>
     </header>
+    <a class="outer_div">
+        <div class="chevron"></div>
+        <div class="chevron"></div>
+        <div class="chevron"></div>
+    </a>
     <mat-card>
         <div>
             <h3><u>{{thisActiveLeague.currentPlayer}}</u></h3>

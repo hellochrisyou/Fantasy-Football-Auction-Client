@@ -315,3 +315,64 @@ header:after {
     transform: rotateZ(-4deg);
   }
 }
+
+// Down Arrow
+.outer_div {
+  position: absolute;
+  right: 0px;
+  left: 0px;
+  margin: auto;
+  width: 100px;
+  top: 300px;
+}
+.chevron {
+  position: relative;
+  width: 70px;
+  animation: move 3s ease-out infinite;
+  opacity: 0;
+
+  &::before,
+  &::after {
+    position: absolute;
+    background: white;
+    content: "";
+    width: 50%;
+    height: 8px;
+    margin: auto;
+  }
+  &:nth-child(1) {
+    animation: move 3s ease-out 1s infinite;
+  }
+  &:nth-child(2) {
+    animation: move 3s ease-out 2s infinite;
+  }
+
+  &::before {
+    transform: skew(0deg, 30deg);
+    left: 0px;
+    width: 50%;
+  }
+  &::after {
+    transform: skew(0deg, -30deg);
+    right: 0px;
+    width: 50%;
+  }
+}
+
+@keyframes move {
+  25% {
+    opacity: 1;
+  }
+  33% {
+    opacity: 1;
+    transform: translateY(30px);
+  }
+  67% {
+    opacity: 1;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(55px) scale3d(0.5, 0.5, 0.5);
+  }
+}

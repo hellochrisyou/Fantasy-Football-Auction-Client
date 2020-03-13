@@ -8,6 +8,8 @@ import { HttpService } from 'src/app/core/service/http.service';
 import { APIURL } from 'src/app/shared/const/url.const';
 import { SnackbarComponent } from 'src/app/shared/component/snackbar/snackbar.component';
 import { LeagueStoreService } from 'src/app/core/service/store/league-store.service';
+import { map } from 'rxjs/operators';
+import { EmitService } from '../../../../core/service/emit.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -23,7 +25,7 @@ export class OngoingDraftComponent implements OnInit {
   currentBid: string;
   bidAmount: number;
   thisBidDto: BidDto = {};
-
+  mainSection: any;
 
   // tslint:disable-next-line: variable-name
   private _thisActiveLeague: AuctionLeague;
@@ -50,6 +52,7 @@ export class OngoingDraftComponent implements OnInit {
     public dialog: MatDialog,
     private httpService: HttpService,
     private snackBar: MatSnackBar,
+    private emitService: EmitService,
     private leagueStoreService: LeagueStoreService
   ) { }
 
@@ -82,7 +85,9 @@ export class OngoingDraftComponent implements OnInit {
       // this.thisBigDto.team = 
       this.httpService.post(APIURL.AUCTIONCALL + '/makeBid/', this.thisBidDto).subscribe(newLeague => {
         this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'make-bid');
+        console.log('newleague', newLeague);
         this.leagueStoreService.auctionLeague = newLeague;
+        this.thisAuctionTeam = this.leagueStoreService.auctionTeamStore;
       });
     });
   }
@@ -98,7 +103,13 @@ export class OngoingDraftComponent implements OnInit {
     // this.thisBigDto.team = 
     this.httpService.post(APIURL.AUCTIONCALL + '/noBid/', this.thisBidDto).subscribe(newLeague => {
       this.openSnackBar('You choose to pass on: ' + this.thisBidDto.playerName, 'no-bid');
+      console.log('thisactiveleague', this.thisActiveLeague);
+      console.log('thisteam', this.thisAuctionTeam);
       this.leagueStoreService.auctionLeague = newLeague;
+      this.thisActiveLeague = newLeague;
+      this.thisAuctionTeam = this.leagueStoreService.auctionTeamStore;
+      this.emitService.refreshLeague(this.thisActiveLeague);
+      this.emitService.refreshTeam(this.thisAuctionTeam);
     });
   }
 

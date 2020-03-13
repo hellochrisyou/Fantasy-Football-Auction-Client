@@ -75,42 +75,6 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       this.auctionSortService.sortAuctionPlayers(data.auctionValues);
       this.fetchThisLeague();
     });
-
-    // this.emitService.mergeQbOutput.subscribe(qbArray => {
-    //   if (qbArray.length === 0) {
-    //     this.emitService.refreshTable();
-    //   }
-    //   console.log('qbarray', qbArray);
-    //   this.lastSeasonPlayers.quaterBacks = qbArray;
-    //   // const tmpQbArray = MERGE_PLAYER_STATS(qbArray, this.lastSeasonPlayers.quaterBacks);
-    //   // this.lastSeasonPlayers.quaterBacks = REMOVE_EXTRA_PLAYERS(tmpQbArray);
-    // });
-
-    // this.emitService.mergeRbOutput.subscribe(rbArray => {
-    //   // const tmpRbArray = MERGE_PLAYER_STATS(rbArray, this.lastSeasonPlayers.runningsBacks);
-    //   // this.lastSeasonPlayers.runningsBacks = REMOVE_EXTRA_PLAYERS(tmpRbArray);
-    // });
-
-    // this.emitService.mergeWrOutput.subscribe(wrArray => {
-    //   // const tmpWrArray = MERGE_PLAYER_STATS(wrArray, this.lastSeasonPlayers.wideReceivers);
-    //   // this.lastSeasonPlayers.wideReceivers = REMOVE_EXTRA_PLAYERS(tmpWrArray);
-    //   this.emitService.refreshTable();
-    // });
-
-    // this.emitService.mergeTeOutput.subscribe(teArray => {
-    //   // const tmpTeArray = MERGE_PLAYER_STATS(teArray, this.lastSeasonPlayers.tightEnds);
-    //   // this.lastSeasonPlayers.tightEnds = REMOVE_EXTRA_PLAYERS(tmpTeArray);
-    // });
-
-    // this.emitService.mergeDefOutput.subscribe(defArray => {
-    //   // const tmpDefArray = MERGE_PLAYER_STATS(defArray, this.lastSeasonPlayers.defenses);
-    //   // this.lastSeasonPlayers.defenses = REMOVE_EXTRA_PLAYERS(tmpDefArray);
-    // });
-
-    // this.emitService.mergeKickerOutput.subscribe(kArray => {
-    //   // const tmpKArray = MERGE_PLAYER_STATS(kArray, this.lastSeasonPlayers.kickers);
-    //   // this.lastSeasonPlayers.kickers = REMOVE_EXTRA_PLAYERS(tmpKArray);
-    // });
   }
 
 
@@ -124,9 +88,9 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
     this.httpService.post(APIURL.AUCTIONCALL + '/getThisLeague/', history.state.league.leagueName).subscribe(leagueData => {
       console.log('leagedata', leagueData);
       this.thisActiveLeague = leagueData;
-      this.leagueStoreService.auctionLeague = leagueData;
       this.thisAuctionTeam = this.thisActiveLeague.auctionTeams.find(team => team.email === this.authService.authState.email);
-      this.leagueStoreService.auctionTeam = this.thisAuctionTeam;
+      this.leagueStoreService.auctionLeague = leagueData;
+      this.leagueStoreService.auctionTeamStore = this.thisAuctionTeam;
       this.numQb = this.playerStoreService.qbStore.length;
       this.numRb = this.playerStoreService.rbStore.length;
       this.numWr = this.playerStoreService.wrStore.length;
@@ -166,11 +130,13 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       this.thisBidDto.position = 'QB';
       this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
         this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
+        console.log('newLeague', newLeague);
         this.leagueStoreService.auctionLeague = newLeague;
+        this.playerStoreService.removeQb(this.playerStoreService.qbStore[index].displayName);
+        this.fetchThisLeague();
+        this.emitService.refreshTable();
+        this.moveToSelectedTab('Lobby');
       });
-      this.playerStoreService.removeQb(this.playerStoreService.qbStore[index].displayName);
-
-      console.log('mahomes', this.playerStoreService.qbStore[index]);
 
     });
   }
@@ -286,5 +252,13 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       panelClass: panelClass,
       duration: 10000
     });
+  }
+
+  public moveToSelectedTab(tabName: string) {
+    for (let i = 0; i < document.querySelectorAll('.mat-tab-label-content').length; i++) {
+      if ((<HTMLElement>document.querySelectorAll('.mat-tab-label-content')[i]).innerText == tabName) {
+        (<HTMLElement>document.querySelectorAll('.mat-tab-label')[i]).click();
+      }
+    }
   }
 }

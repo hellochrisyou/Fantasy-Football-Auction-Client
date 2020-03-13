@@ -24,6 +24,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   index: number;
   expandTeam: Team;
+  emitObject: any;
 
   @Input()
   public get columnObjects() {
@@ -86,17 +87,17 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   public ngOnInit(): void {
-
-  }
-
-  public ngAfterViewInit(): void {
-    this.emitService.refreshOutput.subscribe(x => {
+    this.emitObject = this.emitService.refreshTableOutput.subscribe(x => {
       this.refresh();
     });
   }
 
+  public ngAfterViewInit(): void {
+
+  }
+
   public ngOnDestroy(): void {
-    this.emitService.refreshOutput.unsubscribe();
+    this.emitObject.unsubscribe();
   }
 
   public refresh(): void {

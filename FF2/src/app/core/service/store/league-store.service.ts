@@ -3,13 +3,14 @@ import { AuthService } from 'src/app/core/service/auth.service';
 import { BehaviorSubject } from 'rxjs';
 import { AuctionLeague, Team } from 'src/app/shared/interface/model.interface';
 import { map } from 'rxjs/operators';
+import { findTeam } from 'src/app/shared/utils/findTeam.utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LeagueStoreService {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   private _auctionLeagueStore: AuctionLeague;
   private _auctionTeamStore: Team;
@@ -20,13 +21,14 @@ export class LeagueStoreService {
 
   public set auctionLeague(auctionLeague: AuctionLeague) {
     this._auctionLeagueStore = auctionLeague;
+    this._auctionTeamStore = findTeam(this.authService.authState.email, this._auctionLeagueStore);
   }
 
-  public get auctionTeam() {
+  public get auctionTeamStore() {
     return this._auctionTeamStore;
   }
 
-  public set auctionTeam(auctionTeam: Team) {
+  public set auctionTeamStore(auctionTeam: Team) {
     this._auctionTeamStore = auctionTeam;
   }
 

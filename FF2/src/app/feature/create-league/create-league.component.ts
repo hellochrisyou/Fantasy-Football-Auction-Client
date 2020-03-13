@@ -116,7 +116,7 @@ export class CreateLeagueComponent extends CreateBaseForm {
             console.log('data:', data);
           }
           );
-          // this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/join-league');
         }
       });
     } else {

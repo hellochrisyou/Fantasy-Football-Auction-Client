@@ -28,14 +28,30 @@
                     Maximum number of players is <strong>Required</strong>
                 </mat-error>
             </mat-form-field>
-            <mat-slide-toggle (click)="togglePpr()" formControlName="pprCtrl" matTooltip="Points per Reception"
+            <!-- <mat-slide-toggle (click)="togglePpr()" formControlName="pprCtrl" matTooltip="Points per Reception"
                 matTooltipPosition="above">
                 {{ppr}}
-            </mat-slide-toggle>
-            <mat-slide-toggle (click)="toggleTypeOfDraft()" formControlName="typeCtrl" matTooltip="Type of Draft"
+            </mat-slide-toggle> -->
+            <label class="label">
+                <div class="toggle">
+                    <input formControlName="pprCtrl" (click)="togglePpr()" class="toggle-state" type="checkbox"
+                        name="check" value="check" matTooltipPosition="above" matTooltip="Points per Reception" />
+                    <div class="indicator"></div>
+                </div>
+                <div class="label-text">{{ppr}}</div>
+            </label>
+            <!-- <mat-slide-toggle (click)="toggleTypeOfDraft()" formControlName="typeCtrl" matTooltip="Type of Draft"
                 matTooltipPosition="above">
                 {{typeOfDraft}}
-            </mat-slide-toggle>
+            </mat-slide-toggle> -->
+            <label class="label">
+                <div class="toggle">
+                    <input formControlName="typeCtrl" (click)="toggleTypeOfDraft()" matTooltip="Type of Draft"
+                        class="toggle-state" type="checkbox" name="check" value="check" matTooltipPosition="above" />
+                    <div class="indicator"></div>
+                </div>
+                <div class="label-text">{{typeOfDraft}}</div>
+            </label>
         </div>
         <br />
         <br />
