@@ -85,9 +85,8 @@ export class OngoingDraftComponent implements OnInit {
       // this.thisBigDto.team = 
       this.httpService.post(APIURL.AUCTIONCALL + '/makeBid/', this.thisBidDto).subscribe(newLeague => {
         this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'make-bid');
-        console.log('newleague', newLeague);
-        this.leagueStoreService.auctionLeague = newLeague;
-        this.thisAuctionTeam = this.leagueStoreService.auctionTeamStore;
+        console.log('drafted new bid: newLeague:', newLeague);
+        this.refreshService(newLeague);
       });
     });
   }
@@ -103,13 +102,7 @@ export class OngoingDraftComponent implements OnInit {
     // this.thisBigDto.team = 
     this.httpService.post(APIURL.AUCTIONCALL + '/noBid/', this.thisBidDto).subscribe(newLeague => {
       this.openSnackBar('You choose to pass on: ' + this.thisBidDto.playerName, 'no-bid');
-      console.log('thisactiveleague', this.thisActiveLeague);
-      console.log('thisteam', this.thisAuctionTeam);
-      this.leagueStoreService.auctionLeague = newLeague;
-      this.thisActiveLeague = newLeague;
-      this.thisAuctionTeam = this.leagueStoreService.auctionTeamStore;
-      this.emitService.refreshLeague(this.thisActiveLeague);
-      this.emitService.refreshTeam(this.thisAuctionTeam);
+      this.refreshService(newLeague);
     });
   }
 
@@ -119,5 +112,13 @@ export class OngoingDraftComponent implements OnInit {
       panelClass: panelClass,
       duration: 10000
     });
+  }
+
+  public refreshService(newLeague: AuctionLeague) {
+    this.leagueStoreService.auctionLeague = newLeague;
+    this.thisActiveLeague = newLeague;
+    this.thisAuctionTeam = this.leagueStoreService.auctionTeamStore;
+    this.emitService.refreshLeague(this.thisActiveLeague);
+    this.emitService.refreshTeam(this.thisAuctionTeam);
   }
 }
