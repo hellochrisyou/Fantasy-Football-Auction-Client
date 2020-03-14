@@ -52,6 +52,7 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
 
   public onNoClick(): void {
     this.dialogRef.close();
+    console.log('cancelled');
   }
 
   public submit() {
@@ -67,12 +68,13 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
         if (this.data.auctionTeams) {
           positionVal = String(this.data.auctionTeams.length + 1);
         }
+        console.log('FUCKKK', this.data);
         // Create Auction Team
         if (this.data.leagueType === 'Auction') {
           this.auctionDto = {
             leagueName: this.data.leagueName,
             teamName: this.formGroup.get('teamNameCtrl').value,
-            budget: this.data.budget,
+            budget: this.data.totalBudget,
             photoUrl: this.auth.userData[0].photoURL,
             leagueType: 'Auction',
             draftPosition: positionVal,
@@ -88,14 +90,6 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
           });
         } else {
           // Create Snake Team
-          // this.snakeDto = {
-          //   LeagueName: this.data.LeagueName,
-          //   TeamName: this.formGroup.get('teamNameCtrl').value,
-          //   PPR: this.data.PPR,
-          //   MaxPlayers: this.data.MaxPlayers,
-          // };
-          // this.httpService.post(APIURL.SNAKECALL + '/team/createTeam/', this.snakeDto).subscribe((data) => {
-          // });
         }
       }
     });

@@ -38,8 +38,7 @@ export class JoinAuctionComponent implements OnInit {
     this.openDialog(index);
   }
   private openDialog(index: number): void {
-    console.log('this.auctionarr', this.auctionArr);
-    console.log(this.auctionArr[index]);
+    console.log('join league dialog about to open. this league is: ', this.auctionArr);
     const dialogRef = this.dialog.open(CreateComponent, {
       // width: '250px',
       data: {
@@ -47,7 +46,7 @@ export class JoinAuctionComponent implements OnInit {
         maxPlayers: this.auctionArr[index].maxPlayers,
         leagueType: 'Auction',
         ppr: this.auctionArr[index].ppr,
-        budget: this.auctionArr[index].budget
+        budget: this.auctionArr[index].totalBudget
       }
     });
 

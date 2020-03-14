@@ -4,9 +4,10 @@
       <img [attr.src]="otherTeamsArr[i].photoUrl" />
     </div>
     <div class="cardContent">
-      <button class="cardContentButton" (click)="showPlayers(i);"><i class="material-icons">search</i></button>
-      <p class="cardContentName">{{otherTeam.teamName}}</p>
-      <p class="cardContentName">{{otherTeam.email}}</p>
-      <p class="cardContentJob">Draft Position: {{otherTeam.draftPosition}}</p>
+      <button class="cardContentButton" matTooltip="View Players" matTooltipPosition="above"
+        (click)="showPlayers(i);"><i class="material-icons">search</i></button>
+      <p id="cardTeamName">{{otherTeam.teamName}}</p>
+      <p class="cardSubTitle">{{otherTeam.email}}</p>
+      <p class="cardSubTitle">Draft Position: {{otherTeam.draftPosition}}</p>
     </div>
   </div>

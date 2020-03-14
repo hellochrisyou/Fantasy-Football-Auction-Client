@@ -4,9 +4,11 @@
 
 <div fxLayout="column" fxLayoutAlign="space-around center">
     <div id="lobbyJumbotron" class="jumbotron">
-        <h1>{{thisActiveLeague.leagueName}}</h1>
+        <h1>League: {{thisActiveLeague.leagueName}}</h1>
+        <hr class="my-4">
         <p class="lead">Status: {{thisActiveLeague.status}}</p>
         <p class="lead">Draft turn: {{thisActiveLeague.draftTurn}}</p>
+        <p class="lead">Team Budget: {{thisActiveLeague.totalBudget}}</p>
         <hr class="my-4">
         <p>Your Team: {{thisAuctionTeam.teamName}}</p>
     </div>

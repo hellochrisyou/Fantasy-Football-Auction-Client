@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
@@ -26,7 +26,9 @@ import { Kicker, AuctionLeague, Team, LastSeasonPlayers, QB, RB, WR, TE, DEF } f
   // tslint:disable-next-line: component-selector
   selector: 'live-auction',
   templateUrl: './live-auction.component.html',
-  styleUrls: ['./live-auction.component.scss']
+  styleUrls: ['./live-auction.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -43,9 +45,6 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
 
   status: string;
 
-  // public user: User = {};
-  private readonly AUCTIONURL = APIURL.NFLAUCTIONPLAYERS;
-  private readonly APIKEY = TOKENS.APIKEY;
   readonly PLAYER_COL_OBJ = PLAYER_COL_OBJ;
   readonly PLAYER_DISPLAY = PLAYER_DISPLAY;
   readonly AUCTION_TEAM_COL_OBJ = AUCTION_TEAM_COL_OBJ;
@@ -82,6 +81,15 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log('here', history.state.league.leagueName);
     // this.leagueStoreService.auctionLeague = history.state.league;
 
+    this.emitService.refreshLeagueOutput.subscribe(leagueData => {
+      console.log('emit service league', leagueData);
+      this.thisActiveLeague = leagueData;
+    });
+    this.emitService.refreshTeamOutput.subscribe(teamData => {
+      console.log('emit service team', teamData);
+      this.thisAuctionTeam = teamData;
+    });
+
   }
 
   public fetchThisLeague() {
@@ -115,10 +123,11 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
     this.emitService.refreshTable();
   }
   public bidQbPlayer(index: number): void {
+    console.log('passbudget', this.thisAuctionTeam);
     const dialogRef = this.dialog.open(BidComponent, {
       width: '300px',
       data: {
-        budget: +this.thisAuctionTeam.currentBudget,
+        budget: +this.thisAuctionTeam.budget,
         currentBid: 0
       }
     });
@@ -145,7 +154,7 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
     const dialogRef = this.dialog.open(BidComponent, {
       width: '300px',
       data: {
-        budget: +this.thisAuctionTeam.currentBudget,
+        budget: +this.thisAuctionTeam.budget,
         currentBid: 0
       }
     });
@@ -166,7 +175,7 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
     const dialogRef = this.dialog.open(BidComponent, {
       width: '300px',
       data: {
-        budget: +this.thisAuctionTeam.currentBudget,
+        budget: +this.thisAuctionTeam.budget,
         currentBid: 0
       }
     });
@@ -187,7 +196,7 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
     const dialogRef = this.dialog.open(BidComponent, {
       width: '300px',
       data: {
-        budget: +this.thisAuctionTeam.currentBudget,
+        budget: +this.thisAuctionTeam.budget,
         currentBid: 0
       }
     });
@@ -208,7 +217,7 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
     const dialogRef = this.dialog.open(BidComponent, {
       width: '300px',
       data: {
-        budget: +this.thisAuctionTeam.currentBudget,
+        budget: +this.thisAuctionTeam.budget,
         currentBid: 0
       }
     });
@@ -229,7 +238,7 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
     const dialogRef = this.dialog.open(BidComponent, {
       width: '300px',
       data: {
-        budget: +this.thisAuctionTeam.currentBudget,
+        budget: +this.thisAuctionTeam.budget,
         currentBid: 0
       }
     });

@@ -24,4 +24,5 @@ export class EmitService {
   public refreshTeam(auctionTeam: Team): void {
     this.refreshLeagueOutput.emit(auctionTeam);
   }
+
 }

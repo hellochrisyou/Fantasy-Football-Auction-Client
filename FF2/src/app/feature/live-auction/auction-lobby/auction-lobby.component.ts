@@ -46,16 +46,7 @@ export class AuctionLobbyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.emitService.refreshLeagueOutput.subscribe(leagueData => {
-      console.log('emit service league', leagueData);
-      this.thisActiveLeague = leagueData;
-      this.changeDetector.detectChanges();
-    });
-    this.emitService.refreshTeamOutput.subscribe(teamData => {
-      console.log('emit service team', teamData);
-      this.thisAuctionTeam = teamData;
-      this.changeDetector.detectChanges();
-    })
+
     // transaction to make ready. update leagueStatus to ready as well. return League from this service. and if league is ready run another call to begin auction (goauction/init/) 
     // In html show table of whose turn it is. Need to send event emitter and use input for button to add player is available.
     // Need to show table of whose the current player and what his bid is. and show button to bid or not to bid.  

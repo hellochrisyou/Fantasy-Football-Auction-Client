@@ -6,6 +6,7 @@
             <mat-label>Bid amount:</mat-label>
             <input type="number" placeholder="" matInput value="1" class="number" [formControl]="bidCtrl"
                 onkeydown="return event.keyCode !== 69" [errorStateMatcher]="matcher">
+            <span matPrefix>$&nbsp;</span>
             <mat-error *ngIf="bidCtrl.hasError('required')">
                 Bid amount is <strong>Required</strong>
             </mat-error>
@@ -17,6 +18,7 @@
             </mat-error>
         </mat-form-field>
 
-        <button mat-button (click)="bid()" [mat-dialog-close]="bidCtrl" cdkFocusInitial>Ok</button>
+        <button mat-button type="submit" (click)="bid()" [disabled]="bidCtrl.value>this.data.budget"
+            [mat-dialog-close]="bidCtrl" cdkFocusInitial>Ok</button>
     </form>
 </div>

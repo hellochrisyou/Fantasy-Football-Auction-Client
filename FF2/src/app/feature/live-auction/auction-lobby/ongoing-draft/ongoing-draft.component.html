@@ -25,23 +25,13 @@
         </section>
     </header>
 </ng-container>
-<ng-container
-    *ngIf="thisActiveLeague.draftTurn === thisAuctionTeam.draftPosition && thisActiveLeague.currentPlayer !== ''">
-    <header>
-        <section class="header-content">
-            <h1 class="header-title animate-pop-in">You have auctioned:
-                {{thisActiveLeague.currentPlayer}}</h1>
-            <h3 class="header-subtitle animate-pop-in">Wait for other players..</h3>
-        </section>
-    </header>
-</ng-container>
 <a class="outer_div">
     <div class="chevron"></div>
     <div class="chevron"></div>
     <div class="chevron"></div>
 </a>
 <ng-container
-    *ngIf="thisActiveLeague.draftTurn !== thisAuctionTeam.draftPosition && thisActiveLeague.currentPlayer !== '' && thisActiveLeague.currentBidder !== thisAuctionTeam.teamName">
+    *ngIf="thisActiveLeague.currentBidder !== thisAuctionTeam.teamName && thisActiveLeague.currentPlayer !== ''">
     <header>
         <section class="header-content">
             <h1 class="header-title animate-pop-in">Make a move!</h1>
@@ -53,6 +43,8 @@
         <div class="chevron"></div>
         <div class="chevron"></div>
     </a>
+</ng-container>
+<ng-container *ngIf="thisActiveLeague.currentBidder !==''">
     <mat-card>
         <div>
             <h3><u>{{thisActiveLeague.currentPlayer}}</u></h3>
@@ -65,7 +57,7 @@
             <p class="lead">Current Bid: <span id="tab2"> {{bidAmount}}</span></p>
         </mat-card-content>
         <mat-card-actions>
-            <ng-container *ngIf="thisActiveLeague.draftTurn !== thisAuctionTeam.draftPosition">
+            <ng-container *ngIf="thisActiveLeague.currentBidder !== thisAuctionTeam.teamName">
                 <div id="bid-glow" class="button-container">
                     <button (click)="openBidDialog()"><span>Bid</span></button>
                 </div>

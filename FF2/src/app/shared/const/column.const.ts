@@ -82,7 +82,7 @@ export const TEAM_COL_OBJ: ColumnObject[] = [
     { columnId: 'ViewPlayers', propertyName: '' },
     { columnId: 'Name', propertyName: 'Name' },
     { columnId: 'DraftPosition', propertyName: 'DraftPosition' },
-    { columnId: 'CurrentBudget', propertyName: 'CurrentBudget' },
+    { columnId: 'budget', propertyName: 'budget' },
 ];
 
 export const SNAKE_COL_OBJ: ColumnObject[] = [
