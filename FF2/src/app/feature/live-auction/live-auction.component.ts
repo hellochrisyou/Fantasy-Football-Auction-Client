@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
@@ -8,7 +8,6 @@ import { EmitService } from 'src/app/core/service/emit.service';
 import { HttpService } from 'src/app/core/service/http.service';
 import { BidComponent } from 'src/app/shared/component/dialog/bid/bid.component';
 import { SnackbarComponent } from 'src/app/shared/component/snackbar/snackbar.component';
-import { TOKENS } from 'src/app/shared/const/api-key';
 import {
   AUCTION_TEAM_COL_OBJ,
   AUCTION_TEAM_DISPLAY,
@@ -18,9 +17,9 @@ import {
 import { APIURL } from 'src/app/shared/const/url.const';
 import { BidDto } from 'src/app/shared/interface/dto.interface';
 
-import { LeagueStoreService } from '../../core/service/store/league-store.service';
+import { AuctionLeagueStoreService } from '../../core/service/store/auction-league-store.service';
 import { PlayerStoreService } from '../../core/service/store/player-store.service';
-import { Kicker, AuctionLeague, Team, LastSeasonPlayers, QB, RB, WR, TE, DEF } from '../../shared/interface/model.interface';
+import { AuctionLeague, DEF, Kicker, QB, RB, TE, Team, WR } from '../../shared/interface/model.interface';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -66,7 +65,7 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
     private authService: AuthService,
     private httpService: HttpService,
     private snackBar: MatSnackBar,
-    private leagueStoreService: LeagueStoreService,
+    private auctionLeagueStoreService: AuctionLeagueStoreService,
     public playerStoreService: PlayerStoreService,
 
   ) {
@@ -97,8 +96,8 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       console.log('leagedata', leagueData);
       this.thisActiveLeague = leagueData;
       this.thisAuctionTeam = this.thisActiveLeague.auctionTeams.find(team => team.email === this.authService.authState.email);
-      this.leagueStoreService.auctionLeague = leagueData;
-      this.leagueStoreService.auctionTeamStore = this.thisAuctionTeam;
+      this.auctionLeagueStoreService.auctionLeague = leagueData;
+      this.auctionLeagueStoreService.auctionTeamStore = this.thisAuctionTeam;
       this.numQb = this.playerStoreService.qbStore.length;
       this.numRb = this.playerStoreService.rbStore.length;
       this.numWr = this.playerStoreService.wrStore.length;
@@ -112,13 +111,8 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // if (!!this.emitService.mergeQbOutput) { this.emitService.mergeQbOutput.unsubscribe(); }
-    // if (!!this.emitService.mergeRbOutput) { this.emitService.mergeRbOutput.unsubscribe(); }
-    // if (!!this.emitService.mergeWrOutput) { this.emitService.mergeWrOutput.unsubscribe(); }
-    // if (!!this.emitService.mergeTeOutput) { this.emitService.mergeTeOutput.unsubscribe(); }
-    // if (!!this.emitService.mergeDefOutput) { this.emitService.mergeDefOutput.unsubscribe(); }
-    // if (!!this.emitService.mergeKickerOutput) { this.emitService.mergeKickerOutput.unsubscribe(); }
   }
+
   ngAfterViewInit(): void {
     this.emitService.refreshTable();
   }
@@ -141,7 +135,7 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
         this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
         console.log('newLeague', newLeague);
-        this.leagueStoreService.auctionLeague = newLeague;
+        this.auctionLeagueStoreService.auctionLeague = newLeague;
         this.playerStoreService.removeQb(this.playerStoreService.qbStore[index].displayName);
         this.fetchThisLeague();
         this.emitService.refreshTable();
@@ -168,7 +162,7 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
         this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
         console.log('newLeague', newLeague);
-        this.leagueStoreService.auctionLeague = newLeague;
+        this.auctionLeagueStoreService.auctionLeague = newLeague;
         this.playerStoreService.removeRb(this.playerStoreService.rbStore[index].displayName);
         this.fetchThisLeague();
         this.emitService.refreshTable();
@@ -195,7 +189,7 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
         this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
         console.log('newLeague', newLeague);
-        this.leagueStoreService.auctionLeague = newLeague;
+        this.auctionLeagueStoreService.auctionLeague = newLeague;
         this.playerStoreService.removeWr(this.playerStoreService.wrStore[index].displayName);
         this.fetchThisLeague();
         this.emitService.refreshTable();
@@ -222,7 +216,7 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
         this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
         console.log('newLeague', newLeague);
-        this.leagueStoreService.auctionLeague = newLeague;
+        this.auctionLeagueStoreService.auctionLeague = newLeague;
         this.playerStoreService.removeTe(this.playerStoreService.teStore[index].displayName);
         this.fetchThisLeague();
         this.emitService.refreshTable();
@@ -249,7 +243,7 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
         this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
         console.log('newLeague', newLeague);
-        this.leagueStoreService.auctionLeague = newLeague;
+        this.auctionLeagueStoreService.auctionLeague = newLeague;
         this.playerStoreService.removeDef(this.playerStoreService.defStore[index].displayName);
         this.fetchThisLeague();
         this.emitService.refreshTable();
@@ -276,7 +270,7 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
         this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
         console.log('newLeague', newLeague);
-        this.leagueStoreService.auctionLeague = newLeague;
+        this.auctionLeagueStoreService.auctionLeague = newLeague;
         this.playerStoreService.removeDef(this.playerStoreService.kStore[index].displayName);
         this.fetchThisLeague();
         this.emitService.refreshTable();

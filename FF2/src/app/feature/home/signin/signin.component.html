@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="right_col">
-        <h1 class="text-center"><u>Sign in</u></h1>
+        <h1 class="text-center">Sign in</h1>
         <!-- <section fxLayout="column" fxLayoutAlign="center center"> -->
         <form [formGroup]="formGroup" fxLayout="column" fxLayoutAlign="space-around center">
             <mat-form-field>
@@ -30,7 +30,8 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Password</mat-label>
-                <input matInput placeholder="Password" formControlName="loginPassCtrl" [errorStateMatcher]="matcher">
+                <input matInput type="password" placeholder="Password" formControlName="loginPassCtrl"
+                    [errorStateMatcher]="matcher">
                 <mat-error *ngIf="formGroup.get('loginPassCtrl').errors &&
                     formGroup.get('loginPassCtrl').dirty && formGroup.controls.loginPassCtrl.hasError('required')">
                     Password is <strong>REQUIRED</strong>
@@ -53,7 +54,7 @@
                     characters
                 </mat-error>
             </mat-form-field>
-            <button mat-button class="mat-elevation-z5 oval" type="submit" (click)="login()">Sign in</button>
+            <button mat-button class="oval mat-elevation-z5 oval" type="submit" (click)="login()">Sign in</button>
         </form>
         <!-- </section> -->
     </div>

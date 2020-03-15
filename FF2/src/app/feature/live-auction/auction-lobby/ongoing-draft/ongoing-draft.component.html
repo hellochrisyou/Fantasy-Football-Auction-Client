@@ -1,29 +1,23 @@
 <ng-container
     *ngIf="thisActiveLeague.draftTurn === thisAuctionTeam.draftPosition && thisActiveLeague.currentPlayer === ''">
-    <header>
-        <section class="header-content">
-            <h1 class="header-title animate-pop-in">It's your turn!</h1>
-            <h3 class="header-subtitle animate-pop-in">Select a player</h3>
-        </section>
-    </header>
+    <section class="header-content">
+        <h1 class="header-title animate-pop-in">It's your turn!</h1>
+        <h3 class="header-subtitle animate-pop-in">Select a player</h3>
+    </section>
 </ng-container>
 <ng-container
     *ngIf="thisActiveLeague.draftTurn !== thisAuctionTeam.draftPosition && thisActiveLeague.currentPlayer === ''">
-    <header>
-        <section class="header-content">
-            <h1 class="header-title animate-pop-in">Not your turn.</h1>
-            <h3 class="header-subtitle animate-pop-in">Wait for current team to auction a player.</h3>
-        </section>
-    </header>
+    <section class="header-content">
+        <h1 class="header-title animate-pop-in">Not your turn.</h1>
+        <h3 class="header-subtitle animate-pop-in">Wait for current team to auction a player.</h3>
+    </section>
 </ng-container>
 <ng-container
     *ngIf="thisActiveLeague.currentBidder === thisAuctionTeam.teamName && thisActiveLeague.currentPlayer !== ''">
-    <header>
-        <section class="header-content">
-            <h1 class="header-title animate-pop-in">You are the current bidder</h1>
-            <h3 class="header-subtitle animate-pop-in">Wait for other players..</h3>
-        </section>
-    </header>
+    <section class="header-content">
+        <h1 class="header-title animate-pop-in">You are the current bidder</h1>
+        <h3 class="header-subtitle animate-pop-in">Wait for other players..</h3>
+    </section>
 </ng-container>
 <a class="outer_div">
     <div class="chevron"></div>
@@ -32,12 +26,10 @@
 </a>
 <ng-container
     *ngIf="thisActiveLeague.currentBidder !== thisAuctionTeam.teamName && thisActiveLeague.currentPlayer !== ''">
-    <header>
-        <section class="header-content">
-            <h1 class="header-title animate-pop-in">Make a move!</h1>
-            <h3 class="header-subtitle animate-pop-in">Bid or pass</h3>
-        </section>
-    </header>
+    <section class="header-content">
+        <h1 class="header-title animate-pop-in">Make a move!</h1>
+        <h3 class="header-subtitle animate-pop-in">Bid or pass</h3>
+    </section>
     <a class="outer_div">
         <div class="chevron"></div>
         <div class="chevron"></div>

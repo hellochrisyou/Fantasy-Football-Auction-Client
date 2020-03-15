@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { HttpService } from 'src/app/core/service/http.service';
-import { LeagueStoreService } from 'src/app/core/service/store/league-store.service';
+import { AuctionLeagueStoreService } from 'src/app/core/service/store/auction-league-store.service';
 import { BidComponent } from 'src/app/shared/component/dialog/bid/bid.component';
 import { SnackbarComponent } from 'src/app/shared/component/snackbar/snackbar.component';
 import { APIURL } from 'src/app/shared/const/url.const';
@@ -52,7 +52,7 @@ export class OngoingDraftComponent implements OnInit {
     private httpService: HttpService,
     private snackBar: MatSnackBar,
     private emitService: EmitService,
-    private leagueStoreService: LeagueStoreService,
+    private auctionLeagueStoreService: AuctionLeagueStoreService,
     private changeDetector: ChangeDetectorRef
 
   ) { }
@@ -122,10 +122,10 @@ export class OngoingDraftComponent implements OnInit {
   }
 
   public refreshService(newLeague: AuctionLeague) {
-    this.leagueStoreService.auctionLeague = newLeague;
-    this.thisAuctionTeam = this.leagueStoreService.auctionTeamStore;
-    console.log('refresh league', this.leagueStoreService.auctionLeague);
-    console.log('refresh team', this.leagueStoreService.auctionTeamStore);
+    this.auctionLeagueStoreService.auctionLeague = newLeague;
+    this.thisAuctionTeam = this.auctionLeagueStoreService.auctionTeamStore;
+    console.log('refresh league', this.auctionLeagueStoreService.auctionLeague);
+    console.log('refresh team', this.auctionLeagueStoreService.auctionTeamStore);
     this.emitService.refreshLeague(this.thisActiveLeague);
     this.emitService.refreshTeam(this.thisAuctionTeam);
   }

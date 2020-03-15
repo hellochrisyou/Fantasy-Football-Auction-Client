@@ -1,13 +1,12 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { AUCTION_COL_OBJ, AUCTION_DISPLAY } from 'src/app/shared/const/column.const';
-import { AuctionLeague } from 'src/app/shared/interface/model.interface';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { AuthService } from 'src/app/core/service/auth.service';
 import { EmitService } from 'src/app/core/service/emit.service';
 import { HttpService } from 'src/app/core/service/http.service';
-import { MatDialog, MatBottomSheet } from '@angular/material';
-import { APIURL } from 'src/app/shared/const/url.const';
 import { CreateComponent } from 'src/app/shared/component/dialog/create/create.component';
-import { AuthService } from 'src/app/core/service/auth.service';
-import { BottomSheetComponent } from 'src/app/shared/component/bottom-sheet/bottom-sheet.component';
+import { AUCTION_COL_OBJ, AUCTION_DISPLAY } from 'src/app/shared/const/column.const';
+import { APIURL } from 'src/app/shared/const/url.const';
+import { AuctionLeague } from 'src/app/shared/interface/model.interface';
 import { refreshLeagues } from 'src/app/shared/utils/refreshLeagues.util';
 
 @Component({

@@ -90,8 +90,7 @@ export const TEAM_COL_OBJ: ColumnObject[] = [
 export const AUCTION_COL_OBJ: ColumnObject[] = [
     { columnId: 'Select', propertyName: '' },
     { columnId: 'League Name', propertyName: 'leagueName' },
-    { columnId: 'Team Count', propertyName: 'teamCount' },
-    { columnId: 'Budget', propertyName: 'budget' },
+    { columnId: 'Budget', propertyName: 'totalBudget' },
     { columnId: 'Max Players', propertyName: 'maxPlayers' },
     { columnId: 'PPR', propertyName: 'ppr' },
     { columnId: 'Status', propertyName: 'status' },

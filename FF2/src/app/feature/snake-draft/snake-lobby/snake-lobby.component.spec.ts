@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BottomSheetComponent } from './bottom-sheet.component';
+import { SnakeLobbyComponent } from './snake-lobby.component';
 
-describe('BottomSheetComponent', () => {
-  let component: BottomSheetComponent;
-  let fixture: ComponentFixture<BottomSheetComponent>;
+describe('SnakeLobbyComponent', () => {
+  let component: SnakeLobbyComponent;
+  let fixture: ComponentFixture<SnakeLobbyComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BottomSheetComponent ]
+      declarations: [ SnakeLobbyComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BottomSheetComponent);
+    fixture = TestBed.createComponent(SnakeLobbyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

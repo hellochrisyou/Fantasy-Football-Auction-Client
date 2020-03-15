@@ -8,7 +8,6 @@ import { ConfirmComponent } from './component/dialog/confirm/confirm.component';
 import { ErrorDialogComponent } from './component/dialog/error/error.component';
 import { CreateComponent } from './component/dialog/create/create.component';
 import { SnackbarComponent } from './component/snackbar/snackbar.component';
-import { BottomSheetComponent } from './component/bottom-sheet/bottom-sheet.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { BidComponent } from './component/dialog/bid/bid.component';
 
@@ -21,7 +20,6 @@ import { BidComponent } from './component/dialog/bid/bid.component';
     TableComponent,
     CreateComponent,
     SnackbarComponent,
-    BottomSheetComponent,
     BidComponent],
   imports: [
     CommonModule,
@@ -48,7 +46,7 @@ import { BidComponent } from './component/dialog/bid/bid.component';
     }
   ],
   entryComponents: [
-    ConfirmComponent, ErrorDialogComponent, CreateComponent, SnackbarComponent, BottomSheetComponent, BidComponent
+    ConfirmComponent, ErrorDialogComponent, CreateComponent, SnackbarComponent, BidComponent
   ]
 })
 export class SharedModule { }

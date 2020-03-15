@@ -28,6 +28,18 @@ html CSSResult header {
   perspective: 100px;
 }
 
+section#homeSection {
+  position: absolute;
+  height: 100vh;
+  left: 0;
+  background-image: url("https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg");
+  background-size: cover;
+  overflow: auto;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  margin: 0 auto;
+  min-width: 100vw;
+}
+
 header:before {
   -webkit-animation: no-transform 2s 0.5s cubic-bezier(0, 0.5, 0, 1) forwards;
   animation: no-transform 2s 0.5s cubic-bezier(0, 0.5, 0, 1) forwards;

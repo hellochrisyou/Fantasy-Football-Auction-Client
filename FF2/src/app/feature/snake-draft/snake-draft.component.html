@@ -1,1 +1,100 @@
-<p>snake-draft works!</p>
+<h1 class="text-center"><u>Live Draft</u></h1>
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Lobby">
+        <ng-template matTabLabel>
+            Lobby
+        </ng-template>
+        <snake-lobby [thisSnakeTeam]="thisSnakeTeam" [thisActiveLeague]="thisActiveLeague"></snake-lobby>
+    </mat-tab>
+    <mat-tab label="Quaterback">
+        <ng-template matTabLabel>
+            <span [matBadge]="numQb" matBadgeOverlap="false">QB</span>
+        </ng-template>
+        <base-table [columnObjects]="PLAYER_COL_OBJ" [colDisplay]="PLAYER_DISPLAY"
+            [dataArray]="this.playerStoreService.qbStore" [thisTeam]="thisDraftTeam">
+            <ng-container
+                *ngIf="thisActiveLeague.draftTurn===thisDraftTeam.draftPosition && thisActiveLeague.currentPlayer===''">
+                <ng-template #buttonTemplate let-i=index>
+                    <mat-icon (click)="draftQbPlayer(i)" matTooltip="Draft Player" matTooltipPosition="before">
+                        add
+                    </mat-icon>
+                </ng-template>
+            </ng-container>
+        </base-table>
+    </mat-tab>
+    <mat-tab label="Runningback">
+        <ng-template matTabLabel>
+            <span [matBadge]="numRb" matBadgeOverlap="false">RB</span>
+        </ng-template>
+        <base-table [columnObjects]="PLAYER_COL_OBJ" [colDisplay]="PLAYER_DISPLAY"
+            [dataArray]="this.playerStoreService.rbStore">
+            <ng-container *ngIf="thisActiveLeague.draftTurn === thisDraftTeam.draftPosition">
+                <ng-template #buttonTemplate let-i=index>
+                    <mat-icon (click)="draftRbPlayer(i)" matTooltip="Draft Player" matTooltipPosition="before">
+                        exit_to_app
+                    </mat-icon>
+                </ng-template>
+            </ng-container>
+        </base-table>
+    </mat-tab>
+    <mat-tab label="Wide Receiver">
+        <ng-template matTabLabel>
+            <span [matBadge]="numWr" matBadgeOverlap="false">WR</span>
+        </ng-template>
+        <base-table [columnObjects]="PLAYER_COL_OBJ" [colDisplay]="PLAYER_DISPLAY"
+            [dataArray]="this.playerStoreService.wrStore">
+            <ng-container *ngIf="thisActiveLeague.draftTurn === thisDraftTeam.draftPosition">
+                <ng-template #buttonTemplate let-i=index>
+                    <mat-icon (click)="draftWrPlayer(i)" matTooltip="Draft Player" matTooltipPosition="before">
+                        exit_to_app
+                    </mat-icon>
+                </ng-template>
+            </ng-container>
+        </base-table>
+    </mat-tab>
+    <mat-tab label="Tight End">
+        <ng-template matTabLabel>
+            <span [matBadge]="numTe" matBadgeOverlap="false">TE</span>
+        </ng-template>
+        <base-table [columnObjects]="PLAYER_COL_OBJ" [colDisplay]="PLAYER_DISPLAY"
+            [dataArray]="this.playerStoreService.teStore">
+            <ng-container *ngIf="thisActiveLeague.draftTurn === thisDraftTeam.draftPosition">
+                <ng-template #buttonTemplate let-i=index>
+                    <mat-icon (click)="draftTePlayer(i)" matTooltip="Draft Player" matTooltipPosition="before">
+                        exit_to_app
+                    </mat-icon>
+                </ng-template>
+            </ng-container>
+        </base-table>
+    </mat-tab>
+    <mat-tab label="Defense">
+        <ng-template matTabLabel>
+            <span [matBadge]="numDef" matBadgeOverlap="false">DEF</span>
+        </ng-template>
+        <base-table [columnObjects]="PLAYER_COL_OBJ" [colDisplay]="PLAYER_DISPLAY"
+            [dataArray]="this.playerStoreService.defStore">
+            <ng-container *ngIf="thisActiveLeague.draftTurn === thisDraftTeam.draftPosition">
+                <ng-template #buttonTemplate let-i=index>
+                    <mat-icon (click)="draftDefPlayer(i)" matTooltip="Draft Player" matTooltipPosition="before">
+                        exit_to_app
+                    </mat-icon>
+                </ng-template>
+            </ng-container>
+        </base-table>
+    </mat-tab>
+    <mat-tab label="Kicker">
+        <ng-template matTabLabel>
+            <span [matBadge]="numKicker" matBadgeOverlap="false">K</span>
+        </ng-template>
+        <base-table [columnObjects]="PLAYER_COL_OBJ" [colDisplay]="PLAYER_DISPLAY"
+            [dataArray]="this.playerStoreService.kStore">
+            <ng-container *ngIf="thisActiveLeague.draftTurn === thisDraftTeam.draftPosition">
+                <ng-template #buttonTemplate let-i=index>
+                    <mat-icon (click)="draftKPlayer(i)" matTooltip="Draft Player" matTooltipPosition="before">
+                        exit_to_app
+                    </mat-icon>
+                </ng-template>
+            </ng-container>
+        </base-table>
+    </mat-tab>
+</mat-tab-group>
