@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { QB, RB, WR, TE, DEF, Kicker, LastSeasonPlayers, Player } from 'src/app/shared/interface/model.interface';
-import { LeagueStoreService } from './store/league-store.service';
+import { DEF, Kicker, LastSeasonPlayers, Player, QB, RB, TE, WR } from 'src/app/shared/interface/model.interface';
+
 import { PlayerStoreService } from './store/player-store.service';
 
 @Injectable({

@@ -8,7 +8,7 @@ import { findTeam } from 'src/app/shared/utils/findTeam.utils';
 @Injectable({
   providedIn: 'root'
 })
-export class LeagueStoreService {
+export class AuctionLeagueStoreService {
 
   constructor(private authService: AuthService) { }
 

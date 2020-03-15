@@ -33,16 +33,16 @@ export interface PlayerDto {
     name: string;
 }
 
-export interface AuctionDto {
+export interface DraftDto {
     email?: string;
-    leagueName?: string;
-}
-
-export interface BidDto {
     leagueName?: string;
     teamName?: string;
     newBid?: number;
     playerName?: string;
     team?: string;
     position?: string;
+}
+
+export interface BidDto extends DraftDto {
+    newBid?: number;
 }

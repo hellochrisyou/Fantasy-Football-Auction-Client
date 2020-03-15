@@ -1,10 +1,8 @@
-import { Component, Input, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { AuthService } from 'src/app/core/service/auth.service';
 import { TeamDto } from 'src/app/shared/interface/dto.interface';
 import { AuctionLeague, Team } from 'src/app/shared/interface/model.interface';
-import { findTeam } from 'src/app/shared/utils/findTeam.utils';
-import { LeagueStoreService } from 'src/app/core/service/store/league-store.service';
+
 import { EmitService } from '../../../core/service/emit.service';
 
 @Component({
