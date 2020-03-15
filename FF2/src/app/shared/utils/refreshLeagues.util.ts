@@ -21,6 +21,7 @@ export const refreshLeagues = (leagueArr: AuctionLeague[], email: string): Aucti
             }
         }
     }
+    console.log('return auction arr', leagueArr);
     return leagueArr;
 }
 

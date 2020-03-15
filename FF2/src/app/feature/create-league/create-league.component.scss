@@ -1,8 +1,33 @@
 @import "_home";
 @import "_button";
-
+@import "_color";
 @include home();
 @include button();
+
+section {
+  position: absolute;
+  height: 100vh;
+  left: 0;
+  background-image: url("../../../assets/img/background-create-league.jpg");
+  background-size: cover;
+  overflow: auto;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  margin: 0 auto;
+  min-width: 100vw;
+}
+
+form {
+  padding-top: 2vw;
+}
+
+.mat-form-field,
+input {
+  width: 275px;
+}
+
+mat-icon {
+  color: $crimson;
+}
 
 mat-label.mat-label-color {
   color: black;
@@ -17,6 +42,7 @@ div.portfoliocard {
 }
 h2 {
   font-size: 3.5rem;
+  color: black;
 }
 div.portfoliocard {
   height: 650px;

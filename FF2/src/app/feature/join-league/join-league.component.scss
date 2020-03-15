@@ -1,3 +1,15 @@
 mat-icon {
   color: green;
 }
+
+section {
+  position: absolute;
+  height: 100vh;
+  left: 0;
+  background-image: url("../../../assets/img/background-join-auction.jpg");
+  background-size: cover;
+  overflow: auto;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  margin: 0 auto;
+  min-width: 100vw;
+}

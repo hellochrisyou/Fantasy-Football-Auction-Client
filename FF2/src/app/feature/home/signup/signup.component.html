@@ -27,7 +27,7 @@
         </div>
         <div id="signup-form" class="right_col">
 
-            <h1 class="text-center"><u>Sign Up</u></h1>
+            <h1 class="text-center">Sign Up</h1>
             <div fxLayout="column" fxLayoutAlign="space-between center">
                 <mat-form-field class="signup-form">
                     <mat-label>Name</mat-label>
@@ -63,7 +63,8 @@
                 <mat-form-field class="signup-form">
                     <mat-label class="mat-label-black-color">Password</mat-label>
                     <br>
-                    <input matInput placeholder="Password" formControlName="passwordCtrl" [errorStateMatcher]="matcher">
+                    <input matInput type="password" placeholder="Password" formControlName="passwordCtrl"
+                        [errorStateMatcher]="matcher">
                     <mat-error
                         *ngIf="!formGroup.get('passwordCtrl').errors &&formGroup.controls.passwordCtrl.hasError('minlength')">
                         Miniumum of
@@ -82,7 +83,7 @@
                         Password is <strong>REQUIRED</strong>
                     </mat-error>
                 </mat-form-field>
-                <button mat-button id="signup-button" class="mat-elevation-z4 oval" type="submit"
+                <button mat-button id="oval signup-button" class="mat-elevation-z4 oval" type="submit"
                     (click)="signup()">Sign
                     Up</button>
             </div>

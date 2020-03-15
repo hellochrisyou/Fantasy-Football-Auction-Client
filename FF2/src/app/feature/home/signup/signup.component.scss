@@ -10,6 +10,10 @@
   padding: 0 10px 0;
 }
 
+div.portfoliocard {
+  height: 650px;
+}
+
 img#profile_picture {
   display: inline-block;
   width: 100px;
@@ -21,11 +25,23 @@ img#profile_picture {
   background-position: center center;
   background-size: cover;
 }
-
-div.portfoliocard .right_col {
-  top: 7.65rem !important;
+button.oval {
+  margin-top: 2rem;
+  height: 4rem;
+  width: 10rem;
+}
+div.portfoliocard div.right_col {
+  width: 60%;
+  background: rgba(245, 245, 245, 1);
+  border-left: 1px solid rgba(230, 230, 230, 1);
+  box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.7);
+  margin-left: -1px;
   position: absolute;
-  left: 10rem;
+  top: 11.25vh;
+  right: 0;
+  border-bottom-right-radius: 5px;
+  min-height: 100vh;
+  padding-top: 2rem;
 }
 
 button.mat-button#signup-button {

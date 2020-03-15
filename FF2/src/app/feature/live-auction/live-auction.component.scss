@@ -1,3 +1,16 @@
+@import "_color";
+section {
+  position: absolute;
+  height: 100vh;
+  left: 0;
+  top: 1rem;
+  background-image: url(https://images.unsplash.com/photo-1472545068001-62d94063edd2?auto=format&fit=crop&w=1053&q=80);
+  background-size: cover;
+  overflow: auto;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  margin: 0 auto;
+  min-width: 100vw;
+}
 mat-icon {
   color: green;
   cursor: pointer;
@@ -10,4 +23,14 @@ mat-icon {
 h1 {
   color: black;
   width: 100vw;
+}
+
+p.lead {
+  color: black;
+  font-weight: 800;
+}
+
+.mat-tab-label .mat-tab-label-content,
+span {
+  font-weight: 800;
 }

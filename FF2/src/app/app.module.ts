@@ -22,8 +22,7 @@ import { SnakeDraftComponent } from './feature/snake-draft/snake-draft.component
   declarations: [
     AppComponent,
     LayoutComponent,
-    HeaderComponent,
-    SnakeDraftComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
