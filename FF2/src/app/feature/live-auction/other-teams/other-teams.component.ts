@@ -36,10 +36,13 @@ export class OtherTeamsComponent implements OnInit {
   }
 
   public showPlayers(index: number): void {
-    const dialogRef = this.dialog.open(PlayersDialogComponent, {
-      data: {
-        players: this.otherTeamsArr[index].players
-      }
-    });
+    console.log('players', this.otherTeamsArr[index].auctionPlayers);
+    if (this.otherTeamsArr[index].auctionPlayers.length !== 0) {
+      const dialogRef = this.dialog.open(PlayersDialogComponent, {
+        data: {
+          players: this.otherTeamsArr[index].auctionPlayers
+        }
+      });
+    }
   }
 }

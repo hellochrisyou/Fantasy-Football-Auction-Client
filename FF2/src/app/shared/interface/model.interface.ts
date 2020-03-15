@@ -70,6 +70,7 @@ export interface BaseLeague {
     leagueType?: string;
     ppr?: string;
     auctionTeams?: Team[];
+    snakeTeams?: Team[];
     status?: string;
     playerCount?: string;
     totalBudget?: string;
@@ -85,6 +86,8 @@ export interface SnakeLeague extends BaseLeague {
 
 export interface AuctionLeague extends SnakeLeague {
     currentPlayer?: string;
+    currentPlayerPosition?: string;
+    currentPlayerTeam?: string;
     currentBidder?: string;
     currentBid?: string;
 }
@@ -107,7 +110,7 @@ export interface Team {
     budget?: string;
     leagueType?: string;
     ppr?: string;
-    players?: Player[];
+    auctionPlayers?: Player[];
     photoUrl?: string;
     endBid?: string;
 }

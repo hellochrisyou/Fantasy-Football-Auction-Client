@@ -1,7 +1,9 @@
 main {
   position: absolute;
-  top: 15vh;
-  min-height: 85vh;
+  top: 5vh;
+  height: fit-content;
+  max-height: max-content;
   min-width: 100vw;
   z-index: 15;
+  border: none;
 }

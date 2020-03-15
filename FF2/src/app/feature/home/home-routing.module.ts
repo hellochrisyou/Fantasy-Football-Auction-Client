@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
+import { SnakeDraftModule } from '../snake-draft/snake-draft.module';
 
 
 const routes: Routes = [
@@ -25,13 +26,14 @@ const routes: Routes = [
     loadChildren: () => import('./../live-auction/live-auction.module').then(mod => mod.LiveAuctionModule),
   },
   {
-    path: 'profile',
-    loadChildren: () => import('./../profile/profile-routing.module').then(mod => mod.ProfileRoutingModule),
+    path: 'snake-auction',
+    loadChildren: () => import('./../snake-draft/snake-draft.module').then(mod => mod.SnakeDraftModule),
   },
   {
     path: 'my-account',
     loadChildren: () => import('./../my-account/my-account.module').then(mod => mod.MyAccountModule),
   },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({

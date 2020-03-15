@@ -1,16 +1,14 @@
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { BidComponent } from 'src/app/shared/component/dialog/bid/bid.component';
-import { AuctionLeague, Player, Team } from 'src/app/shared/interface/model.interface';
-import { BidDto } from 'src/app/shared/interface/dto.interface';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { HttpService } from 'src/app/core/service/http.service';
-import { APIURL } from 'src/app/shared/const/url.const';
-import { SnackbarComponent } from 'src/app/shared/component/snackbar/snackbar.component';
 import { LeagueStoreService } from 'src/app/core/service/store/league-store.service';
-import { map } from 'rxjs/operators';
+import { BidComponent } from 'src/app/shared/component/dialog/bid/bid.component';
+import { SnackbarComponent } from 'src/app/shared/component/snackbar/snackbar.component';
+import { APIURL } from 'src/app/shared/const/url.const';
+import { BidDto } from 'src/app/shared/interface/dto.interface';
+import { AuctionLeague, Player, Team } from 'src/app/shared/interface/model.interface';
+
 import { EmitService } from '../../../../core/service/emit.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -84,12 +82,12 @@ export class OngoingDraftComponent implements OnInit {
       this.thisBidDto.teamName = this.thisAuctionTeam.teamName;
       this.thisBidDto.newBid = bidAmountResult.bidAmount;
       this.thisBidDto.playerName = this.thisActiveLeague.currentPlayer;
-      // this.thisBigDto.position = 
-      // this.thisBigDto.team = 
+      this.thisBidDto.position = this.thisActiveLeague.currentPlayerPosition;
+      this.thisBidDto.team = this.thisActiveLeague.currentPlayerTeam;
       this.httpService.post(APIURL.AUCTIONCALL + '/makeBid/', this.thisBidDto).subscribe(newLeague => {
         this.thisActiveLeague = newLeague;
         this.changeDetector.markForCheck();
-
+        this.emitService.refreshOtherTeams(newLeague.auctionTeams);
         this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'make-bid');
 
         console.log('drafted new bid: newLeague:', newLeague);
@@ -108,7 +106,9 @@ export class OngoingDraftComponent implements OnInit {
     // this.thisBidDto.position = 
     // this.thisBigDto.team = 
     this.httpService.post(APIURL.AUCTIONCALL + '/noBid/', this.thisBidDto).subscribe(newLeague => {
-      this.refreshService(newLeague);
+      this.thisActiveLeague = newLeague;
+      this.changeDetector.markForCheck();
+      this.emitService.refreshOtherTeams(newLeague.auctionTeams);
       this.openSnackBar('You choose to pass on: ' + this.thisBidDto.playerName, 'no-bid');
     });
   }
