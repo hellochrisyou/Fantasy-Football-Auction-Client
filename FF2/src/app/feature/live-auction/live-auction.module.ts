@@ -15,6 +15,7 @@ import { OngoingDraftComponent } from './auction-lobby/ongoing-draft/ongoing-dra
     SharedModule,
     LiveAuctionRoutingModule
   ],
-  exports: [LiveAuctionComponent, OtherTeamsComponent, PlayersDialogComponent, AuctionLobbyComponent]
+  exports: [LiveAuctionComponent, OtherTeamsComponent, PlayersDialogComponent, AuctionLobbyComponent],
+  entryComponents: [PlayersDialogComponent]
 })
 export class LiveAuctionModule { }

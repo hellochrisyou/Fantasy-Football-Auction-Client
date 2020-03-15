@@ -18,6 +18,7 @@ import { SnackbarComponent } from '../../snackbar/snackbar.component';
 export class CreateComponent extends CreateBaseForm implements OnInit, AfterViewInit {
 
   auctionDto: CreateTeamDto;
+  snakeDto: CreateTeamDto;
   // snakeDto: CreateSnakeDto;
   leagueName: string;
   constructor(
@@ -68,7 +69,6 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
         if (this.data.auctionTeams) {
           positionVal = String(this.data.auctionTeams.length + 1);
         }
-        console.log('FUCKKK', this.data);
         // Create Auction Team
         if (this.data.leagueType === 'Auction') {
           this.auctionDto = {
@@ -85,11 +85,25 @@ export class CreateComponent extends CreateBaseForm implements OnInit, AfterView
           // NEED TO GET EMAIL AND SET IT ABOVE
           this.httpService.post(APIURL.AUCTIONCALL + '/team/createTeam/', this.auctionDto).subscribe((data) => {
             this.openSnackBar('Created Team', 'Create-Team');
-            console.log('hell1');
             this.dialogRef.close();
           });
         } else {
           // Create Snake Team
+          this.snakeDto = {
+            leagueName: this.data.leagueName,
+            teamName: this.formGroup.get('teamNameCtrl').value,
+            photoUrl: this.auth.userData[0].photoURL,
+            leagueType: 'Snake',
+            draftPosition: positionVal,
+            ppr: this.data.ppr,
+            maxPlayers: this.data.maxPlayers,
+            email: this.auth.userData[0].email
+          };
+          this.httpService.post(APIURL.SNAKECALL + '/team/createTeam/', this.snakeDto).subscribe((data) => {
+            this.openSnackBar('Created Team', 'Create-Team');
+            console.log('hell1');
+            this.dialogRef.close();
+          });
         }
       }
     });

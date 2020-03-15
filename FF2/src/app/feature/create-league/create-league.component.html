@@ -1,5 +1,5 @@
 <div class="portfoliocard">
-    <h1 class="text-center"><u>Create Auction</u></h1>
+    <h2 class="text-center"><u>Create Auction</u></h2>
     <form class="flex-form" [formGroup]="formGroup" (ngSubmit)="submit(formGroup.value)">
         <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="1.5vw">
             <mat-form-field>
@@ -14,13 +14,16 @@
                     characters
                 </mat-error>
             </mat-form-field>
-            <mat-form-field>
-                <mat-label>Player Budget</mat-label>
-                <input matInput type="number" class="number" formControlName="budgetCtrl" [errorStateMatcher]="matcher">
-                <mat-error *ngIf="formGroup.controls.budgetCtrl.hasError('required')">
-                    Budget is <strong>Required</strong>
-                </mat-error>
-            </mat-form-field>
+            <ng-container *ngIf="this.typeOfDraft==='Auction'">
+                <mat-form-field>
+                    <mat-label>Player Budget</mat-label>
+                    <input matInput type="number" class="number" formControlName="budgetCtrl"
+                        [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="formGroup.controls.budgetCtrl.hasError('required')">
+                        Budget is <strong>Required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </ng-container>
             <mat-form-field>
                 <mat-label>Max players</mat-label>
                 <input matInput type="number" formControlName="maxPlayerCtrl" [errorStateMatcher]="matcher">

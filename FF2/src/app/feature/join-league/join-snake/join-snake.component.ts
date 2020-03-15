@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { SnakeLeague } from 'src/app/shared/interface/model.interface';
 import { EmitService } from 'src/app/core/service/emit.service';
 import { HttpService } from 'src/app/core/service/http.service';
@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material';
 import { APIURL } from 'src/app/shared/const/url.const';
 import { CreateComponent } from 'src/app/shared/component/dialog/create/create.component';
 import { SNAKE_COL_OBJ, SNAKE_DISPLAY } from 'src/app/shared/const/column.const';
+import { AuthService } from 'src/app/core/service/auth.service';
+import { refreshLeagues, refreshSnakeLeagues } from 'src/app/shared/utils/refreshLeagues.util';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -22,23 +24,20 @@ export class JoinSnakeComponent implements OnInit {
   constructor(
     private emitService: EmitService,
     private httpService: HttpService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private changeDetectorRefs: ChangeDetectorRef,
+    private authService: AuthService,
+    private changeDetector: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
-    this.httpService.get(APIURL.SNAKECALL + '/getAllLeagues/').subscribe((snakeData) => {
-      console.log('snake data: ', snakeData);
-      this.snakeArr = snakeData;
-      this.emitService.refreshTable();
-    });
+    this.fetchAllLeagues();
   }
 
-  addLeague(index: number) {
+  public addLeague(index: number) {
     this.openDialog(index);
   }
-
   private openDialog(index: number): void {
-    console.log(this.snakeArr[index]);
     const dialogRef = this.dialog.open(CreateComponent, {
       // width: '250px',
       data: {
@@ -51,8 +50,19 @@ export class JoinSnakeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // this.animal = result;
+      this.fetchAllLeagues();
     });
   }
+
+  public fetchAllLeagues() {
+    this.httpService.post(APIURL.SNAKECALL + '/getAllLeagues/', this.authService.userData[0].email).subscribe((leagueData) => {
+      console.log('snake leagues', leagueData);
+      this.snakeArr = leagueData;
+      this.snakeArr = refreshSnakeLeagues(this.snakeArr, this.authService.authState.email);
+      this.emitService.refreshTable();
+      this.changeDetector.markForCheck();
+    });
+  }
+
 
 }

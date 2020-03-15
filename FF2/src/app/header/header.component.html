@@ -1,15 +1,14 @@
-<mat-toolbar class="toolbar mat-elevation-z7" role="banner">
-    <div id="left-spacer"></div>
+<mat-toolbar class="toolbar mat-elevation-z2" role="banner">
+    <div id="left-spacer">{{auth.authState.email}}</div>
     <div class="menu-collapsed">
         <div class="bar"></div>
         <nav>
             <ul>
                 <li><a routerLink="/my-account" routerLinkActive="active">My Account</a></li>
-                <li><a routerLink="/profile" routerLinkActive="active">Profile</a></li>
+                <!-- <li><a routerLink="/profile" routerLinkActive="active">Profile</a></li> -->
                 <li><a routerLink="/my-team" routerLinkActive="active">My Teams</a></li>
                 <li><a routerLink="/create-league" routerLinkActive="active">Create Auction</a></li>
                 <li><a routerLink="/join-league" routerLinkActive="active">Join Auction</a></li>
-                <li><a routerLink="/live-auction" routerLinkActive="active">Live Auction</a></li>
             </ul>
         </nav>
     </div>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ContentChild, Input, OnDestroy, OnInit, TemplateRef, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, Component, ContentChild, Input, OnDestroy, OnInit, TemplateRef, ViewChild, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -18,7 +18,8 @@ import { tap } from 'rxjs/operators';
   selector: 'base-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  animations: [expandRowTransition]
+  animations: [expandRowTransition],
+  encapsulation: ViewEncapsulation.None
 })
 export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
 

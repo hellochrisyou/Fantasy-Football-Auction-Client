@@ -4,10 +4,14 @@
       <img [attr.src]="otherTeamsArr[i].photoUrl" />
     </div>
     <div class="cardContent">
-      <button class="cardContentButton" matTooltip="View Players" matTooltipPosition="above"
-        (click)="showPlayers(i);"><i class="material-icons">search</i></button>
+      <ng-container *ngIf="otherTeam.auctionPlayers?.length>0">
+        <button class="cardContentButton" matTooltip="View Players" matTooltipPosition="above"
+          (click)="showPlayers(i);"><i class="material-icons">search</i>
+        </button>
+      </ng-container>
       <p id="cardTeamName">{{otherTeam.teamName}}</p>
-      <p class="cardSubTitle">{{otherTeam.email}}</p>
-      <p class="cardSubTitle">Draft Position: {{otherTeam.draftPosition}}</p>
+      <p class="cardSubTitle">Email: {{otherTeam.email}}</p>
+      <p class="cardSubTitle">Budget: ${{otherTeam.budget}}</p>
+      <p class="cardSubTitle">Position: {{otherTeam.draftPosition}}</p>
     </div>
   </div>

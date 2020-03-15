@@ -137,6 +137,7 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       this.thisBidDto.newBid = bidAmountResult.bidAmount;
       this.thisBidDto.playerName = this.playerStoreService.qbStore[index].displayName;
       this.thisBidDto.position = 'QB';
+      this.thisBidDto.team = this.playerStoreService.qbStore[index].team;
       this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
         this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
         console.log('newLeague', newLeague);
@@ -146,11 +147,11 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
         this.emitService.refreshTable();
         this.moveToSelectedTab('Lobby');
       });
-
     });
   }
 
   public bidRbPlayer(index: number): void {
+    console.log('passbudget', this.thisAuctionTeam);
     const dialogRef = this.dialog.open(BidComponent, {
       width: '300px',
       data: {
@@ -159,19 +160,25 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
     dialogRef.afterClosed().subscribe(bidAmountResult => {
-      // this.thisBidDto.leagueName = this.thisActiveLeague.leagueName;
-      // this.thisBidDto.teamName = this.thisAuctionTeam.teamName;
-      // this.thisBidDto.newBid = bidAmountResult.bidAmount;
-      // this.thisBidDto.playerName = this.lastSeasonPlayers.runningsBacks[index].displayName;
-      // this.thisBidDto.position = 'RB';
-      // this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
-      //   this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
-      //   this.leagueStoreService.auctionLeague = newLeague;
-      // });
+      this.thisBidDto.leagueName = this.thisActiveLeague.leagueName;
+      this.thisBidDto.teamName = this.thisAuctionTeam.teamName;
+      this.thisBidDto.newBid = bidAmountResult.bidAmount;
+      this.thisBidDto.playerName = this.playerStoreService.rbStore[index].displayName;
+      this.thisBidDto.position = 'RB';
+      this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
+        this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
+        console.log('newLeague', newLeague);
+        this.leagueStoreService.auctionLeague = newLeague;
+        this.playerStoreService.removeRb(this.playerStoreService.rbStore[index].displayName);
+        this.fetchThisLeague();
+        this.emitService.refreshTable();
+        this.moveToSelectedTab('Lobby');
+      });
     });
   }
 
   public bidWrPlayer(index: number): void {
+    console.log('passbudget', this.thisAuctionTeam);
     const dialogRef = this.dialog.open(BidComponent, {
       width: '300px',
       data: {
@@ -180,19 +187,25 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
     dialogRef.afterClosed().subscribe(bidAmountResult => {
-      // this.thisBidDto.leagueName = this.thisActiveLeague.leagueName;
-      // this.thisBidDto.teamName = this.thisAuctionTeam.teamName;
-      // this.thisBidDto.newBid = bidAmountResult.bidAmount;
-      // this.thisBidDto.playerName = this.lastSeasonPlayers.wideReceivers[index].displayName;
-      // this.thisBidDto.position = 'WR';
-      // this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
-      //   this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
-      //   this.leagueStoreService.auctionLeague = newLeague;
-      // });
+      this.thisBidDto.leagueName = this.thisActiveLeague.leagueName;
+      this.thisBidDto.teamName = this.thisAuctionTeam.teamName;
+      this.thisBidDto.newBid = bidAmountResult.bidAmount;
+      this.thisBidDto.playerName = this.playerStoreService.wrStore[index].displayName;
+      this.thisBidDto.position = 'WR';
+      this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
+        this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
+        console.log('newLeague', newLeague);
+        this.leagueStoreService.auctionLeague = newLeague;
+        this.playerStoreService.removeWr(this.playerStoreService.wrStore[index].displayName);
+        this.fetchThisLeague();
+        this.emitService.refreshTable();
+        this.moveToSelectedTab('Lobby');
+      });
     });
   }
 
   public bidTePlayer(index: number): void {
+    console.log('passbudget', this.thisAuctionTeam);
     const dialogRef = this.dialog.open(BidComponent, {
       width: '300px',
       data: {
@@ -201,19 +214,25 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
     dialogRef.afterClosed().subscribe(bidAmountResult => {
-      // this.thisBidDto.leagueName = this.thisActiveLeague.leagueName;
-      // this.thisBidDto.teamName = this.thisAuctionTeam.teamName;
-      // this.thisBidDto.newBid = bidAmountResult.bidAmount;
-      // this.thisBidDto.playerName = this.lastSeasonPlayers.tightEnds[index].displayName;
-      // this.thisBidDto.position = 'TE';
-      // this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
-      //   this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
-      //   this.leagueStoreService.auctionLeague = newLeague;
-      // });
+      this.thisBidDto.leagueName = this.thisActiveLeague.leagueName;
+      this.thisBidDto.teamName = this.thisAuctionTeam.teamName;
+      this.thisBidDto.newBid = bidAmountResult.bidAmount;
+      this.thisBidDto.playerName = this.playerStoreService.teStore[index].displayName;
+      this.thisBidDto.position = 'TE';
+      this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
+        this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
+        console.log('newLeague', newLeague);
+        this.leagueStoreService.auctionLeague = newLeague;
+        this.playerStoreService.removeTe(this.playerStoreService.teStore[index].displayName);
+        this.fetchThisLeague();
+        this.emitService.refreshTable();
+        this.moveToSelectedTab('Lobby');
+      });
     });
   }
 
   public bidDefPlayer(index: number): void {
+    console.log('passbudget', this.thisAuctionTeam);
     const dialogRef = this.dialog.open(BidComponent, {
       width: '300px',
       data: {
@@ -222,19 +241,25 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
     dialogRef.afterClosed().subscribe(bidAmountResult => {
-      // this.thisBidDto.leagueName = this.thisActiveLeague.leagueName;
-      // this.thisBidDto.teamName = this.thisAuctionTeam.teamName;
-      // this.thisBidDto.newBid = bidAmountResult.bidAmount;
-      // this.thisBidDto.playerName = this.lastSeasonPlayers.defenses[index].displayName;
-      // this.thisBidDto.position = 'DEF';
-      // this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
-      //   this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
-      //   this.leagueStoreService.auctionLeague = newLeague;
-      // });
+      this.thisBidDto.leagueName = this.thisActiveLeague.leagueName;
+      this.thisBidDto.teamName = this.thisAuctionTeam.teamName;
+      this.thisBidDto.newBid = bidAmountResult.bidAmount;
+      this.thisBidDto.playerName = this.playerStoreService.defStore[index].displayName;
+      this.thisBidDto.position = 'DEF';
+      this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
+        this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
+        console.log('newLeague', newLeague);
+        this.leagueStoreService.auctionLeague = newLeague;
+        this.playerStoreService.removeDef(this.playerStoreService.defStore[index].displayName);
+        this.fetchThisLeague();
+        this.emitService.refreshTable();
+        this.moveToSelectedTab('Lobby');
+      });
     });
   }
 
   public bidKPlayer(index: number): void {
+    console.log('passbudget', this.thisAuctionTeam);
     const dialogRef = this.dialog.open(BidComponent, {
       width: '300px',
       data: {
@@ -243,15 +268,20 @@ export class LiveAuctionComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
     dialogRef.afterClosed().subscribe(bidAmountResult => {
-      // this.thisBidDto.leagueName = this.thisActiveLeague.leagueName;
-      // this.thisBidDto.teamName = this.thisAuctionTeam.teamName;
-      // this.thisBidDto.newBid = bidAmountResult.bidAmount;
-      // this.thisBidDto.playerName = this.lastSeasonPlayers.kickers[index].displayName;
-      // this.thisBidDto.position = 'K';
-      // this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
-      //   this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
-      //   this.leagueStoreService.auctionLeague = newLeague;
-      // });
+      this.thisBidDto.leagueName = this.thisActiveLeague.leagueName;
+      this.thisBidDto.teamName = this.thisAuctionTeam.teamName;
+      this.thisBidDto.newBid = bidAmountResult.bidAmount;
+      this.thisBidDto.playerName = this.playerStoreService.kStore[index].displayName;
+      this.thisBidDto.position = 'K';
+      this.httpService.post(APIURL.AUCTIONCALL + '/startBid/', this.thisBidDto).subscribe(newLeague => {
+        this.openSnackBar('You have drafted: ' + this.thisBidDto.playerName, 'bid-player');
+        console.log('newLeague', newLeague);
+        this.leagueStoreService.auctionLeague = newLeague;
+        this.playerStoreService.removeDef(this.playerStoreService.kStore[index].displayName);
+        this.fetchThisLeague();
+        this.emitService.refreshTable();
+        this.moveToSelectedTab('Lobby');
+      });
     });
   }
 

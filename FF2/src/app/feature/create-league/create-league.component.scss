@@ -15,9 +15,11 @@ div.portfoliocard {
 #createLeagueButton {
   margin-bottom: 2vw;
 }
-
+h2 {
+  font-size: 3.5rem;
+}
 div.portfoliocard {
-  height: 625px;
+  height: 650px;
 }
 
 button.mat-button {
@@ -54,11 +56,12 @@ button.mat-button {
 .indicator {
   height: 100%;
   width: 200%;
-  background: crimson;
+  background: rgb(204, 55, 50);
   border-radius: 15px;
   transform: translate3d(-75%, 0, 0);
   transition: transform 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35);
-  box-shadow: -8px -4px 8px 0px #ffffff, 8px 4px 12px 0px #d1d9e6;
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12),
+    0 8px 10px -5px rgba(0, 0, 0, 0.3);
 }
 
 .toggle-state:checked ~ .indicator {

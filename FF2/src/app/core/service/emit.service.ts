@@ -10,6 +10,7 @@ export class EmitService {
   @Output() refreshTableOutput: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() refreshLeagueOutput: EventEmitter<AuctionLeague> = new EventEmitter<AuctionLeague>();
   @Output() refreshTeamOutput: EventEmitter<Team> = new EventEmitter<Team>();
+  @Output() refreshOtherOutput: EventEmitter<Team[]> = new EventEmitter<Team[]>();
 
   constructor() { }
 
@@ -23,6 +24,10 @@ export class EmitService {
 
   public refreshTeam(auctionTeam: Team): void {
     this.refreshLeagueOutput.emit(auctionTeam);
+  }
+
+  public refreshOtherTeams(auctionTeams: Team[]): void {
+    this.refreshOtherOutput.emit(auctionTeams);
   }
 
 }

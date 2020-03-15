@@ -13,7 +13,7 @@ body {
   // background: -webkit-linear-gradient(90deg, rgba(12, 9, 121, 1) 0%, rgba(7, 0, 255, 1) 100%);
   // background: linear-gradient(90deg, rgba(12, 9, 121, 1) 0%, rgba(7, 0, 255, 1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0c0979",endColorstr="#0700ff",GradientType=1);
-  background-color: #ecf0f3 !important;
+  background: linear-gradient(141deg, #ccc 25%, #eee 40%, #ddd 55%);
 }
 
 h1 {
@@ -50,7 +50,8 @@ router-outlet {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100%;
+  height: 100vh;
+  background: linear-gradient(141deg, #ccc 25%, #eee 40%, #ddd 55%) !important;
 }
 
 main-auction,

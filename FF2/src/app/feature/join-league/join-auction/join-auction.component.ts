@@ -28,6 +28,7 @@ export class JoinAuctionComponent implements OnInit {
     public dialog: MatDialog,
     private changeDetectorRefs: ChangeDetectorRef,
     private authService: AuthService,
+    private changeDetector: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -57,10 +58,11 @@ export class JoinAuctionComponent implements OnInit {
   }
 
   public fetchAllLeagues() {
-    this.httpService.post(APIURL.AUCTIONCALL + '/getAllOtherLeagues/', this.authService.userData[0].email).subscribe((leagueData) => {
+    this.httpService.post(APIURL.AUCTIONCALL + '/getAllLeagues/', this.authService.authState.email).subscribe((leagueData) => {
       this.auctionArr = leagueData;
       this.auctionArr = refreshLeagues(this.auctionArr, this.authService.authState.email);
       this.emitService.refreshTable();
+      this.changeDetector.markForCheck();
     });
   }
 }

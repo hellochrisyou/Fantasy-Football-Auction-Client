@@ -48,14 +48,14 @@
     Team: (
       width: 1rem
     ),
-    MinPrice: (
-      width: 1rem
+    minPrice: (
+      width: 10rem
     ),
-    MaxPrice: (
-      width: 1rem
+    maxPrice: (
+      width: 10rem
     ),
-    AvgPrice: (
-      width: 1rem
+    avgPrice: (
+      width: 10rem
     ),
     PassYD: (
       width: 1rem
@@ -181,13 +181,19 @@ td {
 mat-cell,
 .mat-cell:nth-child(n + 3),
 mat-header-cell,
-.mat-header-cell:nth-child(n + 3) {
+.mat-header-cell:nth-child(n + 3) div.mat-sort-header-container {
   min-height: auto; // overrides the 'inherit' that set the min height of the row
   padding: 0;
-  text-align: center;
+  text-align: center !important;
 }
 
-.mat-cell:first-child {
+.mat-header-cell:nth-child(n + 3) div.mat-sort-header-container {
+  padding-left: 2rem !important;
+}
+
+mat-cell,
+.mat-cell {
+  border-color: black !important;
 }
 
 .mat-header-cell:first-child {
@@ -241,7 +247,10 @@ mat-cell,
 .fa-user-plus {
   color: green;
 }
-
+.mat-paginator-outer-container {
+  color: black;
+  width: 100%;
+}
 @media screen and (max-width: 1024px) {
   tr.mat-header-row {
     background-color: transparent;
@@ -253,7 +262,9 @@ mat-cell,
   mat-paginator {
     max-width: 100%;
     left: 1vw;
+    color: black;
   }
+
   #search-field {
     left: 1vw;
     top: 8vh;

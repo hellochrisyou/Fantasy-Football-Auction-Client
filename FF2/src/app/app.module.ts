@@ -16,12 +16,14 @@ import { HomeModule } from './feature/home/home.module';
 import { HeaderComponent } from './header/header.component';
 import { LayoutComponent } from './layout/layout.component';
 import { SharedModule } from './shared/shared.module';
+import { SnakeDraftComponent } from './feature/snake-draft/snake-draft.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
-    HeaderComponent
+    HeaderComponent,
+    SnakeDraftComponent
   ],
   imports: [
     BrowserModule,
